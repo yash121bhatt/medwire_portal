@@ -1,0 +1,243 @@
+<section class="content">
+    <div class="content-block">
+       <div class="block-header">
+          <!-- breadcrumb -->
+          <app-breadcrumb [title]="'Dashboard'" [items]="['Symptoms', 'Add Symptome']" [active_item]="'Current Symptoms'"></app-breadcrumb>
+       </div>
+       <div class="row clearfix">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+             <div class="card">
+                <div class="ngxTableHeader bg-white">
+                   <ul class="header-buttons-left ms-0 mb-0 ps-3">
+                      <li class="dropdown">
+                         <h2>
+                            <strong>Current Symptoms</strong>
+                         </h2>
+                      </li>
+                   </ul>
+                </div>
+                <div class="body pt-0">
+                   <div class="addSymptoms">
+                      <div class="body table-responsive">
+                        
+                         <table class="table">
+                            <thead>
+                               <tr>
+                                 <th>S.No.</th>
+                                  <th>Image</th>
+                                  <th>Name</th>
+                                  <th>Update Date</th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let listData of listData; let i=index">
+                                <td>{{i+1}}</td>
+                                <td><img src="{{listData.img}}" alt=""></td>
+                                <td>{{listData.symptom_name| titlecase}}</td>
+                                <td>{{listData.updated_at | date: 'dd/MM/yyyy'}}</td>
+                              </tr>
+                               <!-- <tr *ngIf="headacheone">
+                                 <td><img src="assets/images/symptoms/headache.png" alt=""></td>
+                                 <td>Headache</td>
+                               </tr>
+                               <tr *ngIf="migranestwo" >
+                                 <td><img src="assets/images/symptoms/migraines.png" alt=""></td>
+                               <td>Migraines</td>
+                               </tr>
+                               <tr *ngIf="dizzinesthree">
+                                 <td><img src="assets/images/symptoms/dizziness.png" alt=""></td>
+                                 <td>Dizziness</td>
+                               </tr>
+                               <tr *ngIf="acnefour">
+                                 <td><img src="assets/images/symptoms/acne.png" alt=""></td>
+                                 <td>Acne</td>
+                               </tr>
+                               <tr *ngIf="heteicfever">
+                                 <td><img src="assets/images/symptoms/hecticfever.png" alt=""></td>
+                                <td>Hectic Fever</td>
+                               </tr>
+                               <tr *ngIf="neckaches">
+                                 <td><img src="assets/images/symptoms/neckaches.png" alt=""></td>
+                                 <td>Neckaches</td>
+                               </tr>
+                               <tr *ngIf="shoulderaches">
+                                 <td><img src="assets/images/symptoms/shoulderaches.png" alt=""></td>
+                                 <td>Shoulder Aches</td>
+                               </tr>
+                               <tr *ngIf="tenderbreats">
+                                 <td><img src="assets/images/symptoms/tenderbreast.png" alt=""></td>
+                                 <td>Tender Breats</td>
+                               </tr>
+                               <tr *ngIf="breastsensitivity">
+                                 <td><img src="assets/images/symptoms/breastsensitivit.png" alt=""></td>
+                                 <td>Breast Sensitivity</td>
+                               </tr>
+                               <tr *ngIf="backaches">
+                                 <td><img src="assets/images/symptoms/backaches.png" alt=""></td>
+                                 <td>Backaches</td>
+                               </tr>
+                               <tr *ngIf="lowerBackPain">
+                                 <td><img src="assets/images/symptoms/lowerbackpan.png" alt=""></td>
+                                 <td>Lower Back Pain</td>
+                               </tr>
+                               <tr *ngIf="bodyaches">
+                                 <td><img src="assets/images/symptoms/bodyaches.png" alt=""></td>
+                                  <td>Body Aches</td>
+                               </tr>
+                               <tr *ngIf="musclesPain">
+                                 <td><img src="assets/images/symptoms/musclepain.png" alt=""></td>
+                                 <td>Muscles Pain</td>
+                               </tr >
+                               <tr *ngIf="influenza">
+                                 <td><img src="assets/images/symptoms/influenza.png" alt=""></td>
+                                 <td>Influenza</td>
+                               </tr>
+                               <tr *ngIf="bloating">
+                                 <td><img src="assets/images/symptoms/bloating.png" alt=""></td>
+                                 <td>Bloating</td>
+                               </tr>
+                               <tr *ngIf="constipation">
+                                 <td><img src="assets/images/symptoms/constipation.png" alt=""></td>
+                                 <td>Constipation</td>
+                               </tr >
+                               <tr *ngIf="diarrhea">
+                                 <td><img src="assets/images/symptoms/diarrhea.png" alt=""></td>
+                                <td>Diarrhea</td>
+                               </tr>
+                               <tr *ngIf="nausea" >
+                                 <td><img src="assets/images/symptoms/nausea.png" alt=""></td>
+                                 <td>Nausea</td>
+                               </tr>
+                               <tr *ngIf="backaches_d" >
+                                 <td><img src="assets/images/symptoms/backaches.png" alt=""></td>
+                                 <td>Backaches</td>
+                               </tr>
+                               <tr *ngIf="abdominal_crapms">
+                                 <td><img src="assets/images/symptoms/abdominal.png" alt=""></td>
+                                <td>Abdominal Crapms</td>
+                               </tr>
+                               <tr *ngIf="dyspepsia">
+                                 <td><img src="assets/images/symptoms/dyspepsia.png" alt=""></td>
+                                 <td>Dyspepsia</td>
+                               </tr>
+                               <tr *ngIf="gas">
+                                 <td><img src="assets/images/symptoms/gas.png" alt=""></td>
+                                 <td>Gas</td>
+                               </tr>
+
+                               <tr *ngIf="hunger">
+                                <td><img src="assets/images/symptoms/hunger.png" alt=""></td>
+                                <td>Hunger</td>
+                               </tr>
+                               <tr *ngIf="ovulationpain" >
+                                <td><img src="assets/images/symptoms/ovulation.png" alt=""></td>
+                                <td>Ovulation Pain</td>
+                               </tr>
+                               <tr *ngIf="anxiety" >
+                                <td><img src="assets/images/symptoms/anxiety.png" alt=""></td>
+                                <td>Anxiety</td>
+                               </tr>
+                               <tr *ngIf="insomnia" >
+                                <td><img src="assets/images/symptoms/insomnia.png" alt=""></td>
+                                <td>Insomnia</td>
+                               </tr>
+                               <tr *ngIf="stress" >
+                                <td><img src="assets/images/symptoms/stress.png" alt=""></td>
+                                <td>Stress</td>
+                               </tr>
+                               <tr *ngIf="moodiness" >
+                                <td><img src="assets/images/symptoms/moodiness.png" alt=""></td>
+                                <td>Moodiness</td>
+                               </tr>
+                               <tr *ngIf="tension" >
+                                <td><img src="assets/images/symptoms/tension.png" alt=""></td>
+                                <td>Tension</td>
+                               </tr>
+                               <tr *ngIf="irritability" >
+                                <td><img src="assets/images/symptoms/irritability.png" alt=""></td>
+                                <td>Irritability</td>
+                               </tr>
+                               <tr *ngIf="to_concentrate" >
+                                <td><img src="assets/images/symptoms/unable2consontrate.png" alt=""></td>
+                                <td>Unable to Concentrate</td>
+                               </tr>
+                               <tr *ngIf="fatigue">
+                                <td><img src="assets/images/symptoms/fatigue.png" alt=""></td>
+                                <td>Fatigue</td>
+                               </tr>
+                               <tr *ngIf="confusion">
+                                <td><img src="assets/images/symptoms/confusion.png" alt=""></td>
+                                <td>Confusion</td>
+                               </tr>
+                               <tr *ngIf="ovulationPain_d">
+                                <td><img src="assets/images/symptoms/ovulation.png" alt=""></td>
+                                <td>Ovulation Pain</td>
+                               </tr>
+                               <tr *ngIf="dry" >
+                                <td><img src="assets/images/symptoms/dry.png" alt=""></td>
+                                <td>Dry</td>
+                               </tr>
+                               <tr *ngIf="sticky">
+                                <td><img src="assets/images/symptoms/sticky.png" alt=""></td>
+                                <td>Sticky</td>
+                               </tr>
+                               <tr *ngIf="creamy">
+                                <td><img src="assets/images/symptoms/creamy.png" alt=""></td>
+                                <td>Creamy</td>
+                               </tr>
+                               <tr *ngIf="watery">
+                                <td><img src="assets/images/symptoms/watery.png" alt=""></td>
+                              <td>Watery</td>
+                               </tr>
+                               <tr *ngIf="eggwhite">
+                                <td><img src="assets/images/symptoms/eggwhite.png" alt=""></td>
+                                <td>Egg White</td>
+                               </tr>
+                               <tr *ngIf="cottage_cheese">
+                                <td><img src="assets/images/symptoms/cottagechese.png" alt=""></td>
+                               <td>Cottage Cheese</td>
+                               </tr>
+                               <tr *ngIf="green">
+                                <td><img src="assets/images/symptoms/green.png" alt=""></td>
+                                <td>Green</td>
+                               </tr>
+                               <tr *ngIf="white_blood">
+                                <td><img src="assets/images/symptoms/withblood.png" alt=""></td>
+                                <td>White Blood</td>
+                               </tr>
+                               <tr *ngIf="foulSmelling">
+                                <td><img src="assets/images/symptoms/foulsmeling.png" alt=""></td>
+                               <td>Foul Smelling</td>
+                               </tr>
+                               <tr *ngIf="flow">
+                                <td><img src="assets/images/symptoms/flow.png" alt=""></td>
+                               <td>Flow</td>
+                               </tr>
+                               <tr *ngIf="pelvicPain">
+                                <td><img src="assets/images/symptoms/pelvicpain.png" alt=""></td>
+                                <td>Pelvic Pain</td>
+                               </tr>
+                               <tr *ngIf="cervicalfirmness">
+                                <td><img src="assets/images/symptoms/cervicalfirm.png" alt=""></td>
+                               <td>Cervical Firmness</td>
+                               </tr>
+                               <tr *ngIf="cervicalOpening">
+                                <td><img src="assets/images/symptoms/cervicalopen.png" alt=""></td>
+                                <td>Cervical Opening</td>
+                               </tr>
+                               <tr *ngIf="cervicalMucus">
+                                <td><img src="assets/images/symptoms/cervicalmucus.png" alt=""></td>
+                                <td>Cervical Mucus</td>
+                               </tr> -->
+                              
+
+                            </tbody>
+                         </table>
+                      </div>
+                   </div>
+                </div>
+            </div>
+          </div>
+       </div>
+    </div>
+ </section>

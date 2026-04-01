@@ -1,0 +1,55 @@
+<section class="content" *ngIf="showHTMlcal">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Menstrual Cycle Calendar'"></app-breadcrumb>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <!-- <div class="col-md-2 col-sm-12 p-l-30">
+                  <div class="m-b-25">
+                    <button mat-raised-button color="primary" (click)="addNewEvent()">Add Value</button>
+                  </div>
+                </div> -->
+              <div class="col-md-12 col-sm-12">
+                <div class="row">
+                  <div class="col-lg-3 col-md-6 col-12 d-flex max_content_height">
+                    <div class="bg-danger px-4 col-lg-1 col-md-1 col-3 mr-1 calendar-box-indication"></div>
+                    <div class="ms-1 ps-1">
+                      <!-- <h6>Day is period day</h6> -->
+                      <h6>Period day</h6>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-12 d-flex max_content_height">
+                    <div class="px-4 col-lg-1 col-md-1 col-3 mr-1 calendar-box-indication calendar-box-green">
+                    </div>
+                    <div class="ms-1 ps-1">
+                      <h6>HIGH - Chance of getting pregnant</h6>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-12 d-flex">
+                    <img class="mr-3 Ovulation_img" src="assets/images/menstruel/calendar_dotsecond.jpg">
+                    <div class="ms-1 ps-1">
+                      <h6>Ovulation day</h6>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div>
+                       <h4>No. of Day's Left </h4>
+                    </div> -->
+                <!-- <h4>No. of Day's Left</h4> -->
+                <div class="panel-body  menstruel_calendar mt-3">
+                  <full-calendar [options]='calendarOptions'>
+                  </full-calendar>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

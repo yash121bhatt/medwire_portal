@@ -1,0 +1,363 @@
+<div class="auth-container">
+  <div class="row auth-main">
+    <div class="col-sm-6 px-0 d-none d-sm-block">
+      <div class="left-img" style="background-image: url(assets/images/pages/bg-02.png);">
+      </div>
+    </div>
+    <div class="col-sm-6 auth-form-section">
+      <div class="form-section">
+        <div class="auth-wrapper">
+          <div class="d-flex justify-content-between lbl-alert mb-3 row my-5">
+
+            <div class="col-lg-3 col-md-4 col-5 mt-2">
+              <button mat-raised-button color="primary" type="button" (click)="patientSet();">Patient</button>
+            </div>
+            <div class="col-lg-3 col-md-4 col-5 mt-2">
+              <button mat-raised-button color="accent" class="patientBtn" type="button"
+                (click)="doctorSet();">Laboratory
+              </button>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-5 mt-2">
+              <button mat-raised-button color="warn" type="button" (click)="radiologySet();">Radiology</button>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-5 mt-2 clinicBtn">
+              <button mat-raised-button color="primary" type="button" (click)="clinicSet();">Clinic/Hospital</button>
+            </div>
+          </div>
+          <h2 class="welcome-msg mt-4"> Sign Up as a {{userType}}</h2>
+          <p class="auth-signup-text text-muted">Enter details to create your account</p>
+          <div class="patient-form" *ngIf="active_formstatus_patient">
+            <form class="validate-form" [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Full name</mat-label>
+                    <input matInput formControlName="full_name" type="text" maxlength="32" pattern="[A-Za-z ]{1,32}" required autocomplete="off">
+                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-error >
+                      <div *ngIf="authForm.get('full_name').hasError('required')">  Name is required</div>
+                      <div *ngIf="authForm.get('full_name').hasError('pattern')">Invalid Name</div>
+                      <!-- <div *ngIf="f.authForm && full_name.error?.required">  Name is required</div>
+                      <div *ngIf="f.authForm && full_name.error?.pattern">Invalid Name</div> -->
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 user_role_input">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>User Role</mat-label>
+                    <input matInput formControlName="userrole" >
+                    
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 user_role_input">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>User Role ID</mat-label>
+                    <input matInput formControlName="roleid" >
+                    
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" required autocomplete="off">
+                    <mat-icon matSuffix>mail</mat-icon>
+                    <mat-error *ngIf="authForm.get('email').hasError('required') || authForm.get('email').touched">
+                      Please enter a valid email address
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Mobile No.</mat-label>
+                    <input matInput formControlName="mobile"  required autocomplete="off" (keypress)="mobileNoValidate($event)">
+                    <mat-icon matSuffix>perm_phone_msg</mat-icon>
+                    <mat-error *ngIf="authForm.get('mobile').hasError('required') || authForm.get('mobile').touched">
+                      Please enter a valid mobile number
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Alternate Mobile No.</mat-label>
+                    <input matInput formControlName="alernate_mobile" autocomplete="off" (keypress)="mobileNoValidate($event)">
+                    <mat-icon matSuffix>perm_phone_msg</mat-icon>
+                    <mat-error *ngIf="authForm.get('mobile').touched">
+                      Please enter a valid alternate mobile number
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div> -->
+              <div class="row">
+                <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required autocomplete="off">
+                    <mat-icon matSuffix (click)="hide = !hide">
+                      {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="authForm.get('password').hasError('required') || authForm.get('password').touched">
+                      The password must contain at least 8 characters, 1 Uppercase letter, 1 Lowercase letter,1 Number and 1 Special Character like @ % & *
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <!-- <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput formControlName="cpassword" [type]="chide ? 'password' : 'text'" required>
+                    <mat-icon matSuffix (click)="chide = !chide">
+                      {{chide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                     <mat-error *ngIf="authForm.get('cpassword').hasError('required')">
+                      Confirm Password is required
+                    </mat-error>          
+                  </mat-form-field> -->
+
+
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput formControlName="cpassword" [type]="chide ? 'password' : 'text'"
+                       required>
+                    <mat-icon matSuffix (click)="chide = !chide"> {{chide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="fun.cpassword.touched && fun.cpassword.invalid">
+                       <div *ngIf="fun.cpassword.errors.confirmedValidator">New Password and Confirm
+                          Password must be match.</div>
+                    </mat-error>
+                 </mat-form-field>
+
+                </div>
+              </div>
+              <div class="form-check mb-4">
+                <label class="form-check-label pe-0">
+                  <input class="form-check-input" type="checkbox" required value="" formControlName="boxtermcondition" >I acknowledge that I have read and agreed to the 
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                </label>
+                <a class="fw_mid col-blue cursor-pointer" (click)="openDialog()"> Terms & Conditions.</a>
+              </div>
+              <!-- <div *ngIf="success_message" class="alert alert-success alert-dismissible">
+                <strong> {{success_message_text}} </strong>
+             
+              </div>
+              <p *ngIf="error_message" class="alert alert-danger alert-dismissible">
+                <strong>{{error_message_text}} </strong>
+              </p>  -->
+              <div class="flex-sb-m w-full  p-b-20">
+                <div>
+                  <span>Already Registered? <a routerLink="/authentication/signin">
+                      Login
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div class="container-auth-form-btn mb-5">
+                <button mat-flat-button color="primary" [class.auth-spinner]="loading" class="auth-form-btn" [disabled]="!authForm.valid " type="submit">
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="lab-radio-form"  *ngIf="active_formstatus_labRadio"> 
+            <form class="validate-form" [formGroup]="labRadioForm" (ngSubmit)="onSubmitbtn()">
+              <div class="row">
+                <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Full name</mat-label>
+                    <input matInput formControlName="full_name" required autocomplete="off">
+                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-error *ngIf="labRadioForm.get('full_name').hasError('required')">
+                      Name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div> -->
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>{{frontNameDisplay}}</mat-label>
+                    <input matInput formControlName="company_name" type="text" maxlength="32" pattern="[A-Za-z ]{1,32}" required autocomplete="off">
+                    <mat-icon matSuffix>title</mat-icon>
+                    <mat-error *ngIf="labRadioForm.get('company_name').hasError('required')">
+                      {{frontNameDisplay}} is required
+                    </mat-error>
+                    <mat-error>
+                      <!-- <div *ngIf="labRadioForm.get('full_name').company_name('required')">{{frontNameDisplay}} is required</div> -->
+                      <!-- <div *ngIf="labRadioForm.get('full_name').company_name('pattern')">Invalid Name</div> -->
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Aadhar card no</mat-label>
+                    <input matInput formControlName="adharcardno" required autocomplete="off">
+                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-error *ngIf="labRadioForm.get('adharcardno').hasError('required') || labRadioForm.get('adharcardno').touched ">
+                      Aadhar card no is required
+                    </mat-error>
+                  </mat-form-field>
+                </div> -->
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 user_role_input">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>User Role</mat-label>
+                    <input matInput formControlName="userrole" >
+                    
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 user_role_input">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>User Role ID</mat-label>
+                    <input matInput formControlName="roleid" >
+                    
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" required autocomplete="off">
+                    <mat-icon matSuffix>mail</mat-icon>
+                    <mat-error *ngIf="labRadioForm.get('email').hasError('required') || labRadioForm.get('email').touched">
+                      Please enter a valid email address
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Mobile No.</mat-label>
+                    <input matInput formControlName="mobile"  required autocomplete="off" (keypress)="mobileNoValidate($event)">
+                    <mat-icon matSuffix>perm_phone_msg</mat-icon>
+                    <mat-error *ngIf="labRadioForm.get('mobile').hasError('required') || labRadioForm.get('mobile').touched">
+                      Please enter a valid mobile no.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
+                    <mat-icon matSuffix (click)="hide = !hide">
+                      {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="labRadioForm.get('password').hasError('required') || labRadioForm.get('password').touched">
+                      The password must contain at least 8 characters, 1 Uppercase letter, 1 Lowercase letter,1 Number and 1 Special Character like @ % & *
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput formControlName="cpassword" [type]="chide ? 'password' : 'text'" required>
+                    <mat-icon matSuffix (click)="chide = !chide">
+                      {{chide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      <mat-error *ngIf="f.cpassword.touched && f.cpassword.invalid">
+                        <div *ngIf="f.cpassword.errors.confirmedValidator">New Password and Confirm
+                           Password must be match.</div>
+                     </mat-error>
+                  </mat-form-field>
+
+                  <!-- <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput formControlName="cpassword" [type]="chide ? 'password' : 'text'"
+                       required>
+                    <mat-icon matSuffix (click)="chide = !chide">
+                       {{chide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="fun.cpassword.touched && fun.cpassword.invalid">
+                       <div *ngIf="fun.cpassword.errors.confirmedValidator">New Password and Confirm
+                          Password must be match.</div>
+                    </mat-error>
+                 </mat-form-field> -->
+                  
+                </div>
+
+                <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Upload Document</mat-label>
+                    <ngx-mat-file-input matInput formControlName="doc_image" [accept]="'.png,.jpg,.jpeg,.pdf'"    (change) = "fileChange($event.target.files)" required>
+                    </ngx-mat-file-input>
+                    <mat-icon matSuffix>upload</mat-icon>
+                    <mat-error *ngIf="labRadioForm.get('doc_image').hasError('required')" >
+                      Select Company certified document
+                    </mat-error>
+                  </mat-form-field>
+                 
+                </div>
+
+                <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>{{frontNameDisplay}}</mat-label>
+                    <input matInput formControlName="company_name" required autocomplete="off">
+                    <mat-icon matSuffix>title</mat-icon>
+                    <mat-error *ngIf="labRadioForm.get('company_name').hasError('required')">
+                      {{frontNameDisplay}} is required
+                    </mat-error>
+                  </mat-form-field>
+                </div> -->
+
+                <div class="form-check mb-4">
+                  <label class="form-check-label pe-0">
+                    <input class="form-check-input" type="checkbox" required value="" formControlName="checkcondition" >I acknowledge that I have read and agreed to the 
+                    <span class="form-check-sign">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                  <a class="fw_mid col-blue cursor-pointer" (click)="openDialog()"> Terms & Conditions.</a>
+                </div>
+
+              </div>
+              <!-- <div *ngIf="success_message" class="alert alert-success alert-dismissible">
+                <strong> Success Now ! </strong>
+              </div>
+              <p *ngIf="error_message" class="alert alert-danger alert-dismissible">
+                <strong>{{error_message_text}} </strong>
+              </p>  -->
+              <div class="flex-sb-m w-full  p-b-20">
+                <div>
+                  <span>Already Registered? <a routerLink="/authentication/signin">
+                      Login
+                    </a></span>
+                </div>
+              </div>
+              <div class="container-auth-form-btn mb-5">
+                <button mat-flat-button color="primary" class="auth-form-btn" [class.auth-spinner]="loading" [disabled]="!labRadioForm.valid " type="submit">
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+         
+          <!-- <h6 class="social-login-title">OR</h6>
+          <ul class="list-unstyled social-icon mb-0 mt-3">
+            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded">
+                <i class="fab fa-google"></i>
+              </a></li>
+            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded flex-c-m">
+                <i class="fab fa-facebook-f"></i>
+              </a></li>
+            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded">
+                <i class="fab fa-twitter"></i>
+              </a></li>
+            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded">
+                <i class="fab fa-linkedin-in"></i>
+              </a></li>
+          </ul> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

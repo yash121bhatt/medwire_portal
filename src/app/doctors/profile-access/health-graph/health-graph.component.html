@@ -1,0 +1,518 @@
+<section class="health-graph-access">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <!-- <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Dashboard'"></app-breadcrumb> -->
+      </div>
+    
+      
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="body">
+              <mat-tab-group dynamicHeight>
+                <!-- tab1 -->
+                <mat-tab label="Heart Rate">
+                  <div class="card-body">
+                    <div class="spaceCss mb-5">
+                      <div class="float-start">
+                        <h6 class="text-muted">Performance Heart Rate</h6>
+                        <!-- <h5>129 bmp <span class="text-muted font-12">(Average)</span></h5> -->
+                      </div>
+                      <ul class="btnsBtn">
+                        <li>
+                          
+                        </li>
+                        <li><button mat-raised-button color="primary" type="button" (click)="weeklyData_heartRate(); ">Week</button></li>
+                        <li>
+                          <!-- <button mat-button type="button" (click)="monthlyData_heartRate();">Monthly</button> -->
+                             
+                          <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline" >
+                            <mat-label>Month</mat-label>
+                            <mat-select (selectionChange)="monthlyData_heartData($event)">
+                              <mat-option selected [value]="'select-a-month'">
+                                select
+                               </mat-option>
+                               <mat-option [value]="'January'">
+                                January
+                               </mat-option>
+                               <mat-option [value]="'February'">
+                                February
+                               </mat-option>
+                               <mat-option [value]="'March'">
+                                March 
+                               </mat-option>
+                               <mat-option [value]="'April'">
+                                 April
+                               </mat-option>
+                               <mat-option [value]="'May'">
+                                  May
+                               </mat-option>
+                               <mat-option [value]="'June'">
+                                June 
+                               </mat-option>
+                              <mat-option [value]="'July'">
+                                July 
+                             </mat-option>
+                             <mat-option [value]="'August'">
+                              August 
+                             </mat-option>
+                            <mat-option [value]="'September'">
+                              September
+                            </mat-option>
+                           <mat-option [value]="'October'">
+                            October
+                           </mat-option>
+                           <mat-option [value]="'November'">
+                            November
+                           </mat-option>
+                           <mat-option [value]="'December'">
+                            December
+                           </mat-option>   
+                            </mat-select>
+                         </mat-form-field> 
+                          
+                        </li>
+                        <li><button mat-raised-button class="ms-2" color="primary" type="button" (click)="yearlyData_heartRate();">Year</button></li>
+                      </ul>
+      
+                    </div>
+                    <div class="mb-5">
+                        <!-- <div class="recent-report__chart"  *ngIf="lineChartData[0].data.length> 0">
+                          <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels"
+                            [options]="lineChartOptions" [legend]="true">
+                          </canvas>
+                        </div>
+                         -->
+                         <div *ngIf="!heartRateCondition"> 
+                          <p class="text-danger text-center h4" >No Data Found</p>
+                        </div>
+                      <div class="body" *ngIf="heartRateCondition">       
+                         <div class="recent-report__chart" >
+                          <apx-chart [series]="areaChartOptions2.series" [chart]="areaChartOptions2.chart"
+                          [xaxis]="areaChartOptions2.xaxis" [yaxis]="areaChartOptions2.yaxis" [colors]="areaChartOptions2.colors"
+                          [stroke]="areaChartOptions2.stroke" [legend]="areaChartOptions2.legend" [tooltip]="areaChartOptions2.tooltip"
+                          [dataLabels]="areaChartOptions2.dataLabels"></apx-chart>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </mat-tab>
+  
+                <!-- tab-2 -->
+                <mat-tab label="Blood Pressure">
+                  <div class="card-body">
+                    <div class = "row">
+                      <div class="spaceCss">
+                        <div class="float-start">
+                          <h6 class="text-muted">Performance Blood Pressure</h6>
+                          <!-- <h5>130 mmHg <span class="text-muted font-12">(Average)</span></h5> -->
+                        </div>
+                        
+                        <ul class="btnsBtn">
+                          <li>
+                            
+                          </li>
+                          <li><button mat-raised-button color="primary" type="button" (click)="weeklyData_BloodReport()">Week</button></li>
+                          <li>
+                            <!-- <button mat-button type="button" (click)="monthlyData_BloodReport()">Monthly</button> -->
+                            
+                            <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline" >
+                              <mat-label>Month</mat-label>
+                              <mat-select (selectionChange)="monthlyData_BloodReportData($event)">
+                                <mat-option [value]="'select-a-option'">
+                                  select
+                                 </mat-option> 
+                                <mat-option [value]="'January'">
+                                  January
+                                 </mat-option>
+                                 <mat-option [value]="'February'">
+                                  February
+                                 </mat-option>
+                                 <mat-option [value]="'March'">
+                                  March 
+                                 </mat-option>
+                                 <mat-option [value]="'April'">
+                                   April
+                                 </mat-option>
+                                 <mat-option [value]="'May'">
+                                    May
+                                 </mat-option>
+                                 <mat-option [value]="'June'">
+                                  June 
+                                 </mat-option>
+                                <mat-option [value]="'July'">
+                                  July 
+                               </mat-option>
+                               <mat-option [value]="'August'">
+                                August 
+                               </mat-option>
+                              <mat-option [value]="'September'">
+                                September
+                              </mat-option>
+                             <mat-option [value]="'October'">
+                              October
+                             </mat-option>
+                             <mat-option [value]="'November'">
+                              November
+                             </mat-option>
+                             <mat-option [value]="'December'">
+                              December
+                             </mat-option>   
+                              </mat-select>
+                           </mat-form-field> 
+    
+    
+                          </li>
+                          <li><button mat-raised-button color="primary" class="ms-2" type="button" (click)="yearlyData_bloodReport()">Year</button></li>
+                        </ul>
+                        <!-- <ul class="btnsBtn_max_min ">
+                          <li><button mat-button type="button" (click)="maxFilterType('max_blood_report')">Max</button></li>
+                          <li><button mat-button type="button" (click)="minFilterType('min_blood_report')">Min</button></li>
+                        </ul> -->
+                      </div>
+                    </div>
+                    <div class="mb-5">
+                      <div *ngIf="!bpCondition"> 
+                        <p class="text-danger text-center h4" >No Data Found</p>
+                      </div>
+                      <div class="body" *ngIf="bpCondition">
+                     
+                        <div class="recent-report__chart" >
+                          <apx-chart [series]="areaChartOptions1.series" [chart]="areaChartOptions1.chart"
+                          [xaxis]="areaChartOptions1.xaxis" [yaxis]="areaChartOptions1.yaxis" [colors]="areaChartOptions1.colors"
+                          [stroke]="areaChartOptions1.stroke" [legend]="areaChartOptions1.legend" [tooltip]="areaChartOptions1.tooltip"
+                          [dataLabels]="areaChartOptions1.dataLabels"></apx-chart>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+                <!-- tab-3 -->
+                <mat-tab label="Respiratory Rate">
+                  <div class="card-body">
+                    <div class="spaceCss">
+                      <div class="float-start">
+                        <h6 class="text-muted">Performance Respiratory Rate</h6>
+                        <!-- <h5>188 bpm<span class="text-muted font-12">(Average)</span></h5> -->
+                      </div>
+                      <ul class="btnsBtn">
+                        <li><button mat-raised-button color="primary" type="button" (click)="weeklyData_ResporetryReport()">Week</button></li>
+                        <li>
+                          <!-- <button mat-raised-button type="button" (click)="monthlyData_ResporetryReport()">Monthly</button> -->
+                             
+                          <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline" >
+                            <mat-label>Month</mat-label>
+                            <mat-select (selectionChange)="monthlyData_ResporetryReportData($event)" >
+                              <mat-option [value]="'select-a-month'">
+                                select
+                               </mat-option> 
+                              <mat-option [value]="'January'">
+                                January
+                               </mat-option>
+                               <mat-option [value]="'February'">
+                                February
+                               </mat-option>
+                               <mat-option [value]="'march'">
+                                March 
+                               </mat-option>
+                               <mat-option [value]="'April'">
+                                 April
+                               </mat-option>
+                               <mat-option [value]="'may'">
+                                  May
+                               </mat-option>
+                               <mat-option [value]="'June '">
+                                June 
+                               </mat-option>
+                              <mat-option [value]="'July '">
+                                July 
+                             </mat-option>
+                             <mat-option [value]="'August'">
+                              August 
+                             </mat-option>
+                            <mat-option [value]="'September '">
+                              September
+                            </mat-option>
+                           <mat-option [value]="'October'">
+                            October
+                           </mat-option>
+                           <mat-option [value]="'November'">
+                            November
+                           </mat-option>
+                           <mat-option [value]="'December'">
+                            December
+                           </mat-option>   
+                            </mat-select>
+                         </mat-form-field> 
+                          
+                        </li>
+                        <li><button mat-raised-button color="primary" class="ms-2" type="button" (click)="yearlyData_ResporetryReport()">Year</button></li>
+                      </ul>
+                      <!-- <ul class="btnsBtn_max_min ">
+                        <li><button mat-button type="button" (click)="maxFilterType('max_respiratory_rate')">Max</button></li>
+                        <li><button mat-button type="button" (click)="minFilterType('min_respiratory_rate')">Min</button></li>
+                      </ul> -->
+                    </div>
+                    <div class="mb-5">
+                      <div *ngIf="!respiratoryCondition"> 
+                        <p class="text-danger text-center h4" >No Data Found</p>
+                      </div>
+                      <div class="body" *ngIf="respiratoryCondition"> 
+                        <div class="recent-report__chart" >
+                          <apx-chart [series]="areaChartOptions3.series" [chart]="areaChartOptions3.chart"
+                          [xaxis]="areaChartOptions3.xaxis" [yaxis]="areaChartOptions3.yaxis" [colors]="areaChartOptions3.colors"
+                          [stroke]="areaChartOptions3.stroke" [legend]="areaChartOptions3.legend" [tooltip]="areaChartOptions3.tooltip"
+                          [dataLabels]="areaChartOptions3.dataLabels"></apx-chart>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+                <!-- tab-4 -->
+                <mat-tab label="Oxygen Saturation">
+                  <div class="card-body">
+                    <div class="spaceCss">
+                      <div class="float-start">
+                        <h6 class="text-muted">Performance Oxygen Saturation</h6>
+                        <!-- <h5>109  <span class="text-muted font-12">(Average)</span></h5> -->
+                      </div>
+                      <ul class="btnsBtn">
+                        <li><button mat-raised-button color="primary" type="button" (click)="weeklyData_Oxygensat()">Week</button></li>
+                        <li>
+                          <!-- <button mat-button type="button" (click)="monthlyData_Oxygensat()">Monthly</button> -->
+                          <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline" >
+                            <mat-label>Month</mat-label>
+                            <mat-select (selectionChange)="monthlyData_OxygensatData($event)">
+                              <mat-option [value]="'Select-a-month'">
+                                select
+                               </mat-option>
+                              <mat-option [value]="'January'">
+                                January
+                               </mat-option>
+                               <mat-option [value]="'February'">
+                                February
+                               </mat-option>
+                               <mat-option [value]="'March'">
+                                March 
+                               </mat-option>
+                               <mat-option [value]="'April'">
+                                 April
+                               </mat-option>
+                               <mat-option [value]="'May'">
+                                  May
+                               </mat-option>
+                               <mat-option [value]="'June '">
+                                June 
+                               </mat-option>
+                              <mat-option [value]="'July '">
+                                July 
+                             </mat-option>
+                             <mat-option [value]="'August'">
+                              August 
+                             </mat-option>
+                            <mat-option [value]="'September '">
+                              September
+                            </mat-option>
+                           <mat-option [value]="'October'">
+                            October
+                           </mat-option>
+                           <mat-option [value]="'November'">
+                            November
+                           </mat-option>
+                           <mat-option [value]="'December'">
+                            December
+                           </mat-option>   
+                            </mat-select>
+                         </mat-form-field> 
+                        </li>
+                        <li><button mat-raised-button color="primary" class="ms-2" type="button" (click)="yearlyData_Oxygensat()">Year</button></li>
+                      </ul>
+                      <!-- <ul class="btnsBtn_max_min ">
+                        <li><button mat-button type="button" (click)="maxFilterType('max_oxygen_saturation')">Max</button></li>
+                        <li><button mat-button type="button" (click)="minFilterType('min_oxygen_saturation')">Min</button></li>
+                      </ul> -->
+                    </div>
+                    <div class="mb-5">
+                      <div *ngIf="!oxygenCondition"> 
+                        <p class="text-danger text-center h4" >No Data Found</p>
+                      </div>
+                      <div class="body" *ngIf="oxygenCondition"> 
+                        <div class="recent-report__chart" >
+                          <apx-chart [series]="areaChartOptions4.series" [chart]="areaChartOptions4.chart"
+                          [xaxis]="areaChartOptions4.xaxis" [yaxis]="areaChartOptions4.yaxis" [colors]="areaChartOptions4.colors"
+                          [stroke]="areaChartOptions4.stroke" [legend]="areaChartOptions4.legend" [tooltip]="areaChartOptions4.tooltip"
+                          [dataLabels]="areaChartOptions4.dataLabels"></apx-chart>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+                <!-- tab-5 -->
+                <mat-tab label="Temperature">
+                  <div class="card-body">
+                    <div class="spaceCss">
+                      <div class="float-start">
+                        <h6 class="text-muted">Performance Temperature</h6>
+                        <!-- <h5>102 F <span class="text-muted font-12">(Average)</span></h5> -->
+                      </div>
+                      <ul class="btnsBtn">
+                        <li><button mat-raised-button color="primary" type="button" (click)="weeklyData_Temperature()">Week</button></li>
+                        <li>
+                          <!-- <button mat-button type="button" (click)="monthlyData_Temperature()">Monthly</button> -->
+                          <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline" >
+                            <mat-label>Month</mat-label>
+                            <mat-select (selectionChange)="monthlyData_TemperatureData($event)">
+                              <mat-option [value]="'select-a-month'">
+                                select
+                               </mat-option> 
+                              <mat-option [value]="'January'">
+                                January
+                               </mat-option>
+                               <mat-option [value]="'February'">
+                                February
+                               </mat-option>
+                               <mat-option [value]="'March'">
+                                March 
+                               </mat-option>
+                               <mat-option [value]="'April'">
+                                 April
+                               </mat-option>
+                               <mat-option [value]="'May'">
+                                  May
+                               </mat-option>
+                               <mat-option [value]="'June '">
+                                June 
+                               </mat-option>
+                              <mat-option [value]="'July '">
+                                July 
+                             </mat-option>
+                             <mat-option [value]="'August'">
+                              August 
+                             </mat-option>
+                            <mat-option [value]="'September '">
+                              September
+                            </mat-option>
+                           <mat-option [value]="'October'">
+                            October
+                           </mat-option>
+                           <mat-option [value]="'November'">
+                            November
+                           </mat-option>
+                           <mat-option [value]="'December'">
+                            December
+                           </mat-option>   
+                            </mat-select>
+                         </mat-form-field> 
+                        </li>
+                        <li><button mat-raised-button color="primary" class="ms-2" type="button" (click)="yearlyData_Temperature()">Year</button></li>
+                      </ul>
+                      <!-- <ul class="btnsBtn_max_min ">
+                        <li><button mat-button type="button" (click)="maxFilterType('max_temperature')">Max</button></li>
+                        <li><button mat-button type="button" (click)="minFilterType('min_temperature')">Min</button></li>
+                      </ul> -->
+                    </div>
+                    <div class="mb-5">
+                      <div *ngIf="!temperatureCondition"> 
+                        <p class="text-danger text-center h4" >No Data Found</p>
+                      </div>
+                      <div class="body" *ngIf="temperatureCondition"> 
+                        <div class="recent-report__chart" >
+                          <apx-chart [series]="areaChartOptions5.series" [chart]="areaChartOptions5.chart"
+                          [xaxis]="areaChartOptions5.xaxis" [yaxis]="areaChartOptions5.yaxis" [colors]="areaChartOptions5.colors"
+                          [stroke]="areaChartOptions5.stroke" [legend]="areaChartOptions5.legend" [tooltip]="areaChartOptions5.tooltip"
+                          [dataLabels]="areaChartOptions5.dataLabels"></apx-chart>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+  
+                <!-- tab-6 -->
+                <mat-tab label="BMI">
+                  <div class="card-body">
+                    <div class="spaceCss">
+                      <div class="float-start">
+                        <h6 class="text-muted">Performance BMI</h6>
+                        <!-- <h5>129 bmp <span class="text-muted font-12">(Average)</span></h5> -->
+                      </div>
+                      <ul class="btnsBtn">
+                        <li><button mat-raised-button color="primary" type="button"  (click)="weeklyData_BMI()">Week</button></li>
+                        <li>
+                          <!-- <button mat-button type="button" (click)="monthlyData_BMI()">Monthly</button> -->
+                          <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline" >
+                            <mat-label>Month</mat-label>
+                            <mat-select (selectionChange)="monthlyData_BMIData($event)">
+                              <mat-option [value]="'select-a-month'">
+                                select
+                               </mat-option> 
+                              <mat-option [value]="'January'">
+                                January
+                               </mat-option>
+                               <mat-option [value]="'February'">
+                                February
+                               </mat-option>
+                               <mat-option [value]="'March'">
+                                March 
+                               </mat-option>
+                               <mat-option [value]="'April'">
+                                 April
+                               </mat-option>
+                               <mat-option [value]="'May'">
+                                  May
+                               </mat-option>
+                               <mat-option [value]="'June '">
+                                June 
+                               </mat-option>
+                              <mat-option [value]="'July '">
+                                July 
+                             </mat-option>
+                             <mat-option [value]="'August'">
+                              August 
+                             </mat-option>
+                            <mat-option [value]="'September '">
+                              September
+                            </mat-option>
+                           <mat-option [value]="'October'">
+                            October
+                           </mat-option>
+                           <mat-option [value]="'November'">
+                            November
+                           </mat-option>
+                           <mat-option [value]="'December'">
+                            December
+                           </mat-option>   
+                            </mat-select>
+                         </mat-form-field> 
+                        </li>
+                        <li><button mat-raised-button color="primary" class="ms-2" type="button" (click)="yearlyData_BMI()">Year</button></li>
+                      </ul>
+                      <!-- <ul class="btnsBtn_max_min ">
+                        <li><button mat-button type="button" (click)="maxFilterType('max_bmi')">Max</button></li>
+                        <li><button mat-button type="button" (click)="minFilterType('min_bmi')">Min</button></li>
+                      </ul> -->
+                    </div>
+                    <div class="mb-5">
+                      <div *ngIf="!bmiCondition"> 
+                        <p class="text-danger text-center h4" >No Data Found</p>
+                      </div>
+                      <div class="body" *ngIf="bmiCondition"> 
+                        <div class="recent-report__chart" >
+                          <apx-chart [series]="areaChartOptions6.series" [chart]="areaChartOptions6.chart"
+                          [xaxis]="areaChartOptions6.xaxis" [yaxis]="areaChartOptions6.yaxis" [colors]="areaChartOptions6.colors"
+                          [stroke]="areaChartOptions6.stroke" [legend]="areaChartOptions6.legend" [tooltip]="areaChartOptions6.tooltip"
+                          [dataLabels]="areaChartOptions6.dataLabels"></apx-chart>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+          </div>
+        </div>
+   
+      </div> 
+    </div>    
+  </section>

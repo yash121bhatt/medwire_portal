@@ -1,0 +1,144 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Packages'" [active_item]="'Packages'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <!-- <div class="header d-flex justify-content-between my-4">
+                        <h2><strong>Packages</strong></h2>
+                        <button mat-raised-button color="primary" [routerLink]="['../add-package']">
+                            Add Package
+                        </button>
+                    </div> -->
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="body table-responsive long_text_td">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width my-0" appearance="outline">
+                                                <mat-label>Search</mat-label>
+                                                <input matInput (keyup)="applyFilter($event)" autocomplete="off">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-6 text-end">
+                                            <ul class="header-buttons text-end">
+                                                <li>
+                                                    <button mat-raised-button color="primary"
+                                                        [routerLink]="['../add-package']">
+                                                        Add Package
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <table mat-table [dataSource]="dataSource3" class="w-100" matSort
+                                        #empTbSort="matSort">
+                                        <!-- No Column -->
+                                        <ng-container matColumnDef="no">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No. </th>
+                                            <td mat-cell *matCellDef="let element; let i = index;"> {{ i + 1 }} </td>
+                                        </ng-container>
+                                        <!-- Image Column -->
+                                        <ng-container matColumnDef="image">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+                                            <td mat-cell *matCellDef="let element" class="table-img"><img width="40" class=""
+                                                    src="{{ element.image }}" /></td>
+                                        </ng-container>
+                                        <!-- Full Name Column -->
+                                        <ng-container matColumnDef="category_name">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Category Name </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.category_name}} </td>
+                                        </ng-container>
+                                        <!-- Gender Column -->
+                                        <!-- <ng-container matColumnDef="test_name">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Test Name </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.test_name}} </td>
+                                     </ng-container> -->
+                                        <ng-container matColumnDef="test_name">
+
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Test</th>
+
+                                            <td mat-cell *matCellDef="let element ; let i = index ;">
+
+                                                <div *ngFor="let testfinal of element.testData">
+                                                    {{testfinal.test_name+','}}
+                                                </div>
+                                            </td>
+                                        </ng-container>
+                                        <!-- DOB Column -->
+                                        <ng-container matColumnDef="package_name">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Package Name </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.package_name}} </td>
+                                        </ng-container>
+                                        <!-- Mobile No. Column -->
+                                        <ng-container matColumnDef="test_recommended">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Test For</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.test_recommended}} </td>
+                                        </ng-container>
+                                        <!-- test_recommanded Column -->
+
+                                        <!-- test_recommanded Column -->
+                                        <ng-container matColumnDef="amount">
+
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+
+                                            <td mat-cell *matCellDef="let element"> &#8377; {{element.amount}}</td>
+                                        </ng-container>
+                                        <!-- Email Column -->
+                                        <ng-container matColumnDef="description">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                                            <td mat-cell *matCellDef="let element" [innerHTML]="element.description">
+                                            </td>
+                                        </ng-container>
+                                        <!-- Action Column -->
+                                        <ng-container matColumnDef="actions">
+                                            <th mat-header-cell *matHeaderCellDef> Action</th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <span>
+                                                    <button class="btn tblActnBtn h-auto"
+                                                        [routerLink]="['../edit-package/'+element.package_id]">
+                                                        <i class="material-icons">mode_edit</i>
+                                                    </button>
+                                                    <button class="btn tblActnBtn h-auto"
+                                                        (click)="open(myModal); getId(element.package_id)">
+                                                        <i class="material-icons">delete</i>
+                                                    </button>
+                                                </span>
+                                            </td>
+                                        </ng-container>
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                    </table>
+                                    <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons>
+                                    </mat-paginator>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #myModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+            <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+        </div>
+        <div class="modal-body">
+            Are You sure you want to delete?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark"
+                (click)="modal.close('Save click'); deleteRecord()">Ok</button>
+
+            <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+        </div>
+    </ng-template>
+</section>

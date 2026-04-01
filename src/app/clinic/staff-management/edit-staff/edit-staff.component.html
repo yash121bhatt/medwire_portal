@@ -1,0 +1,109 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Edit Staff'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+               <div class="header mx-4">
+                  <h2><strong>Edit Staff</strong></h2>
+               </div>
+               <div class="body">
+                  <form class="m-4" [formGroup]="editstaffForm" (ngSubmit)="onSubmit()">
+                     <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                           <mat-form-field class="example-full-width mb-3 pt-0" appearance="outline">
+                              <mat-label>Full Name</mat-label>
+                              <input matInput formControlName="full_name" [(ngModel)]="full_name" required />
+                              <mat-error *ngIf="editstaffForm.get('full_name').hasError('required')">
+                                 Full Name is required
+                              </mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                           <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Role</mat-label>
+                              <mat-select formControlName="role_id" [(ngModel)]="role_id" required>
+                                 <!-- <mat-option [value]="7">
+                                    Prescription Writer
+                                 </mat-option> -->
+                                 <mat-option [value]="6">
+                                    Receptionist
+                                 </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="editstaffForm.get('role_id').hasError('required')">
+                                 Role is required
+                              </mat-error>
+                           </mat-form-field>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                           <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Date Of Birth</mat-label>
+                              <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" [(ngModel)]="date_of_birth" formControlName="date_of_birth" required />
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                              <mat-error *ngIf="editstaffForm.get('date_of_birth').hasError('required')">
+                                 Please select date
+                              </mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                           <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Gender</mat-label>
+                              <mat-select formControlName="gender" [(ngModel)]="gender" required>
+                                 <mat-option [value]="'Male'">
+                                    Male
+                                 </mat-option>
+                                 <mat-option [value]="'Female'">
+                                    Female
+                                 </mat-option>
+                              </mat-select>
+                              <!-- <mat-error *ngIf="editstaffForm.get('gender').hasError('required')">
+                                 Sex is required
+                              </mat-error> -->
+                           </mat-form-field>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                           <mat-form-field class="example-full-width mb-3 readonly" appearance="outline">
+                              <mat-label>Mobile No.</mat-label>
+                              <input matInput formControlName="mobile_number" readonly [(ngModel)]="mobile_number" type="number" required />
+                              <!-- <mat-error *ngIf="editstaffForm.get('mobile_number').hasError('required')">
+                                 Mobile Number is required
+                              </mat-error> -->
+                           </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                           <mat-form-field class="example-full-width readonly" appearance="outline">
+                              <mat-label>Email</mat-label>
+                              <input matInput formControlName="email_id" [(ngModel)]="email_id" readonly required />
+                           </mat-form-field>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                           <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Upload Image</mat-label>
+                              <ngx-mat-file-input formControlName="profile_image" (change) ="fileChange($event.target.files)" > </ngx-mat-file-input>
+                           </mat-form-field>
+                           <a href="{{imageURL+imageName}}" target="_blank">View Image</a>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                           <button class="btn-space" type="submit" mat-raised-button color="primary" >Submit</button>
+                           <button type="button" mat-button [routerLink]="['/clinic/staff-management/staff-list']">Cancel</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

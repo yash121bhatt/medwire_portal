@@ -1,0 +1,113 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Doctor list'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="body">
+              <div class="body table-responsive">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width formField" appearance="outline">
+                      <mat-label>Filter</mat-label>
+                      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. John" autocomplete="off" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 text-end">
+                    <button mat-raised-button color="primary" type="button" [routerLink]="['../add-doctor']">Add Doctor</button>
+                  </div>
+                </div>
+  
+                <table mat-table [dataSource]="dataSource3" class="w-100" matSort #empTbSort="matSort">
+                  <!-- No Column -->
+                  <ng-container matColumnDef="no">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No. </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> {{ i + 1 }} </td>
+                  </ng-container>
+                   <!-- Image Column -->
+                   <ng-container matColumnDef="doctor_profile">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+                    <td mat-cell *matCellDef="let element"><img width="40" class="rounded-circle" src="{{imageURL+element.doctor_profile }}" /></td>
+                 </ng-container>
+                  <!-- Doctor Name Column -->
+                  <ng-container matColumnDef="doctor">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</th>
+                    <td mat-cell *matCellDef="let element">{{element.doctor}}</td>
+                  </ng-container>
+
+                     <!--Clinic Column -->
+                     <ng-container matColumnDef="clinic">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Clinic </th>
+                        <td mat-cell *matCellDef="let element">{{element.clinic}}</td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="clinic_logo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Clinic Logo </th>
+                        <td mat-cell *matCellDef="let element"><img width="40" class="rounded-circle" src="{{element.clinic_profile?imageURL+element.clinic_profile:imageURL+'demouser.png' }}" /></td>
+                     </ng-container>                 
+                  <!-- Spaciality Column -->
+                  <ng-container matColumnDef="speciality">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Speciality</th>
+                    <td mat-cell *matCellDef="let element" > <div *ngFor="let data of element.spaciality">{{data.speciality_name}}</div>
+                      <!-- <div *ngFor="let item of speciality">{{item.speciality_name}}</div> -->
+                    </td>
+                  </ng-container>
+
+                   <!--Experience Column -->
+                   <ng-container matColumnDef="experience_in_year">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Experience</th>
+                    <td mat-cell *matCellDef="let element">{{element.experience_in_year}}</td>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef>Action</th>
+                    <td mat-cell *matCellDef="let element">
+                      <span>
+                        <!-- <button class="btn tblActnBtn h-auto eyeIcon checkIcon" matTooltip="Edit" [routerLink]="['../edit-promocode']">
+                          <i class="material-icons">edit</i>
+                        </button> -->
+                        <button class="btn tblActnBtn h-auto eyeIcon cancelIcon" matTooltip="Delete">
+                          <i class="material-icons" (click)="open(mymodal); getdeleteID(element.id)">delete</i>
+                        </button>
+                      </span>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons>
+                </mat-paginator>
+              </div>
+              <!-- Add content here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Delete Pop -->
+
+   <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+      <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button> -->
+    </div>
+    <div class="modal-body">
+     Are You sure you want to delete?
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); deleteDoctor()">Ok</button>
+    
+     <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+   </div>
+  </ng-template>
+
+
+</section>
+  

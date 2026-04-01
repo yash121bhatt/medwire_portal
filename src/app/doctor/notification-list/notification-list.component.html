@@ -1,0 +1,42 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Notifications'" [items]="[]" [active_item]="'Notifications'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="p-3">
+                                    <div class="row">
+                                        <div class="cardNotification "
+                                            *ngFor="let data of systemNotificationData | paginate: { id: 'pagination2', itemsPerPage : 10, currentPage : pagination2, totalItems: total }">
+                                            <div class="doc-card-title">
+                                                <h4>{{data.title}}</h4>
+                                            </div>
+                                            <div class="description">
+                                                <p [innerHTML]="data.message"></p>
+                                            </div>
+                                            <span class="menu-desc timeText mt-2">
+                                             <i class="material-icons">access_time</i> {{data.created_at }}
+                                            </span>
+                                        </div>
+                                        <div class="paginator">
+                                            <pagination-controls id="pagination2" (pageChange)="pagination2 = $event">
+                                            </pagination-controls>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

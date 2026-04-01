@@ -1,0 +1,63 @@
+<div class="example-container">
+   <form class="m-4" [formGroup]="vitalTabForm" (ngSubmit)="onSubmit()">
+   <div class="row">
+      <div class="col-6">
+         <h5>Heart Rate</h5>
+         <mat-form-field class="example-full-width mb-1" appearance="outline">
+            <mat-label>Enter the Heart Rate</mat-label>
+            <input matInput formControlName="heart_rate" autocomplete="off">
+         </mat-form-field>
+      </div>
+      <div class="col-6">
+         <h5>Respiratory Rate</h5>
+         <mat-form-field class="example-full-width mb-1" appearance="outline" >
+            <mat-label>Enter the Respiratory Rate</mat-label>
+            <input matInput formControlName="respiratory_rate" autocomplete="off" >
+         </mat-form-field>
+      </div>
+      <h5>Blood Pressure</h5>
+      <div class="col-6">
+       
+       <mat-form-field class="example-full-width mb-1" appearance="outline">
+          <mat-label>Enter the Systolic Blood Pressure</mat-label>
+          <input matInput formControlName="high_blood_pressure" autocomplete="off" >
+       </mat-form-field>
+    </div>
+    <div class="col-6">
+       <mat-form-field class="example-full-width mb-1" appearance="outline">
+          <mat-label>Enter the Diastolic Blood Pressure</mat-label>
+          <input matInput formControlName="low_blood_pressure" autocomplete="off">
+       </mat-form-field>
+    </div>
+      <div class="col-6">
+       <h5>Oxygen Saturation</h5>
+         <mat-form-field class="example-full-width mb-1" appearance="outline">
+            <mat-label>Enter the Oxygen Saturation</mat-label>
+            <input matInput formControlName="oxygen_saturation" autocomplete="off">
+         </mat-form-field>
+      </div>
+      <div class="col-6">
+         <h5> Temperature</h5>
+         <mat-form-field class="example-full-width mb-1" appearance="outline">
+            <mat-label>Enter the Temperature</mat-label>
+            <input matInput formControlName="temperature" autocomplete="off" >
+         </mat-form-field>
+      </div>
+      <!-- <div class="col-6 mb-1">
+         <h5>BMI</h5>
+         <mat-form-field class="example-full-width mb-1" appearance="outline">
+            <mat-label>BMI</mat-label>
+            <input matInput formControlName="bmi"   autocomplete="off">
+            
+         </mat-form-field>
+      </div>
+       -->
+   </div>
+   <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+         <button class="btn-space" mat-raised-button color="primary" >Submit</button>
+         <button type="button" mat-button [routerLink]="['/doctors/appointments/appointment-list/'+cancelbtnClientId.clientChoose]">Cancel</button>
+      </div>
+   </div>
+   </form>
+</div>

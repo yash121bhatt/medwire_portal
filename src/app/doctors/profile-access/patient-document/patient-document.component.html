@@ -1,0 +1,76 @@
+<div class="body upload_document ps-sm-0 pt-0">
+    <div class="row">
+         <div class="col-lg-3 col-12 min_scroll" >
+             <mat-button-toggle-group class="pt-5" appearance="" vertical>
+                 <mat-button-toggle checked (change)="getDocument('prescription')">Prescription</mat-button-toggle>
+                 <mat-button-toggle (change)="getDocument('patient_lab_report')">Lab Reports</mat-button-toggle>
+                 <mat-button-toggle (change)="getDocument('procedure_report')">Procedure Report</mat-button-toggle>
+                 <mat-button-toggle (change)="getDocument('vaccination')">Vaccination</mat-button-toggle>
+                 <mat-button-toggle (change)="getDocument('discharge_summary')">Discharge Summary</mat-button-toggle>
+                 <mat-button-toggle (change)="getDocument('all_bill')">Medical/lab/hospital Bills</mat-button-toggle>
+                 <mat-button-toggle (change)="getDocument('insurance_document')">Insurance Documents</mat-button-toggle>
+             </mat-button-toggle-group>
+         </div>
+         <div class="col-lg-9 col-12">
+             <div class="row">
+                 <div class="col-sm-12">
+                    <div class="body table-responsive">
+                     <div class="table-responsive">
+                       <table mat-table [dataSource]="dataSource3" class="w-100 padding">
+                         <!-- s_no Column -->
+                         <ng-container matColumnDef="s_no">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header class="ps-0"> S.No. </th>
+                             <td mat-cell class="px-1" *matCellDef="let element; let i=index"> {{i+1}} </td>
+                         </ng-container>
+                         <!-- first Name Column -->
+                         <ng-container matColumnDef="document_title">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Document Name</th>
+                             <td mat-cell class="px-1" *matCellDef="let element"> {{element.document_title}}</td>
+                         </ng-container>
+                         <!-- upload_date Column -->
+                         <ng-container matColumnDef="document_date">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Upload Date </th>
+                             <td mat-cell class="px-1" *matCellDef="let element"> {{element.document_date | date:'dd/MM/yyyy'}} </td>
+                         </ng-container>
+                         <!-- Action Column -->
+                         <ng-container matColumnDef="actions">
+                             <th mat-header-cell *matHeaderCellDef> Action</th>
+                             <td mat-cell class="" *matCellDef="let element">
+                               
+                                <span *ngIf="documentType=='patient_lab_report'">
+                                    {{dicomURL}}
+                                    {{checkCondition(imageURL+element.document_file)}}
+
+                                    <a *ngIf="showdcmFile" class="imgSizeIcon"  href="{{dicomURl+'#'+element.document_file}}" target="_blank">
+                                        <span >
+                                            <div [innerHTML]="htmlReturnDicom"></div>
+                                        </span>
+                                    </a>
+                                    <a *ngIf="showpdfFile"  href="{{imageURL+element.document_file}}" target="_blank">
+                                        <span class="col-green">
+                                          <mat-icon>visibility</mat-icon>
+                                        </span>
+                                    </a>
+                                 </span>
+
+                                 <span *ngIf="documentType!='lab_report'">
+                                    <a href="{{imageURL+element.document_file}}" target="_blank">
+                                        <span class="col-green">
+                                          <mat-icon>visibility</mat-icon>
+                                        </span>
+                                    </a>
+                                 </span>
+                             </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                       </table>
+                      </div>
+                       <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons>
+                      </mat-paginator>
+                    </div>
+                 </div>
+              </div>
+         </div>
+     </div>
+ </div>

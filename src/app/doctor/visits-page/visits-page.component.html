@@ -1,0 +1,184 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Laboratory Visits'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="row">
+              <div class="col-sm-12">
+
+                <div class="ngxTableHeader">
+                  <ul class="header-buttons-left ms-0 mb-0">
+                    <li class="dropdown">
+                      <h2><strong>New Visits</strong></h2>
+                    </li>
+                    <li>
+                      <mat-form-field class="example-full-width searchInput" appearance="outline">
+                        <mat-label>Search</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Search" autocomplete="off">
+                      </mat-form-field>
+                    </li>
+                  </ul>
+                  <ul class="header-buttons">
+                    <li>
+                      <button mat-raised-button color="primary" [routerLink]="['/doctor/new-visit']">
+                        New Visit
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-body p-0">
+                  <div class="body table-responsive">
+                    <table mat-table [dataSource]="dataSource3" class="w-100" matSort #empTbSort="matSort">
+                      <!-- No Column -->
+                      <ng-container matColumnDef="sn">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No. </th>
+                        <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                      </ng-container>
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="username">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.username}}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="mobile">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile No. </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.mobile??'-'}}
+                        </td>
+                      </ng-container>
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="visit_created_at">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date & Time
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.visit_created_at | date:'dd/MM/yyy'}}, {{element.visit_created_at | date:'shortTime':'UTC+11'}}
+                          <!-- {{element.visit_created_at | date : 'yyyy-MM-dd HH:mm:ss'}} -->
+                          <!-- {{element.visit_created_at | date:'dd/MM/yyyy'}} -->
+                          <!-- , {{element.visit_created_at | date:'shortTime'}} -->
+                        </td>
+                      </ng-container>
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="category">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.category}}
+                        </td>
+                      </ng-container>
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="sub_category">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sub Category
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.sub_category}}
+                        </td>
+                      </ng-container>
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="reportStatus">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Report
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          <a class="imgSizeIcon"
+                            href="{{element.report_document?imageURL+element.report_document: '-'}}"
+                            *ngIf="element.report_document" target="__blank">
+                            {{returnPdf(element.report_document??'-')}} <div [innerHtml]="htmlReturn"></div> </a>
+                          <!-- <a class="imgSizeIcon"
+                            href="{{element.report_document?imageURL+element.report_document: '-'}}" target="_blank">
+                            {{viewFile(element.report_document??'-')}} <div [innerHtml]="htmlReturn"></div> </a> -->
+                        </td>
+                      </ng-container>
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="addReport">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Add Report
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          <button class="btn tblActnBtn addBtn h-auto" *ngIf="(element.report_document) == null ? true : false"
+                            (click)='editRow(row, rowIndex, editRecord,element.visit_id)'>
+                            <i class="material-icons">add</i>
+                          </button>
+                        </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons>
+                    </mat-paginator>
+                  </div>
+                  <!-- Edit Record Modal Window -->
+                  <ng-template #editRecord let-modal>
+                    <div class="modal-header editRowModal">
+                      <h4 class="modal-title" id="modal-basic-title">
+                        <div class="modal-header ">
+                          <h6>Upload Report</h6>
+                        </div>
+                      </h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true"><i class="material-icons">close</i></span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                          <div class="uploadReport">
+                            <!-- <form class="uploadImage" [formGroup]="uploadFileForm" (ngSubmit)="onSubmit('uploadFileForm.value')">
+                              <label for="fileUpload"><mat-icon>upload</mat-icon><br>Upload Image  </label>
+                              <input type="file" id="fileUpload" formControlName="report_document" accept="application/pdf, application/vnd.ms-excel">
+                              <div class="button-demo">
+                                <button mat-raised-button type="submit" color="primary">Save</button>
+                                <button mat-button type="button" (click)="modal.close()">Cancel</button>
+                              </div>
+                            </form> -->
+
+                            <form action="" [formGroup]="uploadFileForm" (ngSubmit)="onSubmit('uploadFileForm.value')">
+                              <mat-form-field class="example-full-width fileSize" appearance="outline">
+                                <mat-label>Upload Report</mat-label>
+                                <ngx-mat-file-input formControlName="report_document"  maxSize="5MB" 
+                                  (change)="fileChange($event.target.files);">
+                                </ngx-mat-file-input>
+                                <!-- <mat-error *ngIf="addprofiletForm.get('report_document').hasError('required')">
+                                  Please select image
+                                </mat-error> -->
+                                <mat-icon matSuffix>upload</mat-icon>
+                              </mat-form-field>
+                              <div *ngIf="messages.length > 0">
+                                <span class="sizeError" *ngFor="let msg of messages">
+                                  {{msg}}
+                                  <br />
+                                </span>
+                              </div>
+                              <!-- <span class="">File size should be less than 5 MB.</span> -->
+                              <div class="button-demo fileSize">
+                                <button mat-raised-button type="submit" color="primary"
+                                [disabled]="!report_document" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="fileTypeCheck">Save</button>
+                                <button mat-button type="button" (click)="modal.close();removeData()">Cancel</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <form [formGroup]="editForm" (ngSubmit)="onEditSave(editForm)">
+                        <div class="modal-footer">
+                          <div class="button-demo">
+                            <button mat-raised-button type="submit" color="primary">Save</button>
+                            <button mat-button type="button" (click)="modal.close()">Cancel</button>
+                          </div>
+                        </div>
+                      </form> -->
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

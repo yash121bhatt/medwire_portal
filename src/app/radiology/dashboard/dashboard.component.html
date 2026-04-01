@@ -1,0 +1,135 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Dashboard'"></app-breadcrumb>
+      </div>
+      <!-- Widgets -->
+      <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 cursor-pointer"
+          [routerLink]="['../patient-management/patient-list']">
+          <div class="card card-statistic-2">
+            <div class="clearfix">
+              <div class="card-icon shadow-primary bg-green">
+                <i class="material-icons align-middle">person_add</i>
+              </div>
+              <div class="card-right">
+                <div>
+                  <h5 class="float-end">New Patients</h5>
+                </div>
+                <div class="m-r-10 m-l-10">
+                  <h3 class="font-weight-bold float-end mb-0"> {{todayPatient}}</h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-chart">
+              <canvas baseChart [chartType]="'line'" [datasets]="cardChart3Data" [labels]="cardChart3Label"
+                [options]="cardChart3" [legend]="true">
+              </canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 cursor-pointer"
+          [routerLink]="['../patient-management/patient-list']">
+          <div class="card card-statistic-2">
+            <div class="clearfix">
+              <div class="card-icon shadow-primary bg-purple">
+                <i class="material-icons align-middle">face</i>
+              </div>
+              <div class="card-right">
+                <div>
+                  <h5 class="float-end">Total Patients</h5>
+                </div>
+                <div class="m-r-10 m-l-10">
+                  <h3 class="font-weight-bold float-end mb-0"> {{totalPatient}}</h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-chart">
+              <canvas baseChart [chartType]="'line'" [datasets]="cardChart1Data" [labels]="cardChart1Label"
+                [options]="cardChart1" [legend]="true">
+              </canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 cursor-pointer"
+          [routerLink]="['../appointment-management/appointment-list']">
+          <div class="card card-statistic-2">
+            <div class="clearfix">
+              <div class="card-icon shadow-primary bg-orange">
+                <i class="material-icons align-middle">business_center</i>
+              </div>
+              <div class="card-right">
+                <div>
+                  <h5 class="float-end">Today's Appointments</h5>
+                </div>
+                <div class="m-r-10 m-l-10">
+                  <h3 class="font-weight-bold float-end mb-0"> {{todayAppointment}}</h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-chart">
+              <canvas baseChart [chartType]="'line'" [datasets]="cardChart2Data" [labels]="cardChart2Label"
+                [options]="cardChart2" [legend]="true">
+              </canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 cursor-pointer"
+        [routerLink]="['../appointment-management/appointment-list']">
+          <div class="card card-statistic-2">
+            <div class="clearfix">
+              <div class="card-icon shadow-primary bg-blue">
+                <i class="material-icons align-middle">post_add</i>
+              </div>
+              <div class="card-right">
+                <div>
+                  <h5 class="float-end">Total Appointments</h5>
+                </div>
+                <div class="m-r-10 m-l-10">
+                  <h3 class="font-weight-bold float-end mb-0">{{totalAppointment}}</h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-chart">
+              <canvas baseChart [chartType]="'line'" [datasets]="cardChart4Data" [labels]="cardChart4Label"
+                [options]="cardChart4" [legend]="true">
+              </canvas>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+      <!-- #END# Widgets -->
+      <!-- <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+          <div class="card">
+            <div class="header">
+              <h2>Patient</h2>
+            </div>
+            <div class="body">
+              <apx-chart [series]="areaChartOptions.series" [chart]="areaChartOptions.chart"
+                [xaxis]="areaChartOptions.xaxis" [yaxis]="areaChartOptions.yaxis" [colors]="areaChartOptions.colors"
+                [stroke]="areaChartOptions.stroke" [legend]="areaChartOptions.legend" [tooltip]="areaChartOptions.tooltip"
+                [dataLabels]="areaChartOptions.dataLabels"></apx-chart>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+              <h2>Appointments</h2>
+            </div>
+            <div class="body">
+              <apx-chart [series]="linechartOptions.series" [chart]="linechartOptions.chart"
+                [dataLabels]="linechartOptions.dataLabels" [plotOptions]="linechartOptions.plotOptions"
+                [yaxis]="linechartOptions.yaxis" [legend]="linechartOptions.legend" [fill]="linechartOptions.fill"
+                [colors]="linechartOptions.colors" [stroke]="linechartOptions.stroke" [tooltip]="linechartOptions.tooltip"
+                [xaxis]="linechartOptions.xaxis">
+              </apx-chart>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </section>

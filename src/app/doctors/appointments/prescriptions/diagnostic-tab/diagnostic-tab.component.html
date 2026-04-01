@@ -1,0 +1,173 @@
+<div class="example-container">
+   <form class="m-4" [formGroup]="diagnosticTabForm" (ngSubmit)="onSubmit()">
+   <div class="row">
+      <div class="col-12">
+         <h5>Diagnostic Test</h5>
+      </div>
+      <div class="col-12 mb-3">
+        
+            <mat-form-field class="example-full-width mb-1" appearance="outline">
+               <mat-label>Enter The Test Name</mat-label>
+               <input matInput formControlName="description" autocomplete="off" >
+            </mat-form-field>
+            
+            <!-- <mat-chip-list #chipList aria-label="diagnostic selection" formControlName="description">
+               <mat-chip *ngFor="let diagnostic of diagnostics" (removed)="remove(diagnostic)"> {{diagnostic}} 
+               <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+               </button>
+               </mat-chip>
+               <input placeholder="New Diagnostics..." #diagnosticInput [formControl]="diagnosticCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list> -->
+            <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let diagnostic of filteredDiagnostics | async" [value]="diagnostic">
+            {{diagnostic}}
+            </mat-option>
+            </mat-autocomplete> -->
+         <!-- </mat-form-field> -->
+      </div>
+      <div class="row">
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+            <label class="example-margin font-15 fw_mid">Select Visit Type</label> <br>
+            <mat-checkbox (change)="togglelaboratery($event)" class="mat-primary">
+               Laboratory Test
+             </mat-checkbox> 
+            <mat-checkbox (change)="toggleradiology($event)" class="mat-primary p-4">
+              Radiology Test 
+            </mat-checkbox>
+         </div>
+         </div>
+
+         <div class="row">
+            <div *ngIf="labconditionShow" class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <mat-form-field class="example-full-width " appearance="outline">
+                   <mat-label>Select Laboratory</mat-label>
+                   <mat-select formControlName="lab_name"  (selectionChange)="onChangelab($event.value)" >
+                      <mat-option  value="">Select</mat-option>
+                      <mat-option  *ngFor="let labData of labList" value="{{labData.lab_Id}}">{{labData.first_name}}</mat-option>
+                   </mat-select>
+                   <mat-error *ngIf="diagnosticTabForm.get('lab_name').hasError('required')">
+                      Laboratory is required
+                   </mat-error>
+                </mat-form-field>
+             </div>
+             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <mat-form-field class="example-full-width" appearance="outline">
+                   <mat-label>Laboratory Test Name</mat-label>
+                   <mat-select [disableOptionCentering]="true" #select2 placeholder="Select Laboratory Test" formControlName="lab_test_name" [multiple]="true">
+                   <mat-select-filter *ngIf="select2.focused" [array]="variables" (filteredReturn)="filteredList3 =$event"></mat-select-filter>
+                   <mat-option *ngFor="let item of filteredList3" [value]="item.test_id">
+                   {{item.test_name}} , &#8377;{{item.amount}}
+                   </mat-option>
+                   </mat-select>
+                   <mat-error *ngIf="diagnosticTabForm.get('lab_test_name').hasError('required')">
+                      Laboratory Test Name is required
+                   </mat-error>
+                </mat-form-field>
+             </div>
+             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <p class="example-margin font-15 fw_mid ms-0">Are you authorized to book laboratory appointment on behalf of Patient?</p>
+                <section class="example-section mb-3" >
+                   <mat-radio-group formControlName="Book_test" [(ngModel)]="selection" #radioGroup="matRadioGroup">
+                   <mat-radio-button class="example-margin" (click)="changediv('self_div')" value="By Doctor" >
+                      Yes
+                   </mat-radio-button>
+                   <mat-radio-button class="example-margin" (click)="changediv('doctor_div')" value="By Self" [checked]="'true'">
+                      No
+                   </mat-radio-button>
+                   </mat-radio-group>
+                </section>
+                <div  class="col-xl-12 col-md-12 col-12 mb-3" id="doctor_div" [hidden]="!flat">
+                   <div class=" col-xl-12 col-md-12 col-12 ">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                         <mat-label>Select Appointment Date</mat-label>
+                         <input formControlName="booking_date" matInput [matDatepicker]="picker" [min]="todayDate"  autocomplete="off"  (dateChange)="getTimeslot($event)">
+                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                         <mat-datepicker #picker></mat-datepicker>
+                         <mat-error *ngIf="diagnosticTabForm.get('booking_date').hasError('required')">
+                            Booking Date is required
+                         </mat-error>
+                      </mat-form-field>
+                     </div>
+                      <div class="col-xl-12 col-md-12 col-12 ">
+                        <mat-button-toggle-group class="manual toggleBtn">
+                           <mat-button-toggle *ngFor="let timeSlotData of timeSlot" class="timeBtn" value="bold" (click)="getSlotvalue(timeSlotData.Stime)">{{timeSlotData.Stime}}</mat-button-toggle>
+                        </mat-button-toggle-group>
+                      </div>
+                     
+                   
+                </div>
+             </div>
+          </div>
+
+   <!-- Second Condition -->
+
+   <div *ngIf="radioconditionShow" class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+         <mat-form-field class="example-full-width " appearance="outline">
+            <mat-label>Select Radiology</mat-label>
+            <mat-select formControlName="radio_name"  (selectionChange)="onChangeradio($event.value)" >
+               <mat-option  value="">Select</mat-option>
+               <mat-option  *ngFor="let labData of radiologiList" value="{{labData.lab_Id}}">{{labData.first_name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="diagnosticTabForm.get('lab_name').hasError('required')">
+               Radiology is required
+            </mat-error>
+         </mat-form-field>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+         <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Radiology Test Name</mat-label>
+            <mat-select [disableOptionCentering]="true" #select3 placeholder="Select Radiology Test" formControlName="radio_test_name" [multiple]="true">
+            <mat-select-filter *ngIf="select3.focused" [array]="variables" (filteredReturn)="filteredList4 =$event"></mat-select-filter>
+            <mat-option *ngFor="let item of filteredList4" [value]="item.test_id">
+            {{item.test_name}} , &#8377;{{item.amount}}
+            </mat-option>
+            </mat-select>
+            <mat-error *ngIf="diagnosticTabForm.get('lab_test_name').hasError('required')">
+               Radiology Test Name is required
+            </mat-error>
+         </mat-form-field>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+         <p class="example-margin font-15 fw_mid ms-0">Are you authorized to book radiology appointment on behalf of Patient?</p>
+         <section class="example-section mb-3" >
+            <mat-radio-group formControlName="book_radio_test" [(ngModel)]="selectionRadio" #radioGroup2="matRadioGroup">
+            <mat-radio-button class="example-margin" (click)="changeRadiodiv('self_div')" value="By Doctor" >
+               Yes
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" (click)="changeRadiodiv('doctor_div')" value="By Self" [checked]="'true'">
+               No
+            </mat-radio-button>
+            </mat-radio-group>
+         </section>
+         <div  class="col-xl-12 col-md-12 col-12 mb-3"  [hidden]="!flatRadio">
+            <div class=" col-xl-12 col-md-12 col-12 ">
+               <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Select Appointment Date</mat-label>
+                  <input formControlName="radio_booking_date" matInput [matDatepicker]="picker" [min]="todayDate"  autocomplete="off"  (dateChange)="getTimeslotRadio($event)">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="diagnosticTabForm.get('booking_date').hasError('required')">
+                     Booking Date is required
+                  </mat-error>
+               </mat-form-field>
+               <mat-button-toggle-group  class="manual toggleBtn">
+                  <mat-button-toggle *ngFor="let timeSlotData of timeSlotRadio" class="timeBtn" value="bold" (click)="getSlotvalueRadio(timeSlotData.Stime)">{{timeSlotData.Stime}}</mat-button-toggle>
+               </mat-button-toggle-group>
+            </div>
+         </div>
+      </div>
+   </div>    
+   </div>
+
+   </div>
+   <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+         <button class="btn-space" mat-raised-button color="primary" [disabled]="!diagnosticTabForm.valid ">Submit</button>
+         <button type="button" mat-button [routerLink]="['/doctors/appointments/appointment-list/'+cancelbtnClientId.clientChoose]">Cancel</button>
+      </div>
+   </div>
+   </form>
+</div>

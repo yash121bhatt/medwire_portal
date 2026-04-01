@@ -1,0 +1,100 @@
+<section class="content">
+    <div class="content-block">
+       <div class="block-header">
+          <!-- breadcrumb -->
+          <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Add Bank Details'"></app-breadcrumb>
+       </div>
+       <div class="row clearfix">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+             <div class="card">
+                <div class="header mx-4">
+                   <h2><strong>Add Bank Details</strong></h2>
+                </div>
+                <div class="body">
+                    <form class="row validate-form" [formGroup]="bankdetailForm" (ngSubmit)="onSubmit()">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                           <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Beneficiary Name</mat-label>
+                              <input matInput formControlName="beneficiary_name" required >
+                              <mat-error *ngIf="bankdetailForm.get('beneficiary_name').hasError('required')">
+                                 Beneficiary Name is required
+                              </mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                           <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Bank Name</mat-label>
+                              <mat-select formControlName="bank_name" required >
+                                 <mat-option [value]="'	Bank of India'">
+                                    Bank of India
+                                 </mat-option>
+                                 <mat-option [value]="'Bank of Baroda'">
+                                    Bank of Baroda
+                                 </mat-option>
+                                 <mat-option [value]="'State Bank of India'">
+                                    State Bank of India
+                                 </mat-option>
+                                 <mat-option [value]="'Bank of Maharashtra'">
+                                    Bank of Maharashtra
+                                 </mat-option>
+                                 <mat-option [value]="'State Bank of India'">
+                                    Central Bank of India
+                                 </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="bankdetailForm.get('bank_name').hasError('required')">
+                               Bank Name is required
+                              </mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                           <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Bank Account Number</mat-label>
+                              <input matInput type="number" formControlName="bank_account_no" required >
+                              <mat-error *ngIf="bankdetailForm.get('bank_account_no').hasError('required')">
+                                 Bank Account Number is required
+                              </mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                           <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>IFSC Code</mat-label>
+                              <input matInput formControlName="ifsc_code" required >
+                              <mat-error *ngIf="bankdetailForm.get('ifsc_code').hasError('required')">
+                                 IFSC Code is required
+                              </mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                           <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Bank Account Type</mat-label>
+                              <mat-select formControlName="speciality" required >
+                                 <mat-option [value]="'Current account'">
+                                    Current account
+                                 </mat-option>
+                                 <mat-option [value]="'Saving account'">
+                                    Saving account
+                                 </mat-option>
+                                 <mat-option [value]="' Salary account'">
+                                    Salary account
+                                 </mat-option>
+                                 <mat-option [value]="'Fixed deposit account'">
+                                    Fixed deposit account
+                                 </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="bankdetailForm.get('bank_account_type').hasError('required')">
+                               Speciality is required
+                              </mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="container-auth-form-btn mt-5">
+                           <button mat-flat-button color="primary" class="btn-space" type="submit">
+                           Save
+                           </button>
+                        </div>
+                        </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </section>

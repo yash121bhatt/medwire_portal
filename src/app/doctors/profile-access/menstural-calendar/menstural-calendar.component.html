@@ -1,0 +1,27 @@
+<div class="panel-body  menstruel_calendar" *ngIf="showHTMlcal">
+  <button type="submit" class="btn-space mb-3" mat-raised-button (click)="loadcalendar()"
+  color="primary" [class.auth-spinner]="loading" [disabled]="loading">Load Calendar</button>
+
+  <div *ngIf="showcalendarPart">
+    <div class="row ml-5 mb-3">
+      <div class="col-lg-4 col-md-6 ml-5  col-12 d-flex">
+          <div class="bg-danger p-2 col-lg-1 col-md-1 col-3 mr-1 calendar-box-indication"></div>
+          <div class="ml-1 pl-1"><h6>Day is period day</h6></div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-12 d-flex">
+        <div class=" p-2 col-lg-1 col-md-1 col-3 mr-1 calendar-box-indication calendar-box-green"></div>
+        <div class="ml-1 pl-1"><h6>HIGH - Chance of getting pregnant</h6></div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-12 d-flex">
+      <img class="mr-3 Ovulation_img" src="assets/images/menstruel/calendar_dotsecond.jpg">
+      <div class="ms-1 ps-1">
+        <h6>Ovulation day</h6>
+      </div>
+    </div>
+
+    </div>
+    <full-calendar [options]='calendarOptions' >
+    </full-calendar>
+  </div>
+    
+  </div>

@@ -1,0 +1,104 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Bulk Report Upload'" [items]="[]" [active_item]="'Bulk Report Upload'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="body">
+  
+                <div class="bulkReport">
+                    <div class="row">
+                        
+                        <div class="col-md-12 col-lg-12">
+                            <h4>Select Reports</h4>
+                            <div class="fileMultiple">
+                                <!-- <p>Upload Report</p> -->
+                                <label for="file-icon" class="iconUpldbg">
+                                    <p>Upload Report</p>
+                                    <mat-icon class="iconUpload">attach_file</mat-icon>
+                                </label>
+                                <input type="file" id="file-icon" accept=".pdf" #fileInput multiple (change)="addToQueue()" placeholder="Upload Report" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-lg-12">
+                            <div class="tableSection">
+                                <h4>Uploaded Reports</h4>
+                                <table class="table-headed table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left">Name</th>
+                                            <th class="text-right">Size</th>
+                                            <th class="text-left">Progress</th>
+                                            <th class="text-left">Status</th>
+                                            <th class="text-right">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of queue | async">
+                                            <td>{{ item?.file?.name }}</td>
+                                            <td class="text-right">{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                                            <td>{{ item.progress + ' %' }}</td>
+                                            <td>
+                                                <span *ngIf="item.isPending()" class="tag tag-default"></span>
+                                                <span *ngIf="item.isSuccess()" class="tag tag-success"></span>
+                                                <span *ngIf="item.inProgress()" class="tag tag-warning"></span>
+                                                <span *ngIf="item.isError()" class="tag tag-danger"></span>
+                                            </td>
+                                            <td class="text-right actionBtns">
+                                                <a tooltip="Upload file" class="uploadBtn" (click)="item.upload()" *ngIf="item.isUploadable()">
+                                                    <i class="fa fa-upload"></i>
+                                                </a>
+                                                <a tooltip="Cancel upload" class="cancelBtn" (click)="item.cancel()" *ngIf="item.inProgress()">
+                                                    <i class="fa fa-times-circle"></i>
+                                                </a>
+                                                <a tooltip="Remove from queue" class="deleteBtn" (click)="item.remove()" *ngIf="!item.inProgress()">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bottomBtns">
+                                <div>
+                                    <!-- <a class="button button-clear" (click)="uploader.clearQueue()">Clear queue</a>
+                                    <a class="button button-primary" (click)="uploader.uploadAll()">Upload all</a> -->
+                                    <button class="btn-space"  (click)="uploader.clearQueue()" mat-raised-button
+                                        color="secondary">Clear queue</button>
+                                    <button class="btn-space"  mat-raised-button type="submit"
+                                    color="primary" (click)="uploader.uploadAll();loadingCondition();" data-dismiss="modal" [class.auth-spinner]="loading" >Upload all</button>
+                                    <div  class="mt-5">
+                                        
+                                        <h5>Note :- <br>* Select only Pdf Files. 
+                                            <br>* File formate must be 'patientMobileNo_patientName.pdf'. 
+                                            <br> * (e.g. :- 7090000000_Luffy D Dragon.pdf, 9000463210_Sarah Smith.pdf, 7111000222_shiva.pdf, 7024645622_Sakura Uchiha.pdf). </h5>
+                                            <br><div class="bg-danger p-1 col-lg-1 col-md-1 col-3 mr-1 calendar-box-indication"></div> <div class="ml-1 pl-1">File not uploaded/ Wrong formate</div>
+                                            <br><div class="bg-success p-1 col-lg-1 col-md-1 col-3 mr-1 calendar-box-indication"></div> <div class="ml-1 pl-1">File Uploaded Successfully</div>
+                                        </div>
+                                </div>
+                                <!-- <div>
+                                    <button class="btn-space"  mat-raised-button
+                                        color="primary">Send</button>
+                                </div> -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+
+
+         

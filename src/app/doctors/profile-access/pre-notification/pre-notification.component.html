@@ -1,0 +1,65 @@
+<div class="body upload_document ps-sm-0 pt-0">
+    <div class="row">
+         <div class="col-lg-3 col-12 min_scroll" >
+             <mat-button-toggle-group class="pt-5" appearance="" vertical>
+                 <mat-button-toggle checked >Set Medicine Reminder</mat-button-toggle>
+               
+             </mat-button-toggle-group>
+         </div>
+         <div class="col-lg-9 col-12">
+             <div class="row">
+                 <div class="col-sm-12">
+                    <div class="body table-responsive">
+                     <div class="table-responsive">
+                       <table mat-table [dataSource]="dataSource3" class="w-100 padding">
+                         <!-- s_no Column -->
+                         <ng-container matColumnDef="s_no">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header class="ps-0"> 
+                                S.No.</th>
+                             <td mat-cell class="px-1" *matCellDef="let element ; let i = index"> {{i+1}} </td>
+                         </ng-container>
+                         <!-- first Name Column -->
+                         <ng-container matColumnDef="medicine_name">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Medicine Name </th>
+                             <td mat-cell class="px-1" *matCellDef="let element"> {{ element.medicine_name }}</td>
+                         </ng-container>
+                         <!-- upload_date_time Column -->
+                         <ng-container matColumnDef="medicine_type">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Medicine Type </th>
+                             <td mat-cell class="px-1" *matCellDef="let element"> {{element.medicine_type}} </td>
+                         </ng-container>
+                         <!-- Action Column -->
+                         <ng-container matColumnDef="quantity">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity</th>
+                            <td mat-cell class="px-1" *matCellDef="let element"> {{element.quantity}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="frequency">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Frequency</th>
+                            <td mat-cell class="px-1" *matCellDef="let element"> {{getFrequencyTime(element.take_time_fourth,element.take_time_third,element.take_time_two,element.take_time_one)}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="time_dose">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Time</th>
+                            <td mat-cell class="px-1" *matCellDef="let element"> 
+                                <div class="dose_time">
+                                 {{element.take_time_one}}<br> 
+                                {{element.take_time_two}} <br>
+                                {{element.take_time_third}} <br>
+                                {{element.take_time_fourth}} 
+                                </div>
+                             </td>
+                        </ng-container>
+                         
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                       </table>
+                      </div>
+                       <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons>
+                      </mat-paginator>
+                    </div>
+                 </div>
+              </div>
+         </div>
+     </div>
+ </div>

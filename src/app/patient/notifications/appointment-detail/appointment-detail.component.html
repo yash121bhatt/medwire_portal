@@ -1,0 +1,62 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="['Set Appointment Reminders','Book Appointment']" [active_item]="'Add Appointment Reminder '"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <!-- <div class="header">
+              <h2>Book Appointment</h2>
+            </div> -->
+          <div class="body">
+            <form class="m-4" [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Appointment Name</mat-label>
+                    <input matInput formControlName="name" required autocomplete="off">
+                    <mat-error *ngIf="bookingForm.get('name').hasError('required')">
+                      Appointment name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  
+                    <mat-label>Set Date & Time</mat-label>
+                    <input matInput [owlDateTimeTrigger]="dt" readonly formControlName="date_time" [min]="maxDate" [owlDateTime]="dt">
+                    <owl-date-time [hour12Timer] = "true" #dt></owl-date-time><i [owlDateTimeTrigger]="dt" class="material-icons-outlined mannuel_set">calendar_today</i>
+                 <mat-error *ngIf="bookingForm.get('date_time').hasError('required')">
+                    Date & Time is required
+                 </mat-error>
+                 </mat-form-field>
+
+<!--                  
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Date & time</mat-label>
+                    <input matInput type="datetime-local" formControlName="date_time" required placeholder="Set Time" min="{{maxDate}}">
+                    <mat-error *ngIf="bookingForm.get('date_time').hasError('required')">
+                      Date & Time is required
+                    </mat-error>
+                  </mat-form-field> -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <button class="btn-space" [disabled]="!bookingForm.valid " mat-raised-button
+                    color="primary">Submit</button>
+                  <button type="button" mat-button
+                    [routerLink]="['/patient/notifications/book-appointment/'+memberID]">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  

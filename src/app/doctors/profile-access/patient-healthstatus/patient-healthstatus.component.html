@@ -1,0 +1,48 @@
+<div class="body upload_document ps-sm-0 pt-0">
+    <div class="row">
+         <div class="col-lg-3 col-12 min_scroll" >
+             <mat-button-toggle-group class="pt-5" appearance="" vertical>
+                 <mat-button-toggle checked (change)="getHealthResult('heart_rate')">Heart Rate</mat-button-toggle>
+                 <mat-button-toggle (change)="getHealthResult('blood_pressure')">Blood Pressure</mat-button-toggle>
+                 <mat-button-toggle (change)="getHealthResult('respiratory_rate')">Respiratory Rate</mat-button-toggle>
+                 <mat-button-toggle (change)="getHealthResult('oxygen_saturation')">Oxygen Saturation</mat-button-toggle>
+                 <mat-button-toggle (change)="getHealthResult('temperature')">Temperature</mat-button-toggle>
+                 <mat-button-toggle (change)="getHealthResult('bmi')">BMI</mat-button-toggle>
+             </mat-button-toggle-group>
+         </div>
+         <div class="col-lg-9 col-12">
+             <div class="row">
+                 <div class="col-sm-12">
+                    <div class="body table-responsive">
+                     <div class="table-responsive">
+                       <table mat-table [dataSource]="dataSource3" class="w-100 padding">
+                         <!-- s_no Column -->
+                         <ng-container matColumnDef="s_no">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header class="ps-0"> 
+                                S.No.</th>
+                             <td mat-cell class="px-1" *matCellDef="let element ; let i = index"> {{i+1}} </td>
+                         </ng-container>
+                         <!-- first Name Column -->
+                         <ng-container matColumnDef="heart_rate">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{healthTypeName}}</th>
+                             <td mat-cell class="px-1" *matCellDef="let element"> {{healthResult(element)}}</td>
+                         </ng-container>
+                         <!-- upload_date_time Column -->
+                         <ng-container matColumnDef="createdate">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Recorded Date</th>
+                             <td mat-cell class="px-1" *matCellDef="let element"> {{element.createdate | date:'dd/MM/yyyy'}} </td>
+                         </ng-container>
+                         <!-- Action Column -->
+                         
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                       </table>
+                      </div>
+                       <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons>
+                      </mat-paginator>
+                    </div>
+                 </div>
+              </div>
+         </div>
+     </div>
+ </div>

@@ -1,0 +1,81 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Vaccination Dose Date'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <h2>Vaccination Dose Date</h2>
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="labreportForm" (submit)="onSubmit(labreportForm,formDirective)" #formDirective="ngForm" >
+                <div class="row">
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Duration Timeline</mat-label>
+                      <input matInput value="04 Weeks" readonly >
+                      <!-- <mat-error *ngIf="labreportForm.get('docname').hasError('required')">
+                        Document name is required
+                      </mat-error> -->
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Upload Document</mat-label>
+                      <ngx-mat-file-input  formControlName="profile_image"  (change) = "fileChange($event.target.files)">
+                      </ngx-mat-file-input>
+                      <mat-error *ngIf="labreportForm.get('profile_image').hasError('required')" >
+                        Please Select Document
+                      </mat-error>
+                      
+                    </mat-form-field>
+                  </div> -->
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Select  Dose Date</mat-label>
+                      <input matInput [matDatepicker]="picker" formControlName="dose_date" [max]="maxDate" required
+                        autocomplete="off">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-error *ngIf="labreportForm.get('dose_date').hasError('required')">
+                        Please Select  Dose Date
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 mb-3">
+                    <button class="btn-space" mat-raised-button color="primary">Submit</button>
+                  </div>
+  
+                </div>
+              </form>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Delete Pop -->
+  
+    <ng-template #mymodal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+        <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+       Are You sure you want to delete?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); deleteRecord()" >Ok</button>
+      
+       <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+     </div>
+    </ng-template>
+  
+  </section>

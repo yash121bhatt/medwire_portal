@@ -1,0 +1,46 @@
+
+    <form [formGroup]="HFormGroup2">
+      <form [formGroup]="eventEditForm" novalidate>
+        <div class="form-group">
+          <mat-radio-group  [(ngModel)]="selectedStatus" formControlName="completed" required="true">
+            <div class="card mb-0" *ngIf="conditionForcheck">
+              <mat-radio-button class="radioBtns" [value]="primaryUserData.id" checked required="true"
+              (change)="radioChange($event)">
+              <div class="media boxImg">
+                <img class="mr-3" src="{{primaryUserData.imgName?imageURL+primaryUserData.imgName:imageURL+'demouser.png'}}" alt="Generic placeholder image">
+                <div class="media-body mediaCntnt">
+                  <h5 class="mt-0">{{primaryUserData.first_name}}</h5>
+                  <ul class="d-flex">
+                    <li class="ageText"> <strong>Age:</strong> {{showAge(primaryUserData.date_of_birth)}}</li>
+                    <li class="ageText"> <strong>Gender:</strong> {{primaryUserData.gender}}</li>
+                  </ul>
+                </div>
+              </div>
+            </mat-radio-button>
+            </div>
+            <div class="card mb-0" *ngFor="let listData of memberData">
+              <mat-radio-button class="radioBtns" [value]="listData.id" unchecked required="true"
+                (change)="radioChange($event)">
+                <div class="media boxImg">
+                  <img class="mr-3" src="{{listData.imgName?imageURL+listData.imgName:imageURL+'demouser.png'}}" alt="Generic placeholder image">
+                  <div class="media-body mediaCntnt">
+                    <h5 class="mt-0">{{listData.first_name}}</h5>
+                    <ul class="d-flex">
+                      <li class="ageText"> <strong>Age:</strong> {{showAge(listData.date_of_birth)}}</li>
+                      <li class="ageText"> <strong>Gender: </strong> {{listData.gender}}</li>
+                    </ul>
+                  </div>
+                </div>
+              </mat-radio-button>
+            </div>
+            <br>
+
+          </mat-radio-group>
+        </div>
+        <div class="saveBtn">
+          <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+          <button type ="submit" mat-raised-button color="primary" (click)="ngformSubmit()">Submit</button>
+        </div>
+      </form>
+     
+    </form>

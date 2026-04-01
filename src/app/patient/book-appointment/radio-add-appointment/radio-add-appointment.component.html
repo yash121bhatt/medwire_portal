@@ -1,0 +1,102 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Book Appointment'" [items]="[]" [active_item]="'Book Appointment'">
+            </app-breadcrumb>
+        </div>
+        <div class="row clearfix lab_appointment">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Book Appointment</strong></h2>
+                    </div>
+                    <div class="body">
+                        <form action="" [formGroup]="booAppointmentForm">
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Search by Radiology Name</mat-label>
+                                        <input matInput type="text" formControlName="lab_name" autocomplete="off" (keyup)="applyFilter($event)">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                       <mat-label>Search by Test Name</mat-label>
+                                       <input matInput type="text" formControlName="test_name" autocomplete="off" (keyup)="applyFilter($event)">
+                                    </mat-form-field>
+                                  </div>
+                                <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Search by Test</mat-label>
+                                        <mat-select formControlName="test_name">
+                                            <mat-option [value]="'CT-Scan'">
+                                                CT-Scan
+                                            </mat-option>
+                                            <mat-option [value]="'MRI Investigations'">
+                                                MRI Investigations
+                                            </mat-option>
+                                            <mat-option [value]="'X-Ray'">
+                                                X-Ray
+                                            </mat-option>
+                                            <mat-option [value]="'Ultrasound'">
+                                                Ultrasound
+                                            </mat-option>
+                                            <mat-option [value]="'USG Based Investigatios'">
+                                                USG Based Investigatios
+                                            </mat-option>
+                                            <mat-option [value]="'PET Scan'">
+                                                PET Scan
+                                            </mat-option>
+                                            <mat-option [value]="'Cardiac Investigations'">
+                                                Cardiac Investigations
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div> -->
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                       <mat-label>Search by Pin Code</mat-label>
+                                       <input matInput type="text" formControlName="pin_code" autocomplete="off" (keyup)="applyFilter($event)">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <h4 class="serachText">Search Radiology and Tests List</h4>
+                            <p>{{resultCount}} results Showing </p>
+                            <div class="row min-height">
+                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6" *ngFor="let listlabData of labList | paginate: { id: 'pagination2', itemsPerPage : 4, currentPage : pagination2, totalItems: total }">
+                                    <div class="divederLine couponBox dark_border mt-0">
+                                        <div class="media doctorsList mt-0 mb-0">
+                                            <img class="mr-3" src="{{listlabData.images?imageURL+listlabData.images:imageURL+'mri_img.png'}}"  alt="Generic placeholder image">
+                                            <div class="media-body mediaText">
+                                                <p class="font-14 mb-0"><b>{{listlabData.lab_name}}</b></p>
+                                                <p class="font-14">{{listlabData.address}}</p>
+                                                <p class="font-14">{{listlabData.test_name}}</p>
+                                                <button type="button" class="btn btn-outline-primary out_btn" [routerLink]="['/patient/book-appointment/single-body-test/'+listlabData.test_id+'/'+memberId]">Know More</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="specialityText consultText">
+                                                <span>Fees : <strong>&#8377;  {{listlabData.amount}}</strong></span>
+                                            </div>
+                                            <ul class="buttonList mb-0 mt-2 align-items-center">
+                                                <li>
+                                                    <!-- <button mat-raised-button class="small-btn ms-0" color="primary" type="button" [routerLink]="['../cart-page/'+cartList[0].lab_id]">Add to Cart</button> -->
+                                                    <button mat-raised-button class="small-btn ms-0" color="primary" type="submit" (click)="addToCart(listlabData.lab_id, listlabData.test_id , listlabData.test_name , listlabData.amount)">Add to Cart</button>
+        
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <pagination-controls class="float-right" id="pagination2" (pageChange)="pagination2 = $event"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

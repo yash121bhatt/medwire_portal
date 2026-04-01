@@ -1,0 +1,127 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'My Test Reports'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>My Test Reports</h2>
+          </div>
+
+          <div class="body">
+            <div class="card-body">
+
+              <div class="body table-responsive">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Search</mat-label>
+                  <input matInput (keyup)="applyFilter($event)" placeholder="Search" autocomplete="off">
+                </mat-form-field>
+                <table mat-table [dataSource]="dataSource3" class="w-100" matSort matSort #empTbSort="matSort">
+                  <!-- No Column -->
+                  <ng-container matColumnDef="s_no">
+                    <th mat-header-cell *matHeaderCellDef> S.No. </th>
+                    <td mat-cell *matCellDef="let element ;let i = index;"> {{i+1}} </td>
+                  </ng-container>
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="first_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient </th>
+                    <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+                  </ng-container>
+                  <!-- Gender Column -->
+                  <ng-container matColumnDef="sub_category">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Treatment</th>
+                    <td mat-cell *matCellDef="let element">{{ element.sub_category}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="created_at">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Recorded date and time </th>
+                    <td mat-cell *matCellDef="let element">
+                      <!-- {{ dateFormate(element.created_at) | date:'dd/MM/yyyy' }}
+                      {{element.created_at.substring(11,19)}} -->
+                      {{ element.created_at | date:'dd/MM/yyy'}}, {{element.created_at | date:'shortTime':'UTC +11'}}
+                      
+                    </td>
+                  </ng-container>
+                  <!-- Email Column -->
+                  <ng-container matColumnDef="labradiodocument">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Laboratory/Radiology Reports </th>
+                    <td mat-cell *matCellDef="let element">
+
+                      <div>
+                        <span>
+                          <a class="imgSizeIcon"
+                            *ngIf="((element.dcm_document_url != null && element.dcm_document_url != '') ? true : false)"
+                            target="__blank" href="{{element.dcm_document_url}}">
+                            {{element.dcm_document_url ? viewDicomFile(element.dcm_document_url??"-") : "-"}} <div
+                              [innerHtml]="htmlReturn"></div> </a>
+                        </span>
+                        <span>
+                          <a class="imgSizeIcon"
+                            *ngIf="((element.document != null && element.document != '') ? true : false)"
+                            href="{{element.document}}" target="_blank">
+                            {{element.document ? returnPdf(element.document??'-') : "-"}} <div [innerHtml]="htmlReturn">
+                            </div> </a>
+                        </span>
+
+                      </div>
+                    </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="shareReport" matSortDisabled>
+                    <th mat-header-cell *matHeaderCellDef> Share Pdf Report</th>
+                    <td mat-cell *matCellDef="let element">
+                      <button mat-icon-button *ngIf="element.document.length > 0" [matMenuTriggerFor]="menu2" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu2="matMenu">
+                        <share-buttons [theme]="'material-dark'" [include]="['whatsapp']"
+                          [url]="imageURL+element.report_document"
+                          [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                          [autoSetMeta]="true">
+                        </share-buttons>
+                        <share-buttons [theme]="'material-dark'" [include]="['email']"
+                          [url]="imageURL+element.report_document"
+                          [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                          [autoSetMeta]="true">
+                        </share-buttons>
+                        <share-buttons [theme]="'material-dark'" [include]="['telegram']"
+                          [url]="imageURL+element.report_document"
+                          [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                          [autoSetMeta]="true">
+                        </share-buttons>
+                      </mat-menu>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons></mat-paginator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+      <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+    </div>
+    <div class="modal-body">
+      Are You sure you want to delete?
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); deleteRecord()">Ok</button>
+
+      <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </ng-template>
+</section>

@@ -1,0 +1,42 @@
+<p>demo-img-upload works!</p>
+
+
+<div class="container mt-5 ml-5">
+    <h3>Upload File</h3>
+  
+  
+    <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
+      <div class="row">
+        <div class="col-sm-12">
+          <div>
+            <h6 class="head-title margin-top-8"><span>Select Image File</span></h6>
+          </div>
+        </div>
+        <div class="col-sm-6">
+            <div>
+                <input type="text" name="username" value="Rajmal M">
+            </div>
+            <div>
+                <input type="text" name="email" value="rajmal87@yahoo.com">
+            </div>
+            <div>
+                <input type="password" name="password" value="Aa@123456">
+            </div>
+  
+          <div class="custom-file">
+  
+            <input type="file" class="custom-file-input" id="customFile" name="uploadedImage"
+              (change)="onFileSelect($event)" #UploadFileInput>
+  
+            <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label>
+          
+          </div>
+  
+        </div>
+  
+        <div class="col-sm-6"> <button class="btn btn-primary" type="submit">Upload</button> </div>
+  
+      </div>
+    </form>
+  
+  </div>

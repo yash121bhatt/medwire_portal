@@ -1,0 +1,53 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Access Profile'"></app-breadcrumb>
+        </div>
+        <!-- Your content goes here  -->
+        <div class="row clearfix remov_scroll">
+            <div class="col-lg-12 col-md-12">
+                <div class="card tab_section">
+                    <mat-tab-group>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div class="tabColor font-14"> Dashboard </div>
+                            </ng-template>
+                            <app-profile-dashboard [requestID]="request_id" ></app-profile-dashboard>
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div class="tabColor font-14"> Documents </div>
+                            </ng-template>
+                            <app-patient-document [requestID]="request_id" ></app-patient-document>
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div class="tabColor font-14">Vitals</div>
+                            </ng-template>
+                            <app-patient-healthstatus [requestID]="request_id"></app-patient-healthstatus>
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div class="tabColor font-14">Set Reminders</div>
+                            </ng-template>
+                            <app-pre-notification [requestID]="request_id"></app-pre-notification>
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div class="tabColor font-14">History Notepad</div>
+                            </ng-template>
+                            <app-history-notepad [requestID]="request_id"></app-history-notepad>
+                        </mat-tab>
+                        <mat-tab *ngIf="loadcalendartrue">
+                            <ng-template mat-tab-label >
+                                <div class="tabColor font-14"> Menstrual Cycle Calendar </div>
+                            </ng-template>
+                            <app-menstural-calendar [requestID]="request_id" ></app-menstural-calendar>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

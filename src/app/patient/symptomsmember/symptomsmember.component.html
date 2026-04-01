@@ -1,0 +1,66 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Symptoms'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <!-- <div class="header">
+                <h2><strong>Blank</strong> Page</h2>
+              </div> -->
+            <div class="body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="ngxTableHeader">
+                    <ul class="header-buttons-left ms-0 mb-0">
+                      <!-- <li class="dropdown">
+                        <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                        <input placeholder="Search" type="text" class="browser-default search-field"
+                          (keyup)='filterDatatable($event)' aria-label="Search box">
+                      </li> -->
+                    </ul>
+                  </div>
+                  <ngx-datatable #table class="material table-responsive larger_table" [scrollbarH]="true"
+                    [scrollbarV]="false" [rows]="rows" [columns]="columns" [sortType]="'multi'" [columnMode]="'force'"
+                    [headerHeight]="50" [footerHeight]="50" [rowHeight]="'60'" [limit]="10">
+                   
+                    <ngx-datatable-column name="Image" sortable="false" prop="img" [width]="100">
+                      <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+                        <td class="table-img padding-0" *ngIf="value!=''">
+                          <img width="40" src="{{ row.imgName ? imageURL+row.imgName:imageURL+'demouser.png'}}" />
+                        </td>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Name" prop="first_name" [width]="130"></ngx-datatable-column>
+                    <ngx-datatable-column name="Age" prop="age" [width]="100"><ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ageCount(row.date_of_birth??'-')}}
+                    </ng-template></ngx-datatable-column>
+                    <ngx-datatable-column name="Date of Birth" prop="date_of_birth" [width]="120">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.date_of_birth | date:'dd/MM/yyyy'}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <!-- <ngx-datatable-column name="Aadhar No." prop="adhar_card" [width]="200"></ngx-datatable-column> -->
+                    <!-- <ngx-datatable-column name="Mobile No." prop="mobile" [width]="200"></ngx-datatable-column> -->
+                    <ngx-datatable-column name="Gender" prop="gender" [width]="100"></ngx-datatable-column>
+                    <ngx-datatable-column name="Action" sortable="false" [width]="100">
+                      <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                        <span>
+                          <button class="btn tblActnBtn h-auto eyeIcon" [routerLink]="['/patient/add-symptoms/'+encryptionData(row.id)]">
+                            <i class="material-icons">visibility</i>
+                          </button>
+                        </span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                  </ngx-datatable>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

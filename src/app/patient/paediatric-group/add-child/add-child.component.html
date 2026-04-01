@@ -1,0 +1,152 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Vaccination List'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <!-- <div class="ngxTableHeader">
+                      <ul class="header-buttons-left ms-0 mb-0">
+                        <li class="dropdown">
+                          <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                          <input placeholder="Search" type="text" class="browser-default search-field"
+                            (keyup)='filterDatatable($event)' aria-label="Search box">
+                        </li>
+                      </ul>
+                      <ul class="header-buttons">
+                        <li class="saveBtn">
+                          <button mat-raised-button color="primary" [routerLink]="['/patient/paediatric-group/add-new-baby']">
+                            Add New Baby
+                          </button>
+                        </li>
+                      </ul>
+                    </div> -->
+                    <!-- <ngx-datatable #table class="material table-responsive larger_table" [scrollbarH]="true" [scrollbarV]="false" [rows]="rows" [columns]="columns" [sortType]="'multi'"
+                    [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'60'" [limit]="10">
+                      
+                        <ngx-datatable-column name="Name" prop="name" [width]=""></ngx-datatable-column>
+                        <ngx-datatable-column name="Date of Birth" prop="dateofbirth" [width]=""></ngx-datatable-column>
+                        <ngx-datatable-column name="Gender" prop="gender" [width]=""></ngx-datatable-column>
+                        <ngx-datatable-column name="Actions" sortable="false" [width]="">
+                            <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                              <span>
+                                <button class="btn tblActnBtn h-auto eyeIcon" [routerLink]="['/patient/paediatric-group/vaccination-schedule']">
+                                  <i class="material-icons">visibility</i>
+                                </button>
+                              </span>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                    </ngx-datatable> -->
+                    <div class="body table-responsive">
+                      <div class="row">
+                        <div class="col-md-9 ">
+                          <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Search</mat-label>
+                            <input matInput (keyup)="applyFilter($event)" placeholder="Search" autocomplete="off">
+                            
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-3 mt-4">
+                          <button mat-raised-button color="primary" [routerLink]="['/patient/paediatric-group/add-new-baby']">
+                            Add Baby
+                          </button>
+                        </div>
+                      </div>
+                     
+                      <table mat-table [dataSource]="dataSource3" class="w-100" matSort matSort #empTbSort="matSort">
+                        <!-- No Column -->
+                        <ng-container matColumnDef="s_no">
+                          <th mat-header-cell *matHeaderCellDef > S.No. </th>
+                          <td mat-cell *matCellDef="let element ;let i = index;">  {{i+1}} </td>
+                        </ng-container>
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="baby_name">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                          <td mat-cell *matCellDef="let element"> {{element.baby_name}} </td>
+                        </ng-container>
+                        <!-- Gender Column -->
+                         <!-- Gender -->
+                         <ng-container matColumnDef="baby_gender">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+                          <td mat-cell *matCellDef="let element">{{element.baby_gender }}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="age_count">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Age </th>
+                          <td mat-cell *matCellDef="let element">{{ element.age_count}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="date_of_birth">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Of Birth</th>
+                          <td mat-cell *matCellDef="let element">{{ element.date_of_birth |date:'dd/MM/yyyy' }}</td>
+                        </ng-container>
+                        <!-- Email Column -->
+
+                        <!-- Vaccination Update -->
+                        <!-- <ng-container matColumnDef="vaccination">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Vaccination Progress </th>
+                          <td mat-cell *matCellDef="let element">
+                            <button class="btn tblActnBtn h-auto" [routerLink]="['/patient/paediatric-group/vaccination-schedule']" >
+                            <i class="material-icons">assessment</i>
+                          </button>
+                        </td>
+                        </ng-container> -->
+                       
+
+                        <ng-container matColumnDef="action" matSortDisabled>
+                          <th mat-header-cell *matHeaderCellDef > Action</th>
+                          <td mat-cell *matCellDef="let element">
+                            <button class="btn tblActnBtn h-auto" [routerLink]="['/patient/paediatric-group/vaccination-schedule/'+encryptionData(element.baby_id)]" >
+                              <i class="material-icons">assessment</i>
+                            </button>
+                            <button class="btn tblActnBtn h-auto"  [routerLink]="['/patient/paediatric-group/edit-baby/'+encryptionData(element.baby_id)]"  >
+                              <i class="material-icons">edit</i>
+                            </button>
+                            <button class="btn tblActnBtn h-auto" (click)="open(mymodal); getdeleteId(element.baby_id)" >
+                              <i class="material-icons">delete</i>
+                            </button>
+                          </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+                      <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons></mat-paginator>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #mymodal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+        <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+       Are You sure you want to delete?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); deleteRecord()" >Ok</button>
+      
+       <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+     </div>
+    </ng-template>
+
+  </section>
+  
+  
+
+
+  

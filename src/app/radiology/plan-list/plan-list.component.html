@@ -1,0 +1,103 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <app-breadcrumb [title]="'Plan Management'" [items]="[]" [active_item]="'Plan Management'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        
+                    </div>
+                    <div class="body">
+                        <div class="demo">
+                            <div class="container">
+                                <div class="row sm-gap">
+                                    <div class="col-md-4 col-sm-6" *ngIf="activePlan">
+                                        <div class="pricingTable greenColor">
+                                            <div class="pricingTable-header">
+                                                <i class="material-icons">workspace_premium</i>
+                                                <div class="price-value"> ₹ {{activePrice}}
+                                                    <span class="month"><b>{{activeValidity}}</b></span>
+                                                </div>
+                                            </div>
+                                            <h3 class="heading">{{activePlan_name}}</h3>
+                                            <div class="pricing-content activeContent px-4">
+                                                <ul class="planList">
+                                                    <h6 class="text-dark">Includes</h6> 
+                                                    <div [innerHTML]="activeDescription"></div>
+                                                </ul>
+                                             </div>
+                                             <h6 *ngIf="remainigReportMessage" class="text-warning">You have <b>{{totalRemaining}}</b> Reports remaining!</h6>
+                                             <!-- <h6 *ngIf="remainigDaysMessage" class="text-danger pb-3">Your plan will be expires in <b>{{expiresIn}}</b> days!</h6> -->
+                                             <h6 *ngIf="remainigDaysMessage" class="text-danger">Your plan will be expired in <b>{{expiresIn}}</b> days!</h6>
+                                             <h6 *ngIf="expiredMessage"  class="text-danger pb-3">Your Plan is Expired . Please renew your plan or purchase any other plan!</h6>
+                                            <div class="pricingTable-signup mt-3 cursor-pointer">
+                                                <a (click)="open(mymodal1); getPlanId(activePlanId)">Renewal</a>
+
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6" *ngFor="let plan of plans">
+                                        <div class="pricingTable blueColor">
+                                            <div class="pricingTable-header">
+                                                <i class="material-icons">workspace_premium</i>
+                                                <div class="price-value">₹ {{plan.price}}
+                                                    <span class="month"> <b>{{plan.validity}}</b></span>
+                                                </div>
+                                            </div>
+                                            <h3 class="heading">{{plan.plan_name}}</h3>
+                                            <div class="pricing-content px-4">
+                                                <ul class="planList">
+                                                    <h6 class="text-dark">Includes</h6>
+                                                    <div [innerHTML]="plan.description"></div>
+                                                </ul>
+                                            </div>
+                                           
+                                            <div class="pricingTable-signup cursor-pointer mt-3" >
+                                                <a (click)="open(mymodal); getPlanId(plan.id)">Buy Now</a>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #mymodal let-modal>
+        <div class="modal-header">
+           <h4 class="modal-title" id="modal-basic-title">Purchase Confirmation</h4>
+        </div>
+        <div class="modal-body">Are you sure you want to purchase this plan?</div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); purchasePlan()">
+              Ok
+           </button>
+  
+           <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">
+              Cancel
+           </button>
+        </div>
+     </ng-template>
+     <ng-template #mymodal1 let-modal>
+        <div class="modal-header">
+           <h4 class="modal-title" id="modal-basic-title">Renewal Confirmation</h4>
+        </div>
+        <div class="modal-body">Are you sure you want to renew your plan?</div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); renewPlan()">
+              Ok
+           </button>
+  
+           <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">
+              Cancel
+           </button>
+        </div>
+     </ng-template>
+
+</section>

@@ -1,0 +1,509 @@
+<section class="content">
+  <div class="content-block">
+     <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Pregnancy symptom checker'"></app-breadcrumb>
+     </div>
+     <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+           <div class="card">
+              <div class="header">
+                 <h2>
+                    <strong>Pregnancy symptom checker</strong>
+                 </h2>
+              </div>
+              <div class="body">
+                 <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                 <mat-step>
+                    <ng-template matStepLabel>Start</ng-template>
+                    <div>
+                       <h2 class="col-blue my-3">Find out if you're pregnant in less than 3 minutes!</h2>
+                       <p class="font-21">Our online pregnancy quiz will give you an immediate answer and save time and money. After all, home pregnancy tests can be expensive, especially if you buy more than one. And for a blood pregnancy test you'll need to see a doctor. This is your chance to answer a few questions about typical early pregnancy symptoms and get a quick answer.</p>
+                    </div>
+                    <div>
+                       <button mat-raised-button matStepperNext color="primary" >Are You Pregnant? Find Out!</button>
+                    </div>
+                 </mat-step>
+                 <mat-step [stepControl]="HFormGroup1">
+                    <form [formGroup]="HFormGroup1">
+                       <ng-template matStepLabel>Current Symptoms</ng-template>
+                       <div class="mt-3">
+                          <h2 class="col-blue">Answer these questions about your current symptoms:</h2>
+                       </div>
+                       <div class="my-2 que-section">
+                          <div class="question-heading  my-4">
+                             <h4 class="col-blue">Are your periods regular?</h4>
+                          </div>
+                          <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                             <div class="font-16">Yes</div>
+                             <mat-checkbox class="example-margin" [checked]="checkedValueFirst" (change)="changeStatus()"></mat-checkbox>
+                             <!-- <div>
+                             
+                              <input class = "form-check-input"   
+                                type = "checkbox"  formControlName = "Periods_yes"   value = "good"  [checked]="checkedValueFirst">
+                              </div> -->
+                          </div>
+                          <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                             <div class="font-16">No</div>
+                             <mat-checkbox class="example-margin" [checked]="checkedValueSecond" (change)="changeStatusecond()"></mat-checkbox>
+                             <!-- <div>
+                              <input class = "form-check-input"   
+                                type = "checkbox"  formControlName = "Periods_no" value = "good" >
+                              </div> -->
+                          </div>
+                       </div>
+                       <div class="my-2 que-section">
+                        <div class="question-heading  my-4">
+                           <h4 class="col-blue">Check all the symptoms you usually experience during your period</h4>
+                        </div>
+                        <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">Diarrhea</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "diarrhea" value = "good" ></div>
+                        </div>
+                        <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">Mood changes</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "moodchanges" value = "good" ></div>
+                        </div>
+                        <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                          <div class="font-16">Joint pain</div>
+                          <div><input class = "form-check-input"   
+                             type = "checkbox"  formControlName = "jointpain" value = "good" ></div>
+                       </div>
+                       <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                        <div class="font-16">Increased sex drive</div>
+                        <div><input class = "form-check-input"   
+                           type = "checkbox"  formControlName = "increasedsexdrive" value = "good" ></div>
+                        </div>
+                        <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                          <div class="font-16">Sleep changes</div>
+                          <div><input class = "form-check-input"   
+                             type = "checkbox"  formControlName = "sleepchanges" value = "good" ></div>
+                       </div>
+                       <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                          <div class="font-16">Nausea</div>
+                          <div><input class = "form-check-input"   
+                             type = "checkbox"  formControlName = "Nausea" value = "good" ></div>
+                       </div>
+                       <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                         <div class="font-16">Abdominal cramps</div>
+                         <div><input class = "form-check-input"   
+                            type = "checkbox"  formControlName = "abdominalcramps" value = "good" ></div>
+                      </div>
+                      <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                       <div class="font-16">Ovulation pain</div>
+                       <div><input class = "form-check-input"   
+                          type = "checkbox"  formControlName = "ovulationpain" value = "good" ></div>
+                      </div>
+                     </div>
+                       <div>
+                        <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+                        <button mat-raised-button matStepperNext color="primary" >Next</button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <!-- Second step start -->
+                  <mat-step [stepControl]="HFormGroup2">
+                    <form [formGroup]="HFormGroup2">
+                      <ng-template matStepLabel>Other Symptoms</ng-template>
+                      <!-- <div class="mt-3">
+                        <h2 class="col-blue">Answer these questions about your current symptoms:</h2>
+                     </div> -->
+                     <div class="my-2 que-section">
+                        <div class="question-heading  my-4">
+                           <h4 class="col-blue">Are your breasts tender?</h4>
+                        </div>
+                        <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">Yes</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "tender_yes" value = "good" ></div>
+                        </div>
+                        <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">No</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "tender_no" value = "good" ></div>
+                        </div>
+                     </div>
+                     <div class="my-2 que-section">
+                        <div class="question-heading  my-4">
+                           <h4 class="col-blue">Do you feel nauseated?</h4>
+                        </div>
+                        <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">Yes</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "nauseated_yes" value = "good" ></div>
+                        </div>
+                        <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">No</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "nauseated_no" value = "good" ></div>
+                        </div>
+                     </div>
+                     <div class="my-2 que-section">
+                        <div class="question-heading  my-4">
+                           <h4 class="col-blue">Do you have lower abdominal cramps?</h4>
+                        </div>
+                        <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">Yes</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "abdominal_yes" value = "good" ></div>
+                        </div>
+                        <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">No</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "abdominal_no" value = "good" ></div>
+                        </div>
+                     </div>
+                     <div class="my-2 que-section">
+                        <div class="question-heading  my-4">
+                           <h4 class="col-blue">Do you have vaginal bleeding?</h4>
+                        </div>
+                        <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">Yes</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "vbleeding_yes" value = "good" ></div>
+                        </div>
+                        <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">No</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "vbleeding_no" value = "good" ></div>
+                        </div>
+                     </div>
+                     <div class="my-2 que-section">
+                        <div class="question-heading  my-4">
+                           <h4 class="col-blue">Are you more tired than usual?</h4>
+                        </div>
+                        <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">Yes</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "tired_yes" value = "good" ></div>
+                        </div>
+                        <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                           <div class="font-16">No</div>
+                           <div><input class = "form-check-input"   
+                              type = "checkbox"  formControlName = "tired_no" value = "good" ></div>
+                        </div>
+                     </div>
+                     
+                      <div>
+                        <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+                        <button mat-raised-button matStepperNext color="primary" >Next</button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <!-- second step close -->
+                  <!-- Third Form Start -->
+                  <mat-step [stepControl]="HFormGroup3">
+                     <form [formGroup]="HFormGroup3">
+                        <ng-template matStepLabel>Other Details </ng-template>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">Pregnant women are at increased risk for COVID-19. Will you get the vaccine?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">I'll get it when it's offered but not recommended to me</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "not_recommended" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">I'll get it when it's offered and recommended to me</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "getwhenoffer" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">I'm not sure I'll get it</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "not_sure" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">I will not get it</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "not_get" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">I already got it</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "got_it" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">Are you having unusual food cravings?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Yes</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "food_cravings_yes" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">No</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "food_cravings_yes_no" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">Are you urinating more than usual?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Yes</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "urinating_yes" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">No</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "urinating_no" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">Are you constipated?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Yes</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "constipated_yes" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">No</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "constipated_no" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">Do you know when you ovulated?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Yes</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "ovulated_yes" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">No</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "ovulated_no" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">What type of birth control are you using?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">No birth control</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "no_b_control" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Condoms and/or spermicide</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "condom_spermicide" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">IUD or Depo-Provera</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "iud_depo" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">The Pill</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "pill" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Another birth control</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "another_b_control" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">How old are you?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Under 25</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "undertofive" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">30-34</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "threeo_threefor" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">35-39</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "threefive_threenine" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">40 and older</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "above_forty" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Prefer not to say</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "not_say" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">What is your ethnicity/race?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">American Indian</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "american_indo" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Asian</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "asian" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Black African American</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "b_afric_american" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Black African</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "blackafrican" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Hispanic or Latino</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "hispa_latino" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Prefer not to say</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "pnot_say" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div>
+                           <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+                           <button mat-raised-button matStepperNext color="primary">Next</button>
+                        </div>
+                     </form>
+                  </mat-step>
+                  <!-- third form close -->
+                  <!-- forth Form Start -->
+                  <mat-step [stepControl]="HFormGroup4">
+                     <form [formGroup]="HFormGroup4">
+                        <ng-template matStepLabel>Past Query </ng-template>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">Did you have sex during your 5-6 fertile days?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Yes</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "duringxfertile_yes" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">No</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "duringxfertile_no" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">Did you have an orgasm?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Yes</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "orgasm_yes" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">No</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "orgasm_no" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">What is his sperm count?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">No sperm count done</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "nocount" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Normal sperm count</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "normal_count" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Low sperm count</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "low_count" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">When is your next period expected?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">I missed my period</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "missed_periods" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">In about 1-2 days</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "in_one_to_days" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">In more that 4 days</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "more_then_for_days" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div class="my-2 que-section">
+                           <div class="question-heading  my-4">
+                              <h4 class="col-blue">Did you take a pregnancy test?</h4>
+                           </div>
+                           <div class="mb-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">No pregnancy test done</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "notest" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Negative pregnancy test</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "negativeresult" value = "good" ></div>
+                           </div>
+                           <div class="my-4 fildes d-flex justify-content-between rounded align-items-center blue_border">
+                              <div class="font-16">Positive pregnancy test</div>
+                              <div><input class = "form-check-input"   
+                                 type = "checkbox"  formControlName = "positiveresult" value = "good" ></div>
+                           </div>
+                        </div>
+                        <div>
+                           <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+                           <button mat-raised-button matStepperNext color="primary">Next</button>
+                        </div>
+                     </form>
+                  </mat-step>
+                  <mat-step>
+                     <ng-template matStepLabel>Result</ng-template>
+                     <div class="mt-3">
+                        <h2 class="col-blue">You've completed the online pregnancy test..</h2>
+                        <h4 class="col-blue my-4">You might be Pregnant, please consult with Gynecologist</h4>
+                     </div>
+                     <div>
+                        <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+                        <button mat-raised-button color="primary" (click)="stepper.reset()">Done</button>
+                    </div>
+                  </mat-step>
+                </mat-horizontal-stepper>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

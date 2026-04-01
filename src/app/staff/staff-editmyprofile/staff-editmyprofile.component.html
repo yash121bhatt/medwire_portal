@@ -1,0 +1,143 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Edit Profile'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+               <!-- <div class="header">
+                  <h2><strong>Blank</strong> Page</h2>
+                  </div> -->
+                  <div class="body editBlock">
+                    <div class="example-container">
+                       <div class="row justify-content-between">
+                          <div class="col-lg-10 m-auto">
+                             <form [formGroup]="uploadfileForm" (ngSubmit)="onSubmit()" class="text-center">
+                             <div class="group-gap">
+                                <!-- Upload image -->
+                                <div class="avatar-upload">
+                                   <div class="uploadFile" (click)="fileInput.click()">
+                                      <mat-icon class="uploadIcon">upload</mat-icon>
+                                   </div>
+                                   <div class="avatar-edit">
+                                      <input type='file' id="profile_image" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event);fileChange($event.target.files)" />
+                                   </div>
+                                   <div class="avatar-preview">
+                                      <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                             <!-- Submit Button -->
+                             <button type="button" class="btn btn-outline-secondary submitBtn btn-lg btn-block" (click)="fileInput.click()">Upload Profile Image</button>
+                             </form>
+                          </div>
+                          <div class="col-12">
+                             <div class="body">
+                                <form class="mt-4" [formGroup]="editprofiletForm" (ngSubmit)="onSubmit()">
+                                <div class="row">
+                                   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12  mb-2">
+                                      <mat-form-field class="example-full-width" appearance="outline">
+                                         <mat-label>Full Name</mat-label>
+                                         <input matInput formControlName="first_name" type="text" maxlength="32" pattern="[A-Za-z ]{1,32}" [(ngModel)]="first_name" required>
+                                         <mat-icon matSuffix>face</mat-icon>
+                                         <mat-error *ngIf="editprofiletForm.get('first_name').hasError('required')">
+                                            Name is required
+                                         </mat-error>
+                                      </mat-form-field>
+                                   </div>
+                                   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12  mb-2">
+                                      <mat-form-field class="example-full-width readonly" appearance="outline">
+                                         <mat-label>Mobile No. </mat-label>
+                                         <input matInput formControlName="mobile" [(ngModel)]="mobile" type="number" readonly >
+                                         <mat-icon matSuffix>perm_phone_msg</mat-icon>
+                                         
+
+
+                                         
+                                      </mat-form-field>
+                                   </div>
+                                   
+                                   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                      <mat-form-field class="example-full-width" appearance="outline">
+                                         <mat-label>Email</mat-label>
+                                         <input matInput formControlName="email" [(ngModel)]="email" required>
+                                         <mat-icon matSuffix>mail</mat-icon>
+                                         <mat-error *ngIf="editprofiletForm.get('email').hasError('required') || editprofiletForm.get('email').touched">
+                                            Please enter a valid email address
+                                         </mat-error>
+                                      </mat-form-field>
+                                   </div>
+                                   
+                                  
+                                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                      <mat-label>Gender</mat-label>
+                                      <mat-select formControlName="gender" [(ngModel)]="gender" required >
+                                        <mat-option [value]="'Male'">
+                                          Male
+                                        </mat-option>
+                                        <mat-option [value]="'Female'">
+                                          Female
+                                        </mat-option>
+                                      </mat-select>
+                                      <mat-error *ngIf="editprofiletForm.get('gender').hasError('required')">
+                                       Gender is required
+                                      </mat-error>
+                                    </mat-form-field>
+                                  </div>
+
+                                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                      <mat-label>Date Of Birth</mat-label>
+                                      <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="dd/mm/yyyy" [(ngModel)]="dob"  required autocomplete="off" [max]="maxDate" >
+                                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                      <mat-datepicker #picker></mat-datepicker>
+                                      <mat-error *ngIf="editprofiletForm.get('dob').hasError('required')">
+                                        Please select date
+                                      </mat-error>
+                                    </mat-form-field>
+                                  </div>
+
+                                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                       <mat-label>Address</mat-label>
+                                       <textarea matInput formControlName="address" [(ngModel)]="address" required></textarea>
+                                       <mat-error *ngIf="editprofiletForm.get('address').hasError('required')">
+                                          Address is required
+                                       </mat-error>
+                                       <mat-icon matSuffix>location_on</mat-icon>
+                                    </mat-form-field>
+                                 </div>
+                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width " appearance="outline">
+                                       <mat-label>Pin Code</mat-label>
+                                       <input matInput formControlName="pin_code" [(ngModel)]="pin_code" type="number"  required>
+                                       <mat-icon matSuffix>location_on</mat-icon>
+                                       <mat-error *ngIf="editprofiletForm.get('pin_code').hasError('required') || editprofiletForm.get('pin_code').touched">
+                                          Please enter a valid Pin code
+                                       </mat-error>
+                                    </mat-form-field>
+                                 </div>
+                                   
+                                </div>
+                                <div class="row">
+                                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                      <button class="btn-space" mat-raised-button
+                                         color="primary" >Update Profile</button>
+                                      <button type="button" mat-button [routerLink]="['/staff/staff-myprofile']">Cancel</button>
+                                   </div>
+                                </div>
+                                </form>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

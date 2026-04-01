@@ -1,0 +1,403 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Insight Monitoring Table'">
+            </app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+
+                    <div class="body">
+                        <div class="">
+                            <form [formGroup]="InslightMoteringForm" (ngSubmit)="onSubmit()"
+                                class="text-center">
+                                <div class="row">
+                                    <!-- <div class="col-sm-6 col-md-3">
+
+
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                            <mat-label>All</mat-label>
+                                            <mat-select formControlName="user_id">
+                                                <mat-option *ngFor="let data of lebListData" [value]="data.id">
+                                                    {{data.first_name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div> -->
+                                    <div class="col-sm-6 col-md-3">
+
+
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                            <mat-label>Gender</mat-label>
+                                            <mat-select formControlName="gender">
+                                                <mat-option [value]="'Male'">
+                                                    Male
+                                                </mat-option>
+                                                <mat-option [value]="'Female'">
+                                                    Female
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+
+
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                            <mat-label>Filter By</mat-label>
+                                            <mat-select formControlName="filter_by">
+                                                <mat-option [value]="'day'" (click)="changediv('day')">
+                                                    Day
+                                                </mat-option>
+                                                <mat-option [value]="'week'" (click)="changediv('weekly')">
+                                                    Week
+                                                </mat-option>
+                                                <mat-option [value]="'month'" (click)="changediv('monthly')">
+                                                    Month
+                                                </mat-option>
+                                                <mat-option [value]="'year'" (click)="changediv('yearly')">
+                                                    Year
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error
+                                                *ngIf="InslightMoteringForm.get('gender').hasError('required')">
+                                                Gender is required
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                    </div>
+
+
+
+                                    <div class="col-sm-6 col-md-3" [hidden]="!weekly">
+
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                            <mat-label>Week</mat-label>
+                                            <mat-select formControlName="week">
+                                                <mat-option [value]="'0'">
+                                                    Monday
+                                                </mat-option>
+                                                <mat-option [value]="'1'">
+                                                    Tuesday
+                                                </mat-option>
+                                                <mat-option [value]="'2'">
+                                                    Wednesday
+                                                </mat-option>
+                                                <mat-option [value]="'3'">
+                                                    Thursday
+                                                </mat-option>
+                                                <mat-option [value]="'4'">
+                                                    Friday
+                                                </mat-option>
+                                                <mat-option [value]="'5'">
+                                                    Saturday
+                                                </mat-option>
+                                                <mat-option [value]="'6'">
+                                                    Sunday
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-3" [hidden]="!monthly">
+
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                            <mat-label>Month</mat-label>
+                                            <mat-select formControlName="month">
+                                                <mat-option [value]="'0'">
+                                                    January
+                                                </mat-option>
+                                                <mat-option [value]="'1'">
+                                                    February
+                                                </mat-option>
+                                                <mat-option [value]="'2'">
+                                                    March
+                                                </mat-option>
+                                                <mat-option [value]="'3'">
+                                                    April
+                                                </mat-option>
+                                                <mat-option [value]="'4'">
+                                                    May
+                                                </mat-option>
+                                                <mat-option [value]="'5'">
+                                                    June
+                                                </mat-option>
+                                                <mat-option [value]="'6'">
+                                                    July
+                                                </mat-option>
+                                                <mat-option [value]="'7'">
+                                                    August
+                                                </mat-option>
+                                                <mat-option [value]="'8'">
+                                                    September
+                                                </mat-option>
+                                                <mat-option [value]="'9'">
+                                                    October
+                                                </mat-option>
+                                                <mat-option [value]="'10'">
+                                                    November
+                                                </mat-option>
+                                                <mat-option [value]="'11'">
+                                                    December
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3" [hidden]="!yearly">
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-label>Year</mat-label>
+                                            <input matInput formControlName="year">
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-3" [hidden]="!day">
+                                        <mat-form-field appearance="outline" class="example-full-width mb-3">
+                                            <mat-label>Appointment Date</mat-label>
+                                            <input matInput [matDatepicker]="picker2"
+                                                formControlName="appointment_date" [max]="maxDate">
+                                            <mat-hint>MM/DD/YYYY</mat-hint>
+                                            <mat-datepicker-toggle matSuffix
+                                                [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-3">
+
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                            <mat-label>Age</mat-label>
+                                            <mat-select formControlName="age_group">
+                                                <mat-option [value]="'below_5'">
+                                                    Below 5
+                                                </mat-option>
+                                                <mat-option [value]="'between_5_and_18'">
+                                                    Between 5 and 18
+                                                </mat-option>
+                                                <mat-option [value]="'above_18'">
+                                                    Above 18
+                                                </mat-option>
+                                            </mat-select>
+
+                                        </mat-form-field>
+
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                            <mat-label>Blood Group</mat-label>
+                                            <mat-select formControlName="blood_group">
+                                                <mat-option [value]="'a+'">
+                                                    A+
+                                                </mat-option>
+                                                <mat-option [value]="'a-'">
+                                                    A-
+                                                </mat-option>
+                                                <mat-option [value]="'b+'">
+                                                    B+
+                                                </mat-option>
+                                                <mat-option [value]="'b-'">
+                                                    B-
+                                                </mat-option>
+                                                <mat-option [value]="'o+'">
+                                                    O+
+                                                </mat-option>
+                                                <mat-option [value]="'o-'">
+                                                    O-
+                                                </mat-option>
+                                                <mat-option [value]="'ab+'">
+                                                    AB+
+                                                </mat-option>
+                                                <mat-option [value]="'ab-'">
+                                                    AB-
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-3">
+                                        <mat-form-field class="dateRange example-full-width mb-3" appearance="outline">
+                                            <mat-label>Date Range</mat-label>
+                                            <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+                                                <input matStartDate placeholder="Start date"
+                                                    formControlName="from_date">
+                                                <input matEndDate placeholder="End date"
+                                                    formControlName="to_date">
+                                            </mat-date-range-input>
+                                            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                                            <mat-datepicker-toggle matSuffix
+                                                [for]="picker"></mat-datepicker-toggle>
+                                            <mat-date-range-picker #picker></mat-date-range-picker>
+                                        </mat-form-field>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-3" >
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                           <mat-label>Search Zip Code</mat-label>
+                                           <input matInput formControlName="pin_code" autocomplete="off" >
+                                         </mat-form-field>
+                                      </div>
+
+                                </div>
+                            </form>
+                            <div class="saveBtn mb-4 resetBtn">
+                                <button mat-raised-button color="primary" (click)="generateReport();">Generate Report</button>
+                                <button mat-raised-button color="" class="msr-2"(click)="resetForm()">Reset</button>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 mt-2">
+                                    <div class="ngxTableHeader">
+                                        <ul class="header-buttons-left ms-0 mb-0">
+                                            <li class="dropdown me-3">
+                                                <h2><strong>Insight Monitoring</strong></h2>
+                                            </li>
+                                            <li>
+                                                <mat-form-field
+                                                    class="example-full-width searchInput serchTable "
+                                                    appearance="outline">
+                                                    <mat-label>Search</mat-label>
+                                                    <input matInput (keyup)="applyFilter($event)"
+                                                        placeholder="Search" autocomplete="off">
+                                                </mat-form-field>
+                                            </li>
+                                        </ul>
+                                        <ul class="header-buttons">
+                                            <li>
+                                                <button class="me-2 border-0"
+                                                    (click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'sheet_name'})"
+                                                    matTooltip="Export as xlsx"><img
+                                                        src="assets/images/icon/xlsx.png" alt="">
+                                                </button>
+                                                <button class=" border-0"
+                                                    (click)="exporter.exportTable('csv')"><img
+                                                        src="assets/images/icon/csv.png" alt=""
+                                                        matTooltip="Export as csv">
+                                                </button>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="body table-responsive pdf_sign">
+                                            <table mat-table matTableExporter [dataSource]="dataSource3"
+                                                class="w-100" matSort #empTbSort="matSort"
+                                                #exporter="matTableExporter">
+                                                <!-- No Column -->
+                                                <ng-container matColumnDef="no">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No.
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let element; let i = index;"> {{ i
+                                                        + 1 }}
+                                                    </td>
+                                                </ng-container>
+
+                                                <!-- Lab Id Column -->
+                                                <ng-container matColumnDef="radiology_id">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Lab
+                                                        ID</th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        {{element.lab_id?element.lab_id:'-'}}
+                                                    </td>
+                                                </ng-container>
+
+                                                <!-- Laboratory Column -->
+                                                <ng-container matColumnDef="radiology_name">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                        Laboratory
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        {{element.lab_name?element.lab_name:'-'}}
+                                                    </td>
+                                                </ng-container>
+                                                <!-- Number Of Booking Column -->
+                                                <ng-container matColumnDef="total_booking">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                        Booking Appointment
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        {{element.total_booking?element.total_booking:'-'}}
+                                                    </td>
+                                                </ng-container>
+                                                <!-- Number Of Complete Column -->
+                                                <ng-container matColumnDef="complete">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                        Complete Appointment
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        {{element.total_completed_booking ?
+                                                        element.total_completed_booking : '-'}}
+                                                    </td>
+                                                </ng-container>
+                                                <!--Number Of FutureColumn -->
+                                                <ng-container matColumnDef="future">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Future
+                                                        Appointment
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        {{element.total_future_booking ?
+                                                        element.total_future_booking : '-' }}
+                                                    </td>
+                                                </ng-container>
+                                                <!--Gender Male Column -->
+                                                <ng-container matColumnDef="total_males">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Male
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        {{element.total_males?element.total_males:'-'}}
+                                                    </td>
+                                                </ng-container>
+
+                                                <!--Gender Female Column -->
+                                                <ng-container matColumnDef="total_females">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Female
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        {{element.total_females?element.total_females:'-'}}
+                                                    </td>
+                                                </ng-container>
+
+                                                <!--Gender Zip Code Column -->
+                                                 <ng-container matColumnDef="pin_code">
+                                                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Zip Code
+                                                     </th>
+                                                 <td mat-cell *matCellDef="let element">{{element.pin_code?element.pin_code:'-'}}
+                                                 </td>
+                                                 </ng-container>
+
+                                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                                                </tr>
+                                            </table>
+                                            <mat-paginator [pageSizeOptions]="[10, 20, 25]"
+                                                showFirstLastButtons>
+                                            </mat-paginator>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Laboratory</h2>
+                        </div>
+                        <div class="body" *ngIf="totalBookingCountLab.length > 0">
+                            <apx-chart [series]="barChartLabOptions.series" [chart]="barChartLabOptions.chart"
+                                [dataLabels]="barChartLabOptions.dataLabels"
+                                [plotOptions]="barChartLabOptions.plotOptions"
+                                [responsive]="barChartLabOptions.responsive" [xaxis]="barChartLabOptions.xaxis"
+                                [tooltip]="barChartLabOptions.tooltip" [legend]="barChartLabOptions.legend"
+                                [fill]="barChartLabOptions.fill">
+                            </apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

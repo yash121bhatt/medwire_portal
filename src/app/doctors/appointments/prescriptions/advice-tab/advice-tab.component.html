@@ -1,0 +1,88 @@
+<div class="example-container">
+    <form class="m-4" [formGroup]="adviceTabForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-12">
+                <h5>Advice</h5>
+            </div>
+            <div class="col-12 mb-3">
+                <mat-form-field class="example-chip-list w-100" appearance="outline">
+                    <mat-label>Advice</mat-label>
+                    <input matInput formControlName="description"  placeholder="Advice" autocomplete="off" >
+                    <!-- <textarea matInput formControlName="description"  rows="2" placeholder="Advice" ></textarea> -->
+                    <mat-error>
+                        <div *ngIf="adviceTabForm.get('description').hasError('maxlength')">The Advice Field Should be 160 character maximum</div>
+                      </mat-error>
+                </mat-form-field>
+                  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <button class="btn-space" mat-raised-button color="primary" [disabled]="!adviceTabForm.valid ">Submit</button>
+                <button type="button" mat-button [routerLink]="['/doctors/appointments/appointment-list/'+cancelbtnClientId.clientChoose]">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="example-container">
+    <!-- <div class="body table-responsive long_text_td">
+        <div class="row align-items-center px-2">
+            <div class="col-md-6 text-start">
+                <h4>Advice List</h4>
+            </div>
+           <div class="col-md-6">
+              <mat-form-field class="example-full-width my-0" appearance="outline">
+                 <mat-label>Search</mat-label>
+                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+              </mat-form-field>
+           </div>
+        </div>
+        <table mat-table [dataSource]="dataSource3" class="w-100" matSort
+        #empTbSort="matSort">
+          
+           <ng-container matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header > S.No. </th>
+            <td mat-cell *matCellDef="let element; let i = index;"> {{ i + 1 }}
+            </td>
+            </ng-container>
+           
+           <ng-container matColumnDef="patient">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient Name</th>
+              <td mat-cell *matCellDef="let element"> {{element.patient}} </td>
+           </ng-container>
+         
+           <ng-container matColumnDef="appointment_date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Date</th>
+              <td mat-cell *matCellDef="let element"> {{element.appointment_date}} </td>
+           </ng-container>
+       
+           <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+              <td mat-cell *matCellDef="let element" class="pe-4"> {{element.description}} </td>
+           </ng-container>
+          
+           <ng-container matColumnDef="followup">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Follow Up </th>
+            <td mat-cell *matCellDef="let element" class="pe-4"> {{element.followup}} </td>
+         </ng-container>
+      
+           <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Action</th>
+              <td mat-cell *matCellDef="let element">
+                 <span>
+                    <button class="btn btn-outline-primary font-13" [routerLink]="['']">
+                        Upload
+                      </button>
+                    <button class="btn tblActnBtn h-auto" (click)='deleteRow(row)'>
+                      <i class="material-icons">delete</i>
+                    </button>
+                  </span>
+              </td>
+           </ng-container>
+           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+     </div> -->
+</div>

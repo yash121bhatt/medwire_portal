@@ -1,0 +1,124 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Add Test'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="header mx-4">
+                        <h2><strong>Add Test</strong></h2>
+                    </div>
+                    <div class="body">
+                        <form class="m-4 mt-0" [formGroup]="addtestForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Test Category</mat-label>
+                                        <mat-select [disableOptionCentering]="true" #select1 placeholder="Auto Focus"
+                                            formControlName="cat_id">
+                                            <mat-select-filter *ngIf="select1.focused" [array]="variables"
+                                                (filteredReturn)="filteredList2 =$event"></mat-select-filter>
+                                            <mat-option *ngFor="let item of filteredList2" [value]="item.cat_id">
+                                                {{item.category_name}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                        <mat-error *ngIf="addtestForm.get('cat_id').hasError('required')">
+                                            Test Category Select is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Test Name</mat-label>
+                                        <input matInput formControlName="test_name" required autocomplete="off">
+                                        <mat-error *ngIf="addtestForm.get('test_name').hasError('required')">
+                                            Test Name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Test Report Time</mat-label>
+                                        <input matInput formControlName="test_report" required autocomplete="off">
+                                        <mat-error *ngIf="addtestForm.get('test_report').hasError('required')">
+                                            Test Report Time is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Fasting Time</mat-label>
+                                        <input matInput formControlName="fast_time" required autocomplete="off">
+                                        <mat-error *ngIf="addtestForm.get('fast_time').hasError('required')">
+                                            Fasting Time is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Test Recommended for</mat-label>
+                                        <mat-select formControlName="test_recommended" required>
+                                            <mat-option [value]="'Male'">
+                                                Male
+                                            </mat-option>
+                                            <mat-option [value]="'Female'">
+                                                Female
+                                            </mat-option>
+                                            <mat-option [value]="'Other'">
+                                                Other
+                                            </mat-option>
+                                            <mat-option [value]="'For All'">
+                                                For All
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="addtestForm.get('test_recommended').hasError('required')">
+                                            Test Recommended Select is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Upload Image</mat-label>
+                                        <ngx-mat-file-input formControlName="image" [accept]="accept"
+                                            (change)="fileChange($event.target.files)" required>
+                                        </ngx-mat-file-input>
+                                        <mat-error *ngIf="addtestForm.get('image').hasError('required')">
+                                            Image is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <mat-label>Description</mat-label>
+                                    <ckeditor [editor]="Editor" formControlName="description" required></ckeditor>
+                                    
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Amount</mat-label>
+                                        <input matInput type="number" formControlName="amount" required
+                                            autocomplete="off">
+                                        <mat-icon matSuffix>currency_rupee</mat-icon>
+                                        <mat-error *ngIf="addtestForm.get('amount').hasError('required')">
+                                            Amount is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="btn-space" mat-raised-button color="primary"
+                                        [disabled]="!addtestForm.valid">Submit</button>
+                                    <button type="button" mat-button
+                                        [routerLink]="['/doctor/laboratory-items/test-list']">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

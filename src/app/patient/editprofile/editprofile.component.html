@@ -1,0 +1,184 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="['My Profile']" [active_item]="'Edit Profile'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <!-- <div class="header">
+                  <h2><strong>Blank</strong> Page</h2>
+                  </div> -->
+          <div class="body editBlock">
+            <div class="example-container">
+              <div class="row justify-content-between">
+                <div class="col-lg-12 col-md-12">
+                  <form [formGroup]="editprofiletForm" (ngSubmit)="onSubmit()" class="text-center">
+                    <div class="group-gap">
+                      <!-- Upload image -->
+                      <div class="avatar-upload">
+                        <div class="uploadFile">
+                          <mat-icon class="uploadIcon">upload</mat-icon>
+                        </div>
+                        <div class="avatar-edit">
+                          <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event);fileChange($event.target.files)" />
+                        </div>
+                        <div class="avatar-preview">
+                          <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Submit Button -->
+
+                    <a class="btn btn-outline-secondary btn-lg btn-block" (click)="fileInput.click()">Upload Profile Image</a>
+                    <a href="{{imageURLprofile+imageprofile}}" class="btn btn-outline-secondary btn-lg btn-block ml-4 profilee-btn" target="_blank">View
+                      Image</a>
+                    <div class="col-lg-12 col-md-12">
+                      <div class="body">
+                        <!-- <form class="mt-4" [formGroup]="editprofiletForm" > -->
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2" *ngFor="let userdata  of Users">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Full name</mat-label>
+
+                              <input matInput formControlName="username" type="text" maxlength="32" pattern="[A-Za-z ]{1,32}" [(ngModel)]="username" required autocomplete="off">
+                              <mat-icon matSuffix>face</mat-icon>
+                              <mat-error *ngIf="editprofiletForm.get('username').hasError('required')">
+                                Name is required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width readonly" appearance="outline">
+                              <mat-label>Mobile No.</mat-label>
+                              <input type="number" matInput formControlName="mobile" [(ngModel)]="mobileno" required autocomplete="off" readonly>
+                              <mat-icon matSuffix>perm_phone_msg</mat-icon>
+                              <mat-error *ngIf="editprofiletForm.get('mobile').hasError('required') || editprofiletForm.get('mobile').touched">
+                                Please enter a valid mobile number
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+
+                        </div>
+
+                        <div class="row">
+                          <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width " appearance="outline">
+                                       <mat-label>Alternate Mobile No.</mat-label>
+                                       <input type="number" matInput formControlName="alternateno" [(ngModel)]="alternateno"  autocomplete="off" >
+                                       <mat-icon matSuffix>perm_phone_msg</mat-icon>
+                                    </mat-form-field>
+                                 </div> -->
+                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Gender</mat-label>
+                              <mat-select formControlName="gender" [(ngModel)]="gender" required>
+                                <mat-option [value]="'Male'">
+                                  Male
+                                </mat-option>
+                                <mat-option [value]="'Female'">
+                                  Female
+                                </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="editprofiletForm.get('gender').hasError('required')">
+                                Gender is required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Blood Group</mat-label>
+                              <mat-select formControlName="blood_group" [(ngModel)]="blood_group" required>
+                                <mat-option [value]="'A+'">
+                                  A+
+                                </mat-option>
+                                <mat-option [value]="'A-'">
+                                  A-
+                                </mat-option>
+                                <mat-option [value]="'B+'">
+                                  B+
+                                </mat-option>
+                                <mat-option [value]="'B-'">
+                                  B-
+                                </mat-option>
+                                <mat-option [value]="'O+'">
+                                  O+
+                                </mat-option>
+                                <mat-option [value]="'O-'">
+                                  O-
+                                </mat-option>
+                                <mat-option [value]="'AB+'">
+                                  AB+
+                                </mat-option>
+                                <mat-option [value]="'AB-'">
+                                  AB-
+                                </mat-option>
+                                <mat-option [value]="'Not Known'">
+                                  Not Known
+                                </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="editprofiletForm.get('blood_group').hasError('required')">
+                                Blood group is required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+
+                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Date Of Birth</mat-label>
+                              <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="dob" [(ngModel)]="dob" [max]="maxDate" required readonly autocomplete="off">
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                              <mat-error *ngIf="editprofiletForm.get('dob').hasError('required')">
+                                Please select date
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Address</mat-label>
+                              <input matInput formControlName="address" [(ngModel)]="address" required autocomplete="off">
+                              <mat-error *ngIf="editprofiletForm.get('address').hasError('required')">
+                                Address is required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Pin Code </mat-label>
+                              <input matInput formControlName="pincode" type="number" [(ngModel)]="pincode" required autocomplete="off">
+                              <mat-error *ngIf="editprofiletForm.get('pincode').hasError('required')">
+                                Pin code is required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div *ngIf="success_message" class="alert alert-success alert-dismissible">
+                            <strong> Success Now ! </strong>
+                          </div>
+                          <p *ngIf="error_message" class="alert alert-danger alert-dismissible">
+                            <strong>{{error_message_text}} </strong>
+                          </p>
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                            <button type="submit" class="btn-space" mat-raised-button color="primary">Update
+                              Profile</button>
+                            <button type="button" mat-button [routerLink]="['/patient/myprofile']">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

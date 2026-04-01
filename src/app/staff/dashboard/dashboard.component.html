@@ -1,0 +1,59 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Dashboard'"></app-breadcrumb>
+    </div>
+    <!-- Widgets -->
+    <div class="row">
+      <div class="col-lg-3 col-sm-6 cursor-pointer" [routerLink]="['../appointment/appointment-list']">
+        <div class="info-box7 l-bg-card1 order-info-box7">
+          <div class="info-box7-block">
+            <h5 class="m-b-15">Today's Appointments</h5>
+            <h2 class="text-end"><i _ngcontent-ldh-c338="" class="material-icons align-middle iconSizedash material-icons-outlined float-start">business_center</i><span>{{todays_apppintment}}</span></h2>
+            <!-- <p class="m-b-0">18% Higher Then Last Month</p> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 cursor-pointer" [routerLink]="['../appointment/appointment-list']">
+        <div class="info-box7 l-bg-card2 order-info-box7">
+          <div class="info-box7-block">
+            <h5 class="m-b-15">Completed Appointments</h5>
+            <h2 class="text-end"><i class="far fa-calendar-check float-start"></i><span>{{completed_apppintment}}</span>
+            </h2>
+            <!-- <p class="m-b-0">21% Higher Then Last Month</p> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 cursor-pointer" [routerLink]="['../appointment/appointment-list']">
+        <div class="info-box7 l-bg-card3 order-info-box7">
+          <div class="info-box7-block">
+            <h5 class="m-b-15">Total Appointments</h5>
+            <h2 class="text-end"><i _ngcontent-ldh-c338="" class="material-icons align-middle iconSizedash float-start">enhanced_encryption</i><span>{{total_apppintment}}</span></h2>
+            <!-- <p class="m-b-0">37% Higher Then Last Month</p> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 cursor-pointer" [routerLink]="['../patient-management/patient-list']">
+        <div class="info-box7 l-bg-card4 order-info-box7">
+          <div class="info-box7-block">
+            <h5 class="m-b-15">Today's Patients</h5>
+            <h2 class="text-end"><i _ngcontent-ldh-c338="" class="material-icons align-middle iconSizedash float-start">face</i><span>{{todays_patient}}</span>
+            </h2>
+            <!-- <p class="m-b-0">10% Higher Then Last Month</p> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 cursor-pointer" [routerLink]="['../patient-management/patient-list']">
+        <div class="info-box7 l-bg-card4 order-info-box7">
+          <div class="info-box7-block">
+            <h5 class="m-b-15">Total Patients</h5>
+            <h2 class="text-end"><i _ngcontent-ldh-c338="" class="material-icons align-middle iconSizedash float-start">post_add</i><span>{{total_patient}}</span></h2>
+            <!-- <p class="m-b-0">10% Higher Then Last Month</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #END# Widgets -->
+  </div>
+</section>

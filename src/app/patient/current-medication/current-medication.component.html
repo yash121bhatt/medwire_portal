@@ -1,0 +1,41 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="['Current Medication','Current Medication List']" [active_item]="'Add Current Medication'"></app-breadcrumb>
+    </div>
+    <!-- CKEditor -->
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <form class="m-4" [formGroup]="CurrmediForm" (ngSubmit)="onSubmit('authForm.value')">
+            <h3 class="mb-3">Add Current Medication </h3>
+            
+            <ckeditor [editor]="Editor" formControlName="description" value="description">{{description}}
+              <!-- <div> {{data}}</div> -->
+            </ckeditor>
+            <!-- <mat-error *ngIf="CurrmediForm.get('description').hasError('required')">
+              Please add description
+            </mat-error> -->
+            <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 my-3">
+              <mat-form-field class="example-full-width my-3" appearance="outline">
+                <mat-label>Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="created_date" value="{{created_date}}" required autocomplete="off" >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="CurrmediForm.get('created_date').hasError('required')">
+                  Please select date
+                </mat-error>
+              </mat-form-field>
+            </div> -->
+            <div class="my-3"> 
+              <button class="btn-space"  mat-raised-button color="primary" [disabled]="!CurrmediForm.valid">Add</button>
+              <button type="button" mat-button class="cancel_btn_back" [routerLink]="['/patient/currentmedilist/'+urlparameter]">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- #END# CKEditor -->
+  </div>
+</section>

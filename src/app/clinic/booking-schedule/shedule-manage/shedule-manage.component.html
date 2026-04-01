@@ -1,0 +1,29 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Doctor’s Schedule'"></app-breadcrumb>
+        </div>
+        <!-- Your content goes here  -->
+        <div class="row clearfix remov_scroll">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <mat-tab-group>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div class="tabColor">AVAILABILITY</div>
+                            </ng-template>
+                            <app-availability [doctor_id]="doctorId"></app-availability>
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div class="tabColor">WEEKLY SCHEDULE</div>
+                            </ng-template>
+                            <app-weekly-schedule [doctor_id]="doctorId"></app-weekly-schedule>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

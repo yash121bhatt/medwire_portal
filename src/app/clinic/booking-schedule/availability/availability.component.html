@@ -1,0 +1,57 @@
+<div class="body available">
+   <form class="" [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+         <div class="col-md-4 col-sm-12">
+            <ngx-calendar [options]="calendarOptions" formControlName="calender" (onChooseDate)="onChooseDate($event)" [events]="calendarEvents"></ngx-calendar>
+         </div>
+         <div class="col-md-8 col-sm-12">
+               <mat-slide-toggle class="mb-3" color="primary" formControlName="full" (change)="toggleChange($event)" [(ngModel)]="full">Completely Unavailable</mat-slide-toggle>
+               <div class="row {{full}}">
+                  <div class="col-lg-4 col-md-6 col-sm-12 pe-0">
+                    <div>
+                    <label class="badge bg-blue">Morning</label><br>
+                    <mat-slide-toggle class="my-2 d-block" color="primary" formControlName="morning" [(ngModel)]="morning">Unavailable</mat-slide-toggle>
+                    <mat-error *ngIf="morningSlot1">
+                       Sorry , there is no slots available
+                    </mat-error>
+                 </div> 
+                     <mat-button-toggle-group *ngFor="let time of morningSlot" class="manual toggleBtn mt-2 {{morning}}">
+                        <mat-button-toggle class="timeBtn my-2" value="time.Stime">{{time.Stime}}</mat-button-toggle>
+                     </mat-button-toggle-group>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12 pe-0">
+                    <div>
+                     <label class="badge bg-blue">Afternoon</label><br>
+                     <mat-slide-toggle class="my-2 d-block" color="primary" formControlName="afternoon" [(ngModel)]="afternoon">Unavailable</mat-slide-toggle> 
+                     <mat-error *ngIf="afternoonSlot1">
+                       Sorry , there is no slots available
+                    </mat-error>
+                    </div>
+                     <mat-button-toggle-group *ngFor="let time of afternoonSlot" class="manual toggleBtn mt-2 {{afternoon}}">
+                        <mat-button-toggle class="timeBtn col-6 my-2" value="time.Stime">{{time.Stime}}</mat-button-toggle>
+                        </mat-button-toggle-group>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12 pe-0">
+                    <div>
+                    <label class="badge bg-blue">Evening</label><br>
+                    <mat-slide-toggle class="my-2 d-block" color="primary" formControlName="evening"  [(ngModel)]="evening">Unavailable</mat-slide-toggle>
+                    <mat-error *ngIf="eveningSlot1">
+                       Sorry , there is no slots available
+                    </mat-error>
+                 </div>
+                     <mat-button-toggle-group  *ngFor="let time of eveningSlot" class="manual toggleBtn mt-2 {{evening}}">
+                        <mat-button-toggle class="timeBtn col-6 my-2" value="time.Stime">{{time.Stime}}</mat-button-toggle>
+                     </mat-button-toggle-group>
+                  </div>
+               </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+            <button class="btn-space"  mat-raised-button
+            color="primary"  [disabled]="!scheduleForm.valid " [routerLink]="['../doctor-list']" >Submit</button>
+            <button type="button" mat-button [routerLink]="['../../doctor-list']">Cancel</button>
+         </div>
+      </div>
+   </form>
+</div>

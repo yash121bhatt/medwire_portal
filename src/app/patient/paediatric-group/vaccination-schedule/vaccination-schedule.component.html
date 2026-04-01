@@ -1,0 +1,181 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="['Vaccination List']" [active_item]="'Vaccination Schedule'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="ngxTableHeader min_width_100">
+                    <ul class="header-buttons-left ms-0 mb-0">
+                      <!-- <li class="dropdown">
+                        <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                        <input placeholder="Search" type="text" class="browser-default search-field"
+                          (keyup)='filterDatatable($event)' aria-label="Search box">
+                      </li> -->
+                    </ul>
+                    <!-- <ul class="header-buttons">
+                      <li class="saveBtn">
+                        <button mat-raised-button color="primary" [routerLink]="['/patient/add-new-baby']">
+                          Add New Baby
+                        </button>
+                      </li>
+                    </ul> -->
+                  </div>
+                  <!-- <ngx-datatable #table class="material table-responsive larger_table" [scrollbarH]="true" [scrollbarV]="false" [rows]="rows" [columns]="columns" [sortType]="'multi'"
+                  [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'60'" [limit]="10">
+                    
+                      <ngx-datatable-column name="Duration" prop="duration" [width]="130"></ngx-datatable-column>
+                      <ngx-datatable-column name="Due Date" prop="duedate" [width]="130"></ngx-datatable-column>
+                      <ngx-datatable-column name="Dose Date" prop="dosedate" [width]="200"></ngx-datatable-column>
+                      <ngx-datatable-column name="Status" sortable="false" [width]="120">
+                          <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                            <span>
+                               <button class="btn tblActnBtn markText h-auto eyeIcon" [routerLink]="['/patient/vaccination-schedule']">
+                                Mark As Done
+                              </button> 
+                              <mat-slide-toggle (change)="onMarkasDone($event)">Mark As Done</mat-slide-toggle>
+                            </span>
+                          </ng-template>
+                      </ngx-datatable-column>
+                  </ngx-datatable> -->
+
+                  <!-- <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Search</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Search" autocomplete="off">
+                  </mat-form-field> -->
+                  <table mat-table [dataSource]="dataSource3" class="w-100" matSort matSort #empTbSort="matSort">
+                    <!-- No Column -->
+                    <ng-container matColumnDef="s_no">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No. </th>
+                      <td mat-cell *matCellDef="let element ;let i = index;">  {{i+1}} </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="duration">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Vaccine Time </th>
+                      <td mat-cell *matCellDef="let element"> {{element.duration!=null && element.duration!=""?element.duration:'-'}}</td>
+                    </ng-container>
+
+                     <!-- Name Column -->
+                     <ng-container matColumnDef="vaccination_name">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Vaccination Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.vaccination_name}}</td>
+                    </ng-container>
+
+                    <!-- Gender Column -->
+                    <ng-container matColumnDef="due_date">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Due date </th>
+                      <td mat-cell *matCellDef="let element">{{ element.due_date |date :'dd/MM/yyyy' }}</td>
+                    </ng-container>
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="dose_date">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Dose date </th>
+                      <td mat-cell *matCellDef="let element">{{ element.dose_date!='' && element.dose_date!=null ?(element.dose_date | date:'dd/MM/yyyy'):'-' }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action" matSortDisabled>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                      <td mat-cell *matCellDef="let element">
+                        
+                        <button *ngIf="element.dose_date!='' && element.dose_date!=null ?false:true" (click)='editRow(row, rowIndex, editRecord , element.v_id,element.duration)'   class="btn tblActnBtn h-auto btn-primary">
+                         Mark as Done
+                        </button> 
+
+                        <span *ngIf="element.dose_date!='' && element.dose_date!=null ?true:false" >
+                          Vaccination Completed
+                        </span> 
+                        <!-- <button class="btn tblActnBtn h-auto btn-primary" (click)="open(mymodal); getId(element.id)" >
+                          Update Grater
+                        </button>  -->
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons></mat-paginator>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <ng-template #template let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Vaccination Dose Confirmation</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+    The Vaccination is Already Updated ?
+    </div>
+    <div class="modal-footer">
+       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); deleteRecord()" >Ok</button>
+    
+     <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+   </div>
+  </ng-template> -->
+
+  <!-- Edit Record Modal Window -->
+  <ng-template #editRecord let-modal class="modalVaccination" >
+    <div class="modal-header editRowModal">
+      <h4 class="modal-title" id="modal-basic-title">
+        <div class="modal-header ">
+          <h6>Vaccination Dose Date</h6>
+        </div>
+      </h4>
+      <button type="button" class="close" aria-label="Close" id="modal_closeBtn" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true"><i class="material-icons">close</i></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <form class="m-4" [formGroup]="labreportForm" (submit)="onSubmit(labreportForm.value)" #formDirective="ngForm" >
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Duration Timeline</mat-label>
+                  <input matInput formControlName="duration" [ngModel]="time_duration" autocomplete="off" readonly />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Select  Dose Date</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="dose_date" [max]="maxDate" required
+                    autocomplete="off" />
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="labreportForm.get('dose_date').hasError('required')">
+                    Please Select  Dose Date
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="button-demo">
+                <button mat-raised-button type="submit" color="primary" >Submit</button>
+                <button mat-button type="button" (click)="modal.close()">Cancel</button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</section>
+
+
+
+

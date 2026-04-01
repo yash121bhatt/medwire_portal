@@ -1,0 +1,84 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="['Symptoms']" [active_item]="'Add Symptoms'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix symptoms">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="ngxTableHeader bg-white">
+              <ul class="header-buttons-left ms-0 mb-0 ps-3">
+                <li class="dropdown">
+                  <h2>
+                    
+                    <strong>Add Symptoms</strong></h2>
+                </li>
+              </ul>
+              <ul class="header-buttons">
+                <li>
+                  <button mat-raised-button color="primary" type="button" [routerLink]="['/patient/symptomslist/'+memberId]">Symptoms List</button>
+                 
+                </li>
+              </ul>
+            </div>
+            <form [formGroup]="symptomsForm" (submit)="onSubmit(symptomsForm.value)">
+            <div class="body pt-0">
+              <!-- <div class="float-right">
+              <button mat-raised-button  color="primary" type="submit">Save Changes</button>
+               
+              </div> -->
+             
+              <div class="addSymptoms">
+                <div class="body table-responsive">
+                  
+                  <div *ngFor="let symptomesData of finalListingData ;let i=index">
+                    <div class="header pb-0 px-4 mx-3 px-4 mx-3">
+                      <h2><strong>{{symptomesData.category | titlecase}}</strong></h2>
+                    </div>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>S.No.</th>
+                          <th>Image</th>
+                          <th>Name</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                        <tr *ngFor="let listnormalData of symptomesData.symptomList;let i=index ">
+                          <td>{{i+1}}</td>
+                          <td><img src="{{listnormalData.img}}" alt=""></td>
+                          <td>{{listnormalData.symptom_name | titlecase}}</td>
+                          <td>
+                              <div  *ngIf="checkCondition(listnormalData.symptom_status)">
+                              
+                                <mat-slide-toggle formControlName="symptomesId{{listnormalData.id}}" [(ngModel)]="check_uncheckcondition" (change)="statusUpdate(listnormalData.id,$event.checked)" ></mat-slide-toggle>
+                              </div>
+                              <div *ngIf="!checkCondition(listnormalData.symptom_status)">
+                         
+                                <mat-slide-toggle formControlName="symptomesId{{listnormalData.id}}" [(ngModel)]="check_uncheckcondition" (change)="statusUpdate(listnormalData.id,$event.checked)"></mat-slide-toggle>
+                              </div> 
+                          </td>
+                        
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                 
+                </div>
+
+              </div>
+              
+            </div>
+              
+          
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+  

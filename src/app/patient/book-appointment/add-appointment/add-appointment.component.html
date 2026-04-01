@@ -1,0 +1,150 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'" [items]="['Doctor Appointment', 'Appointments']" [active_item]="'Book Appointment'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix book_appointment">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+               <div class="header">
+                  <h3><strong>Book Appointment</strong></h3>
+               </div>
+               <div class="body">
+                  <form action="" [formGroup]="bookAppointmentForm">
+                     <!-- <div class="row">
+                        <div class="col-12 mb-3">
+                           <mat-form-field class="example-chip-list w-100 mt-3" appearance="outline">
+                               <mat-label>Reason of Appointment</mat-label>
+                               <mat-chip-list #chipList aria-label="History selection" formControlName="description" autocomplete="off" (click)="checkerrormessage()">
+                                   <mat-chip *ngFor="let history of historys" (removed)="remove(history)"> {{history}} 
+                                       <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                                   </mat-chip>
+                                   <input placeholder="Add Reason of Appointment" #historyInput [formControl]="historyCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event);">
+                               </mat-chip-list>
+                               <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                   <mat-option *ngFor="let history of filteredHistorys | async" [value]="history">
+                                       {{history}}
+                                   </mat-option>
+                               </mat-autocomplete>
+                              
+                           </mat-form-field>
+                           <mat-error *ngIf="checkStatus">
+                              Reason of appointment is required
+                            </mat-error>
+                       </div>
+                     </div> -->
+                     <div class="row margin">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-0">
+                           <mat-form-field class="example-full-width mb-0" appearance="outline">
+                              <mat-label>Search by Doctor Name</mat-label>
+                              <input matInput type="text" formControlName="doctor_name" (keyup)="filterDoctor()" autocomplete="off">
+                           </mat-form-field>
+                        </div>
+                        
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-0">
+                           <mat-form-field class="example-full-width mb-0" appearance="outline">
+                              <mat-label>Search by Speciality</mat-label>
+                              <mat-select [disableOptionCentering]="true" #select2 placeholder="Auto Focus" formControlName="speciality" (selectionChange)="filterDoctor()" >
+                                 <mat-select-filter *ngIf="select2.focused" [array]="variables3" (filteredReturn)="filteredList3 =$event"></mat-select-filter>
+                                 <mat-option *ngFor="let item of filteredList3" [value]="item">
+                                     {{item}}
+                                 </mat-option>
+                             </mat-select>
+                             
+                           </mat-form-field>        
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 mb-0">
+                           <mat-form-field class="example-full-width mb-0" appearance="outline">
+                              <mat-label>Search by Clinic</mat-label>
+                              <mat-select [disableOptionCentering]="true" #select1 placeholder="Auto Focus" formControlName="clinic" (selectionChange)="filterDoctor()">
+                                  <mat-select-filter *ngIf="select1.focused" [array]="variables" (filteredReturn)="filteredList2 =$event" ></mat-select-filter>
+                                  <mat-option *ngFor="let item of filteredList2" [value]="item">
+                                      {{item}}
+                                  </mat-option>
+                              </mat-select>
+                           </mat-form-field>
+                         </div>
+                       
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-0">
+                           <mat-form-field class="example-full-width mb-0" appearance="outline">
+                              <mat-label>Search by Pincode</mat-label>
+                              <input matInput type="text" formControlName="pincode"  (keyup)="filterDoctor()" autocomplete="off">
+                           </mat-form-field>
+                        </div>
+                        <!-- <div>
+                           <button class="btn-space mb-3" mat-raised-button
+                          color="primary" >Search</button>
+                        </div> -->
+                     </div>
+                  </form>
+                  <button mat-raised-button color="secondary" type="button" class="mb-4" (click)="resetFilter()">Reset</button>
+                  <div class="container px-3">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div>
+                              <h4>Searched Doctors List</h4>
+                             <p>{{this.resultCount}} results Showing </p>
+                           </div>
+                           <div *ngIf="checkPincodeCondition">
+                              <mat-error >
+                                {{messageResult}}
+                               </mat-error>
+                           </div>
+                        </div>
+                        <div class="col-md-6 text-end">
+                           <div class=" btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="grid">
+                           <label ngbButtonLabel class="btn-primary">
+                           <input class="d-none" ngbButton type="radio" [value]="true"> Grid
+                           </label>
+                           <label ngbButtonLabel class="btn-primary">
+                           <input class="d-none" ngbButton type="radio" [value]="false"> List
+                           </label>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row mt-2 g-5">
+                     <div class="my-0" [ngClass]="grid ? 'col-md-6' : 'col-md-12'" 
+                     *ngFor="let userData of doctorRecord | paginate: { id: 'pagination1', itemsPerPage : 10, currentPage : pagination1, totalItems: total }">
+                        <div>
+                           <div class="divederLine couponBox row">
+                              <div class="media doctorsList my-3" [ngClass]="grid ? 'col-md-12' : 'col-md-6'">
+                                 <img class="mr-3" src="{{userData.profile_image?imageURL+userData.profile_image:imageURL+'demouser.png' }}" alt="Generic placeholder image">
+                                 <div class="media-body mediaText">
+                                    <h5 class="mt-1">{{userData.doctor}}</h5>
+                                    <p class="mb-1">{{userData.speciality_name}}</p>
+                                    <span class="font-14">{{userData.experience_in_year}} years experience</span><br>
+                                    <!-- <button type="button" class="btn btn-outline-primary out_btn mt-2" [routerLink]="['/patient/book-appointment/online-appointments']">Know More</button> -->
+                                    
+                                 </div>
+                              </div>
+                              <div class="my-3" [ngClass]="grid ? 'col-md-12' : 'col-md-6'">
+                                 <div class="specialityText">
+                                    <span class="font-16">Clinic : <strong>{{userData.clinic}}, {{userData.address}}</strong></span>
+                                 </div>
+                                 <div class="consultFee row">
+                                    {{offlineValue(userData.ofline_fee)}} {{onlineValue(userData.online_fee)}}
+                                    <div class="specialityText consultText col-md-6 col-sm-6 mb-0" *ngIf="onlinebtnStatus" (click)="conditionCheck('online',userData.id )">
+                                       <p class="mb-1"><span>Video Consultation : <strong>&#8377; {{userData.online_fee??'-'}}</strong></span></p>
+                                       <button mat-raised-button color="primary" type="button" >Video Consultation</button>
+                                    </div>
+                                    <div class="specialityText consultText col-md-6 col-sm-6 mb-0" *ngIf="offlinebtnStatus" (click)="conditionCheck('offline',userData.id )">
+                                       <p class="mb-1"><span>Clinic Visit : <strong>&#8377; {{userData.ofline_fee??'-'}}</strong></span></p>
+                                       <button mat-raised-button color="warn" type="button" >Clinic Visit</button>
+                                    </div>
+                                 </div>
+                              </div>
+                             
+                           </div>
+                        </div>
+                     </div>
+                     
+                  </div>
+                  <pagination-controls id="pagination1" (pageChange)="pagination1 = $event"></pagination-controls>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+</section>

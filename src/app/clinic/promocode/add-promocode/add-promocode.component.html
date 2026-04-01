@@ -1,0 +1,124 @@
+<section class="content">
+    <div class="content-block">
+       <div class="block-header">
+          <!-- breadcrumb -->
+          <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Add Promo code'"></app-breadcrumb>
+       </div>
+       <div class="row clearfix">
+          <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+             <div class="card">
+                <div class="header mx-4">
+                   <h2><strong>Add Promo code</strong></h2>
+                </div>
+                <div class="body">
+                   <form class="m-4 mt-0" [formGroup]="addpromocodeForm" (ngSubmit)="onSubmit()">
+                   <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-0 ps-0">
+                         <label class="example-margin font-15 fw_mid">Promo code Discount Type</label>
+                         <section class="example-section" >
+                            <mat-radio-group formControlName="Discount_type" [(ngModel)]="selection" #radioGroup="matRadioGroup">
+                            <mat-radio-button class="example-margin" (click)="changediv('persent_div')" value="persentage" >
+                               By %
+                            </mat-radio-button>
+                            <mat-radio-button class="example-margin" (click)="changediv('flat_div')" value="flat">
+                               By Flat
+                            </mat-radio-button>
+                            </mat-radio-group>
+                         </section>
+                      </div>
+                      
+                   </div>
+                   <div class="row">
+                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                           <mat-label>Enter Promo code</mat-label>
+                           <input matInput formControlName="promocode" required >
+                           <mat-error *ngIf="addpromocodeForm.get('promocode').hasError('required')">
+                              Promo Code is required
+                           </mat-error>
+                        </mat-form-field>
+                     </div>
+                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-0 ps-0">
+                        <div class="row">
+                           <div class="col-12 mb-3" id="flat_div" [hidden]="!flat">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                 <mat-label>Discount in Persent</mat-label>
+                                 <input matInput formControlName="persent_discount" type="number"  >
+                                 <mat-error *ngIf="addpromocodeForm.get('persent_discount').hasError('required')">
+                                    Discount in Persent is required
+                                 </mat-error>
+                                 <mat-icon matSuffix>percent</mat-icon>
+                              </mat-form-field>
+                           </div>
+                           <div class="col-12 mb-3" id="persent_div" [hidden]="!persentage">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                 <mat-label>Flat Discount in Rupee</mat-label>
+                                 <input matInput formControlName="flat_discount" type="number"  >
+                                 <mat-error *ngIf="addpromocodeForm.get('flat_discount').hasError('required')">
+                                    Discount in Rupee is required
+                                 </mat-error>
+                                 <mat-icon matSuffix>currency_rupee</mat-icon>
+                              </mat-form-field>
+                           </div>
+                        </div>
+                     </div>
+                      
+                   </div>
+                   <div class="row">
+                      <div class="col-12">
+                         <label class="example-margin font-15 fw_mid">Promocode Validity</label>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                         <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Promo Code Start Date</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="startDate" required >
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="addpromocodeForm.get('startDate').hasError('required')">
+                               Please select start date
+                            </mat-error>
+                         </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                           <mat-label>Promo Code End Date</mat-label>
+                           <input matInput [matDatepicker]="picker" formControlName="endDate" required >
+                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                           <mat-datepicker #picker></mat-datepicker>
+                           <mat-error *ngIf="addpromocodeForm.get('endDate').hasError('required')">
+                              Please select end date
+                           </mat-error>
+                        </mat-form-field>
+                     </div>
+                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Max Number of Persons Use Promocode</mat-label>
+                            <input matInput formControlName="max_number" type="number" required >
+                            <mat-error *ngIf="addpromocodeForm.get('max_number').hasError('required')">Persons max no. is required </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                           <mat-label>Promo Code Price Range</mat-label>
+                           <input matInput formControlName="price_range" required >
+                           <mat-icon matSuffix>currency_rupee</mat-icon>
+                           <mat-error *ngIf="addpromocodeForm.get('price_range').hasError('required')">
+                              Price Range is required
+                           </mat-error>
+                        </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                         <button class="btn-space"  mat-raised-button
+                            color="primary" [disabled]="!addpromocodeForm.valid ">Submit</button>
+                         <button type="button" mat-button [routerLink]="['../fee-management']">Cancel</button>
+                      </div>
+                   </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>

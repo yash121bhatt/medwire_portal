@@ -1,0 +1,66 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Full Body Check'" [items]="[]" [active_item]="'Full Body Check'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="body">
+                        <div class="headingBody">
+                            <span>&#8377; {{amount}} Onwards</span>
+                            <h4>{{package_name}}</h4>
+                        </div>
+                        <div class="bodyContent">
+                            <h5>{{totalTest}} Tests Include</h5>
+                            <span>Click on below <strong>Add to Cart</strong> button to see included tests</span>
+                            <ul class="testList fullTest">
+                                <li class="testName"  *ngFor="let testfinal of testData">
+                                    <img src="{{imageURL+testfinal.image}}" alt="Liver">
+                                    <p>{{testfinal.test_name??'-'}}</p>
+                                </li>
+                            </ul>
+                            <ul class="coverLines">
+                                <h6>This Package Covers</h6>
+                                <div [innerHtml]='description'> 
+                                    
+                                </div>
+                                <!-- <li [(ngModel)]="description">{{description}}</li> -->
+                                <!-- <li>Lorem ipsum means nothing, it is a set of Latin words that make up a text 
+                                    of fake filling, random, placeholder. Use the online text generator.</li>
+                                <li>Lorem ipsum, or lipsum as it is sometimes known, 
+                                    is dummy text used in laying out print, graphic or web designs. </li> -->
+                            </ul>
+                        </div>
+                        <div class="col-12">
+                            <div class="body bg-light">
+                                <div class="usplevel_two dark_border">
+                                   <ul class="row">
+                                      <!-- <li class="col-lg-4 col-md-4 col-md-6 mt-4">
+                                         <p> Report Time: <strong class="mt-2"> - </strong> </p>
+                                      </li>
+                                      <li class="col-lg-4 col-md-4 col-md-6 mt-4 ps-3">
+                                         <p> Fasting Time: <strong class="mt-2"> - </strong>
+                                         </p>
+                                      </li> -->
+                                      <li class="col-lg-4 col-md-4 col-md-6 mt-4 ps-3">
+                                         <p>Test Recommended for: <strong class="mt-2"> {{test_recommended??'-'}}</strong> </p>
+                                      </li>
+                                   </ul>
+                                </div>
+                             </div>
+                             <div class="two min-height bg-white">
+                                    _
+                             </div>
+                        </div>
+                        <div class="mtBtn">
+                            <button mat-raised-button color="warn" type="button" 
+                            (click)="addToCart(packageDetail.lab_id, packageDetail.package_id , packageDetail.package_name , packageDetail.amount ,'package')">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

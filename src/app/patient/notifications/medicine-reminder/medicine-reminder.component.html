@@ -1,0 +1,590 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="['Set Medicine Reminders', 'Medicine Notification']" [active_item]="'Add Medicine Reminder'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <!-- <div class="header">
+              <h2><strong>Blank</strong> Page</h2>
+            </div> -->
+          <div class="body">
+            <mat-horizontal-stepper [linear]="isLinear" #stepper>
+              <mat-step [stepControl]="HFormGroup1">
+                <form [formGroup]="HFormGroup1" >
+                  <ng-template matStepLabel>Medicine Name</ng-template>
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Medicine Name</mat-label>
+                        <input matInput type="text" formControlName="medicine_name" required autocomplete="off">
+                        <!-- <mat-icon matSuffix>phone</mat-icon> -->
+                        <mat-error *ngIf="HFormGroup1.get('medicine_name').hasError('required')">
+                          Medicine Name is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Medicine Type</mat-label>
+                        <mat-select formControlName="medicine_type" required="true">
+                          <mat-option [value]="'IU'">
+                            IU
+                          </mat-option>
+                          <mat-option [value]="'Ampoule(s)'">
+                            Ampoule(s)
+                          </mat-option>
+                          <mat-option [value]="'Application(s)'">
+                            Application(s)
+                          </mat-option>
+                          <mat-option [value]="'Capsule(s)'">
+                            Capsule(s)
+                          </mat-option>
+                          <mat-option [value]="'Drop(s)'">
+                            Drop(s)
+                          </mat-option>
+                          <mat-option [value]="'Gramme(s)'">
+                            Gramme(s)
+                          </mat-option>
+                          <mat-option [value]="'Injection(s)'">
+                            Injection(s)
+                          </mat-option>
+                          <mat-option [value]="'Miligramme(s)'">
+                            Miligramme(s)
+                          </mat-option>
+                          <mat-option [value]="'Millilitre(s)'">
+                            Millilitre(s)
+                          </mat-option>
+                          <mat-option [value]="'Patch(es)'">
+                            Patch(es)
+                          </mat-option>
+                          <mat-option [value]="'Pessary(ies)'">
+                            Pessary(ies)
+                          </mat-option>
+                          <mat-option [value]="'Piece(s)'">
+                            Piece(s)
+                          </mat-option>
+                          <mat-option [value]="'Pill(s)'">
+                            Pill(s)
+                          </mat-option>
+                          <mat-option [value]="'Puff(s)'">
+                            Puff(s)
+                          </mat-option>
+                          <mat-option [value]="'Spray(s)'">
+                            Spray(s)
+                          </mat-option>
+                          <mat-option [value]="'Sachet(s)'">
+                            Sachet(s)
+                          </mat-option>
+                          <mat-option [value]="'Suppository(ies)'">
+                            Suppository(ies)
+                          </mat-option>
+                          <mat-option [value]="'Tablet(s)'">
+                            Tablet(s)
+                          </mat-option>
+                          <mat-option [value]="'Tablespoon(s)'">
+                            Tablespoon(s)
+                          </mat-option>
+                          <mat-option [value]="'Teaspoon(s)'">
+                            Teaspoon(s)
+                          </mat-option>
+                          <mat-option [value]="'Unit(s)'">
+                            Unit(s)
+                          </mat-option>
+                          <mat-option [value]="'Vaginal Capsule(s)'">
+                            Vaginal Capsule(s)
+                          </mat-option>
+                          <mat-option [value]="'Vaginal Insert(s)'">
+                            Vaginal Insert(s)
+                          </mat-option>
+                          <mat-option [value]="'Vaginal Tablet(s)'">
+                            Vaginal Tablet(s)
+                          </mat-option> 
+                        </mat-select>
+                      </mat-form-field>
+                    </div> -->
+
+
+                    <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Quantity</mat-label>
+                        <mat-select formControlName="quantity">
+                          <mat-option [value]="'250 mg pills'">
+                            250 mg pills
+                          </mat-option>
+                          <mat-option [value]="'1 capsule'">
+                            1 capsule
+                          </mat-option>
+                          <mat-option [value]="'2.5 mL '">
+                            2.5 mL
+                          </mat-option>
+                          <mat-option [value]="' 500 mg capsule'">
+                            500 mg capsule
+                          </mat-option>
+                          <mat-option [value]="'2 puffs'">
+                            2 puffs
+                          </mat-option>
+                          <mat-option [value]="'1 suppository'">
+                            1 suppository
+                          </mat-option>
+
+                          <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory">
+                                  {{ subcategory }}
+                                </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div> -->
+
+                  </div>
+                  <div class="saveBtn">
+                    <button mat-raised-button matStepperNext color="primary"
+                      [disabled]="!HFormGroup1.valid">Next</button>
+                      <button type="button" mat-button class="cancel_btn_back" [routerLink]="['/patient/notifications/medicine-notification/'+memberID]">Cancel</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="HFormGroup2">
+                <form [formGroup]="HFormGroup2">
+                  <ng-template matStepLabel>Medicine Frequency</ng-template>
+                  <form [formGroup]="HFormGroup2" novalidate>
+                    <div class="form-group">
+                      <mat-radio-group [(ngModel)]="selectedStatus" formControlName="frequency" required="true">
+                        <div class="">
+                          <mat-radio-button class="radioBtns medicineRdo" name="radio1" id="radio1" 
+                          (click)="changediv('cc_onceDaily')" 
+                          [value]="onceDay" [checked]="onceDay" required="true" [checked]="true">
+                            <p>Once daily</p>
+                          </mat-radio-button>
+                        </div><br>
+
+                        <div class="">
+                          <mat-radio-button class="radioBtns medicineRdo" type="radio" name="radio1" id="radio2"  
+                          (click)="changediv('nc_twiceDaily')" [value]="twiceDay">
+                            <p>Twice daily</p>
+                          </mat-radio-button>
+                        </div><br>
+
+                        <div class="">
+                          <mat-radio-button class="radioBtns medicineRdo" type="radio" name="radio1" id="radio3"  
+                          (click)="changediv('cc_thriceDaily')" [value]="thriceDay">
+                            <p>Thrice daily</p>
+                          </mat-radio-button>
+                        </div>
+                        <br>
+
+                        <div class="">
+                          <mat-radio-button class="radioBtns medicineRdo" type="radio" name="radio1" id="radio4"  
+                          (click)="changediv('cc_fourthDaily')" [value]="fourthDay">
+                            <p>Fourth daily</p>
+                          </mat-radio-button>
+                        </div><br>
+
+                        <!-- <div class="">
+                          <mat-radio-button class="radioBtns medicineRdo" type="radio" name="radio1" id="radio5"  
+                          (click)="changediv('cc_asPerNeed')" [value]="option3">
+                            <p>As needed (PRN)</p>
+                          </mat-radio-button>
+                        </div><br> -->
+
+                        <!-- <div class="">
+                          <mat-radio-button class="radioBtns medicineRdo" [value]="4">
+                            <p>Other frequency</p>
+                          </mat-radio-button>
+                        </div><br> -->
+                      </mat-radio-group>
+                    </div>
+                  </form>
+                  <div class="saveBtn">
+                    <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+                    <button mat-raised-button matStepperNext color="primary">Next</button>
+                    <!-- <button mat-raised-button matStepperNext *ngIf="!asNeededSelected" color="primary">Next</button> -->
+                    <!-- <button mat-raised-button *ngIf="asNeededSelected" (click)="onSubmit('authForm.value')" color="primary">Next</button> -->
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="HFormGroup3">
+                <form [formGroup]="HFormGroup3" (ngSubmit)="onSubmit('authForm.value')">
+                  <div class="matSelect">
+                    <ng-template matStepLabel>Medicine Time</ng-template>
+                    <div *ngIf="onceDay_slot" >
+                      <div class="doseHeading">
+                        <h6>First Dose</h6>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <div class="default-time-example timeInput">
+                              <input aria-label="default time" formControlName="take_time_one" [ngxTimepicker]="defaultValue"
+                                [value]="'12:00 am'" placeholder="Set Time" readonly required="true">
+                              <ngx-material-timepicker #defaultValue></ngx-material-timepicker>
+                            </div>
+                          </div>
+                          <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Dose</mat-label>
+                              <mat-select formControlName="take_dose_one">
+                                <mat-option [value]="'2 pill(s)'">
+                                  2 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1 pill(s)'">
+                                  1 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'2.5 pill(s)'">
+                                  2.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.5 pill(s)'">
+                                  1.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.25 pill(s)'">
+                                  1.25 pill(s)
+                                </mat-option>
+                               
+                              </mat-select>
+                            </mat-form-field>
+                          </div> -->
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="twiceDay_slot">
+                      <div class="doseHeading">
+                        <h6>First Dose</h6>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <div class="default-time-example timeInput">
+                              <input aria-label="default time" formControlName="take_time_one" [ngxTimepicker]="defaultTwice"
+                                [value]="'12:00 am'" placeholder="Set Time" readonly required="true">
+                              <ngx-material-timepicker #defaultTwice></ngx-material-timepicker>
+                            </div>
+                          </div>
+                          <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Dose</mat-label>
+                              <mat-select formControlName="take_dose_one">
+                                <mat-option [value]="'2 pill(s)'">
+                                  2 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1 pill(s)'">
+                                  1 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'2.5 pill(s)'">
+                                  2.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.5 pill(s)'">
+                                  1.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.25 pill(s)'">
+                                  1.25 pill(s)
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div> -->
+                        </div>
+                      </div>
+                      <div class="doseHeading">
+                        <h6>Second Dose</h6>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <div class="default-time-example timeInput">
+                              <input aria-label="default time" formControlName="take_time_two" [ngxTimepicker]="defaultTime"
+                                [value]="'12:00 am'" placeholder="Set Time" readonly required="true">
+                              <ngx-material-timepicker #defaultTime></ngx-material-timepicker>
+                            </div>
+                          </div>
+                          <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Dose</mat-label>
+                              <mat-select formControlName="take_dose_two">
+                                <mat-option [value]="'2 pill(s)'">
+                                  2 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1 pill(s)'">
+                                  1 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'2.5 pill(s)'">
+                                  2.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.5 pill(s)'">
+                                  1.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.25 pill(s)'">
+                                  1.25 pill(s)
+                                </mat-option>
+                              
+                              </mat-select>
+                            </mat-form-field>
+                          </div> -->
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="thriceDay_slot">
+                      <div class="doseHeading">
+                        <h6>First Dose</h6>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <div class="default-time-example timeInput">
+                              <input aria-label="default time" formControlName="take_time_one" [ngxTimepicker]="defaultTwice"
+                                [value]="'12:00 am'" placeholder="Set Time" readonly required="true">
+                              <ngx-material-timepicker #defaultTwice></ngx-material-timepicker>
+                            </div>
+                          </div>
+                          <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Dose</mat-label>
+                              <mat-select formControlName="take_dose_one">
+                                <mat-option [value]="'2 pill(s)'">
+                                  2 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1 pill(s)'">
+                                  1 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'2.5 pill(s)'">
+                                  2.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.5 pill(s)'">
+                                  1.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.25 pill(s)'">
+                                  1.25 pill(s)
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div> -->
+                        </div>
+                      </div>
+                      <div class="doseHeading">
+                        <h6>Second Dose</h6>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <div class="default-time-example timeInput">
+                              <input aria-label="default time" formControlName="take_time_two" [ngxTimepicker]="defaultTimethird"
+                                [value]="'12:00 am'" placeholder="Set Time" readonly required="true">
+                              <ngx-material-timepicker #defaultTimethird></ngx-material-timepicker>
+                            </div>
+                          </div>
+                          <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Dose</mat-label>
+                              <mat-select formControlName="take_dose_two">
+                                <mat-option [value]="'2 pill(s)'">
+                                  2 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1 pill(s)'">
+                                  1 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'2.5 pill(s)'">
+                                  2.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.5 pill(s)'">
+                                  1.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.25 pill(s)'">
+                                  1.25 pill(s)
+                                </mat-option>
+                               
+                              </mat-select>
+                            </mat-form-field>
+                          </div> -->
+                        </div>
+                      </div>
+
+                      <div class="doseHeading">
+                        <h6>Third Dose</h6>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <div class="default-time-example timeInput">
+                              <input aria-label="default time" formControlName="take_time_third" [ngxTimepicker]="defaultTime"
+                                [value]="'12:00 am'" placeholder="Set Time" readonly required="true">
+                              <ngx-material-timepicker #defaultTime></ngx-material-timepicker>
+                            </div>
+                          </div>
+                          <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Dose</mat-label>
+                              <mat-select formControlName="take_dose_third">
+                                <mat-option [value]="'2 pill(s)'">
+                                  2 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1 pill(s)'">
+                                  1 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'2.5 pill(s)'">
+                                  2.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.5 pill(s)'">
+                                  1.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.25 pill(s)'">
+                                  1.25 pill(s)
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div> -->
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="fourthDay_slot">
+                      <div class="doseHeading">
+                        <h6>First Dose</h6>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <div class="default-time-example timeInput">
+                              <input aria-label="default time" formControlName="take_time_one" [ngxTimepicker]="defaultTwice"
+                                [value]="'12:00 am'" placeholder="Set Time" readonly required="true">
+                              <ngx-material-timepicker #defaultTwice></ngx-material-timepicker>
+                            </div>
+                          </div>
+                          <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Dose</mat-label>
+                              <mat-select formControlName="take_dose_one">
+                                <mat-option [value]="'2 pill(s)'">
+                                  2 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1 pill(s)'">
+                                  1 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'2.5 pill(s)'">
+                                  2.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.5 pill(s)'">
+                                  1.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.25 pill(s)'">
+                                  1.25 pill(s)
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div> -->
+                        </div>
+                      </div>
+                      <div class="doseHeading">
+                        <h6>Second Dose</h6>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <div class="default-time-example timeInput">
+                              <input aria-label="default time" formControlName="take_time_two" [ngxTimepicker]="defaultTimethird"
+                                [value]="'12:00 am'" placeholder="Set Time" readonly required="true">
+                              <ngx-material-timepicker #defaultTimethird></ngx-material-timepicker>
+                            </div>
+                          </div>
+                          <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Dose</mat-label>
+                              <mat-select formControlName="take_dose_two">
+                                <mat-option [value]="'2 pill(s)'">
+                                  2 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1 pill(s)'">
+                                  1 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'2.5 pill(s)'">
+                                  2.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.5 pill(s)'">
+                                  1.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.25 pill(s)'">
+                                  1.25 pill(s)
+                                </mat-option>
+                               
+                              </mat-select>
+                            </mat-form-field>
+                          </div> -->
+                        </div>
+                      </div>
+
+                      <div class="doseHeading">
+                        <h6>Third Dose</h6>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <div class="default-time-example timeInput">
+                              <input aria-label="default time" formControlName="take_time_third" [ngxTimepicker]="defaultTime"
+                                [value]="'12:00 am'" placeholder="Set Time" readonly required="true">
+                              <ngx-material-timepicker #defaultTime></ngx-material-timepicker>
+                            </div>
+                          </div>
+                          <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Dose</mat-label>
+                              <mat-select formControlName="take_dose_third">
+                                <mat-option [value]="'2 pill(s)'">
+                                  2 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1 pill(s)'">
+                                  1 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'2.5 pill(s)'">
+                                  2.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.5 pill(s)'">
+                                  1.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.25 pill(s)'">
+                                  1.25 pill(s)
+                                </mat-option>
+                               
+                              </mat-select>
+                            </mat-form-field>
+                          </div> -->
+                        </div>
+                      </div>
+
+                      <div class="doseHeading">
+                        <h6>Fourth Dose</h6>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <div class="default-time-example timeInput">
+                              <input aria-label="default time" formControlName="take_time_fourth" [ngxTimepicker]="defaultTimefourth"
+                                [value]="'12:00 am'" placeholder="Set Time" readonly required="true">
+                              <ngx-material-timepicker #defaultTimefourth></ngx-material-timepicker>
+                            </div>
+                          </div>
+                          <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Dose</mat-label>
+                              <mat-select formControlName="take_dose_fourth">
+                                <mat-option [value]="'2 pill(s)'">
+                                  2 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1 pill(s)'">
+                                  1 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'2.5 pill(s)'">
+                                  2.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.5 pill(s)'">
+                                  1.5 pill(s)
+                                </mat-option>
+                                <mat-option [value]="'1.25 pill(s)'">
+                                  1.25 pill(s)
+                                </mat-option>
+                               
+                              </mat-select>
+                            </mat-form-field>
+                          </div> -->
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div id="cc_asPerNeed" [hidden]="!option3">
+                    </div>
+                  </div>
+                  <div class="saveBtn">
+                    <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+                    <button mat-raised-button color="primary"
+                      type="submit">Submit</button>
+                  </div>
+                </form>
+              </mat-step>
+            </mat-horizontal-stepper>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

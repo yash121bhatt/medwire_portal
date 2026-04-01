@@ -1,0 +1,41 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="['']" [active_item]="'Edit Surgical History'"></app-breadcrumb>
+      </div>
+      <!-- CKEditor -->
+      <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <form class="m-4" [formGroup]="editHistoryForm" (ngSubmit)="onSubmit('authForm.value')">
+              <h3 class="mb-3">Edit Surgical History</h3>
+              
+              <ckeditor [editor]="Editor" formControlName="description" ></ckeditor>
+
+              <mat-error *ngIf="editHistoryForm.get('description').hasError('required')">
+                Please add description
+              </mat-error>
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 my-3">
+                <mat-form-field>
+                
+                  {{yearMonthValue}}
+                      <input #dpInput matInput [matDatepicker]="dp"  [formControl]="date"  formControlName="created_date" [ngModel]="yearMonthValue">
+                      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                       <mat-datepicker #dp (monthSelected)="monthSelected($event, dp, dpInput)" startView="multi-year"></mat-datepicker>
+                         </mat-form-field>
+              </div>
+              <div class="my-3"> 
+                <button class="btn-space"  mat-raised-button color="primary">Update</button>
+                <button type="button" mat-button class="cancel_btn_back" [routerLink]="['/patient/pastsurgerylist/'+urlparameter]">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- #END# CKEditor -->
+    </div>
+  </section>
+  
+
+

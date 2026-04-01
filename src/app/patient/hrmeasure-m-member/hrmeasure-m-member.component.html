@@ -1,0 +1,140 @@
+
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="['Heart Rate']" [active_item]="'Heart Rate'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <h2>Heart Rate</h2>
+            </div>
+            <div class="body">
+                <form class="m-4" [formGroup]="heravalueForm" (ngSubmit)="onSubmit(heravalueForm.value)">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Please Enter Your Heart Rate</mat-label>
+                              <input matInput formControlName="hrvalue" required autocompelete="off">
+                              <mat-icon matSuffix>title</mat-icon>
+                              <mat-error *ngIf="heravalueForm.get('hrvalue').hasError('required')">
+                                Heart Rate is required in (beats/min)
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Recorded date</mat-label>
+                            <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="dop"
+                             [max]="maxDate"  autocomplete="off">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="heravalueForm.get('dop').hasError('required')">
+                              Please select date
+                            </mat-error>
+                          </mat-form-field>
+                          <!-- <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Recorded date</mat-label>
+                          <input matInput type="datetime-local" formControlName="dop" max="{{maxDate}}" required  autocompelete="off">
+                            <mat-error *ngIf="heravalueForm.get('dop').hasError('required')">
+                              Please select date
+                            </mat-error>
+                          </mat-form-field> -->
+<!-- 
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          
+                            <mat-label>Recorded date and time</mat-label>
+                            <input matInput [owlDateTimeTrigger]="dt" readonly formControlName="dop" [max]="currentDate" [owlDateTime]="dt">
+                            <owl-date-time [hour12Timer] = "true" #dt></owl-date-time><i class="material-icons-outlined mannuel_set">calendar_today</i>
+                         <mat-error *ngIf="heravalueForm.get('dop').hasError('required')">
+                          Recorded date and time is required
+                         </mat-error>
+                         </mat-form-field> -->
+
+                          </div>
+
+                          <div *ngIf="success_message" class="alert alert-success alert-dismissible">
+                            <strong> Record Added ! </strong>
+                          </div>
+
+                          <p *ngIf="error_message" class="alert alert-danger alert-dismissible">
+                            <strong>{{error_message_text}} </strong>
+                          </p> 
+                         
+                          <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 mb-3">
+                              <button class="btn-space"  mat-raised-button
+                                color="primary">Submit</button>
+                                <button type="button" mat-button class="cancel_btn_back" [routerLink]="['/patient/hrmeasure-member']">Cancel</button>
+                          </div>
+                     
+                      </div>
+                      </form>
+            </div>
+            <div class="body">
+              <div class="card-body">
+                
+                  <!-- Search Table code Here NGX -->
+               
+                <div class="body table-responsive">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Search</mat-label>
+                  <input matInput (keyup)="applyFilter($event)" placeholder="Search" autocomplete="off">
+                </mat-form-field>
+                <table mat-table [dataSource]="dataSource3" class="w-100" matSort matSort #empTbSort="matSort">
+                  <!-- No Column -->
+                  <ng-container matColumnDef="s_no">
+                    <th mat-header-cell *matHeaderCellDef > S.No. </th>
+                    <td mat-cell *matCellDef="let element ;let i = index;">  {{i+1}} </td>
+                  </ng-container>
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="heart_rate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Heart Rate </th>
+                    <td mat-cell *matCellDef="let element"> {{element.heart_rate}} beats/min</td>
+                  </ng-container>
+                  <!-- Gender Column -->
+                  <ng-container matColumnDef="createdate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Recorded Date</th>
+                    <td mat-cell *matCellDef="let element">{{element.createdate|date:'dd/MM/yyyy' }} </td>
+                  </ng-container>
+                  <!-- Email Column -->
+                  <ng-container matColumnDef="action" matSortDisabled>
+                    <th mat-header-cell *matHeaderCellDef > Action </th>
+                    <td mat-cell *matCellDef="let element">
+                      <button class="btn tblActnBtn h-auto" (click)="open(mymodal); getId(element.id)" >
+                        <i class="material-icons">delete</i>
+                      </button>
+                      
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons></mat-paginator>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #mymodal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+        <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+       Are You sure you want to delete?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); deleteRecord()" >Ok</button>
+      
+       <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+     </div>
+    </ng-template>
+  </section>
+  

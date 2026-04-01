@@ -1,0 +1,171 @@
+<form [formGroup]="prescribeTabForm" class="p-4" (submit)="saveProduct(prescribeTabForm)">
+   <div class="d-flex justify-content-between align-items-center">
+      <h5 class="">Drugs</h5>
+      <!-- <button class="btn-space" mat-raised-button color="primary" (click)="addItem()">Add More</button> -->
+   </div>
+   <div formArrayName="variants" *ngFor="let item of prescribeTabForm.get('variants')['controls']; let i = index;">
+      <div [formGroupName]="i">
+         <div class="row">
+            <div class="col-12 mb-0 pb-0">
+               <mat-form-field class="example-chip-list w-100 mt-1" appearance="outline">
+                  <textarea matInput formControlName="drugs_name" cols="30" rows="6" placeholder="Drugs" ></textarea>
+                  <!-- <mat-chip-list #chipList>
+                     <mat-chip *ngFor="let follow of typesOptionsArray[i]" [selectable]="true"
+                     [removable]="true" (removed)="removeOpt(follow, i)">
+                     {{follow}}
+                     <mat-icon matChipRemove>cancel</mat-icon>
+                     </mat-chip>
+                     <input placeholder="New Drugs" [(ngModel)]="srch" #followInput [formControl]="followCtrl" [matAutocomplete]="auto" formControlName="drugs_name" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addOpt($event, i)" (keyup)="searchFilter()" (click)="myclickeventDemo(i)">
+                  </mat-chip-list>
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                     <mat-option *ngFor="let follow of filteredFollows | async" [value]="follow">
+                         {{follow}}
+                     </mat-option>
+                 </mat-autocomplete> -->
+               </mat-form-field>
+            </div>
+          
+            <!-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mt-0 pb-0">
+               <mat-form-field class="example-full-width mt-0 pt-0 mb-0 pb-0" appearance="outline">
+                  <mat-label>Drug Type</mat-label>
+                  <mat-select formControlName="medicine_type" >
+                     <mat-option [value]="'IU'">
+                        IU
+                     </mat-option>
+                     <mat-option [value]="'Ampoule(s)'">
+                        Ampoule(s) 
+                     </mat-option>
+                     <mat-option [value]="'Application(s)'">
+                        Application(s) 
+                     </mat-option>
+                     <mat-option [value]="'Capsule(s)'">
+                        Capsule(s) 
+                     </mat-option>
+                     <mat-option [value]="'Drop(s)'">
+                        Drop(s) 
+                     </mat-option>
+                     <mat-option [value]="'Gramme(s)'">
+                        Gramme(s) 
+                     </mat-option>
+                     <mat-option [value]="'Injection(s)'">
+                        Injection(s) 
+                     </mat-option>
+                     <mat-option [value]="'miligramme(s)'">
+                        miligramme(s) 
+                     </mat-option>
+                     <mat-option [value]="'mililitre(s)'">
+                        mililitre(s) 
+                     </mat-option>
+                     <mat-option [value]="'Patch(s)'">
+                        Patch(s) 
+                     </mat-option>
+                     <mat-option [value]="'Pessary(ies)'">
+                        Pessary(ies) 
+                     </mat-option>
+                     <mat-option [value]="'Piece(s)'">
+                        Piece(s) 
+                     </mat-option>
+                     <mat-option [value]="'Pill(s)'">
+                        Pill(s) 
+                     </mat-option>
+                     <mat-option [value]="'Puff(s)'">
+                        Puff(s) 
+                     </mat-option>
+                     <mat-option [value]="'Spray(s)'">
+                        Spray(s) 
+                     </mat-option>
+                     <mat-option [value]="'Sachet(s)'">
+                        Sachet(s) 
+                     </mat-option>
+                     <mat-option [value]="'Suppository(s)'">
+                        Suppository(s) 
+                     </mat-option>
+                     <mat-option [value]="'Tablet(s)'">
+                        Tablet(s) 
+                     </mat-option>
+                     <mat-option [value]="'TableSpoon(s)'">
+                        TableSpoon(s) 
+                     </mat-option>
+                     <mat-option [value]="'Teaspoon(s)'">
+                        Teaspoon(s) 
+                     </mat-option>
+                     <mat-option [value]="'Puff(s)'">
+                        Unit(s) 
+                     </mat-option>
+                     <mat-option [value]="'Vaginal Capsule(s)'">
+                        Vaginal Capsule(s) 
+                     </mat-option>
+                     <mat-option [value]="'Vaginal Insert(s)'">
+                        Vaginal Insert(s) 
+                     </mat-option>
+                     <mat-option [value]="'Vaginal Tablet(s)'">
+                        Vaginal Tablet(s) 
+                     </mat-option>
+                  </mat-select>
+               </mat-form-field>
+            </div> -->
+            <!-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-0 pb-0">
+               <mat-form-field class="example-full-width mb-0 pb-0" appearance="outline">
+                  <mat-label>Drugs Frequency</mat-label>
+                  <mat-select formControlName="medicine_frequency"  >
+                     <mat-option [value]="'Once daily'">
+                        Once daily
+                     </mat-option>
+                     <mat-option [value]="'Twice daily'">
+                        Twice daily
+                     </mat-option>
+                     <mat-option [value]="'Thrice daily'">
+                        Thrice daily
+                     </mat-option>
+                     <mat-option [value]="'Fourth daily'">
+                        Fourth daily
+                     </mat-option>
+                     <mat-option [value]="'As needed (PRN)'">
+                        As needed (PRN)
+                     </mat-option>
+                     <mat-option [value]="'Other frequency'">
+                        Other frequency
+                     </mat-option>
+                  </mat-select>
+               </mat-form-field>
+            </div> -->
+            <!-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-0 pb-0">
+               <mat-form-field class="example-full-width mt-0 pt-0" appearance="outline">
+                  <mat-label>Drugs Timing</mat-label>
+                  <mat-select formControlName="medicine_time"  >
+                     <mat-option [value]="'Before Breakfast'">
+                        Before Breakfast
+                     </mat-option>
+                     <mat-option [value]="'After Breakfast'">
+                        After Breakfast
+                     </mat-option>
+                     <mat-option [value]="'Before Lunch'">
+                        Before Lunch
+                     </mat-option>
+                     <mat-option [value]="'After Lunch'">
+                        After Lunch
+                     </mat-option>
+                     <mat-option [value]="'Before Dinner'">
+                        Before Dinner
+                     </mat-option>
+                     <mat-option [value]="'After Dinner'">
+                        After Dinner
+                     </mat-option>
+                  </mat-select>
+               </mat-form-field>
+            </div> -->
+         </div>
+         <div class="text-end">
+            <button class="btn-space dlt-btn " mat-raised-button color="warn">
+            <mat-icon class="delete-btn" (click)="removeItem(i)" *ngIf="i > 0">delete_forever</mat-icon>
+            </button>
+         </div>
+      </div>
+   </div>
+   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+      <button class="btn-space" mat-raised-button color="primary" type="submit" (click)="onSubmit($event.target.value)" >Submit</button>
+      <button type="button" mat-button [routerLink]="['../appointment-list']">Cancel</button>
+   </div>
+   </form>
+
+

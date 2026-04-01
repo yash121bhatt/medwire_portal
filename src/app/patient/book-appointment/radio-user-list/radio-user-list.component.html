@@ -1,0 +1,108 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Radiology Appointments'"></app-breadcrumb>
+        </div>
+        <!-- Basic Examples -->
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="ngxTableHeader">
+                                    <ul class="header-buttons-left ms-0 mb-0">
+                                        <li class="dropdown">
+                                            <h2>
+                                                <strong>User List</strong>
+                                            </h2>
+                                        </li>
+                                        <!-- <li class="dropdown m-l-20">
+                        <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                        <input placeholder="Search" #search id="search" type="text" class="browser-default search-field"
+                          aria-label="Search box">
+                      </li> -->
+                                    </ul>
+                                    <!-- <ul class="header-buttons">
+                      <li *ngIf="addprofile == false">
+                        <button mat-raised-button color="primary" type="button"
+                          [routerLink]="['/patient/add-profile']">Add Member</button>
+  
+                      </li>
+                    </ul> -->
+                                </div>
+                                <ngx-datatable #table class="material table-responsive larger_table" [rows]="rows"
+                                    [columns]="columns" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
+                                    [footerHeight]="50" [rowHeight]="'60'" [limit]="10" [scrollbarH]="true"
+                                    [scrollbarV]="false">
+
+                                    <ngx-datatable-column name="Image" sortable="false" prop="img" [width]="100">
+                                        <ng-template let-row="row" let-value="value" let-i="index"
+                                            ngx-datatable-cell-template>
+                                            <td class="table-img padding-0" *ngIf="value!=''">
+                                                <img width="40" src="{{ row.imgName?imageURL+row.imgName : imageURL+'demouser.png'}}" />
+                                            </td>
+                                        </ng-template>
+                                    </ngx-datatable-column>
+                                    <ngx-datatable-column name="MedWire ID" prop="permanent_id" [width]="100">
+                                    </ngx-datatable-column>
+                                    <ngx-datatable-column name="Full Name" prop="first_name" [width]="100">
+                                    </ngx-datatable-column>
+                                    <!-- <ngx-datatable-column name="Surname" prop="last_name" [width]="100"></ngx-datatable-column> -->
+                                    <ngx-datatable-column name="Gender" prop="gender" [width]="100">
+                                    </ngx-datatable-column>
+                                    <ngx-datatable-column name="DOB" prop="date_of_birth" [width]="100">
+                                        <ng-template let-row="row" ngx-datatable-cell-template>
+                                            {{row.date_of_birth | date:'dd/MM/yyyy'}}
+                                        </ng-template>
+                                    </ngx-datatable-column>
+                                    <!-- <ngx-datatable-column name="Adhar Card No." prop="adhar_card" [width]="150">
+                                    </ngx-datatable-column> -->
+                                    <ngx-datatable-column *ngFor="let col of columns" [name]="col.name">
+                                    </ngx-datatable-column>
+                                    <ngx-datatable-column name="Actions" sortable="false" [width]="100">
+                                        <ng-template #buttonsTemplate let-value="value" let-row="row"
+                                            let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                                            <span>
+                                                <button class="btn tblActnBtn h-auto eyeIcon"
+                                                    [routerLink]="['/patient/book-appointment/radiology-appointment/'+row.id]">
+                                                    <i class="material-icons">visibility</i>
+                                                </button>
+                                                <!-- <button class="btn tblActnBtn h-auto" (click)="deleteRow(row.id)">
+                                                    <i class="material-icons">delete</i>
+                                                </button> -->
+                                            </span>
+                                        </ng-template>
+                                    </ngx-datatable-column>
+                                </ngx-datatable>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Pop -->
+
+    <ng-template #mymodal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+            <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+        </div>
+        <div class="modal-body">
+            Are You sure you want to delete?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark"
+                (click)="modal.close('Save click'); deleteRecord()">Ok</button>
+
+            <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+        </div>
+    </ng-template>
+</section>

@@ -1,0 +1,153 @@
+<section class="content">
+	<div class="content-block">
+		<div class="block-header">
+			<!-- breadcrumb -->
+			<app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Profile Access'"></app-breadcrumb>
+		</div>
+		<!-- Basic Examples -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="body">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="body">
+									<div class="row align-items-center px-2">
+										<div class="col-md-6 text-start">
+											<h4>Profile Access</h4> </div>
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width my-0" appearance="outline">
+												<mat-label>Search</mat-label>
+												<input matInput (keyup)="applyFilter($event)"> </mat-form-field>
+										</div>
+									</div>
+									<div class="table-responsive">
+									<table mat-table [dataSource]="dataSource3" class="w-100">
+										<!--Medwire ID Column -->
+										 <!-- No Column -->
+										 <ng-container matColumnDef="no">
+											<th mat-header-cell *matHeaderCellDef > S.No. </th>
+											<td mat-cell *matCellDef="let element; let i = index;"> {{ i + 1 }}
+											</td>
+										  </ng-container>
+										<ng-container matColumnDef="medwire_id">
+											<th mat-header-cell *matHeaderCellDef> MedWire ID</th>
+											<td mat-cell *matCellDef="let element"> {{element.medwire_id}} </td>
+										</ng-container>
+										<!--Patient Column -->
+										<ng-container matColumnDef="patient_name">
+											<th mat-header-cell *matHeaderCellDef> Patient Name</th>
+											<td mat-cell *matCellDef="let element"> {{element.patient_name}} </td>
+										</ng-container>
+                                        <!-- Doctor Column -->
+										<ng-container matColumnDef="doctor_name">
+											<th mat-header-cell *matHeaderCellDef> Doctor Name</th>
+											<td mat-cell *matCellDef="let element" class="pe-4"> {{element.doctor_name}} </td>
+										</ng-container>
+										<!-- Date Column -->
+										<ng-container matColumnDef="requested_at">
+											<th mat-header-cell *matHeaderCellDef> Date</th>
+											<td mat-cell *matCellDef="let element"> {{element.requested_at | date:'dd/MM/yyyy'}} </td>
+										</ng-container>
+										<!-- Date Column -->
+										<ng-container matColumnDef="status">
+											<th mat-header-cell *matHeaderCellDef> Status</th>
+											<td mat-cell *matCellDef="let element"> {{element.status}} </td>
+										</ng-container>
+									
+										
+										<!-- Action Column -->
+										<ng-container matColumnDef="actions">
+											<th mat-header-cell *matHeaderCellDef> Action</th>
+											<td mat-cell *matCellDef="let element"> <span>
+                                    <button class="btn btn-outline-success font-13 me-2" *ngIf="(element.status!=='Accept' && element.status!=='Reject')" (click)="timeRequestopen(timeallotModal);getRequest_id(element.request_id)">
+                                    Accept
+                                    </button>
+                                    <button class="btn btn-outline-danger font-13" *ngIf="element.status!=='Reject'" (click)="cancelRequestopen(cancelRequestModal);getRequest_id(element.request_id)">
+                                       Reject
+                                        </button>
+                                        <!-- <button mat-icon-button class="tbl-action-btn" (click)="deleteopen(deleteModal);getRequest_id(element.request_id)" >
+                                            <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                          </button> -->
+                                    </span> </td>
+										</ng-container>
+										<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+										<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+									</table>
+									<mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons></mat-paginator>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Delete Confirmation  -->
+
+	<ng-template #deleteModal let-modal>
+		<div class="modal-header">
+		  <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+		</div>
+		<div class="modal-body">
+		 Are You sure you want to Delete?
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); deleteProfileRequest()" >Ok</button>
+		
+		 <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+	   </div>
+	  </ng-template>
+
+	  <!-- Cancel Modal Confirmation-->
+	  <ng-template #cancelRequestModal let-modal>
+		<div class="modal-header">
+		  <h4 class="modal-title" id="modal-basic-title">Cancel Confirmation</h4>
+		</div>
+		<div class="modal-body">
+		 Are You sure you want to Cancel Request?
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); cancelProfileRequest()" >Ok</button>
+		
+		 <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+	   </div>
+	  </ng-template>
+
+	  <!-- Time Invterval Point -->
+	   <!-- Cancel Modal Confirmation-->
+	   <ng-template #timeallotModal let-modal>
+		<div class="modal-header">
+		  <h4 class="modal-title" id="modal-basic-title">Profile Access</h4>
+		</div>
+		<div class="modal-body">
+			<div mat-dialog-content>
+				<form [formGroup]="addCusForm" (ngSubmit)="onSubmitClick()">
+					<div class="text-inside">
+				<p>For how long to allow profile access</p>
+						<mat-form-field class="example-full-width mb-3" appearance="outline">
+							<mat-label>Set Time Interval</mat-label>
+							<mat-select formControlName="time_set" required>
+								<!-- <mat-option [value]="'30 Minutes'">30 Minutes</mat-option>
+								<mat-option [value]="'60 Minutes'">60 Minutes</mat-option> -->
+								<mat-option [value]="'1 Day'">One Day</mat-option>
+								<mat-option [value]="'1 Week'">One Week</mat-option>
+								<mat-option [value]="'2 Weeks'">Two Weeks</mat-option>
+								<mat-option [value]="'1 Month'">One Month</mat-option>
+								<mat-option [value]="'1 Year'">One Year</mat-option>
+							</mat-select>
+							<mat-error *ngIf="addCusForm.get('time_set').hasError('required')"> Time Set is required</mat-error>
+						</mat-form-field>
+					</div>
+					<div class="btn-sec">
+						<button class="btn-space" mat-raised-button color="primary"  (click)="modal.close('Save click');">Save</button>
+						<button type="button" mat-button (click)="modal.dismiss('Cross click')">Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+	  </ng-template>
+</section>

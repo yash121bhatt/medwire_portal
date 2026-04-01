@@ -1,0 +1,243 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'" [items]="['Doctor Appointment']" [active_item]="'Appointments'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+               <div class="body">
+                  <div class="">
+                     <div class="row">
+                        <div class="col-sm-12">
+                           <div class="ngxTableHeader">
+                              <ul class="header-buttons-left ms-0 mb-0">
+                                 <li class="dropdown me-3">
+                                    <h2><strong>Appointments</strong></h2>
+                                 </li>
+                                 <li>
+                                    <mat-form-field class="example-full-width searchInput" appearance="outline">
+                                       <mat-label>Search</mat-label>
+                                       <input matInput (keyup)="applyFilter($event)" placeholder="Search"
+                                          autocomplete="off">
+                                    </mat-form-field>
+                                 </li>
+                              </ul>
+                              <ul class="header-buttons">
+                                 <li>
+                                    <button mat-raised-button color="primary" type="button"
+                                       [routerLink]="['/patient/book-appointment/add-appointment/'+activatedmemberID]">Book
+                                       Appointment</button>
+                                 </li>
+                              </ul>
+                           </div>
+                           <div class="card-body p-0">
+                              <div class="body table-responsive pdf_sign">
+                                 <table mat-table [dataSource]="dataSource3" class="w-100" matSort #empTbSort="matSort">
+                                    <!-- No Column -->
+
+                                    <ng-container matColumnDef="no">
+                                       <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No. </th>
+                                       <td mat-cell *matCellDef="let element; let i = index;">
+                                          {{ i + 1 }}
+                                       </td>
+                                    </ng-container>
+                                    <!-- order id  -->
+                                    <ng-container matColumnDef="appointment_id">
+                                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Booking ID
+                                       </th>
+                                       <td mat-cell *matCellDef="let element"> {{element.appointment_id}}
+                                       </td>
+                                    </ng-container>
+                                    <!-- Clinic Name Column -->
+                                    <ng-container matColumnDef="clinic_address">
+                                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Clinic Address
+                                       </th>
+                                       <td mat-cell *matCellDef="let element"> {{element.clinic_address}}
+                                       </td>
+                                    </ng-container>
+                                    <!-- Clinic Address -->
+                                    <ng-container matColumnDef="clinic_name">
+                                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Clinic Name
+                                       </th>
+                                       <td mat-cell *matCellDef="let element"> {{element.clinic_name}}
+                                       </td>
+                                    </ng-container>
+                                    <!-- Dr. Name Column -->
+                                    <ng-container matColumnDef="doctor_name">
+                                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Dr. Name
+                                       </th>
+                                       <td mat-cell *matCellDef="let element"> {{element.doctor_name}}
+                                       </td>
+                                    </ng-container>
+
+                                    <!-- Date Column -->
+                                    <ng-container matColumnDef="appointment_date">
+                                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Appointment Date
+                                       </th>
+                                       <td mat-cell *matCellDef="let element">
+                                          {{element.appointment_date | date:'dd/MM/yyyy'}}
+                                       </td>
+                                    </ng-container>
+                                    <!-- Time Column -->
+                                    <ng-container matColumnDef="time_slot">
+                                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Time Slot
+                                       </th>
+                                       <td mat-cell *matCellDef="let element" [innerHTML]="element.time_slot">
+                                          {{element.time_slot}}
+                                       </td>
+                                    </ng-container>
+                                    <!-- Status Column -->
+                                    <!-- reason Column -->
+                                    <ng-container matColumnDef="reason">
+                                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Reason of appointment
+                                       </th>
+                                       <td mat-cell *matCellDef="let element"> {{convertReason(element.reason)}}
+                                       </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="reason_of_reschedule">
+                                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Reason of Reschedule
+                                       </th>
+                                       <td mat-cell *matCellDef="let element"> {{element.reason_of_reschedule??'-'}}
+                                       </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="total_amount">
+                                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount
+                                       </th>
+                                       <td mat-cell *matCellDef="let element"> &#8377;  {{element.total_amount??'-'}}
+                                       </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="shareReport" matSortDisabled>
+                                       <th mat-header-cell *matHeaderCellDef> Share Report</th>
+                                       <td mat-cell *matCellDef="let element">
+                                          <button mat-icon-button [matMenuTriggerFor]="menu2"
+                                             *ngIf="element.status == 'Completed' ? true : false"
+                                             aria-label="Example icon-button with a menu">
+                                             <mat-icon>more_vert</mat-icon>
+                                          </button>
+                                          <mat-menu #menu2="matMenu">
+                                             <share-buttons [theme]="'material-dark'" [include]="['whatsapp']"
+                                                [url]="imageURLpdf+element.prescription_pdf_name"
+                                                [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                                                [autoSetMeta]="true">
+                                             </share-buttons>
+                                             <share-buttons [theme]="'material-dark'" [include]="['email']"
+                                                [url]="imageURLpdf+element.prescription_pdf_name"
+                                                [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                                                [autoSetMeta]="true">
+                                             </share-buttons>
+                                             <share-buttons [theme]="'material-dark'" [include]="['telegram']"
+                                                [url]="imageURLpdf+element.prescription_pdf_name"
+                                                [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                                                [autoSetMeta]="true">
+                                             </share-buttons>
+                                          </mat-menu>
+                                       </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="status">
+                                       <th mat-header-cell *matHeaderCellDef> Appointment Status </th>
+                                       <td mat-cell *matCellDef="let element">
+                                          {{classConditioncheck(element.status)}}
+
+                                          <label [ngClass]="colClassName">
+                                             {{element.status??'Pending'}}
+                                          </label>
+                                       </td>
+                                    </ng-container>
+
+                                    <!-- <ng-container matColumnDef="payment_status">
+                                       <th mat-header-cell *matHeaderCellDef> Payment Status </th>
+                                       <td mat-cell *matCellDef="let element">
+                                          {{classConditionPayment(element.payment_status)}}
+                                          <label [ngClass]="payClassName">
+                                             {{paymentStatus}}
+                                          </label>
+                                       </td>
+                                    </ng-container> -->
+
+                                    <ng-container matColumnDef="payment_status">
+                                       <th mat-header-cell *matHeaderCellDef> Payment Status </th>
+                                       <td mat-cell *matCellDef="let element">
+                                           <span class="badge badge-{{element.payment_status=='Success'?'Completed':element.payment_status}}">
+                                               {{(element.payment_status == 'Successful' ||
+                                               element.payment_status == 'Success') ? "Success": (
+                                               (element.payment_status == 'Pending') ? "Pending" : (
+                                               (element.payment_status == 'Aborted') ? "Failed" : ""))
+                                               }}</span>
+                                       </td>
+                                   </ng-container>
+
+                                    <!-- Appointment By -->
+                                    <ng-container matColumnDef="appointments_user_type">
+                                       <th mat-header-cell *matHeaderCellDef> Appointment By </th>
+                                       <td mat-cell *matCellDef="let element">
+                                           <span class="{{element.appointments_user_type}}">
+                                               {{element.appointments_user_type | titlecase}}</span>
+                                       </td>
+                                   </ng-container>
+
+
+                                    <ng-container matColumnDef="actions">
+                                       <th mat-header-cell *matHeaderCellDef> Action</th>
+                                       <td mat-cell *matCellDef="let element">
+                                          <!--                                       
+                                         <div >
+                                            <button class="btn btn-outline-primary font-13" (click)="navigatingUrl(element.appointment_id)">
+                                               Prescription
+                                             </button>
+                                         </div> -->
+                                          <div *ngIf="conditionCheck(element.status)">
+                                             <a href="{{element.prescription_pdf_name?imageURLpdf+element.prescription_pdf_name: '-'}}"
+                                                target="__blank">
+                                                <div [innerHtml]="htmlReturn"></div>
+                                             </a>
+                                          </div>
+
+                                          <div *ngIf="conditionCheck(element.status)=='false'">
+                                             --
+                                          </div>
+
+
+                                          <div *ngIf="(element.type=='online' && (element.status=='Approved' || element.status=='Reschedule') && element.payment_status=='Success' )?true:false">
+
+                                             <button mat-icon-button
+                                                aria-label="Example icon button with a vertical three dot icon"
+                                                (click)="getOnlineAppointment(element.patient_id)" >
+                                                <mat-icon>{{(element.type=='online' && (element.status=='Approved' || element.status=='Reschedule') && element.payment_status=='Success' )?'call':''  }}</mat-icon>
+                                             </button>
+
+                                          </div>
+                                          <div  *ngIf="((element.type=='online' && element.status=='Approved' && element.payment_status=='Success') ||  element.status=='Completed' )?false:true">
+                                             <mat-icon>minimize</mat-icon>
+                                          </div>
+
+                                          <!-- <button class="btn tblActnBtn h-auto" (click)='deleteRow(row)'>
+                                            <i class="material-icons">delete</i>
+                                          </button> -->
+
+                                       </td>
+                                    </ng-container>
+                                    <!-- Document Column -->
+                                    <ng-container matColumnDef="file">
+                                       <th mat-header-cell *matHeaderCellDef> Document </th>
+                                       <td mat-cell *matCellDef="let element"><a><i
+                                                class="far fa-file-pdf tbl-pdf"></i></a></td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                 </table>
+                                 <mat-paginator [pageSizeOptions]="[10, 20,25]" showFirstLastButtons>
+                                 </mat-paginator>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

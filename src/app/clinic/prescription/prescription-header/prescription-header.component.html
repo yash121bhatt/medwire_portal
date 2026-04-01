@@ -1,0 +1,150 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Prescription Header'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+               <div class="header mx-4">
+                  <h2><strong>Prescription Header</strong></h2>
+               </div>
+               <div class="body">
+                  <form class="m-4" [formGroup]="prescriptionForm" (ngSubmit)="onSubmit()">
+                     <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                           <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Clinic Name</mat-label>
+                              <input matInput type="text" [(ngModel)]="clinic_name" formControlName="clinic_name"
+                                 required autocomplete="off">
+                              <mat-error *ngIf="prescriptionForm.get('clinic_name').hasError('required')">
+                                 Clinic Name is required
+                              </mat-error>
+                              <mat-error *ngIf="prescriptionForm.get('clinic_name').hasError('pattern')">
+                                 Clinic Name is not valid </mat-error>
+                           </mat-form-field>
+                        </div>
+                        <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                           <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Landline No.</mat-label>
+                              <input matInput [(ngModel)]="mobile_no" formControlName="mobile_no" required
+                                 autocomplete="off">
+                              <mat-error *ngIf="prescriptionForm.get('mobile_no').hasError('required')">
+                                 Landline No. is required
+                              </mat-error>
+                              <mat-error *ngIf="prescriptionForm.get('mobile_no').hasError('pattern')">
+                                 Please enter a Valid Landline No.
+                              </mat-error>
+                           </mat-form-field>
+                        </div> -->
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                           <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Mobile Number</mat-label>
+                              <input matInput type="number" [(ngModel)]="mobile_no2" required formControlName="mobile_no2"
+                                 autocomplete="off">
+                              <mat-error *ngIf="prescriptionForm.get('mobile_no2').hasError('pattern')">
+                                 Please enter a Valid Mobile no.
+                              </mat-error>
+                              <mat-error *ngIf="prescriptionForm.get('mobile_no2').hasError('required')">
+                                Mobile No. is required
+                              </mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                           <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Clinic Email Address</mat-label>
+                              <input matInput type="email" [(ngModel)]="email" formControlName="email" required
+                                 autocomplete="off">
+                              <mat-error
+                                 *ngIf="prescriptionForm.get('email').hasError('required') || prescriptionForm.get('email').touched">
+                                 Please enter a valid email address
+                              </mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                           <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Clinic Timing</mat-label>
+                                <input matInput type="text" [(ngModel)]="clinic_timeing" formControlName="clinic_timeing" required autocomplete="off">
+                                <mat-error *ngIf="prescriptionForm.get('clinic_timeing').hasError('required')">
+                                    Clinic Timing is required
+                                </mat-error>
+                            </mat-form-field>
+                           <!-- <div class="default-time-example timeInput text-start
+                                 text-start">
+
+                              <label>Clinic Timing*</label>
+                              <input class="mt-2" aria-label="default time" formControlName="clinic_timeing"
+                                 [ngxTimepicker]="defaultValue" [value]="clinic_timeing" [(ngModel)]="clinic_timeing"
+                                 placeholder="Opening Time" readonly required="">
+
+                              <ngx-material-timepicker #defaultValue></ngx-material-timepicker>
+                           </div> -->
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3 mt-4">
+
+                           <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                              (change)="uploadFile($event);fileChange($event.target.files)" [hidden]="'true'" />
+                           <a class="btn btn-outline-secondary btn-lg btn-block"
+                              (click)="fileInput.click();uploadFile($event);fileChange($event.target.files)">Upload
+                              Image</a>
+                        </div>
+
+
+                     </div>
+                     <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                           <button class="btn-space" mat-raised-button color="primary"
+                              [disabled]="!prescriptionForm.valid ">Save</button>
+                           <!-- <button type="button" mat-button [routerLink]="['../doctor-list']">Cancel</button> -->
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <div class="body">
+                  <div class="row m-4">
+                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-3">
+                        <h6>Clinic Name</h6>
+                        <p>{{clinic_name}}</p>
+                     </div>
+                     <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-3">
+                        <h6>Landline Number</h6>
+                        <p class="mb-2">{{mobile_no}}</p>
+
+                     </div> -->
+                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-3">
+                        <h6>Mobile Number</h6>
+                        <p>{{mobile_no2??'-'}}</p>
+                     </div>
+                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-3">
+                        <h6>Email Address</h6>
+                        <p class="mb-2">{{email}}</p>
+                     </div>
+                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-3">
+                        <h6>Clinic Timing</h6>
+                        <p>{{clinic_timeing}}</p>
+                     </div>
+                     <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 mb-3">
+                        <h6>Clinic Logo</h6>
+                        <div class="group-gap">
+                           <!-- {{clinic_logo}} -->
+                           <!-- Upload image -->
+                           <div class="avatar-upload">
+                              <div class="avatar-edit">
+                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                                    (change)="uploadFile($event);fileChange($event.target.files)" />
+                              </div>
+                              <div class="avatar-preview border-0 shadow-none ">
+                                 <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

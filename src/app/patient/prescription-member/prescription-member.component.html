@@ -1,0 +1,53 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Prescription'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <h2>User List</h2>
+  
+            </div>
+            <div class="body">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover ">
+                    <thead>
+                      <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Date Of Birth</th>
+                        <!-- <th>Aadhar No.</th> -->
+                        <th>Gender</th>
+                        <th>Action </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of Users">
+                        <td class="table-img"><img alt="image" class="msr-3" width="40" src="{{data.imgName?imageURL+data.imgName:imageURL+'demouser.png'}}"></td>
+                        <td>{{data.first_name}}</td>
+                        <td>{{data.age}}</td>
+                        <td>{{data.date_of_birth | date: 'dd/MM/yyyy'}}</td>
+                        <!-- <td>{{data.adhar_card??'-'}}</td> -->
+                        <td>{{data.gender??'-'}}</td>
+                        <td>
+                          <button mat-icon-button>
+                            <a routerLink="/patient/prescription-m-report/{{encryptionData(data.id)}}" ><mat-icon class="col-green" >visibility</mat-icon></a>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

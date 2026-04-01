@@ -1,0 +1,99 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Pricing Management'"  [active_item]="'Pricing Management'">
+            </app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <!-- <h2>
+                            <strong>Filter</strong> 
+                        </h2> -->
+
+                    </div>
+                    <div class="body table-responsive">
+                        <div class="tableHeader">
+                            <mat-form-field class="example-full-width formField" appearance="outline">
+                                <mat-label>Search</mat-label>
+                                <input matInput (keyup)="applyFilter($event)" autocomplete="off">
+                            </mat-form-field>
+                            <div>
+                                <!-- <button _ngcontent-afr-c369="" mat-raised-button="" color="primary" [routerLink]="['/admin/add-plan']"  
+                                class="mat-focus-indicator btn-space mat-raised-button mat-button-base mat-primary" ng-reflect-color="primary" ng-reflect-disabled="false">
+                                    <span class="mat-button-wrapper">Add Plan</span>
+                                </button> -->
+                            </div>
+                        </div>
+                        <table mat-table [dataSource]="dataSource3"  class="w-100" matSort matSort #empTbSort="matSort">
+                            <!-- No Column -->
+                            <ng-container matColumnDef="no">
+                                <th mat-header-cell *matHeaderCellDef> S.No. </th>
+                                <td mat-cell *matCellDef="let element; let i=index;"> {{i+1}} </td>
+                            </ng-container>
+                        
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="plan_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Plan Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.plan_name}} </td>
+                            </ng-container>
+                            <!-- Gender Column -->
+                            <ng-container matColumnDef="price">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+                                <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                            </ng-container>
+                            <!-- Email Column -->
+                            <ng-container matColumnDef="validity">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Validity </th>
+                                <td mat-cell *matCellDef="let element"> {{element.validity}} </td>
+                            </ng-container>
+                               <!-- Email Column -->
+                               <ng-container matColumnDef="benefit">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Benefit </th>
+                                <td mat-cell *matCellDef="let element"> {{element.benefit}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action" matSortDisabled>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                                <td mat-cell *matCellDef="let element">
+                                  <span>
+                                    <!-- <button class="btn tblActnBtn h-auto eyeIcon checkIcon" matTooltip="Edit">
+                                      <i class="material-icons" [routerLink]="reload">edit</i>
+                                    </button> -->
+                                    <button class="btn tblActnBtn h-auto eyeIcon cancelIcon" matTooltip="Add"   (click)='open(mymodal); getId(element.id);'>
+                                      <i class="material-icons">add</i>
+                                    </button>
+                                  </span>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons></mat-paginator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Pop -->
+
+    <ng-template #mymodal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Plan Update  Confirmation</h4>
+            <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button> -->
+            </div>
+            <div class="modal-body">
+            Are You want to upgrade plan?
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); deleteRecord()" >Ok</button>
+            
+            <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+        </div>
+    </ng-template>
+</section>

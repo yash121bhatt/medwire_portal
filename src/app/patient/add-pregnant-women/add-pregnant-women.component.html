@@ -1,0 +1,97 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="['Pregnant Woman']" [active_item]="'Add Pregnant Woman'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <!-- <div class="header">
+              <h2><strong>Blank</strong> Page</h2>
+            </div> -->
+            <div class="body">
+  
+                <div class="mb-5">
+                    <div class="row">
+                        <form action="" [formGroup]="pregnantWomenBabyForm" (ngSubmit)="onSubmit(pregnantWomenBabyForm.value)">
+                        <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div class="childHeading">
+                                <h5>Select Gender</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                        <mat-radio-group  [(ngModel)]="selectedStatus" formControlName="baby_gender" required="true">
+                                            <mat-radio-button class="genderRadio" [value]="gender_f">
+                                                <div class="media genderimg">
+                                                    <img class="mr-3" src="assets/images/woman.png" alt="Generic placeholder image">
+                                                    <div class="media-body genderText">
+                                                      <h5 class="mt-0">I have a Girl</h5>
+                                                    </div>
+                                                </div>
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                        <mat-radio-group  [(ngModel)]="selectedStatus" formControlName="baby_gender" required="true">
+                                            <mat-radio-button class="genderRadio" [value]="gender_m">
+                                                <div class="media genderimg">
+                                                    <img class="mr-3" src="assets/images/boy.png" alt="Generic placeholder image">
+                                                    <div class="media-body genderText">
+                                                      <h5 class="mt-0">I have a Boy</h5>
+                                                    </div>
+                                                </div>
+                                            </mat-radio-button>
+                                        </mat-radio-group> 
+                                </div> 
+                            </div>
+                        </div> -->
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                            <div class="childHeading">
+                                <h5>Enter Woman Name</h5>
+                            </div>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Woman Name</mat-label>
+                                <input matInput type="text" formControlName="women_name" type="text" maxlength="32" pattern="[A-Za-z ]{1,32}" required autocomplete="off">
+                                <mat-error *ngIf="pregnantWomenBabyForm.get('women_name').hasError('required')">
+                                  Woman Name Required
+                                  </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-0">
+                            <div class="childHeading">
+                                <h5> Last Menstruation Period</h5>
+                            </div>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Last Menstruation Period</mat-label>
+                                <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="dateofPregency" required autocomplete="off">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-error *ngIf="pregnantWomenBabyForm.get('dateofPregency').hasError('required')">
+                                  Last Menstruation Period date is required
+                                  </mat-error>
+                            </mat-form-field>
+                           
+                        </div>
+                        <div *ngIf="success_message" class="alert alert-success alert-dismissible">
+                            <strong> Success Now ! </strong>
+                          </div>
+                          <p *ngIf="error_message" class="alert alert-danger alert-dismissible">
+                            <strong>{{error_message_text}} </strong>
+                          </p>
+                    
+                    <div class="saveBtn">
+                        <button class="text-center" mat-raised-button color="primary">Submit</button>
+                        <button type="button" mat-button class="cancel_btn_back" [routerLink]="['/patient/pregnant-woman/pregnent-womenList']">Cancel</button>
+                      </div>
+                </form>
+            </div>
+                </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+  

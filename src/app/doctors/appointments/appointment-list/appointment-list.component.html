@@ -1,0 +1,185 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Appointment List'"></app-breadcrumb>
+      </div>
+      <!-- Basic Examples -->
+      <div class="row clearfix">
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+               <div class="body">
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <div class="body">
+                           <div class="row align-items-center">
+                              <div class="col-md-6">
+                                 <mat-form-field class="example-full-width my-0" appearance="outline">
+                                    <mat-label>Search</mat-label>
+                                    <input matInput (keyup)="applyFilter($event)" autocomplete="off">
+                                 </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                 <button mat-icon-button aria-label="Example icon button with a vertical three dot icon"
+                                    (click)="createAppointmentMeeting()">
+                                    <h3><mat-icon>call</mat-icon></h3>
+                                    
+                                 </button>
+                              </div>
+                           </div>
+                           <div class="table-responsive table-patient-appointment">
+                              <table mat-table [dataSource]="dataSource3" class="w-100" matSort #empTbSort="matSort">
+                                 <!-- No Column -->
+                                 <ng-container matColumnDef="no">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No. </th>
+                                    <td mat-cell *matCellDef="let element; let i = index;"> {{ i + 1 }}
+                                    </td>
+                                 </ng-container>
+
+                                 <ng-container matColumnDef="appointment_id">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Booking ID</th>
+                                    <td mat-cell *matCellDef="let element;"> {{element.appointment_id}}
+                                    </td>
+                                 </ng-container>
+                                 <!-- Image Column -->
+
+                                 <ng-container matColumnDef="img">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+                                    <td mat-cell *matCellDef="let element" class="table-img"><img width="40"
+                                          src="{{ element.profile_image_name?profileImageurl+element.profile_image_name:profileImageurl+'demouser.png' }}" />
+                                    </td>
+                                 </ng-container>
+
+                                 <!-- First Name Column -->
+                                 <ng-container matColumnDef="patient_name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient Name </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.patient_name}} </td>
+                                 </ng-container>
+
+                                 <!-- Gender Column -->
+                                 <ng-container matColumnDef="gender">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                                 </ng-container>
+                                 <!-- Mobile No. Column -->
+
+                                 <ng-container matColumnDef="mobile_number">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.mobile_number!='' &&
+                                       element.mobile_number!=null ? element.mobile_number :'-' }}</td>
+                                 </ng-container>
+                                 <!-- Status Column -->
+
+                                 <ng-container matColumnDef="appointment_reason">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Appointment Reason</th>
+                                    <td mat-cell *matCellDef="let element">
+                                       {{convertReason(element.appointment_reason)}}</td>
+                                 </ng-container>
+
+                                 <ng-container matColumnDef="appointment_status">
+                                    <th mat-header-cell *matHeaderCellDef> Appointment Status </th>
+                                    <td mat-cell *matCellDef="let element">
+                                       {{classConditioncheck(element.appointment_status)}}
+                                       <label [ngClass]="colClassName">
+                                          {{element.appointment_status!=null && element.appointment_status!='' ? (element.appointment_status == 'Visited'?'Arrived':element.appointment_status) :'Pending'}}
+                                       </label>
+                                    </td>
+                                 </ng-container>
+
+
+                                 <!-- Appointment By -->
+                                 <ng-container matColumnDef="appointments_user_type">
+                                    <th mat-header-cell *matHeaderCellDef> Appointment By </th>
+                                    <td mat-cell *matCellDef="let element">
+                                       <span class="{{element.appointments_user_type}}">
+                                          {{element.appointments_user_type | titlecase}}</span>
+                                    </td>
+                                 </ng-container>
+
+                                 <!-- appointment_date Column -->
+
+                                 <ng-container matColumnDef="appointment_date">
+                                    <th mat-header-cell *matHeaderCellDef> Appointment Date and Time </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.appointment_date |
+                                       date:'dd/MM/yyyy'}}, {{element.time_slot}} </td>
+                                 </ng-container>
+                                 <!-- DOB Column -->
+                                 <ng-container matColumnDef="date_of_birth">
+                                    <th mat-header-cell *matHeaderCellDef> DOB </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.date_of_birth| date:
+                                       'dd/MM/yyyy'}} </td>
+                                 </ng-container>
+                                 <!-- Action Column -->
+                                 <ng-container matColumnDef="radio_document" matSortDisabled class="mr-2">
+                                    <th mat-header-cell *matHeaderCellDef class="mr-2">Radiology Report</th>
+                                    <td mat-cell *matCellDef="let element">
+                                       <span>
+                                          <a class="imgSizeIcon"
+                                            *ngIf="((element.radio_document_dcm_url != null && element.radio_document_dcm_url != '') ? true : false)"
+                                            target="__blank" href="{{element.radio_document_dcm_url}}">
+                                            {{element.radio_document_dcm_url ? viewDicomFile(element.radio_document_dcm_url??'-') : '-'}} <div
+                                              [innerHtml]="htmlReturn"></div> </a>
+                                        </span>
+                                        <span>
+                                          <a class="imgSizeIcon"
+                                            *ngIf="((element.radio_document_url != null && element.radio_document_url != '') ? true : false)"
+                                            href="{{element.radio_document_url}}" target="_blank">
+                                            {{element.radio_document_url ? returnPdf(element.radio_document_url??'-') : '-'}} <div [innerHtml]="htmlReturn">
+                                            </div> </a>
+                                        </span>
+                                       <!-- <a class="imgSizeIcon" *ngIf="element.radio_document" target="__blank" (click)="viewReport(element.radio_document??'-')
+                                    ">
+                                          {{viewDicomFile(element.radio_document??'-')}} <div [innerHtml]="htmlReturn">
+                                          </div> </a> -->
+                                         
+                                    </td>
+                                 </ng-container>
+                                 <ng-container matColumnDef="lab_document" matSortDisabled class="mr-2">
+                                    <th mat-header-cell *matHeaderCellDef class="mr-2">Lab Report </th>
+                                    <td mat-cell *matCellDef="let element">
+                                       <a class="imgSizeIcon"
+                                          href="{{element.lab_document?imageURL+element.lab_document: '-'}}"
+                                          *ngIf="element.lab_document" target="__blank">
+                                          {{returnPdf(element.lab_document??'-')}} <div [innerHtml]="htmlReturn"></div>
+                                       </a>
+                                    </td>
+                                 </ng-container>
+
+                                 <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef> Action</th>
+                                    <td mat-cell *matCellDef="let element">
+                                       {{conditionCheck(element.appointment_status)}}
+                                       <div *ngIf="presciptioncol">
+                                          <button class="btn btn-outline-primary font-13"
+                                             (click)="navigatingUrl(element.appointment_id)">
+                                             Prescription
+                                          </button>
+                                       </div>
+                                       <div *ngIf="pdfcol">
+                                          <a href="{{element.prescription_pdf_name?prescriptionurl+element.prescription_pdf_name: '-'}}"
+                                             target="__blank">
+                                             <div [innerHtml]="htmlReturnpdf"></div>
+                                          </a>
+                                       </div>
+
+                                       <!-- <button class="btn tblActnBtn h-auto" (click)='deleteRow(row)'>
+                                          <i class="material-icons">delete</i>
+                                        </button> -->
+
+                                    </td>
+                                 </ng-container>
+                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                              </table>
+                           </div>
+                           <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons>
+                           </mat-paginator>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

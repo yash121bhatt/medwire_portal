@@ -1,0 +1,75 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Milestone Tracker'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <!-- <div class="header">
+                        <h2><strong>Blank</strong> Page</h2>
+                    </div> -->
+                    <div class="body">
+                        <mat-tab-group>
+                            <mat-tab label="1-4 Months">
+                                <section id="cd-timeline" class="cd-container">
+
+                                    <div class="cd-timeline-block" *ngFor="let eventdata of eventsData">
+                                        <div class="cd-timeline-img cd-movie">
+                                            <img src="{{eventdata.image}}" alt="childImg">
+                                        </div>
+                                        <div class="cd-timeline-content">
+                                            <p>{{eventdata.content}}</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </mat-tab>
+                            <mat-tab label="5-7 Months">
+                                <section id="cd-timeline" class="cd-container">
+
+                                    <div class="cd-timeline-block" *ngFor="let eventdata of eventsDatachild">
+                                        <div class="cd-timeline-img cd-movie">
+                                            <img src="{{eventdata.image}}" alt="childImg">
+                                        </div>
+                                        <div class="cd-timeline-content">
+                                            <p>{{eventdata.content}}</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </mat-tab>
+                            <mat-tab label="8-10 Months">
+                                <section id="cd-timeline" class="cd-container">
+
+                                    <div class="cd-timeline-block" *ngFor="let eventdata of eventsDatachildmonth">
+                                        <div class="cd-timeline-img cd-movie">
+                                            <img src="{{eventdata.image}}" alt="childImg">
+                                        </div>
+                                        <div class="cd-timeline-content">
+                                            <p>{{eventdata.content}}</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </mat-tab>
+                            <mat-tab label="11-12 Months">
+                                <section id="cd-timeline" class="cd-container">
+
+                                    <div class="cd-timeline-block" *ngFor="let eventdata of milestoneChildmonth">
+                                        <div class="cd-timeline-img cd-movie">
+                                            <img src="{{eventdata.image}}" alt="childImg">
+                                        </div>
+                                        <div class="cd-timeline-content">
+                                            <p>{{eventdata.content}}</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </mat-tab>
+                        </mat-tab-group>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

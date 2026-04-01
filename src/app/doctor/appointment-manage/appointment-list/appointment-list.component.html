@@ -1,0 +1,401 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Appointment Management'"></app-breadcrumb>
+      </div>
+      <!-- Basic Examples -->
+      <div class="row clearfix">
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+               <div class="body">
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <div class="body long_text_td ">
+                           <div class="row align-items-center">
+                              <div class="col-md-6">
+                                 <mat-form-field class="example-full-width my-0" appearance="outline">
+                                    <mat-label>Search</mat-label>
+                                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium"
+                                       autocomplete="off">
+                                 </mat-form-field>
+                              </div>
+
+                           </div>
+                           <div class="table-responsive">
+                              <table mat-table [dataSource]="dataSource3" class="w-100" matSort #empTbSort="matSort">
+                                 <!-- No Column -->
+                                 <ng-container matColumnDef="no">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No. </th>
+                                    <td mat-cell *matCellDef="let element; let i = index;"> {{ i + 1 }}
+                                    </td>
+                                 </ng-container>
+                                 <ng-container matColumnDef="appointment_id">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Booking ID</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.appointment_id??'-'}} </td>
+                                 </ng-container>
+                                 <!-- Medwire ID Column -->
+                                 <ng-container matColumnDef="medwire_id">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> MedWire ID</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.medwire_id??'-'}} </td>
+                                 </ng-container>
+                                 <!-- Name Column -->
+                                 <ng-container matColumnDef="patient_name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient Name </th>
+                                    <td mat-cell class="py-2" *matCellDef="let element"> {{element.patient_name}} <br>
+                                       <!-- <b><small>{{element.doctor}}</small></b> -->
+                                    </td>
+                                 </ng-container>
+                                 <!-- pincode Column -->
+                                 <ng-container matColumnDef="grand_total">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                                    <td mat-cell *matCellDef="let element"> &#8377; {{element.grand_total}} </td>
+                                 </ng-container>
+                                 <ng-container matColumnDef="pin_code">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Pin Code </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.pin_code??'-'}} </td>
+                                 </ng-container>
+                                 <!-- Appointment Column -->
+                                 <ng-container matColumnDef="appointment_date">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Appointment Date </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.appointment_date |
+                                       date:'dd/MM/yyyy'}} </td>
+                                 </ng-container>
+                                 <!-- test_name Column -->
+                                 <ng-container matColumnDef="test_name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Test Name</th>
+                                    <td mat-cell *matCellDef="let element ; let i = index ;">
+
+                                       <div *ngFor="let testfinal of element.cart_item">
+                                          {{( element.cart_item && element.cart_item.length > 1) ?
+                                          testfinal.test_name+',' : testfinal.test_name}}
+                                       </div>
+                                    </td>
+                                 </ng-container>
+                                 <ng-container matColumnDef="appointments_user_type">
+                                    <th mat-header-cell *matHeaderCellDef> Booked By </th>
+                                    <td mat-cell *matCellDef="let element">
+                                       {{element.appointments_user_type}}
+
+                                    </td>
+                                 </ng-container>
+                                 <!-- Payment Status Column -->
+                                 <ng-container matColumnDef="payment_status">
+                                    <th mat-header-cell *matHeaderCellDef> Payment Status </th>
+                                    <td mat-cell *matCellDef="let element">
+                                       <span class="badge badge-{{element.payment_status}}">
+                                          {{(element.payment_status == 'Successful' ||
+                                          element.payment_status == 'Success') ? "Success": (
+                                          (element.payment_status == 'Pending') ? "Pending" : (
+                                          (element.payment_status == 'Aborted') ? "Failed" : ""))
+                                          }}</span>
+                                    </td>
+                                 </ng-container>
+                                 <!-- Status Column -->
+                                 <ng-container matColumnDef="appointment_status">
+                                    <th mat-header-cell *matHeaderCellDef> Appointment Status </th>
+                                    <td mat-cell *matCellDef="let element"><label
+                                          class="badge col-{{element.booking_status}}">
+                                          {{element.booking_status=='Visited'?'Arrived':element.booking_status}}
+                                       </label>
+                                    </td>
+                                 </ng-container>
+                                 <!-- Report  -->
+                                 <ng-container matColumnDef="report_document">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Report
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                       <!-- <a class="imgSizeIcon"
+                                       href="{{element.report_document?imageURL+element.report_document: '-'}}"
+                                       target="__blank">
+                                       {{returnPdf(element.report_document??'-')}} <div [innerHtml]="htmlReturn"></div>
+                                    </a>
+                                    <a class="imgSizeIcon"
+                                       href="{{element.report_document?imageURL+element.report_document: '-'}}"
+                                       target="_blank" (click)="returnPdf(element.report_document??'-')
+                                                       ">
+                                       {{viewFile(element.report_document??'-')}} <div [innerHtml]="htmlReturn"></div>
+                                    </a> -->
+                                       <!-- <a class="imgSizeIcon"
+                                       href="{{element.report_document?imageURL+element.report_document: '-'}}"
+                                       target="__blank">
+                                       {{returnPdf(element.report_document??'-')}} <div [innerHtml]="htmlReturn"></div>
+                                    </a> -->
+                                       <a class="imgSizeIcon" href="{{element.report_documentApk??'-'}}" target="_blank"
+                                          (click)="returnPdf(element.report_document??'-')
+                                                       ">
+                                          {{returnPdf(element.report_document??'-')}} <div [innerHtml]="htmlReturn">
+                                          </div>
+                                       </a>
+                                    </td>
+                                 </ng-container>
+                                 <!-- Reschedule Column -->
+                                 <ng-container matColumnDef="reason_of_reschedule">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Reason of Reschedule</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.reason_of_reschedule!='' &&
+                                       element.reason_of_reschedule!=null ?element.reason_of_reschedule:'-'}} </td>
+                                 </ng-container>
+                                 <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef> Action</th>
+                                    <td mat-cell *matCellDef="let element">
+                                       {{conditionCheck(element.approve_status?element.approve_status:
+                                       'Pending')}}
+                                       <span>
+                                          <span
+                                             *ngIf="element.status == 'Approved' ? false : element.status == 'Visited' ? false : element.payment_status == 'Pending' || element.payment_status ==  'Aborted' ? false : true">
+                                             <button *ngIf="approve_state"
+                                                class="btn tblActnBtn h-auto eyeIcon checkIcon" matTooltip="Approve"
+                                                (click)="open(mymodal); approveLab(element.appointment_id)">
+                                                <i class="material-icons">check_circle_outline</i>
+                                             </button>
+                                          </span>
+                                          <span *ngIf="element.status ==  'Pending' ? true : false">
+                                             <button *ngIf="cancel_state"
+                                                class="btn tblActnBtn h-auto eyeIcon cancelIcon" matTooltip="Disapprove"
+                                                (click)="open(disapprovemodal); getId(element.appointment_id);">
+                                                <i class="material-icons">highlight_off</i>
+                                             </button>
+                                          </span>
+                                          <span
+                                             *ngIf="element.status == 'Visited' ? false : element.status != 'Approved' ? false : element.payment_status == 'Pending' || element.payment_status ==  'Aborted' ? false : true">
+                                             <button *ngIf="cancel_state"
+                                                class="btn tblActnBtn h-auto eyeIcon cancelIcon" matTooltip="Arrived"
+                                                (click)="openDisapprove(visitedmodal);  disapproveLab(element.appointment_id)">
+
+                                                <i class="material-icons">how_to_reg</i>
+                                             </button>
+                                          </span>
+                                          <button class="btn tblActnBtn h-auto eyeIcon Viewicon"
+                                             *ngIf="element.status == 'Reschedule' ? false : element.status == 'Visited' ? false : element.status == 'Approved' ? false : element.payment_status == 'Pending' || element.payment_status ==  'Aborted' ? false : true"
+                                             matTooltip="Reschedule"
+                                             (click)="rescheduleopen(reschedulepopup);getdoctorId(element.appointment_id)">
+                                             <i class="material-icons">refresh</i>
+                                          </button>
+                                          <button class="btn tblActnBtn h-auto addIcon addBtn"
+                                             matTooltip="Upload Report"
+                                             *ngIf="element.status == 'Visited' ? true : element.report_document == null ? true : false"
+                                             (click)='editRow(row, rowIndex, editRecord,element.visit_id)'>
+                                             <i class="material-icons">add</i>
+                                          </button>
+                                       </span>
+                                    </td>
+                                    <!-- <td mat-cell *matCellDef="let element">
+                                    {{conditionCheck(element.approve_status?element.approve_status: 'Pending')}}
+                                    <span>
+                                       <span
+                                          *ngIf="element.status == 'Approved' ? false : element.status == 'Visited' ? false : element.payment_status == 'PENDING' || element.payment_status ==  'TXN_FAILURE' ? false : true">
+                                          <button *ngIf="approve_state" class="btn tblActnBtn h-auto eyeIcon checkIcon"
+                                             matTooltip="Approve"
+                                             (click)="open(mymodal); approveLab(element.appointment_id)">
+                                             <i class="material-icons">check_circle_outline</i>
+                                          </button>
+                                       </span>
+                                       <span
+                                          *ngIf="element.status == 'Visited' ? false : element.status != 'Approved' ? false : element.payment_status == 'PENDING' || element.payment_status ==  'TXN_FAILURE' ? false : true">
+                                          <button *ngIf="cancel_state" class="btn tblActnBtn h-auto eyeIcon cancelIcon"
+                                             matTooltip="Visited"
+                                             (click)="openDisapprove(disApprovemodal);  disapproveLab(element.appointment_id)">
+
+                                             <i class="material-icons">how_to_reg</i>
+                                          </button>
+                                       </span>
+                                       <button class="btn tblActnBtn h-auto eyeIcon Viewicon"
+                                          *ngIf="element.status == 'Reschedule' ? false : element.status == 'Visited' ? false : element.payment_status == 'PENDING' || element.payment_status ==  'TXN_FAILURE' ? true :false"
+                                          matTooltip="Reschedule"
+                                          (click)="rescheduleopen(reschedulepopup);getdoctorId(element.appointment_id);">
+                                          <i class="material-icons">refresh</i>
+                                       </button>
+                                       <button class="btn tblActnBtn h-auto addIcon addBtn"
+                                          *ngIf="element.status == 'Visited' ? true : false"
+                                          (click)='editRow(row, rowIndex, editRecord,element.visit_id)'>
+                                          <i class="material-icons">add</i>
+                                       </button>
+                                    </span>
+                                 </td> -->
+                                 </ng-container>
+                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                              </table>
+                           </div>
+                           <mat-paginator [pageSizeOptions]="[10, 20,25]" showFirstLastButtons>
+                           </mat-paginator>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+   <!-- Approve Pop -->
+   <ng-template #mymodal let-modal>
+      <div class="modal-header">
+         <h4 class="modal-title" id="modal-basic-title">Approve Confirmation</h4>
+         <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button> -->
+      </div>
+      <div class="modal-body">
+         Are you sure you want to Approve?
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-outline-dark"
+            (click)="modal.close('Save click'); approvedRequest()">Ok</button>
+
+         <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+      </div>
+   </ng-template>
+
+   <!-- Disapprove -->
+   <ng-template #disapprovemodal let-modal>
+      <div class="modal-header">
+         <h4 class="modal-title" id="modal-basic-title">Disapprove Confirmation</h4>
+         <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">×</span>
+       </button> -->
+      </div>
+      <div class="modal-body">
+         Are you sure you want to Disapprove?
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-outline-dark"
+            (click)="modal.close('Save click'); disapprovedAppointment()">Ok</button>
+
+         <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+      </div>
+   </ng-template>
+
+   <!--  Pop Code -->
+   <ng-template #visitedmodal let-modal>
+      <div class="modal-header">
+         <h4 class="modal-title" id="modal-basic-title">Visit Confirmation</h4>
+         <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button> -->
+      </div>
+      <div class="modal-body">
+         Are you sure you want to confirm Visit?
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-outline-dark"
+            (click)="modal.close('Save click'); visitedAppointment()">Ok</button>
+
+         <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+      </div>
+   </ng-template>
+
+   <!-- Edit Record Modal Window -->
+   <ng-template #reschedulepopup let-modal class="modalVaccination">
+      <div class="modal-header editRowModal">
+         <h4 class="modal-title" id="modal-basic-title">
+            <div class="modal-header ">
+               <h6>Reschedule</h6>
+            </div>
+         </h4>
+         <button type="button" class="close" aria-label="Close" id="modal_closeBtn"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="material-icons">close</i></span>
+         </button>
+      </div>
+      <div class="reschedule modal-body">
+         <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+               <form [formGroup]="resheduleForm" >
+                  <div class="text-inside mt-4 ">
+                     <div class="row scroll">
+                        <div class="col-md-8 col-sm-12 m-auto mb-3">
+                           <ngx-calendar [options]="calendarOptions" formControlName="time_set"
+                              (onChooseDate)="onChooseDate($event)" [events]="calendarEvents"
+                              (ngModelChange)="setDate('start', $event)"></ngx-calendar>
+                        </div>
+                        <div class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 m-auto">
+                           <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 pe-0">
+                                 <!-- <label class="badge bg-blue">Morning</label> -->
+                                 <mat-button-toggle-group class="manual mt-2">
+                                    <mat-button-toggle class="timeBtn" value="bold"
+                                       *ngFor="let slotData of availableSlot"
+                                       (click)="slotTimeselected(slotData.Stime)">{{slotData.Stime}}</mat-button-toggle>
+                                    <!-- <mat-button-toggle class="timeBtn" value="bold" *ngFor=" let slotData of afternoonSlot " (click)="slotTimeselected(slotData.Stime)">{{slotData.Stime}}</mat-button-toggle>  -->
+                                    <!-- <mat-button-toggle class="timeBtn" value="bold" *ngFor=" let slotData of eveningSlots " (click)="slotTimeselected(slotData.Stime)">{{slotData.Stime}}</mat-button-toggle>  -->
+                                 </mat-button-toggle-group>
+                              </div>
+
+                           </div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 m-auto">
+                           <h6 class="mb-0">Reason Of Reschedule</h6>
+                           <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Reason of Reschedule</mat-label>
+                              <input matInput formControlName="reschedule" required autocomplete="off">
+                              <mat-error *ngIf="resheduleForm.get('reschedule').hasError('required')">
+                                 Reason Of Reschedule is required
+                              </mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="btn-sec pb-5 text-center">
+                           <button class="btn-space" mat-raised-button color="primary"
+                              [disabled]="!resheduleForm.valid "
+                              (click)="onSubmitClick();modal.close('Save click'); ">Submit</button>
+                           <button type="button" class="btn btn-outline-dark"
+                              (click)="modal.dismiss('Cross click')">Cancel</button>
+                        </div>
+                     </div>
+
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </ng-template>
+
+
+   <!-- Upload Record  Window -->
+   <ng-template #editRecord let-modal>
+      <div class="modal-header editRowModal">
+         <h4 class="modal-title" id="modal-basic-title">
+            <div class="modal-header ">
+               <h6>Upload Report</h6>
+            </div>
+         </h4>
+         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="material-icons">close</i></span>
+         </button>
+      </div>
+      <div class="modal-body">
+         <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+               <div class="uploadReport">
+
+                  <form action="" [formGroup]="uploadFileForm" (ngSubmit)="onSubmit('uploadFileForm.value')">
+                     <mat-form-field class="example-full-width fileSize" appearance="outline">
+                        <mat-label>Upload Report</mat-label>
+                        <ngx-mat-file-input formControlName="report_document"
+                           (change)="fileChange($event.target.files);">
+                        </ngx-mat-file-input>
+                        <mat-icon matSuffix>upload</mat-icon>
+                     </mat-form-field>
+                     <div *ngIf="messages.length > 0">
+                        <span class="sizeError" *ngFor="let msg of messages">
+                           {{msg}}
+                           <br />
+                        </span>
+                     </div>
+                     <!-- <span class="">File size should be less than 5 MB.</span> -->
+                     <div class="button-demo fileSize">
+                        <button mat-raised-button type="submit" color="primary"
+                           [disabled]="!report_document" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="fileTypeCheck">Save</button>
+                        <button mat-button type="button" (click)="modal.close();removeData()">Cancel</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </ng-template>
+
+
+</section>

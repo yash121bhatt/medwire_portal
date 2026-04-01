@@ -1,0 +1,129 @@
+
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="['Discharge Summary']" [active_item]="'Discharge Summary'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <h2>Add Discharge Summary</h2>
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="labreportForm" (submit)="onSubmit(labreportForm,formDirective)" #formDirective="ngForm" >
+                <div class="row">
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Document Name</mat-label>
+                      <input matInput  formControlName="docname" required autocomplete="off" >
+                      <mat-icon matSuffix>title</mat-icon>
+                      <mat-error *ngIf="labreportForm.get('docname').hasError('required')">
+                        Document name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Upload Document</mat-label>
+                      <ngx-mat-file-input  formControlName="profile_image" accept=".png,.pdf,.jpg,.jpeg" (change) = "fileChange($event.target.files)">
+                      </ngx-mat-file-input>
+                      <mat-icon matSuffix>upload</mat-icon>
+                      <mat-error *ngIf="labreportForm.get('profile_image').hasError('required')" >
+                        Please Select Document
+                      </mat-error>
+                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Document Date</mat-label>
+                      <input matInput [matDatepicker]="picker" formControlName="dob" [max]="maxDate" required
+                        autocomplete="off">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-error *ngIf="labreportForm.get('dob').hasError('required')">
+                        Please Select Date
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 mb-3">
+                    <button class="btn-space" mat-raised-button color="primary">Submit</button>
+                    <button type="button" mat-button class="cancel_btn_back" [routerLink]="['/patient/discharge-summary']">Cancel</button>
+                  </div>
+  
+                </div>
+              </form>
+            </div>
+            <div class="body">
+              <div class="card-body">
+                <div class="body table-responsive">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Search</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Search" autocomplete="off">
+                  </mat-form-field>
+                  <table mat-table [dataSource]="dataSource3" class="w-100" matSort matSort #empTbSort="matSort">
+                    <!-- No Column -->
+                    <ng-container matColumnDef="invoice_id">
+                      <th mat-header-cell *matHeaderCellDef > S.No. </th>
+                      <td mat-cell *matCellDef="let element ,let i=index"> {{i+1}} </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="document_title">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Document Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.document_title}} </td>
+                    </ng-container>
+                    <!-- Gender Column -->
+                    <ng-container matColumnDef="document_date">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Document Date </th>
+                      <td mat-cell *matCellDef="let element"> {{element.document_date | date:'dd/MM/yyyy'}} </td>
+                    </ng-container>
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="action" matSortDisabled>
+                      <th mat-header-cell *matHeaderCellDef > Action </th>
+                      <td mat-cell *matCellDef="let element">
+                        <a href="{{imageURL+element.document_file}}" target="_blank">
+                          <span class="col-green">
+                            <mat-icon>visibility</mat-icon>
+                          </span>
+                        </a>
+                        <button class="btn tblActnBtn h-auto" (click)="open(mymodal); getId(element.id)" >
+                          <i class="material-icons">delete</i>
+                        </button>
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons></mat-paginator>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Delete Pop -->
+  
+    <ng-template #mymodal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+        <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+       Are You sure you want to delete?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); deleteRecord()" >Ok</button>
+      
+       <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+     </div>
+    </ng-template>
+  
+  </section>
+  

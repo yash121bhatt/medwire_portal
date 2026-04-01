@@ -1,0 +1,170 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Edit Package'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="header mx-4">
+                        <h2><strong>Edit Package</strong></h2>
+                    </div>
+                    <div class="body">
+                        <form class="m-4 mt-0" [formGroup]="editPackageForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Package Name</mat-label>
+                                        <input matInput formControlName="package_name" [ngModel]="package_name"
+                                            autocomplete="off">
+                                        <!-- <mat-error *ngIf="editPackageForm.get('package_name').hasError('required')">
+                                            Package Name is required
+                                        </mat-error> -->
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <!-- <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Test Category</mat-label>
+                                        <mat-select [disableOptionCentering]="true" [value]="category_id" #select1
+                                            placeholder="Auto Focus" formControlName="cat_id">
+                                            <mat-select-filter *ngIf="select1.focused" [array]="variables"
+                                                (filteredReturn)="filteredList2 =$event"></mat-select-filter>
+                                            <mat-option *ngFor="let item of filteredList2" [value]="item.cat_id">
+                                                {{item.category_name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="editPackageForm.get('cat_id').hasError('required')">
+                                            Test Category Select is required
+                                        </mat-error>
+                                    </mat-form-field> -->
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Test Category</mat-label>
+                                        <mat-select [disableOptionCentering]="true" [value]="category_id" #select1 placeholder=""
+                                            (selectionChange)="onSelect($event)" formControlName="cat_id">
+                                            <mat-select-filter *ngIf="select1.focused" [array]="variables"
+                                                (filteredReturn)="filteredList2 =$event"></mat-select-filter>
+                                            <mat-option *ngFor="let item of filteredList2" [value]="item.cat_id">
+                                                {{item.category_name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <!-- <mat-error *ngIf="editPackageForm.get('cat_id').hasError('required')">
+                                            Test Category Select is required
+                                        </mat-error> -->
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <!-- <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Test Name</mat-label>
+                                        <mat-select [disableOptionCentering]="true" [(ngModel)]="selectedvariables3"
+                                            #select2 placeholder="Auto Focus" formControlName="test_id"
+                                            [multiple]="true">
+                                            <mat-select-filter *ngIf="select2.focused" [array]="variables"
+                                                (filteredReturn)="filteredList3 =$event"></mat-select-filter>
+                                            <mat-option *ngFor="let item of filteredList3" [value]="item.test_id">
+                                                {{item.test_name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="editPackageForm.get('test_id').hasError('required')">
+                                            Test Name is required
+                                        </mat-error>
+                                    </mat-form-field> -->
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Test Name</mat-label>
+                                        <mat-select [disableOptionCentering]="true" [(ngModel)]="test_id" #select2 placeholder="Auto Focus"
+                                            formControlName="test_id" [multiple]="true">
+                                            <mat-select-filter *ngIf="select2.focused" [array]="variables"
+                                                (filteredReturn)="filteredList3 =$event"></mat-select-filter>
+                                            <mat-option *ngFor="let item of filteredList3" [value]="item.test_id">
+                                                {{item.test_name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <!-- <mat-error *ngIf="editPackageForm.get('test_id').hasError('required')">
+                                            Test Name is required
+                                        </mat-error> -->
+                                    </mat-form-field>
+                                </div>
+                                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Test Report Time</mat-label>
+                                        <input matInput formControlName="test_report_time" required>
+                                        <mat-error *ngIf="addtestForm.get('test_report_time').hasError('required')">
+                                            Test Report Time is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Fasting Time</mat-label>
+                                        <input matInput formControlName="fasting_time" required>
+                                        <mat-error *ngIf="addtestForm.get('fasting_time').hasError('required')">
+                                            Fasting Time is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div> -->
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Test Recommended for</mat-label>
+                                        <mat-select formControlName="test_recommended" [ngModel]="test_recommended"
+                                           >
+                                            <mat-option [value]="'Male'">
+                                                Male
+                                            </mat-option>
+                                            <mat-option [value]="'Female'">
+                                                Female
+                                            </mat-option>
+                                            <mat-option [value]="'Other'">
+                                                Other
+                                            </mat-option>
+                                            <mat-option [value]="'For All'">
+                                                For All
+                                            </mat-option>
+                                        </mat-select>
+                                        <!-- <mat-error *ngIf="editPackageForm.get('test_recommended').hasError('required')">
+                                            Test Recommended Select is required
+                                        </mat-error> -->
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <mat-label>Description</mat-label>
+                                    <ckeditor [editor]="Editor" formControlName="description" [ngModel]="description"
+                                        required></ckeditor>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Upload Image</mat-label>
+                                        <ngx-mat-file-input formControlName="image" [accept]="accept"
+                                            (change)="fileChange($event.target.files)" >
+                                        </ngx-mat-file-input>
+                                        <!-- <mat-error *ngIf="editPackageForm.get('image').hasError('required')">
+                                            Image is required
+                                        </mat-error> -->
+                                    </mat-form-field>
+                                    <a href="{{imageURL+images}}" target="_blank">View Image</a>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Amount</mat-label>
+                                        <input matInput type="number" formControlName="amount" [ngModel]="amount"
+                                             autocomplete="off">
+                                        <mat-icon matSuffix>currency_rupee</mat-icon>
+                                        <!-- <mat-error *ngIf="editPackageForm.get('amount').hasError('required')">
+                                            Amount is required
+                                        </mat-error> -->
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="btn-space" mat-raised-button color="primary">Submit</button>
+                                    <button type="button" mat-button [routerLink]="['/doctor/laboratory-items/package-list']">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

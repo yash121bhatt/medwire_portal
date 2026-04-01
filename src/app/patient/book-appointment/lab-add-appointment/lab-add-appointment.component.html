@@ -1,0 +1,157 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Book Appointment'" [items]="[]" [active_item]="'Book Appointment'">
+            </app-breadcrumb>
+        </div>
+        <div class="row clearfix lab_appointment">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Book Appointment</strong></h2>
+                    </div>
+                    <div class="body">
+                        <form action="" [formGroup]="booAppointmentForm">
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Search by Lab Name</mat-label>
+                                        <input matInput type="text" formControlName="lab_name" autocomplete="off"
+                                            (keyup)="applyFilter($event)">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Search by Package Name</mat-label>
+                                        <input matInput type="text" formControlName="package_name" autocomplete="off"
+                                            (keyup)="applyFilter($event)">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Search by Test Name</mat-label>
+                                        <input matInput type="text" formControlName="test_name" autocomplete="off"
+                                            (keyup)="applyFilter($event)">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Search by Pin Code</mat-label>
+                                        <input matInput type="number" formControlName="pin_code" autocomplete="off"
+                                            (keyup)="applyFilter($event)">
+                                    </mat-form-field>
+                                </div>
+                                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-0">
+                                    <mat-form-field class="example-full-width mb-0" appearance="outline">
+                                        <mat-label>Test Category</mat-label>
+                                        <mat-select [disableOptionCentering]="true"
+                                            (selectionChange)="someMethod($event.value)" #select1
+                                            placeholder="Auto Focus" formControlName="test_name">
+                                            <mat-select-filter *ngIf="select1.focused" [array]="variables"
+                                                (filteredReturn)="filteredList2 =$event"></mat-select-filter>
+                                            <mat-option *ngFor="let item of filteredList2"
+                                                [value]="filteredList2.test_name">
+                                                {{item}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div> -->
+                            </div>
+                           
+                            <!-- <div class="container-auth-form-btn">
+                        <button mat-flat-button color="primary" class="btn-space" (click)="searchLab()" type="submit">
+                           Submit
+                        </button>
+                     </div> -->
+                        </form>
+                        <div class="row">
+                            <div class="col-6">
+                                <div>
+                                    <h4>Search Packages</h4>
+                                    <p>{{packageCount}} results Showing </p>
+                                </div>
+                                <div class="row min-height">
+                                    <div class="col-xl-6 col-lg-6 col-md-4 col-sm-6"
+                                        *ngFor="let listlabData of labListone | paginate: { id: 'pagination1', itemsPerPage: 10, currentPage: pagination1, totalItems: total }">
+                                        <div class="divederLine couponBox dark_border">
+                                            <div class="media doctorsList mt-0 mb-0">
+                                               
+                                                <div class="media-body mediaText">
+                                                    <!-- <p class="font-14 mb-0"><b>{{listlabData.lab_name}}</b></p> -->
+                                                    <p class="font-14">{{listlabData.address}}</p>
+                                                    <p class="font-14"><b>{{listlabData.package_name}}</b></p>
+                                                    <button type="button" class="btn btn-outline-primary out_btn"
+                                                        [routerLink]="['/patient/book-appointment/full-body-test/'+listlabData.package_id+'/'+memberId]">Know
+                                                        More</button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="specialityText consultText">
+                                                    <span>Fees : <strong>&#8377; {{listlabData.amount}}</strong></span>
+                                                </div>
+                                                <ul class="buttonList mb-0 mt-2 align-items-center">
+
+                                                    <li>
+                                                        <button mat-raised-button class="small-btn ms-0" color="primary"
+                                                            type="button"
+                                                            (click)="addToCart(listlabData.lab_id, listlabData.package_id , listlabData.package_name , listlabData.amount, 'package')">
+                                                            Add to Cart
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <pagination-controls id="pagination1" (pageChange)="pagination1 = $event"></pagination-controls>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <h4>Search Laboratory / Tests</h4>
+                                    <p>{{resultCount}} results Showing </p>
+                                </div>
+                                <div class="row min-height" *ngIf="showData">
+                                    <div class="col-xl-6 col-lg-6 col-md-4 col-sm-6"
+                                        *ngFor="let listlabData of labList | paginate: { id: 'pagination2', itemsPerPage : 6, currentPage : pagination2, totalItems: total }">
+                                        <div class="divederLine couponBox dark_border">
+                                            <div class="media doctorsList mt-0 mb-0">
+                                                <img class="mr-3"
+                                                    src="{{listlabData.images?imageURL+listlabData.images:imageURL+'mri_img.png'}}"
+                                                    alt="Generic placeholder image">
+                                                <div class="media-body mediaText">
+                                                    <p class="font-14 mb-0"><b>{{listlabData.lab_name}}</b></p>
+                                                    <p class="font-14">{{listlabData.address}}</p>
+                                                    <p class="font-14">{{listlabData.test_name}}</p>
+                                                    <button type="button" class="btn btn-outline-primary out_btn"
+                                                        [routerLink]="['/patient/book-appointment/single-body-test/'+listlabData.test_id+'/'+memberId]">Know
+                                                        More</button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="specialityText consultText">
+                                                    <span>Fees : <strong>&#8377; {{listlabData.amount}}</strong></span>
+                                                </div>
+                                                <ul class="buttonList mb-0 mt-2 align-items-center">
+                                                    <li>
+                                                        <!-- <button mat-raised-button class="small-btn ms-0" color="primary" type="button" [routerLink]="['../cart-page/'+cartList[0].lab_id]">Add to Cart</button> -->
+                                                        <button mat-raised-button class="small-btn ms-0" color="primary"
+                                                            type="submit"
+                                                            (click)="addToCart(listlabData.lab_id, listlabData.test_id , listlabData.test_name , listlabData.amount, 'test')">Add
+                                                            to Cart</button>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <pagination-controls id="pagination2" (pageChange)="pagination2 = $event"></pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

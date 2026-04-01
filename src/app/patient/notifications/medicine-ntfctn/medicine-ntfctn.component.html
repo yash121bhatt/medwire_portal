@@ -1,0 +1,165 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="['Set Medicine Reminders']" [active_item]="'Medicine Reminders'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="">
+              <div class="row">
+                <div class="col-sm-12 set_header">
+                  <!-- <div class="ngxTableHeader">
+                    <ul class="header-buttons-left ms-0 mb-0">
+                      <li class="dropdown">
+                        <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                        <input placeholder="Search" type="text" class="browser-default search-field"
+                          (keyup)='filterDatatable($event)' aria-label="Search box">
+                      </li>
+                    </ul>
+                    <ul class="header-buttons">
+                      <li class="saveBtn">
+                        <button mat-raised-button color="primary"
+                          [routerLink]="['/patient/notifications/medicine-reminder']">
+                          Add Medicine Schedule
+                        </button>
+                      </li>
+                    </ul>
+                  </div> -->
+
+                  <!-- <ngx-datatable #table class="material table-responsive" [scrollbarH]="false" [scrollbarV]="false"
+                    [rows]="rows" [columns]="columns" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="'60'" [limit]="10">
+
+                    <ngx-datatable-column name="Medicine Name" prop="medicine_name" [width]="130">
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Medicine Type" prop="medicine_type" [width]="130">
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Quantity" prop="quantity" [width]="120"></ngx-datatable-column>
+
+                    <ngx-datatable-column name="Frequency" prop="frequency" [width]="200"></ngx-datatable-column>
+
+                    <ngx-datatable-column name="Time" prop="time" [width]="200"></ngx-datatable-column>
+
+                  </ngx-datatable> -->
+
+                  <div class="ngxTableHeader">
+                    <ul class="header-buttons-left ms-0 mb-0">
+                      <li class="dropdown">
+                        <h2><strong>Medicine Notification</strong></h2>
+                      </li>
+                      <li class="search_filter_box">
+                        <mat-form-field class="example-full-width searchInput " appearance="outline">
+                          <mat-label>Search</mat-label>
+                          <input matInput (keyup)="applyFilter($event)" placeholder="Search" autocomplete="off">
+                        </mat-form-field>
+                      </li>
+                    </ul>
+                    <ul class="header-buttons">
+                      <li>
+                        <button mat-raised-button color="primary" type="button"
+                          [routerLink]="['/patient/notifications/medicine-reminder/'+memberID]">Add Medicine Schedule</button>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="body table-responsive">
+                      <table mat-table [dataSource]="dataSource3" class="w-100" matSort #empTbSort="matSort">
+                         <!-- No Column -->
+                         <ng-container matColumnDef="sno">
+                          <th mat-header-cell *matHeaderCellDef > S.No. </th>
+                          <td mat-cell *matCellDef="let element; let i = index;"> {{ i + 1 }}
+                          </td>
+                        </ng-container>
+                        <!-- No Column -->
+                        <ng-container matColumnDef="medicine_name">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Medicine Name </th>
+                          <td mat-cell *matCellDef="let element"> {{element.medicine_name}}
+                          </td>
+                        </ng-container>
+                        <!-- Name Column -->
+                        <!-- <ng-container matColumnDef="medicine_type">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Medicine Type
+                          </th>
+                          <td mat-cell *matCellDef="let element" [innerHTML]="element.medicine_type">
+                          </td>
+                        </ng-container> -->
+                        <!-- Name Column -->
+                        <!-- <ng-container matColumnDef="quantity">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity
+                          </th>
+                          <td mat-cell *matCellDef="let element" [innerHTML]="element.quantity">
+                          </td>
+                        </ng-container> -->
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="frequency">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Frequency
+                          </th>
+                          <td mat-cell *matCellDef="let element">
+                            {{getFrequencyTime(element.take_time_fourth,element.take_time_third,element.take_time_two,element.take_time_one)}}
+                          </td>
+                        </ng-container>
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="take_time_one">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Time 
+                          </th>
+                          <td mat-cell *matCellDef="let element" >
+                            <div class="dose_time">
+                              {{
+                                (element.take_time_one=='' || element.take_time_one==null)  && (element.take_time_two=='' || element.take_time_two==null )
+                                && (element.take_time_third=='' ||   element.take_time_third==null) && (element.take_time_fourth=='' || element.take_time_fourth==null)?'As needed (PRN)':''  }}
+                                
+    
+                                {{element.take_time_one}} <br> 
+                                {{element.take_time_two}} <br>
+                                {{element.take_time_third}}<br>
+                                {{element.take_time_fourth}} 
+                            </div>
+                        </td>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action
+                          </th>
+                          <td mat-cell *matCellDef="let element" >
+                            <button class="btn tblActnBtn h-auto" (click)="open(mymodal); getdeleteId(element.medicine_id);" >
+                              <i class="material-icons">delete</i>
+                            </button>
+                          </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+                      <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons>
+                      </mat-paginator>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+      <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button> -->
+    </div>
+    <div class="modal-body">
+     Are you sure you want to delete?
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); deleteRecord()" >Ok</button>
+    
+     <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+   </div>
+  </ng-template>
+</section>

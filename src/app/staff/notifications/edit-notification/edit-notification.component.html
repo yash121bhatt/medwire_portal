@@ -1,0 +1,192 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Edit Notification'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="header mx-4">
+                        <h2><strong>Edit Notification</strong></h2>
+                    </div>
+                    <div class="body">
+                        <form class="m-4 mt-0" [formGroup]="editnotificationForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <label class="example-margin font-15 fw_mid">Select Notification For</label>
+                                    <section class="example-section">
+                                        <mat-radio-group formControlName="notification_for"
+                                            [(ngModel)]="notification_for" #radioGroup="matRadioGroup">
+                                            <mat-radio-button class="example-margin" (click)="changediv('doctor_visit')"
+                                                value="doctor">
+                                                For Doctor
+                                            </mat-radio-button>
+                                            <mat-radio-button class="example-margin"
+                                                (click)="changediv('general_visit')" value="general">
+                                                For General
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </section>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-12 mb-3" id="doctor_visit" [hidden]="!doctor">
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <mat-label>Select the Doctor</mat-label>
+                                                <mat-select [disableOptionCentering]="true" #select2
+                                                    placeholder="Auto Focus" [(ngModel)]="doctor_id"
+                                                    formControlName="doctor_id">
+                                                    <mat-select-filter *ngIf="select2.focused" [array]="variables3"
+                                                        (filteredReturn)="filteredList3 =$event"></mat-select-filter>
+                                                    <mat-option *ngFor="let item of filteredList3" [value]="item.id">
+                                                        {{item.full_name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                                <mat-error
+                                                    *ngIf="editnotificationForm.get('doctor_id').hasError('required')">
+                                                    Select atleast one Doctor
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <label class="example-margin font-15 fw_mid">Notification Sent By</label>
+                                    <section class="example-section">
+                                        <mat-radio-group formControlName="notification_sent_by"
+                                            [(ngModel)]="notification_sent_by" #radioGroup2="matRadioGroup">
+                                            <mat-radio-button class="example-margin"
+                                                (click)="changedivtwo('pincode_view')" value="pin_code">
+                                                By Pin code
+                                            </mat-radio-button>
+                                            <mat-radio-button class="example-margin"
+                                                (click)="changedivtwo('patient_view')" value="patient">
+                                                By Patient
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </section>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <div class="row">
+                                        <div class="col-12 mb-3" id="pincode_view" [hidden]="!pincode_radio">
+                                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                                <mat-label>Patient Area Pin Code</mat-label>
+                                                <input matInput [(ngModel)]="patient_pin_code"
+                                                    formControlName="patient_pin_code" type="number">
+                                                <mat-error
+                                                    *ngIf="editnotificationForm.get('patient_pin_code').hasError('required')">
+                                                    Pin Code is required
+                                                </mat-error>
+                                                <mat-icon matSuffix>location_on</mat-icon>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 mb-3" id="patient_view" [hidden]="!patient_radio">
+                                            <mat-form-field class="example-full-width " appearance="outline">
+                                                <mat-label>Select the Patient</mat-label>
+                                                <mat-select [disableOptionCentering]="true" #select3
+                                                    placeholder="Auto Focus" [(ngModel)]="patient_ids"
+                                                    formControlName="patient_ids" [multiple]="true">
+                                                    <mat-select-filter *ngIf="select3.focused" [array]="variables4"
+                                                        (filteredReturn)="filteredList4 =$event"></mat-select-filter>
+                                                    <mat-option *ngFor="let item of filteredList4" [value]="item.id">
+                                                        {{item.full_name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                                <mat-error
+                                                    *ngIf="editnotificationForm.get('patient_ids').hasError('required')">
+                                                    Select atleast one Patient
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <label class="example-margin font-15 fw_mid">Notification Type</label>
+                                    <section class="example-section">
+                                        <mat-radio-group formControlName="notification_type"
+                                            [(ngModel)]="notification_type" #radioGroup3="matRadioGroup">
+                                            <mat-radio-button class="example-margin"
+                                                (click)="changedivthree('onTheSpot')" value="on_spot">
+                                                On the Spot
+                                            </mat-radio-button>
+                                            <mat-radio-button class="example-margin"
+                                                (click)="changedivthree('dateandTime')" value="date_time">
+                                                According to Date & Time
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </section>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <div class="row">
+                                        <div class="col-12 mb-3" id="date_time" [hidden]="!date_time">
+                                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                                <mat-label>Set Date & Time</mat-label>
+                                                <!-- <input matInput type="datetime-local" [min]="currentDate"
+                                                    formControlName="notification_date_time"
+                                                    [(ngModel)]="notification_date_time" placeholder="Set Time"> -->
+                                                    <input matInput [owlDateTimeTrigger]="dt" [(ngModel)]="notification_date_time"  readonly formControlName="notification_date_time" [min]="currentDate" [owlDateTime]="dt">
+                                                    <owl-date-time [hour12Timer] = "true" #dt></owl-date-time><i [owlDateTimeTrigger]="dt" class="material-icons-outlined mannuel_set">calendar_today</i>                
+                                                    <mat-error
+                                                    *ngIf="editnotificationForm.get('notification_date_time').hasError('required')">
+                                                    Date & Time is required
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                               <mat-label>Set Date & Time</mat-label>
+                               <input matInput type="datetime-local" formControlName="notification_date_time" [(ngModel)]="notification_date_time" placeholder="Set Time" required>
+                               <mat-error *ngIf="editnotificationForm.get('notification_date_time').hasError('required')">
+                                  Date & Time is required
+                               </mat-error>
+                            </mat-form-field>
+                         </div> -->
+
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Notification Title</mat-label>
+                                        <input matInput formControlName="notification_title"
+                                            [(ngModel)]="notification_title" required>
+                                        <mat-error
+                                            *ngIf="editnotificationForm.get('notification_title').hasError('required')">
+                                            Title is required
+                                        </mat-error>
+                                        <mat-icon matSuffix>title</mat-icon>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Description</mat-label>
+                                        <textarea matInput formControlName="description" [(ngModel)]="description"
+                                            required></textarea>
+                                        <mat-error *ngIf="editnotificationForm.get('description').hasError('required')">
+                                            Description is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <!-- </div> -->
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="btn-space" mat-raised-button color="primary"
+                                        [disabled]="!editnotificationForm.valid ">Submit</button>
+                                    <button type="button" mat-button
+                                        [routerLink]="['../../notification-list']">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

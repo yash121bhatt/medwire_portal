@@ -1,0 +1,87 @@
+<section class="content">
+    <div class="content-block">
+       <div class="block-header">
+          <!-- breadcrumb -->
+          <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Book Appointment'"></app-breadcrumb>
+       </div>
+       <div class="row clearfix">
+          <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+             <div class="card">
+                <div class="header mx-4">
+                   <h2><strong>Book Appointment</strong></h2>
+                </div>
+                <div class="body">
+                   <form class="m-4 mt-0" [formGroup]="bookappointmentForm" (ngSubmit)="onSubmit()">
+                   <div class="row">
+                     <div class="col-12 mb-3">
+                        <mat-form-field class="example-chip-list w-100 mt-3" appearance="outline">
+                         <mat-label>Reason of Appointment</mat-label>
+                         <mat-chip-list #chipList aria-label="History selection" formControlName="reason">
+                            <mat-chip *ngFor="let history of historys" (removed)="remove(history)"> {{history}} 
+                               <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                           </mat-chip>
+                             <input placeholder="Add Reason of Appointment" #historyInput [formControl]="historyCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event);">
+                         </mat-chip-list>
+                         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                             <mat-option *ngFor="let history of filteredHistorys | async" [value]="history">
+                                 {{history}}
+                             </mat-option>
+                         </mat-autocomplete>
+                        
+                     </mat-form-field>
+                    </div>
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-0">
+                         <mat-form-field class="example-full-width mb-0" appearance="outline">
+                            <mat-label>Select Doctor</mat-label>
+                            <mat-select [disableOptionCentering]="true"  (selectionChange)="onSelect($event)" #select2 placeholder="Auto Focus" formControlName="doctor_id">
+                                <mat-select-filter *ngIf="select2.focused" [array]="variables" (filteredReturn)="filteredList3 =$event"></mat-select-filter>
+                                <mat-option *ngFor="let item of filteredList" [value]="item">
+                                    {{item.doctor_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="bookappointmentForm.get('doctor_id').hasError('required')">
+                               Atleast select one Doctor
+                            </mat-error>
+                         </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-0">
+                         <mat-form-field class="example-full-width mb-3 readonly" appearance="outline">
+                            <mat-label>Doctor Fees</mat-label>
+                            <input matInput formControlName="consulting_fee" [(ngModel)]="consulting_fee" readonly autocomplete="off">
+                         </mat-form-field>
+                      </div>
+                      <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-1">
+                        <mat-form-field class="example-full-width mb-0" appearance="outline">
+                           <mat-label>Booking Date</mat-label>
+                           <input matInput [matDatepicker]="picker" [min]="newDate" formControlName="appointment_date" required autocomplete="off">
+                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                           <mat-datepicker #picker></mat-datepicker>
+                           <mat-error *ngIf="bookappointmentForm.get('appointment_date').hasError('required')">
+                            Booking Date is required
+                           </mat-error>
+                        </mat-form-field>
+                     </div> -->
+                     <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                        <div class="default-time-example timeInput">
+                           <input class="time_pick" formControlName="time_slot" [ngxTimepicker]="defaultTime" placeholder="Booking Time" required>
+                           <ngx-material-timepicker #defaultTime></ngx-material-timepicker>
+                        </div>
+                     </div> -->
+                     <div class="col-12 mb-4">
+                        <mat-checkbox class="mat-primary" formControlName="payment_status" required><span class="font-15 fw_mid">Payment Completed ?</span></mat-checkbox>
+                     </div>
+                  </div>
+                   <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                         <button class="btn-space"  mat-raised-button
+                            color="primary" [disabled]="!bookappointmentForm.valid">Submit</button>
+                         <button type="button" mat-button [routerLink]="['/staff/patient-management/patient-list']">Cancel</button>
+                      </div>
+                   </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>

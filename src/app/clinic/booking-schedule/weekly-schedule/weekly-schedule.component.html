@@ -1,0 +1,488 @@
+<div class="body weekly">
+   <form class="m-4 weekly" [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+   <div class="row">
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+         <!-- <span>Day/Enable</span>  -->
+         <div class="d-flex justify-content-around">
+            <p class="shedule_toggle">Monday</p>
+            <mat-slide-toggle class="shedule_toggle" color="primary" formControlName="monday" [(ngModel)]="monday">ON</mat-slide-toggle>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{monday}}">
+         <span>Morning</span>
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_mon_mor" [ngxTimepicker]="defaultValue1"
+                [(ngModel)]="start_time_mon_mor" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue1></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_mon_mor" [ngxTimepicker]="defaultValue2"
+                   [(ngModel)]="end_time_mon_mor" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue2></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{monday}}">
+         <span>After Noon</span>
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_mon_an" [ngxTimepicker]="defaultValue3"
+                   [(ngModel)]="start_time_mon_an" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue3></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_mon_an" [ngxTimepicker]="defaultValue4"
+                   [(ngModel)]="end_time_mon_an" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue4></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{monday}}">
+         <span>Evening</span> 
+         <div class="row">
+            <div class="col-6 mb-0">
+               <div class="default-time-example timeInput">            
+                 <input aria-label="default time" formControlName="start_time_mon_evn" [ngxTimepicker]="defaultValue5"
+                    [(ngModel)]="start_time_mon_evn" placeholder="Opening Time" readonly required="true">
+                 <ngx-material-timepicker #defaultValue5></ngx-material-timepicker>
+               </div>
+            </div>
+            <div class="col-6 mb-0">
+               <div class="default-time-example timeInput">            
+                 <input aria-label="default time" formControlName="end_time_mon_evn" [ngxTimepicker]="defaultValue6"
+                    [(ngModel)]="end_time_mon_evn" placeholder="closing Time" readonly required="true">
+                 <ngx-material-timepicker #defaultValue6></ngx-material-timepicker>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+         <!-- <span>Day/Enable</span>  -->
+         <div class="d-flex justify-content-around">
+            <p class="shedule_toggle">Tuesday</p>
+            <mat-slide-toggle class="shedule_toggle" color="primary" formControlName="tuesday" [(ngModel)]="tuesday">ON</mat-slide-toggle>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{tuesday}}">
+         <!-- <span>Morning</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_tus_mor" [ngxTimepicker]="defaultValue7"
+                [(ngModel)]="start_time_tus_mor" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue7></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_tus_mor" [ngxTimepicker]="defaultValue8"
+                   [(ngModel)]="end_time_tus_mor" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue8></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{tuesday}}">
+         <!-- <span>After Noon</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_tus_an" [ngxTimepicker]="defaultValue9"
+                [(ngModel)]="start_time_tus_an" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue9></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_tus_an" [ngxTimepicker]="defaultValue10"
+                   [(ngModel)]="end_time_tus_an" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue10></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{tuesday}}">
+         <!-- <span>Evening</span>  -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_tus_evn" [ngxTimepicker]="defaultValue11"
+                [(ngModel)]="start_time_tus_evn" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue11></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_tus_evn" [ngxTimepicker]="defaultValue12"
+                   [(ngModel)]="end_time_tus_evn" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue12></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+   </div>
+   <div class="row ">
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+         <!-- <span>Day/Enable</span>  -->
+         <div class="d-flex justify-content-around">
+            <p class="shedule_toggle">Wednesday</p>
+            <mat-slide-toggle class="shedule_toggle" color="primary" formControlName="wednesday" [(ngModel)]="wednesday">ON</mat-slide-toggle>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{wednesday}}">
+         <!-- <span>Morning</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_wed_mor" [ngxTimepicker]="defaultValue13"
+                [(ngModel)]="start_time_wed_mor" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue13></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_wed_mor" [ngxTimepicker]="defaultValue14"
+                   [(ngModel)]="end_time_wed_mor" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue14></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{wednesday}}">
+         <!-- <span>After Noon</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_wed_an" [ngxTimepicker]="defaultValue15"
+                [(ngModel)]="start_time_wed_an" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue15></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_wed_an" [ngxTimepicker]="defaultValue16"
+                   [(ngModel)]="end_time_wed_an" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue16></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{wednesday}}">
+         <!-- <span>Evening</span>  -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_wed_evn" [ngxTimepicker]="defaultValue17"
+                [(ngModel)]="start_time_wed_evn" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue17></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_wed_evn" [ngxTimepicker]="defaultValue18"
+                   [(ngModel)]="end_time_wed_evn" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue18></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+         <!-- <span>Day/Enable</span>  -->
+         <div class="d-flex justify-content-around">
+            <p class="shedule_toggle">Thursday</p>
+            <mat-slide-toggle class="shedule_toggle" color="primary" formControlName="thursday" [(ngModel)]="thursday">ON</mat-slide-toggle>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{thursday}}">
+         <!-- <span>Morning</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_thur_mor" [ngxTimepicker]="defaultValue19"
+                [(ngModel)]="start_time_thur_mor" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue19></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_thur_mor" [ngxTimepicker]="defaultValue20"
+                   [(ngModel)]="end_time_thur_mor" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue20></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{thursday}}">
+         <!-- <span>After Noon</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_thur_an" [ngxTimepicker]="defaultValue21"
+                [(ngModel)]="start_time_thur_an" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue21></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_thur_an" [ngxTimepicker]="defaultValue22"
+                   [(ngModel)]="end_time_thur_an" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue22></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{thursday}}">
+         <!-- <span>Evening</span>  -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_thur_evn" [ngxTimepicker]="defaultValue23"
+                [(ngModel)]="start_time_thur_evn" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue23></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_thur_evn" [ngxTimepicker]="defaultValue24"
+                   [(ngModel)]="end_time_thur_evn" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue24></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+         <!-- <span>Day/Enable</span>  -->
+         <div class="d-flex justify-content-around">
+            <p class="shedule_toggle">Friday</p>
+            <mat-slide-toggle class="shedule_toggle" color="primary" formControlName="friday" [(ngModel)]="friday">ON</mat-slide-toggle>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{friday}}">
+         <!-- <span>Morning</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_fri_mor" [ngxTimepicker]="defaultValue25"
+                [(ngModel)]="start_time_fri_mor" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue25></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_fri_mor" [ngxTimepicker]="defaultValue26"
+                   [(ngModel)]="end_time_fri_mor" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue26></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{friday}}">
+         <!-- <span>After Noon</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_fri_an" [ngxTimepicker]="defaultValue27"
+                [(ngModel)]="start_time_fri_an" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue27></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_fri_an" [ngxTimepicker]="defaultValue28"
+                   [(ngModel)]="end_time_fri_an" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue28></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{friday}}">
+         <!-- <span>Evening</span>  -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_fri_evn" [ngxTimepicker]="defaultValue29"
+                [(ngModel)]="start_time_fri_evn" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue29></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_fri_evn" [ngxTimepicker]="defaultValue30"
+                   [(ngModel)]="end_time_fri_evn" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue30></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+         <!-- <span>Day/Enable</span>  -->
+         <div class="d-flex justify-content-around">
+            <p class="shedule_toggle">Saturday</p>
+            <mat-slide-toggle class="shedule_toggle" color="primary" formControlName="saturday" [(ngModel)]="saturday">ON</mat-slide-toggle>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{saturday}}">
+         <!-- <span>Morning</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_sat_mor" [ngxTimepicker]="defaultValue31"
+                [(ngModel)]="start_time_sat_mor" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue31></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_sat_mor" [ngxTimepicker]="defaultValue32"
+                   [(ngModel)]="end_time_sat_mor" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue32></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{saturday}}">
+         <!-- <span>After Noon</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_sat_an" [ngxTimepicker]="defaultValue33"
+                [(ngModel)]="start_time_sat_an" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue33></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_sat_an" [ngxTimepicker]="defaultValue34"
+                   [(ngModel)]="end_time_sat_an" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue34></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{saturday}}">
+         <!-- <span>Evening</span>  -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_sat_evn" [ngxTimepicker]="defaultValue35"
+                [(ngModel)]="start_time_sat_evn" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue35></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_sat_evn" [ngxTimepicker]="defaultValue36"
+                   [(ngModel)]="end_time_sat_evn" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue36></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+         <!-- <span>Day/Enable</span>  -->
+         <div class="d-flex justify-content-around">
+            <p class="shedule_toggle">Sunday</p>
+            <mat-slide-toggle class="shedule_toggle" color="primary" formControlName="sunday" [(ngModel)]="sunday">ON</mat-slide-toggle>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{sunday}}">
+         <!-- <span>Morning</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_sun_mor" [ngxTimepicker]="defaultValue37"
+                [(ngModel)]="start_time_sun_mor" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue37></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_sun_mor" [ngxTimepicker]="defaultValue38"
+                   [(ngModel)]="end_time_sun_mor" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue38></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{sunday}}">
+         <!-- <span>After Noon</span> -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_sun_an" [ngxTimepicker]="defaultValue39"
+                [(ngModel)]="start_time_sun_an" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue39></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_sun_an" [ngxTimepicker]="defaultValue40"
+                   [(ngModel)]="end_time_sun_an" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue40></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 mb-0 {{sunday}}">
+         <!-- <span>Evening</span>  -->
+         <div class="row">
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="start_time_sun_evn" [ngxTimepicker]="defaultValue41"
+                [(ngModel)]="start_time_sun_evn" placeholder="Opening Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue41></ngx-material-timepicker>
+              </div>
+           </div>
+           <div class="col-6 mb-0">
+              <div class="default-time-example timeInput">            
+                <input aria-label="default time" formControlName="end_time_sun_evn" [ngxTimepicker]="defaultValue42"
+                   [(ngModel)]="end_time_sun_evn" placeholder="closing Time" readonly required="true">
+                <ngx-material-timepicker #defaultValue42></ngx-material-timepicker>
+              </div>
+           </div>
+        </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 my-3">
+         <button class="btn-space"  mat-raised-button
+         color="primary"  [routerLink]="['../doctor-list']" >Submit</button>
+         <button type="button" mat-button [routerLink]="['../../doctor-list']">Cancel</button>
+      </div>
+   </div>
+   </form>
+
+   <div class="row">
+      <h5>Note:</h5>
+      <h6>Morning
+         5:00 AM -12 Noon,
+         Afternoon
+         12:00 Noon - 6:00 PM,
+         Evening
+         6:00 PM - 11:00 PM</h6>
+
+   </div>
+</div>

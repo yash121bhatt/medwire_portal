@@ -1,0 +1,481 @@
+<div class="body upload_document ps-sm-0 pt-4 ">
+<div class="row profile-access-dcard">
+  <div class="row mt-2 dashboard">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="body">
+          <!-- <div *ngIf="editbtnCondition" class="float-right editbtndashboard">
+            <a class="editIcon" [routerLink]="['/patient/editprofile']">
+              <mat-icon class="example-tab-icon msr-2 editico">edit_copy</mat-icon>
+            </a>
+          </div> -->
+          <div class="row align-items-center">
+
+            <div class="col-md-4" *ngFor="let userdata of Users">
+
+              <img src="{{userdata.imgName?imageURL+userdata.imgName:imageURL+'demouser.png' }}" alt="" class="">
+            </div>
+            <div class="col-md-8">
+
+              <h4 class="font-20 weight-500 mb-2">
+           
+                <div class="weight-600 font-30 col-blue pt-1" *ngFor="let userdata of Users">
+                  {{userdata.first_name}}
+                </div>
+
+              </h4>
+
+              <div class="weight-600 font-30 col-blue pt-1" *ngFor="let userdata of Users">
+                <h5> MedWire ID - {{userdata.permanent_id??'-' }}</h5>
+                <h5> Date of Birth - {{userdata.date_of_birth | date:'dd/MM/yyyy' }}</h5>
+                <h5> Age - {{userdata.age}}</h5>
+                <h5> Gender - {{userdata.gender}}</h5>
+                <h5> Blood Group - {{userdata.blood_group}}</h5>
+              </div>
+              <!-- <p class="font-18 max-width-600">We would like to take this opportunity to welcome you to our practice
+                and to thank you
+                for choosing our physicians to participate in your healthcare. We look forward to
+                providing you with personalized, comprehensive health care focusing on wellness and
+                prevention.</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="card card-statistic-2">
+     
+        <div class="clearfix">
+          <div class="card-icon-only shadow-primary float-start">
+            <img src="assets/images/pages/heart-rate.png" alt="">
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="float-end">Heart Rate</h5>
+            </div>
+            <div class="col-green" >
+              <h3 class="font-weight-bold float-end mb-0">{{heart_rate}}   beats/min</h3>
+            </div>
+          
+          </div>
+        </div>
+      
+        <!-- <div class="card-content msl-4 mb-3">
+          <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 10% Higher Then Last Month
+          </p>
+        </div> -->
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12" >
+      <div class="card card-statistic-2">
+        <div class="clearfix">
+          <div class="card-icon-only shadow-primary float-start">
+            <img src="assets/images/pages/blood-pressure.png" alt="">
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="float-end">Blood Pressure </h5>
+            </div>
+          
+            <div class="col-green">
+              <h3 class="font-weight-bold float-end mb-0">{{blood_pressure}} mmHg</h3>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card-content msl-4 mb-3">
+          <p class="m-b-0 d-flex"><i class="material-icons col-orange psr-2">trending_down</i> 07% Less Then Last
+            Month
+          </p>
+        </div> -->
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12" >
+      <div class="card card-statistic-2">
+        <div class="clearfix">
+          <div class="card-icon-only shadow-primary float-start">
+            <img src="assets/images/pages/Respiratoryimg.png" alt="">
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="float-end">Respiratory Rate</h5>
+            </div>
+            <div class="col-green">
+              <h3 class="font-weight-bold float-end mb-0">{{respiratory_rate}} breaths/min</h3>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card-content msl-4 mb-3">
+          <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 12% Higher Then Last Month
+          </p>
+        </div> -->
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12"  >
+      <div class="card card-statistic-2">
+        <div class="clearfix">
+          <div class="card-icon-only shadow-primary float-start">
+            <img src="assets/images/pages/oxygen-satu.png" alt="">
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="float-end">Oxygen Saturation</h5>
+            </div>
+            <div class="col-green">
+              <h3 class="font-weight-bold float-end mb-0">{{oxygen_saturation}} %</h3>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card-content msl-4 mb-3">
+          <p class="m-b-0 d-flex"><i class="material-icons col-orange psr-2">trending_down</i> 22% Less Then Last
+            Month
+          </p>
+        </div> -->
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12"  >
+      <div class="card card-statistic-2">
+        <div class="clearfix">
+          <div class="card-icon-only shadow-primary float-start">
+            <img src="assets/images/pages/thermometer.png" alt="">
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="float-end">Temperature</h5>
+            </div>
+            <div class="col-green" >
+              <h3 class="font-weight-bold float-end mb-0">{{temperature}} &#176;F</h3>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card-content msl-4 mb-3">
+          <p class="m-b-0 d-flex"><i class="material-icons col-orange psr-2">trending_down</i> 07% Less Then Last
+            Month
+          </p>
+        </div> -->
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="card card-statistic-2">
+        <div class="clearfix">
+          <div class="card-icon-only shadow-primary float-start">
+            <img src="assets/images/pages/bmiimg.png" alt="">
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="float-end">BMI</h5>
+            </div>
+            <div class="col-green" >
+              <h3 class="font-weight-bold float-end mb-0">{{BMI | number : '.2-2'}} kg/m<sup>2</sup></h3>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card-content msl-4 mb-3">
+          <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 12% Higher Then Last Month
+          </p>
+        </div> -->
+      </div>
+ 
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+      <button type="submit" (click)="loadHealthGraphComponent()" class="btn-space" mat-raised-button
+         color="primary">View Graph</button>
+         <app-health-graph *ngIf="healthGroupCondition" ></app-health-graph>
+   </div>
+  
+   <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+    <div class="card">
+      <div class="body">
+        <mat-tab-group dynamicHeight>
+          <mat-tab label="My Test Report">
+            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table"  *ngFor="let labrDoc of labReportLatestList ; let i=index">
+              <!-- <div *ngIf="i<5"> -->
+              <li class="app-list">
+                <img alt="image" class="rounded-circle" width="40" src="{{labrDoc.profile_image?imageURL+labrDoc.profile_image:imageURL+'demouser.png'}}">
+                <div class="set-flex">
+                  <div class="media-title font-16">{{labrDoc.first_name}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Date</div>
+                  <div class="media-title font-16">{{labrDoc.created_at | date : 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Name</div>
+                  <div class="text-job font-16">{{labrDoc.sub_category}}</div>
+                </div>
+                <!-- <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Contact Number</div>
+                  <div class="text-job font-16">+123 676545655</div>
+                </div> -->
+                <div class="media-cta px-4">
+                  <td>
+                    <div>
+                      <span>
+                      <a class="imgSizeIcon"
+                      *ngIf="((labrDoc.dcm_document_url != null && labrDoc.dcm_document_url != '') ? true : false)"
+                      target="__blank" href="{{labrDoc.dcm_document_url}}">
+                      {{labrDoc.dcm_document_url ? viewDicomFile(labrDoc.dcm_document_url??"-") : "-"}} <div
+                      [innerHtml]="htmlReturn"></div> </a>
+                      </span>
+                      <span>
+                      <a class="imgSizeIcon"
+                      *ngIf="((labrDoc.document != null && labrDoc.document != '') ? true : false)"
+                      href="{{labrDoc.document}}" target="_blank">
+                      {{labrDoc.document ? returnPdf(labrDoc.document??'-') : "-"}} <div [innerHtml]="htmlReturn">
+                      </div> </a>
+                      </span>
+                      
+                      </div>
+                    <!-- <a class="view" [href]="imageURL+labrDoc.document_file">View</a> -->
+                  </td>
+                  
+                </div>
+              </li>
+            <!-- </div> -->
+            </ul>
+          </mat-tab>
+          <mat-tab label="Prescription">
+            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table" *ngFor="let labDoc of labReport">
+              <li class="app-list">
+                <img alt="image" class="rounded-circle" width="40" src="{{labDoc.profile_image?imageURL+labDoc.profile_image:imageURL+'demouser.png' }}">
+                <div class="set-flex">
+                  <div class="media-title font-16">{{labDoc.first_name}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Date</div>
+                  <div class="media-title font-16">{{labDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Name</div>
+                  <div class="text-job font-16">{{labDoc.document_title}}</div>
+                </div>
+                <div class="media-cta px-4">
+                  <td>
+                    <a class="view" [href]="imageURL+labDoc.document_file">View</a>
+                  </td>
+                  <!-- <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menu2" aria-label="Example icon-button with a menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu2="matMenu">
+                      <button mat-menu-item (click)="shareToMail(imageURL+labDoc.document_file)">
+                        <mat-icon>mail</mat-icon>
+                        <span>mail</span>
+                      </button>
+                    </mat-menu>
+                  </td> -->
+                  
+                </div>
+              </li>
+            </ul>
+          </mat-tab>
+          <mat-tab label="Vaccination">
+            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table" *ngFor="let vacDoc of vacReport">
+              <li class="app-list">
+                <img alt="image" class="rounded-circle" width="40" src="{{vacDoc.profile_image?imageURL+vacDoc.profile_image:imageURL+'demouser.png'}}">
+                <div class="set-flex">
+                  <div class="media-title font-16">{{vacDoc.first_name}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Date</div>
+                  <div class="media-title font-16">{{vacDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Name</div>
+                  <div class="text-job font-16">{{vacDoc.document_title}}</div>
+                </div>
+                <div class="media-cta px-4">
+                  <td>
+                    <a class="view" [href]="imageURL+vacDoc.document_file">View</a>
+                  </td>
+                  <!-- <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menu1" aria-label="Example icon-button with a menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu1="matMenu">
+                      <button mat-menu-item (click)="shareToMail(imageURL+vacDoc.document_file)">
+                        <mat-icon>mail</mat-icon>
+                        <span>mail</span>
+                      </button>
+                    </mat-menu>
+                  </td> -->
+                </div>
+              </li>
+            </ul>
+          </mat-tab>
+          <mat-tab label="Procedure Report">
+            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table" *ngFor="let proDoc of procedureReport">
+              <li class="app-list">
+                <img alt="image" class="rounded-circle" width="40" src="{{proDoc.profile_image?imageURL+proDoc.profile_image:imageURL+'demouser.png'}}">
+                <div class="set-flex">
+                  <div class="media-title font-16">{{proDoc.first_name}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Date</div>
+                  <div class="media-title font-16">{{proDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Name</div>
+                  <div class="text-job font-16">{{proDoc.document_title}}</div>
+                </div>
+                <div class="media-cta px-4">
+                  <td>
+                    <a class="view" [href]="imageURL+proDoc.document_file">View</a>
+                  </td>
+                  <!-- <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menu1" aria-label="Example icon-button with a menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu1="matMenu">
+                      <button mat-menu-item (click)="shareToMail(imageURL+proDoc.document_file)">
+                        <mat-icon>mail</mat-icon>
+                        <span>mail</span>
+                      </button>
+                    </mat-menu>
+                  </td> -->
+                </div>
+              </li>
+            </ul>
+          </mat-tab>
+          <mat-tab label="Discharge Summery">
+            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table"  *ngFor="let dischargeDoc of dischargeReport">
+              <li class="app-list">
+                <img alt="image" class="rounded-circle" width="40" src="{{dischargeDoc.profile_image?imageURL+dischargeDoc.profile_image:imageURL+'demouser.png'}}">
+                <div class="set-flex">
+                  <div class="media-title font-16">{{dischargeDoc.first_name}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Date</div>
+                  <div class="media-title font-16">{{dischargeDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Name</div>
+                  <div class="text-job font-16">{{dischargeDoc.document_title}}</div>
+                </div>
+                <div class="media-cta px-4">
+                  <td>
+                    <a class="view" [href]="imageURL+dischargeDoc.document_file">View</a>
+                  </td>
+                  <!-- <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menu1" aria-label="Example icon-button with a menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu1="matMenu">
+                      <button mat-menu-item (click)="shareToMail(imageURL+dischargeDoc.document_file)">
+                        <mat-icon>mail</mat-icon>
+                        <span>mail</span>
+                      </button>
+                    </mat-menu>
+                  </td> -->
+                </div>
+              </li>
+            </ul>
+          </mat-tab>
+          <mat-tab label="Medical Bills">
+            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table" *ngFor="let billsDoc of billsReport">
+              <li class="app-list">
+                <img alt="image" class="rounded-circle" width="40" src="{{billsDoc.profile_image?imageURL+billsDoc.profile_image:imageURL+'demouser.png'}}">
+                <div class="set-flex">
+                  <div class="media-title font-16">{{billsDoc.first_name}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Date</div>
+                  <div class="media-title font-16">{{billsDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Name</div>
+                  <div class="text-job font-16">{{billsDoc.document_title}}</div>
+                </div>
+                <div class="media-cta px-4">
+                  <td>
+                    <a class="view" [href]="imageURL+billsDoc.document_file">View</a>
+                  </td>
+                  <!-- <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menu1" aria-label="Example icon-button with a menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu1="matMenu">
+                      <button mat-menu-item (click)="shareToMail(imageURL+billsDoc.document_file)">
+                        <mat-icon>mail</mat-icon>
+                        <span>mail</span>
+                      </button>
+                    </mat-menu>
+                  </td> -->
+                </div>
+              </li>
+            </ul>
+          </mat-tab>
+          <mat-tab label="Insurance Documents">
+            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table" *ngFor="let inssuranceDoc of insuranceReport">
+              <li class="app-list">
+                <img alt="image" class="rounded-circle" width="40" src="{{inssuranceDoc.profile_image?imageURL+inssuranceDoc.profile_image:imageURL+'demouser.png'}}">
+                <div class="set-flex">
+                  <div class="media-title font-16">{{inssuranceDoc.first_name}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Date</div>
+                  <div class="media-title font-16">{{inssuranceDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="set-flex">
+                  <div class="media-title text-muted mb-0">Document Name</div>
+                  <div class="text-job font-16">{{inssuranceDoc.document_title}}</div>
+                </div>
+                <div class="media-cta px-4">
+                  <td>
+                    <a class="view" [href]="imageURL+inssuranceDoc.document_file">View</a>
+                  </td>
+                  <!-- <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="shareToMail(imageURL+inssuranceDoc.document_file)">
+                        <mat-icon>mail</mat-icon>
+                        <span>mail</span>
+                      </button>
+                    </mat-menu>
+                  </td> -->
+                </div>
+              </li>
+            </ul>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="card">
+      <div class="header">
+        <h2>Upload Reports/Documents</h2>
+      </div>
+      <div class="body">
+        <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
+          <li class="report-list" *ngFor="let listData of dataSource">
+            <div class="d-flex">
+              <i class="far fa-file file-style col-red font-20"></i>
+              <div class="media-title font-16">{{listData.document_title}}</div>
+            </div>
+            <div class="ms-auto">
+              <td>
+                {{checkCondition(imageURL+listData.document_file??'-')}}
+                <div *ngIf="dcmDisable">
+                  <a [href]="listData.document"  class="imgSizeIcon"  [download]="listData.document_title" target="_blank">
+                    <div [innerHTML]="htmlReturnDicom"></div>
+                  </a>
+                </div>
+                <div *ngIf="pdfDisable">
+                  <a [href]="listData.document" [download]="listData.document_title" target="_blank">
+                    <i class="far fa-arrow-alt-circle-down"></i>
+                  </a>
+                </div>
+                
+              </td>
+            </div>
+          </li>
+        
+        </ul>
+      </div>
+      </div>
+  </div>
+</div>

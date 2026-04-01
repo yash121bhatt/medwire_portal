@@ -1,0 +1,298 @@
+<form class="margin_bottom m-4" [formGroup]="prescribeTabForm" (submit)="saveProduct(prescribeTabForm)">
+   <!-- Chief Complaint -->
+   <div class="d-flex justify-content-between align-items-center">
+      <h5 class="">Chief Complaint</h5>
+      <!-- <button class="btn-space" mat-raised-button color="primary" (click)="addItem()">Add More</button> -->
+   </div>
+   <div formArrayName="chief_variants" *ngFor="let item of prescribeTabForm.get('chief_variants')['controls']; let i = index;">
+      <div [formGroupName]="i">
+         <div class="row">
+            <div class="col-lg-12 col-md-12 mb-0">
+
+               <mat-form-field class="example-full-width mb-0 pb-0" appearance="outline">
+                  <textarea matInput formControlName="chief_complaint" cols="30" rows="6" placeholder="Chief Complaint" ></textarea>
+                  <mat-label>Chief Complaint</mat-label>
+                  <!-- <input matInput formControlName="chief_complaint" > -->
+               </mat-form-field>
+            </div>
+            <!-- <div class="col-lg-3 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mt-1 mb-0 pb-0" appearance="outline">
+                   <mat-label>Duration</mat-label>
+                   <mat-select formControlName="duration"  >
+                      <mat-option [value]="'One day'">One day</mat-option>
+                      <mat-option [value]="'Two day'">Two day</mat-option>
+                      <mat-option [value]="'Three day'">Three day</mat-option>
+                      <mat-option [value]="'Four day'">Four day</mat-option>
+                      <mat-option [value]="'Five day'">Five day</mat-option>
+                      <mat-option [value]="'Six day'">Six day</mat-option>
+                      <mat-option [value]="'One Week'">One Week</mat-option>
+                      <mat-option [value]="'Two Week'">Two Week</mat-option>
+                      <mat-option [value]="'Three Week'">Three Week</mat-option>
+                      <mat-option [value]="'One Month'">One Month</mat-option>
+                      <mat-option [value]="'Two Month'">Two Month</mat-option>
+                   </mat-select>
+                </mat-form-field>
+            </div> -->
+         </div>
+         <!-- <div class="text-end pb-2">
+            <button class="btn-space dlt-btn " mat-raised-button color="warn">
+            <mat-icon class="delete-btn" (click)="removeItem(i)" *ngIf="i > 0">delete_forever</mat-icon>
+            </button>
+         </div> -->
+      </div>
+   </div>
+   <!-- H/O Presentation Illness -->
+   <div class="d-flex justify-content-between align-items-center">
+      <h5 class="">History of presenting illness</h5>
+      <!-- <button class="btn-space" mat-raised-button color="primary" (click)="addItem2()">Add More</button> -->
+   </div>
+   <div formArrayName="presentation_variants" *ngFor="let item of prescribeTabForm.get('presentation_variants')['controls']; let i = index;">
+      <div [formGroupName]="i">
+         <div class="row">
+            <div class="col-lg-12 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mb-0 pb-0" appearance="outline">
+                  <textarea matInput formControlName="presentation_illness" cols="30" rows="6" placeholder="History of presenting illness" ></textarea>
+                  <mat-label>History of presenting illness</mat-label>
+                  <!-- <input matInput formControlName="presentation_illness" > -->
+               </mat-form-field>
+            </div>
+            <!-- <div class="col-lg-3 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mt-1 mb-0 pb-0" appearance="outline">
+                   <mat-label>Duration</mat-label>
+                   <mat-select formControlName="duration"  >
+                      <mat-option [value]="'One day'">One day</mat-option>
+                      <mat-option [value]="'Two day'">Two day</mat-option>
+                      <mat-option [value]="'Three day'">Three day</mat-option>
+                      <mat-option [value]="'Four day'">Four day</mat-option>
+                      <mat-option [value]="'Five day'">Five day</mat-option>
+                      <mat-option [value]="'Six day'">Six day</mat-option>
+                      <mat-option [value]="'One Week'">One Week</mat-option>
+                      <mat-option [value]="'Two Week'">Two Week</mat-option>
+                      <mat-option [value]="'Three Week'">Three Week</mat-option>
+                      <mat-option [value]="'One Month'">One Month</mat-option>
+                      <mat-option [value]="'Two Month'">Two Month</mat-option>
+                   </mat-select>
+                </mat-form-field>
+            </div> -->
+         </div>
+         <!-- <div class="text-end pb-2">
+            <button class="btn-space dlt-btn" mat-raised-button color="warn">
+            <mat-icon class="delete-btn" (click)="removeItem2(i)" *ngIf="i > 0">delete_forever</mat-icon>
+            </button>
+         </div> -->
+      </div>
+   </div>
+   <!-- Past Medical History -->
+   <div class="d-flex justify-content-between align-items-center">
+      <h5 class="">Past Medical History</h5>
+      <!-- <button class="btn-space" mat-raised-button color="primary" (click)="addItem3()">Add More</button> -->
+   </div>
+   <div formArrayName="past_medical_variants" *ngFor="let item of prescribeTabForm.get('past_medical_variants')['controls']; let i = index;">
+      <div [formGroupName]="i">
+         <div class="row">
+            <div class="col-lg-12 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mb-0 pb-0" appearance="outline">
+                  <mat-label>Past Medical History</mat-label>
+                  <textarea matInput formControlName="past_medical" cols="30" rows="6" placeholder="Past Medical History" ></textarea>
+                  <!-- <input matInput formControlName="past_medical" > -->
+               </mat-form-field>
+            </div>
+            <!-- <div class="col-lg-3 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mt-1 mb-0 pb-0" appearance="outline">
+                   <mat-label>Duration</mat-label>
+                   <mat-select formControlName="duration"  >
+                      <mat-option [value]="'One day'">One day</mat-option>
+                      <mat-option [value]="'Two day'">Two day</mat-option>
+                      <mat-option [value]="'Three day'">Three day</mat-option>
+                      <mat-option [value]="'Four day'">Four day</mat-option>
+                      <mat-option [value]="'Five day'">Five day</mat-option>
+                      <mat-option [value]="'Six day'">Six day</mat-option>
+                      <mat-option [value]="'One Week'">One Week</mat-option>
+                      <mat-option [value]="'Two Week'">Two Week</mat-option>
+                      <mat-option [value]="'Three Week'">Three Week</mat-option>
+                      <mat-option [value]="'One Month'">One Month</mat-option>
+                      <mat-option [value]="'Two Month'">Two Month</mat-option>
+                   </mat-select>
+                </mat-form-field>
+            </div> -->
+         </div>
+         <!-- <div class="text-end pb-2">
+            <button class="btn-space dlt-btn" mat-raised-button color="warn">
+            <mat-icon class="delete-btn" (click)="removeItem3(i)" *ngIf="i > 0">delete_forever</mat-icon>
+            </button>
+         </div> -->
+      </div>
+   </div>
+   <!-- Alergy -->
+   <div class="d-flex justify-content-between align-items-center">
+      <h5 class="">Allergy</h5>
+      <!-- <button class="btn-space" mat-raised-button color="primary" (click)="addItem4()">Add More</button> -->
+   </div>
+   <div formArrayName="alergy_variants" *ngFor="let item of prescribeTabForm.get('alergy_variants')['controls']; let i = index;">
+      <div [formGroupName]="i">
+         <div class="row">
+            <div class="col-lg-12 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mb-0 pb-0" appearance="outline">
+                  <mat-label>Allergy</mat-label>
+                  <textarea matInput formControlName="alergy" cols="30" rows="6" placeholder="Allergy" ></textarea>
+                  <!-- <input matInput formControlName="alergy" > -->
+               </mat-form-field>
+            </div>
+            <!-- <div class="col-lg-3 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mt-1 mb-0 pb-0" appearance="outline">
+                   <mat-label>Duration</mat-label>
+                   <mat-select formControlName="duration"  >
+                      <mat-option [value]="'One day'">One day</mat-option>
+                      <mat-option [value]="'Two day'">Two day</mat-option>
+                      <mat-option [value]="'Three day'">Three day</mat-option>
+                      <mat-option [value]="'Four day'">Four day</mat-option>
+                      <mat-option [value]="'Five day'">Five day</mat-option>
+                      <mat-option [value]="'Six day'">Six day</mat-option>
+                      <mat-option [value]="'One Week'">One Week</mat-option>
+                      <mat-option [value]="'Two Week'">Two Week</mat-option>
+                      <mat-option [value]="'Three Week'">Three Week</mat-option>
+                      <mat-option [value]="'One Month'">One Month</mat-option>
+                      <mat-option [value]="'Two Month'">Two Month</mat-option>
+                   </mat-select>
+                </mat-form-field>
+            </div> -->
+         </div>
+         <!-- <div class="text-end pb-2">
+            <button class="btn-space dlt-btn" mat-raised-button color="warn">
+            <mat-icon class="delete-btn" (click)="removeItem4(i)" *ngIf="i > 0">delete_forever</mat-icon>
+            </button>
+         </div> -->
+      </div>
+   </div>
+   <!-- Parent History -->
+   <div class="d-flex justify-content-between align-items-center">
+      <h5 class="">Family History</h5>
+      <!-- <button class="btn-space" mat-raised-button color="primary" (click)="addItem5()">Add More</button> -->
+   </div>
+   <div formArrayName="parenthistory_variants" *ngFor="let item of prescribeTabForm.get('parenthistory_variants')['controls']; let i = index;">
+      <div [formGroupName]="i">
+         <div class="row">
+            <div class="col-lg-12 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mb-0 pb-0" appearance="outline">
+                  <mat-label>Family History</mat-label>
+                  <textarea matInput formControlName="parent_history" cols="30" rows="6" placeholder="Family History" ></textarea>
+
+                  <!-- <input matInput formControlName="parent_history" > -->
+               </mat-form-field>
+            </div>
+            <!-- <div class="col-lg-3 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mt-1 mb-0 pb-0" appearance="outline">
+                   <mat-label>Duration</mat-label>
+                   <mat-select formControlName="duration"  >
+                      <mat-option [value]="'One day'">One day</mat-option>
+                      <mat-option [value]="'Two day'">Two day</mat-option>
+                      <mat-option [value]="'Three day'">Three day</mat-option>
+                      <mat-option [value]="'Four day'">Four day</mat-option>
+                      <mat-option [value]="'Five day'">Five day</mat-option>
+                      <mat-option [value]="'Six day'">Six day</mat-option>
+                      <mat-option [value]="'One Week'">One Week</mat-option>
+                      <mat-option [value]="'Two Week'">Two Week</mat-option>
+                      <mat-option [value]="'Three Week'">Three Week</mat-option>
+                      <mat-option [value]="'One Month'">One Month</mat-option>
+                      <mat-option [value]="'Two Month'">Two Month</mat-option>
+                   </mat-select>
+                </mat-form-field>
+            </div> -->
+         </div>
+         <!-- <div class="text-end pb-2">
+            <button class="btn-space dlt-btn" mat-raised-button color="warn">
+            <mat-icon class="delete-btn" (click)="removeItem5(i)" *ngIf="i > 0">delete_forever</mat-icon>
+            </button>
+         </div> -->
+      </div>
+   </div>
+   <!-- Addiction History -->
+   <div class="d-flex justify-content-between align-items-center">
+      <h5 class="">Addiction History</h5>
+      <!-- <button class="btn-space" mat-raised-button color="primary" (click)="addItem6()">Add More</button> -->
+   </div>
+   <div formArrayName="addictionhistory_variants" *ngFor="let item of prescribeTabForm.get('addictionhistory_variants')['controls']; let i = index;">
+      <div [formGroupName]="i">
+         <div class="row">
+            <div class="col-lg-12 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mb-0 pb-0" appearance="outline">
+                  <mat-label>Addiction History</mat-label>
+                  <textarea matInput formControlName="addiction_history" cols="30" rows="6" placeholder="Addiction History" ></textarea>
+
+                  <!-- <input matInput formControlName="addiction_history" > -->
+               </mat-form-field>
+            </div>
+            <!-- <div class="col-lg-3 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mt-1 mb-0 pb-0" appearance="outline">
+                   <mat-label>Duration</mat-label>
+                   <mat-select formControlName="duration"  >
+                      <mat-option [value]="'One day'">One day</mat-option>
+                      <mat-option [value]="'Two day'">Two day</mat-option>
+                      <mat-option [value]="'Three day'">Three day</mat-option>
+                      <mat-option [value]="'Four day'">Four day</mat-option>
+                      <mat-option [value]="'Five day'">Five day</mat-option>
+                      <mat-option [value]="'Six day'">Six day</mat-option>
+                      <mat-option [value]="'One Week'">One Week</mat-option>
+                      <mat-option [value]="'Two Week'">Two Week</mat-option>
+                      <mat-option [value]="'Three Week'">Three Week</mat-option>
+                      <mat-option [value]="'One Month'">One Month</mat-option>
+                      <mat-option [value]="'Two Month'">Two Month</mat-option>
+                   </mat-select>
+                </mat-form-field>
+            </div> -->
+         </div>
+         <!-- <div class="text-end pb-2">
+            <button class="btn-space dlt-btn" mat-raised-button color="warn">
+            <mat-icon class="delete-btn" (click)="removeItem6(i)" *ngIf="i > 0">delete_forever</mat-icon>
+            </button>
+         </div> -->
+      </div>
+   </div>
+   <!-- Menstrual/OBS -->
+   <div class="d-flex justify-content-between align-items-center">
+      <h5 class="">Menstrual/OBS</h5>
+      <!-- <button class="btn-space" mat-raised-button color="primary" (click)="addItem7()">Add More</button> -->
+   </div>
+   <div formArrayName="menstrualobs_variants" *ngFor="let item of prescribeTabForm.get('menstrualobs_variants')['controls']; let i = index;">
+      <div [formGroupName]="i">
+         <div class="row">
+            <div class="col-lg-12 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mb-0 pb-0" appearance="outline">
+                  <mat-label>Menstrual/OBS</mat-label>
+                  <textarea matInput formControlName="menstrual_obs" cols="30" rows="6" placeholder="Menstrual/OBS" ></textarea>
+
+                  <!-- <input matInput formControlName="menstrual_obs" > -->
+               </mat-form-field>
+            </div>
+            <!-- <div class="col-lg-3 col-md-12 mb-0">
+               <mat-form-field class="example-full-width mt-1 mb-0 pb-0" appearance="outline">
+                   <mat-label>Duration</mat-label>
+                   <mat-select formControlName="duration"  >
+                      <mat-option [value]="'One day'">One day</mat-option>
+                      <mat-option [value]="'Two day'">Two day</mat-option>
+                      <mat-option [value]="'Three day'">Three day</mat-option>
+                      <mat-option [value]="'Four day'">Four day</mat-option>
+                      <mat-option [value]="'Five day'">Five day</mat-option>
+                      <mat-option [value]="'Six day'">Six day</mat-option>
+                      <mat-option [value]="'One Week'">One Week</mat-option>
+                      <mat-option [value]="'Two Week'">Two Week</mat-option>
+                      <mat-option [value]="'Three Week'">Three Week</mat-option>
+                      <mat-option [value]="'One Month'">One Month</mat-option>
+                      <mat-option [value]="'Two Month'">Two Month</mat-option>
+                   </mat-select>
+                </mat-form-field>
+            </div> -->
+         </div>
+         <!-- <div class="text-end pb-2">
+            <button class="btn-space dlt-btn" mat-raised-button color="warn">
+            <mat-icon class="delete-btn" (click)="removeItem7(i)" *ngIf="i > 0">delete_forever</mat-icon>
+            </button>
+         </div> -->
+      </div>
+   </div>
+   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+      <button class="btn-space" mat-raised-button color="primary" type="submit" (click)="onSubmit($event.target.value)">Submit</button>
+      <button type="button" mat-button [routerLink]="['/doctors/appointments/appointment-list']">Cancel</button>
+   </div>
+   </form>
+   

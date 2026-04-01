@@ -1,0 +1,72 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'"  [active_item]="'Insights'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix insights">
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+               <div class="spaceCss p-3 row align-items-center">
+                  <div class="col-md-5">
+                     <h5 class="text-muted">Patient Statistics</h5>
+                  </div>
+                  <div class="col-md-7 text-end">
+                     <button mat-button type="button" color="primary" class="mat-raised-button me-2">Weekly</button>
+                     <button mat-button type="button" color="primary" class="mat-raised-button me-2">Monthly</button>
+                     <button mat-button type="button"color="primary" class="mat-raised-button">Yearly</button>
+                  </div>
+               </div>
+               <div class="body">
+                  <div style="text-align:center">
+                     <apx-chart [series]="areaChartOptions.series" [chart]="areaChartOptions.chart"
+                     [xaxis]="areaChartOptions.xaxis" [title]="areaChartOptions.title"></apx-chart>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+               <div class="spaceCss p-3 row align-items-center">
+                  <div class="col-md-3">
+                     <h5 class="text-muted">Gender Statistics</h5>
+                  </div>
+                  <div class="col-md-9 text-end">
+                     <button mat-button type="button" color="primary" class="mat-raised-button me-2">Weekly</button>
+                     <button mat-button type="button" color="primary" class="mat-raised-button me-2">Monthly</button>
+                     <button mat-button type="button"color="primary" class="mat-raised-button">Yearly</button>
+                  </div>
+               </div>
+               <div style="text-align:center">
+                  <apx-chart [series]="barChartOptions.series" [chart]="barChartOptions.chart"
+                  [dataLabels]="barChartOptions.dataLabels" [plotOptions]="barChartOptions.plotOptions"
+                  [yaxis]="barChartOptions.yaxis" [legend]="barChartOptions.legend" [fill]="barChartOptions.fill"
+                  [stroke]="barChartOptions.stroke" [tooltip]="barChartOptions.tooltip" [xaxis]="barChartOptions.xaxis">
+                  </apx-chart>
+               </div>
+            </div>
+         </div>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+               <div class="spaceCss p-3 row align-items-center">
+                  <div class="col-md-3">
+                     <h5 class="text-muted">Age Group Statistics</h5>
+                  </div>
+                  <div class="col-md-9 text-end">
+                     <button mat-button type="button" color="primary" class="mat-raised-button me-2">Weekly</button>
+                     <button mat-button type="button" color="primary" class="mat-raised-button me-2">Monthly</button>
+                     <button mat-button type="button"color="primary" class="mat-raised-button">Yearly</button>
+                  </div>
+               </div>
+               <div style="text-align:center">
+                  <apx-chart [series]="barChartOptions2.series" [chart]="barChartOptions2.chart"
+                  [dataLabels]="barChartOptions2.dataLabels" [plotOptions]="barChartOptions2.plotOptions"
+                  [yaxis]="barChartOptions2.yaxis" [legend]="barChartOptions2.legend" [fill]="barChartOptions2.fill"
+                  [stroke]="barChartOptions2.stroke" [tooltip]="barChartOptions2.tooltip" [xaxis]="barChartOptions2.xaxis">
+                  </apx-chart>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

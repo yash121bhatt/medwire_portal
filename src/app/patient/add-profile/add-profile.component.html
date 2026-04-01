@@ -1,0 +1,129 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Add Family Member'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2><strong>Add Family Member</strong></h2>
+
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="addprofiletForm" (ngSubmit)="onSubmit('authForm.value')">
+              <div class="row" >
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Full Name</mat-label>
+                    <input matInput formControlName="first_name" type="text" maxlength="32" pattern="[A-Za-z ]{1,32}" required autocomplete="off" >
+                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-error *ngIf="addprofiletForm.get('first_name').hasError('required')">
+                      Name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender" required >
+                      <mat-option [value]="'Male'">
+                        Male
+                      </mat-option>
+                      <mat-option [value]="'Female'">
+                        Female
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="addprofiletForm.get('gender').hasError('required')">
+                      Gender is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+               <div class="row">
+                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Aadhar Card Number</mat-label>
+                    <input matInput formControlName="adhar_card" type="number" required autocomplete="off">
+                    <mat-error *ngIf="addprofiletForm.get('adhar_card').hasError('required')">
+                      Aadhar Card Number is required
+                    </mat-error>
+                  </mat-form-field>
+                </div> -->
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Date Of Birth</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" [max]="today" formControlName="dob" required autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="addprofiletForm.get('dob').hasError('required')">
+                      Please select date
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Blood Group</mat-label>
+                    <mat-select formControlName="blood_group" required >
+                      <mat-option [value]="'A+'">
+                        A+
+                      </mat-option>
+                      <mat-option [value]="'A-'">
+                        A-
+                      </mat-option>
+                      <mat-option [value]="'B+'">
+                        B+
+                      </mat-option>
+                      <mat-option [value]="'B-'">
+                        B-
+                      </mat-option>
+                      <mat-option [value]="'O+'">
+                        O+
+                      </mat-option>
+                      <mat-option [value]="'O-'">
+                        O-
+                      </mat-option>
+                      <mat-option [value]="'AB+'">
+                        AB+
+                      </mat-option>
+                      <mat-option [value]="'AB-'">
+                        AB-
+                      </mat-option>
+                      <mat-option [value]="'Not Known'">
+                        Not Known
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="addprofiletForm.get('blood_group').hasError('required')">
+                      blood group is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Upload Image</mat-label>
+                    <ngx-mat-file-input formControlName="profile_image" [accept] = "accept" (change) ="fileChange($event.target.files)">
+                    </ngx-mat-file-input>
+                    <mat-error *ngIf="addprofiletForm.get('profile_image').hasError('required')">
+                      Please select image
+                    </mat-error>
+                    <mat-icon matSuffix>upload</mat-icon>
+                  </mat-form-field>
+                </div>
+                
+              </div>
+             
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <button class="btn-space"  mat-raised-button
+                    color="primary" [disabled]="!addprofiletForm.valid">Submit</button>
+                  <button type="button" mat-button [routerLink]="['/patient/profile-list']">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

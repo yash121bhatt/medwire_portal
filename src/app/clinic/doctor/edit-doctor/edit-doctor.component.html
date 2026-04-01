@@ -1,0 +1,182 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Edit Doctor'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+               <div class="header mx-4">
+                  <h2><strong>Edit Doctor</strong></h2>
+               </div>
+               <div class="body">
+                  <form class="m-4" [formGroup]="editdoctorForm" (ngSubmit)="onSubmit()">
+                  <div class="row">
+                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                           <mat-label>Full Name</mat-label>
+                           <input matInput formControlName="fullname" [(ngModel)]="fullnamedoctor" required >
+                           <mat-error *ngIf="editdoctorForm.get('fullname').hasError('required')">
+                              Full Name is required
+                           </mat-error>
+                        </mat-form-field>
+                     </div>
+                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                           <mat-label>Date Of Birth</mat-label>
+                           <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="dd/mm/yyyy" [(ngModel)]="date_of_birth" required >
+                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                           <mat-datepicker #picker></mat-datepicker>
+                           <mat-error *ngIf="editdoctorForm.get('dob').hasError('required')">
+                              Please select date
+                           </mat-error>
+                        </mat-form-field>
+                     </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                       <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label>Gender</mat-label>
+                          <mat-select formControlName="gender" required [(ngModel)]="gender" >
+                             <mat-option [value]="'Male'">
+                                Male
+                             </mat-option>
+                             <mat-option [value]="'Female'">
+                                Female
+                             </mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="editdoctorForm.get('gender').hasError('required')">
+                           Gender is required
+                          </mat-error>
+                       </mat-form-field>
+                    </div>
+                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                           <mat-label>Mobile No.</mat-label>
+                           <input matInput formControlName="mobile" type="number" required [(ngModel)]="mobile_no" >
+                           <mat-error *ngIf="editdoctorForm.get('mobile').hasError('required')">
+                              Mobile Number is required
+                           </mat-error>
+                        </mat-form-field>
+                     </div>
+                     </div>
+                     
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                       <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label>Alternate Mobile No. </mat-label>
+                          <input matInput formControlName="alternate_number" type="number"  [(ngModel)]="alternate_number" >
+                       </mat-form-field>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                       <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Email</mat-label>
+                          <input matInput formControlName="email" required [(ngModel)]="emailId">
+                          <mat-error *ngIf="editdoctorForm.get('email').hasError('required') || editdoctorForm.get('email').touched">
+                             Please enter a valid email address
+                          </mat-error>
+                       </mat-form-field>
+                    </div> 
+                 </div>
+                  <div class="row">
+                   
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-3">
+                      
+                       <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Doctor's Degree</mat-label>
+                          <mat-select [disableOptionCentering]="true" #select2 placeholder="Auto Focus" formControlName="doctor_degree" [multiple]="true"  [(ngModel)]="degrees_doctor">
+                          <mat-select-filter *ngIf="select2.focused" [array]="variables" (filteredReturn)="filteredList3 =$event" ></mat-select-filter>
+                          <mat-option *ngFor="let item of filteredList3" [value]="item">
+                          {{item}}
+                          </mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="editdoctorForm.get('doctor_degree').hasError('required')">
+                             Degree is required
+                          </mat-error>
+                       </mat-form-field>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 mb-3">
+                     <mat-form-field class="example-chip-list w-100 padding" appearance="outline">
+                        <mat-label>Speciality *</mat-label>
+                        <mat-chip-list #chipList aria-label="speciality selection" formControlName="">
+                            <mat-chip *ngFor="let speciality of specialitys" (removed)="remove(speciality)"> {{speciality}} 
+                                <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                            </mat-chip>
+                            <input placeholder="Add Speciality..." #specialityInput [formControl]="specialityCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let speciality of filteredSpecialitys | async" [value]="speciality">
+                                {{speciality}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                  </div>
+                  </div>
+                  <div class="row">
+                    <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                       <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Speciality</mat-label>
+                          <mat-select [disableOptionCentering]="true" #select1 placeholder="Auto Focus" formControlName="speciality" [multiple]="true"  [(ngModel)]="speciality">
+                              <mat-select-filter *ngIf="select1.focused" [array]="variables" (filteredReturn)="filteredList2 =$event"></mat-select-filter>
+                              <mat-option *ngFor="let item of filteredList2" [value]="item">
+                                  {{item}}
+                              </mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="editdoctorForm.get('speciality').hasError('required')">
+                             Speciality is required
+                              </mat-error>
+                      </mat-form-field>
+                    </div> -->
+                    <!-- <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 mb-3">
+                     <mat-form-field class="example-chip-list w-100 padding" appearance="outline">
+                        <mat-label>Speciality</mat-label>
+                        <mat-chip-list #chipList aria-label="speciality selection" formControlName="speciality">
+                            <mat-chip *ngFor="let speciality of specialitys" (removed)="remove(speciality)"> {{speciality}} 
+                                <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                            </mat-chip>
+                            <input placeholder="Add Speciality..." #specialityInput [formControl]="specialityCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let speciality of filteredSpecialitys | async" [value]="speciality">
+                                {{speciality}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                  </div> -->
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                     <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Experience (years)</mat-label>
+                        <input matInput formControlName="experience" type="number" required [(ngModel)]="experience">
+                        <mat-error *ngIf="editdoctorForm.get('experience').hasError('required')">
+                         Experience is required
+                        </mat-error>
+                     </mat-form-field>
+                  </div>
+                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                           <mat-label>Upload Image</mat-label>
+                           <ngx-mat-file-input formControlName="uploadImg" [accept]="'.png,.jpg,.jpeg'"    (change) = "fileChange($event.target.files)" >
+                           </ngx-mat-file-input>
+                        </mat-form-field>
+                     <a  href="{{imageURLprofile}}" class="" target="_blank">View Image</a>
+
+                     </div>
+                  </div>
+                  <div class="row">
+                     
+                  </div>
+                  <div class="row">
+                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                        <button class="btn-space"  mat-raised-button
+                           color="primary" [disabled]="!editdoctorForm.valid ">Submit</button>
+                        <button type="button" mat-button [routerLink]="['/clinic/doctor/doctor-list']">Cancel</button>
+                     </div>
+                  </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+ </section>

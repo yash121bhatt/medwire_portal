@@ -1,0 +1,45 @@
+<section class="content">
+    <div class="content-block">
+       <div class="block-header">
+          <!-- breadcrumb -->
+          <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Add Laboratory'"></app-breadcrumb>
+       </div>
+       <div class="row clearfix">
+          <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+             <div class="card">
+                <div class="header mx-4">
+                   <h2><strong>Add Radiology</strong></h2>
+                </div>
+                <div class="body">
+                   <form class="m-4 mt-0" [formGroup]="radiologyForm" (ngSubmit)="onSubmit()">
+                   <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                         <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Laboratory Name</mat-label>
+                            <mat-select [disableOptionCentering]="true" #select2 placeholder="Select Laboratory" formControlName="radiology_name" [multiple]="true">
+                            <mat-select-filter *ngIf="select2.focused" [array]="variables" (filteredReturn)="filteredList3 =$event"></mat-select-filter>
+                            <mat-option *ngFor="let item of filteredList3" [value]="item">
+                            {{item}}
+                            </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="radiologyForm.get('radiology_name').hasError('required')">
+                                Radiology Name is required
+                            </mat-error>
+                         </mat-form-field>
+                      </div>
+                      
+                   </div>
+                   <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                         <button class="btn-space"  mat-raised-button
+                         color="primary" [disabled]="!radiologyForm.valid" [routerLink]="['../radiology-list']">Submit</button>
+                         <button type="button" mat-button [routerLink]="['../radiology-list']">Cancel</button>
+                      </div>
+                   </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>

@@ -1,0 +1,55 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Personal Health Diary'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <h2>User List</h2>
+            </div>
+            <div class="body">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover ">
+                    <thead>
+                      <tr>
+                        <th>S.No.</th>
+                        <th>Image</th>
+                        <th>Full Name</th>
+                        <th>Age</th>
+                        <th>Date Of Birth</th>
+                        <!-- <th>Aadhar No.</th> -->
+                        <th>Gender</th>
+                        <th>Actions </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of Users;let i = index">
+                        <td>{{i+1}}</td>
+                        <td class="table-img"><img alt="image" class="msr-3" width="40" src="{{data.img}}"></td>
+
+                        <!-- <td><img alt="image" class="msr-3 rounded-circle" width="40" height="40" style="object-fit: cover;" src="{{data.img}}"></td> -->
+                        <td>{{data.first_name}}</td>
+                        <td>{{data.age}}</td>
+                        <td>{{data.date_of_birth | date:'dd/MM/yyyy'}} </td>
+                        <!-- <td>{{data.adhar_card}}</td> -->
+                        <td>{{data.gender}}</td>
+                        <td>
+                          <button mat-icon-button>
+                            <a [routerLink]="['/patient/healthdiarylist/'+encryptionData(data.id)]"><mat-icon class="col-green">visibility</mat-icon></a>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

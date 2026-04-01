@@ -1,0 +1,35 @@
+<div class="example-container">
+    <form class="m-4" [formGroup]="prescribeTabForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-12">
+                <h5>Examination Findings</h5>
+            </div>
+            <div class="col-12 mb-3">
+                <mat-form-field class="example-chip-list w-100" appearance="outline">
+                    <mat-label>Examination Findings</mat-label>
+                    <input matInput formControlName="description"  placeholder="Examination Findings" autocomplete="off" >
+                    <!-- <mat-chip-list #chipList aria-label="Healthstat selection" formControlName="description" max="80">
+                        <mat-chip *ngFor="let healthstat of healthstats" (removed)="remove(healthstat)"> {{healthstat}} 
+                            <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                        </mat-chip>
+                        <input placeholder="Enter Examination Findings" #healthstatInput [formControl]="healthstatCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let healthstat of filteredHealthstats | async" [value]="healthstat">
+                            {{healthstat}}
+                        </mat-option>
+                    </mat-autocomplete> -->
+                    <mat-error>
+                        <div *ngIf="prescribeTabForm.get('description').hasError('maxlength')">The Examination Findings Field Should be 160 character maximum</div>
+                      </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <button class="btn-space" mat-raised-button color="primary" [disabled]="!prescribeTabForm.valid ">Submit</button>
+                <button type="button" mat-button [routerLink]="['/doctors/appointments/appointment-list/'+cancelbtnClientId.clientChoose]">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

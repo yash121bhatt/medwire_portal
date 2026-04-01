@@ -1,0 +1,43 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Add Category'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="header mx-4">
+                        <h2><strong>Add Category</strong></h2>
+                    </div>
+                    <div class="body">
+                        <form class="m-4 mt-0" [formGroup]="addcategorytForm" (ngSubmit)="onSubmit(addcategorytForm.value)">
+                            <div class="row">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Category Name</mat-label>
+                                        <input matInput formControlName="category_name" required autocomplete="off">
+                                        <mat-error *ngIf="addcategorytForm.get('category_name').hasError('required')">
+                                            Category Name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="btn-space" mat-raised-button color="primary"
+                                       [class.auth-spinner]="loading" [disabled]="loading"  [disabled]="!addcategorytForm.valid">Submit</button>
+                                    <button type="button" mat-button [routerLink]="['/radiology/radiology-items/category-list']">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

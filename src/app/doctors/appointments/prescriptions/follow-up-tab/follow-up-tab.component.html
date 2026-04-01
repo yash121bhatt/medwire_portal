@@ -1,0 +1,32 @@
+<div class="example-container">
+    <form class="m-4" [formGroup]="followTabForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-12">
+                <h5>Follow Up</h5>
+            </div>
+            <div class="col-12 mb-3">
+                <mat-form-field class="example-chip-list w-100" appearance="outline">
+                    <mat-label>Follow Up</mat-label>
+                    <mat-chip-list #chipList aria-label="Follow Up selection" formControlName="description">
+                        <mat-chip *ngFor="let follow of follows" (removed)="remove(follow)"> {{follow}} 
+                            <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                        </mat-chip>
+                        <input placeholder="New follow up..." #followInput [formControl]="followCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let follow of filteredFollows | async" [value]="follow">
+                            {{follow}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <button class="btn-space" mat-raised-button color="primary" >Submit</button>
+                <button type="button" mat-button [routerLink]="['/doctors/appointments/appointment-list/'+cancelbtnClientId.clientChoose]">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

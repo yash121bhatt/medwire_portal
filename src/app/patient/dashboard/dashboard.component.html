@@ -1,0 +1,1228 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <!-- <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Dashboard'"></app-breadcrumb> -->
+    </div>
+    <!-- Widgets -->
+    <div class="row mt-5 dashboard">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="body">
+            <div *ngIf="editbtnCondition" class="float-right editbtndashboard">
+              <a class="editIcon" [routerLink]="['/patient/editprofile']">
+                <mat-icon class="example-tab-icon msr-2 editico">edit_copy</mat-icon>
+              </a>
+            </div>
+            <div class="row align-items-center">
+
+              <div class="col-md-4" *ngFor="let userdata of Users">
+
+                <img src="{{userdata.imgName?imageURL+userdata.imgName:imageURL+'demouser.png' }}" alt="" class="">
+              </div>
+              <div class="col-md-8">
+
+                <h4 class="font-20 weight-500 mb-2">
+                  Welcome
+                  <div class="weight-600 font-30 col-blue pt-1" *ngFor="let userdata of Users">
+                    {{userdata.first_name}}
+                  </div>
+
+                </h4>
+
+                <div class="weight-600 font-30 col-blue pt-1" *ngFor="let userdata of Users">
+                  <h5> MedWire ID - {{userdata.permanent_id??'-' }}</h5>
+                  <h5> Date of Birth - {{userdata.date_of_birth | date:'dd/MM/yyyy' }}</h5>
+                  <h5> Age - {{userdata.age}}</h5>
+                  <h5> Gender - {{userdata.gender}}</h5>
+                  <h5> Blood Group - {{userdata.blood_group}}</h5>
+                </div>
+                <!-- <p class="font-18 max-width-600">We would like to take this opportunity to welcome you to our practice
+                  and to thank you
+                  for choosing our physicians to participate in your healthcare. We look forward to
+                  providing you with personalized, comprehensive health care focusing on wellness and
+                  prevention.</p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #END# Widgets -->
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12 cursor-pointer" [routerLink]="'/patient/hrmeasure-m-member/'+redirectID">
+        <div class="card card-statistic-2">
+
+          <div class="clearfix cursor-pointer">
+            <div class="card-icon-only shadow-primary float-start">
+              <img src="assets/images/pages/heart-rate.png" alt="">
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">Heart Rate</h5>
+              </div>
+              <div class="col-green">
+                <h3 class="font-weight-bold float-end mb-0">{{heart_rate}} beats/min</h3>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- <div class="card-content msl-4 mb-3">
+            <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 10% Higher Then Last Month
+            </p>
+          </div> -->
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12" [routerLink]="'/patient/bpmeasure-m-member/'+redirectID">
+        <div class="card card-statistic-2">
+          <div class="clearfix cursor-pointer">
+            <div class="card-icon-only shadow-primary float-start">
+              <img src="assets/images/pages/blood-pressure.png" alt="">
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">Blood Pressure </h5>
+              </div>
+
+              <div class="col-green">
+                <h3 class="font-weight-bold float-end mb-0">{{blood_pressureCount}} mmHg</h3>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card-content msl-4 mb-3">
+            <p class="m-b-0 d-flex"><i class="material-icons col-orange psr-2">trending_down</i> 07% Less Then Last
+              Month
+            </p>
+          </div> -->
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12" [routerLink]="'/patient/rrmeasure-m-member/'+redirectID">
+        <div class="card card-statistic-2">
+          <div class="clearfix cursor-pointer">
+            <div class="card-icon-only shadow-primary float-start">
+              <img src="assets/images/pages/Respiratoryimg.png" alt="">
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">Respiratory Rate</h5>
+              </div>
+              <div class="col-green">
+                <h3 class="font-weight-bold float-end mb-0">{{respiratory_rate}} breaths/min</h3>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card-content msl-4 mb-3">
+            <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 12% Higher Then Last Month
+            </p>
+          </div> -->
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12" [routerLink]="'/patient/osmeasure-m-member/'+redirectID">
+        <div class="card card-statistic-2">
+          <div class="clearfix cursor-pointer">
+            <div class="card-icon-only shadow-primary float-start">
+              <img src="assets/images/pages/oxygen-satu.png" alt="">
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">Oxygen Saturation</h5>
+              </div>
+              <div class="col-green">
+                <h3 class="font-weight-bold float-end mb-0">{{oxygen_saturation}} %</h3>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card-content msl-4 mb-3">
+            <p class="m-b-0 d-flex"><i class="material-icons col-orange psr-2">trending_down</i> 22% Less Then Last
+              Month
+            </p>
+          </div> -->
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12" [routerLink]="'/patient/tempmeasure-m-member/'+redirectID">
+        <div class="card card-statistic-2">
+          <div class="clearfix cursor-pointer">
+            <div class="card-icon-only shadow-primary float-start">
+              <img src="assets/images/pages/thermometer.png" alt="">
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">Temperature</h5>
+              </div>
+              <div class="col-green">
+                <h3 class="font-weight-bold float-end mb-0">{{temperature}} &#176;F</h3>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card-content msl-4 mb-3">
+            <p class="m-b-0 d-flex"><i class="material-icons col-orange psr-2">trending_down</i> 07% Less Then Last
+              Month
+            </p>
+          </div> -->
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12" [routerLink]="'/patient/add-bmi/'+redirectID">
+        <div class="card card-statistic-2">
+          <div class="clearfix cursor-pointer">
+            <div class="card-icon-only shadow-primary float-start">
+              <img src="assets/images/pages/bmiimg.png" alt="">
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">BMI</h5>
+              </div>
+              <div class="col-green">
+                <h3 class="font-weight-bold float-end mb-0">{{BMI | number : '.2-2'}} kg/m<sup>2</sup></h3>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card-content msl-4 mb-3">
+            <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 12% Higher Then Last Month
+            </p>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="body">
+            <mat-tab-group dynamicHeight>
+              <!-- tab1 -->
+              <mat-tab label="Heart Rate">
+                <div class="card-body">
+                  <div class="spaceCss mb-5">
+                    <div class="float-start">
+                      <h6 class="text-muted">Performance Heart Rate</h6>
+                      <!-- <h5>129 bmp <span class="text-muted font-12">(Average)</span></h5> -->
+                    </div>
+                    <ul class="btnsBtn">
+                      <li>
+
+                      </li>
+                      <li><button mat-button type="button" (click)="weeklyData_heartRate(); ">Week</button></li>
+                      <li>
+                        <!-- <button mat-button type="button" (click)="monthlyData_heartRate();">Monthly</button> -->
+
+                        <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline">
+                          <mat-label>Month</mat-label>
+                          <mat-select (selectionChange)="monthlyData_heartData($event)">
+                            <mat-option selected [value]="'select-a-month'">
+                              select
+                            </mat-option>
+                            <mat-option [value]="'January'">
+                              January
+                            </mat-option>
+                            <mat-option [value]="'February'">
+                              February
+                            </mat-option>
+                            <mat-option [value]="'March'">
+                              March
+                            </mat-option>
+                            <mat-option [value]="'April'">
+                              April
+                            </mat-option>
+                            <mat-option [value]="'May'">
+                              May
+                            </mat-option>
+                            <mat-option [value]="'June'">
+                              June
+                            </mat-option>
+                            <mat-option [value]="'July'">
+                              July
+                            </mat-option>
+                            <mat-option [value]="'August'">
+                              August
+                            </mat-option>
+                            <mat-option [value]="'September'">
+                              September
+                            </mat-option>
+                            <mat-option [value]="'October'">
+                              October
+                            </mat-option>
+                            <mat-option [value]="'November'">
+                              November
+                            </mat-option>
+                            <mat-option [value]="'December'">
+                              December
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                      </li>
+                      <li><button mat-button type="button" (click)="yearlyData_heartRate();">Year</button></li>
+                    </ul>
+
+                  </div>
+                  <div class="mb-5">
+                    <!-- <div class="recent-report__chart"  *ngIf="lineChartData[0].data.length> 0">
+                        <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels"
+                          [options]="lineChartOptions" [legend]="true">
+                        </canvas>
+                      </div>
+                       -->
+                       <div *ngIf="!heartRateCondition"> 
+                        <p class="text-danger text-center h4" >No Data Found</p>
+                      </div>
+                    <div class="body" *ngIf="heartRateCondition">
+                      <div class="recent-report__chart">
+                        <apx-chart [series]="areaChartOptions2.series" [chart]="areaChartOptions2.chart"
+                          [xaxis]="areaChartOptions2.xaxis" [yaxis]="areaChartOptions2.yaxis"
+                          [colors]="areaChartOptions2.colors" [stroke]="areaChartOptions2.stroke"
+                          [legend]="areaChartOptions2.legend" [tooltip]="areaChartOptions2.tooltip"
+                          [dataLabels]="areaChartOptions2.dataLabels"></apx-chart>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </mat-tab>
+
+              <!-- tab-2 -->
+              <mat-tab label="Blood Pressure">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="spaceCss">
+                      <div class="float-start">
+                        <h6 class="text-muted">Performance Blood Pressure</h6>
+                        <!-- <h5>130 mmHg <span class="text-muted font-12">(Average)</span></h5> -->
+                      </div>
+
+                      <ul class="btnsBtn">
+                        <li>
+
+                        </li>
+                        <li><button mat-button type="button" (click)="weeklyData_BloodReport()">Week</button></li>
+                        <li>
+                          <!-- <button mat-button type="button" (click)="monthlyData_BloodReport()">Monthly</button> -->
+
+                          <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline">
+                            <mat-label>Month</mat-label>
+                            <mat-select (selectionChange)="monthlyData_BloodReportData($event)">
+                              <mat-option [value]="'select-a-option'">
+                                select
+                              </mat-option>
+                              <mat-option [value]="'January'">
+                                January
+                              </mat-option>
+                              <mat-option [value]="'February'">
+                                February
+                              </mat-option>
+                              <mat-option [value]="'March'">
+                                March
+                              </mat-option>
+                              <mat-option [value]="'April'">
+                                April
+                              </mat-option>
+                              <mat-option [value]="'May'">
+                                May
+                              </mat-option>
+                              <mat-option [value]="'June'">
+                                June
+                              </mat-option>
+                              <mat-option [value]="'July'">
+                                July
+                              </mat-option>
+                              <mat-option [value]="'August'">
+                                August
+                              </mat-option>
+                              <mat-option [value]="'September'">
+                                September
+                              </mat-option>
+                              <mat-option [value]="'October'">
+                                October
+                              </mat-option>
+                              <mat-option [value]="'November'">
+                                November
+                              </mat-option>
+                              <mat-option [value]="'December'">
+                                December
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+
+                        </li>
+                        <li><button mat-button type="button" (click)="yearlyData_bloodReport()">Year</button></li>
+                      </ul>
+                      <!-- <ul class="btnsBtn_max_min ">
+                        <li><button mat-button type="button" (click)="maxFilterType('max_blood_report')">Max</button></li>
+                        <li><button mat-button type="button" (click)="minFilterType('min_blood_report')">Min</button></li>
+                      </ul> -->
+                    </div>
+                  </div>
+                  <div class="mb-5">
+                    <div *ngIf="!bpCondition"> 
+                        <p class="text-danger text-center h4" >No Data Found</p>
+                      </div>
+                    <div class="body" *ngIf="bpCondition">
+
+                      <div class="recent-report__chart">
+                        <apx-chart [series]="areaChartOptions1.series" [chart]="areaChartOptions1.chart"
+                          [xaxis]="areaChartOptions1.xaxis" [yaxis]="areaChartOptions1.yaxis"
+                          [colors]="areaChartOptions1.colors" [stroke]="areaChartOptions1.stroke"
+                          [legend]="areaChartOptions1.legend" [tooltip]="areaChartOptions1.tooltip"
+                          [dataLabels]="areaChartOptions1.dataLabels"></apx-chart>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <!-- tab-3 -->
+              <mat-tab label="Respiratory Rate">
+                <div class="card-body">
+                  <div class="spaceCss">
+                    <div class="float-start">
+                      <h6 class="text-muted">Performance Respiratory Rate</h6>
+                      <!-- <h5>188 bpm<span class="text-muted font-12">(Average)</span></h5> -->
+                    </div>
+                    <ul class="btnsBtn">
+                      <li><button mat-raised-button type="button"
+                          (click)="weeklyData_ResporetryReport()">Week</button></li>
+                      <li>
+                        <!-- <button mat-raised-button type="button" (click)="monthlyData_ResporetryReport()">Monthly</button> -->
+
+                        <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline">
+                          <mat-label>Month</mat-label>
+                          <mat-select (selectionChange)="monthlyData_ResporetryReportData($event)">
+                            <mat-option [value]="'select-a-month'">
+                              select
+                            </mat-option>
+                            <mat-option [value]="'January'">
+                              January
+                            </mat-option>
+                            <mat-option [value]="'February'">
+                              February
+                            </mat-option>
+                            <mat-option [value]="'march'">
+                              March
+                            </mat-option>
+                            <mat-option [value]="'April'">
+                              April
+                            </mat-option>
+                            <mat-option [value]="'may'">
+                              May
+                            </mat-option>
+                            <mat-option [value]="'June '">
+                              June
+                            </mat-option>
+                            <mat-option [value]="'July '">
+                              July
+                            </mat-option>
+                            <mat-option [value]="'August'">
+                              August
+                            </mat-option>
+                            <mat-option [value]="'September '">
+                              September
+                            </mat-option>
+                            <mat-option [value]="'October'">
+                              October
+                            </mat-option>
+                            <mat-option [value]="'November'">
+                              November
+                            </mat-option>
+                            <mat-option [value]="'December'">
+                              December
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                      </li>
+                      <li><button mat-raised-button type="button"
+                          (click)="yearlyData_ResporetryReport()">Year</button></li>
+                    </ul>
+                    <!-- <ul class="btnsBtn_max_min ">
+                      <li><button mat-button type="button" (click)="maxFilterType('max_respiratory_rate')">Max</button></li>
+                      <li><button mat-button type="button" (click)="minFilterType('min_respiratory_rate')">Min</button></li>
+                    </ul> -->
+                  </div>
+                  <div class="mb-5">
+                    <div *ngIf="!respiratoryCondition"> 
+                      <p class="text-danger text-center h4" >No Data Found</p>
+                    </div>
+                    <div class="body" *ngIf="respiratoryCondition">
+                      <div class="recent-report__chart">
+                        <apx-chart [series]="areaChartOptions3.series" [chart]="areaChartOptions3.chart"
+                          [xaxis]="areaChartOptions3.xaxis" [yaxis]="areaChartOptions3.yaxis"
+                          [colors]="areaChartOptions3.colors" [stroke]="areaChartOptions3.stroke"
+                          [legend]="areaChartOptions3.legend" [tooltip]="areaChartOptions3.tooltip"
+                          [dataLabels]="areaChartOptions3.dataLabels"></apx-chart>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <!-- tab-4 -->
+              <mat-tab label="Oxygen Saturation">
+                <div class="card-body">
+                  <div class="spaceCss">
+                    <div class="float-start">
+                      <h6 class="text-muted">Performance Oxygen Saturation</h6>
+                      <!-- <h5>109  <span class="text-muted font-12">(Average)</span></h5> -->
+                    </div>
+                    <ul class="btnsBtn">
+                      <li><button mat-button type="button" (click)="weeklyData_Oxygensat()">Week</button></li>
+                      <li>
+                        <!-- <button mat-button type="button" (click)="monthlyData_Oxygensat()">Monthly</button> -->
+                        <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline">
+                          <mat-label>Month</mat-label>
+                          <mat-select (selectionChange)="monthlyData_OxygensatData($event)">
+                            <mat-option [value]="'Select-a-month'">
+                              select
+                            </mat-option>
+                            <mat-option [value]="'January'">
+                              January
+                            </mat-option>
+                            <mat-option [value]="'February'">
+                              February
+                            </mat-option>
+                            <mat-option [value]="'March'">
+                              March
+                            </mat-option>
+                            <mat-option [value]="'April'">
+                              April
+                            </mat-option>
+                            <mat-option [value]="'May'">
+                              May
+                            </mat-option>
+                            <mat-option [value]="'June '">
+                              June
+                            </mat-option>
+                            <mat-option [value]="'July '">
+                              July
+                            </mat-option>
+                            <mat-option [value]="'August'">
+                              August
+                            </mat-option>
+                            <mat-option [value]="'September '">
+                              September
+                            </mat-option>
+                            <mat-option [value]="'October'">
+                              October
+                            </mat-option>
+                            <mat-option [value]="'November'">
+                              November
+                            </mat-option>
+                            <mat-option [value]="'December'">
+                              December
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </li>
+                      <li><button mat-button type="button" (click)="yearlyData_Oxygensat()">Year</button></li>
+                    </ul>
+                    <!-- <ul class="btnsBtn_max_min ">
+                      <li><button mat-button type="button" (click)="maxFilterType('max_oxygen_saturation')">Max</button></li>
+                      <li><button mat-button type="button" (click)="minFilterType('min_oxygen_saturation')">Min</button></li>
+                    </ul> -->
+                  </div>
+                  <div class="mb-5">
+                    <div *ngIf="!oxygenCondition"> 
+                      <p class="text-danger text-center h4" >No Data Found</p>
+                    </div>
+                    <div class="body" *ngIf="oxygenCondition">
+                      <div class="recent-report__chart">
+                        <apx-chart [series]="areaChartOptions4.series" [chart]="areaChartOptions4.chart"
+                          [xaxis]="areaChartOptions4.xaxis" [yaxis]="areaChartOptions4.yaxis"
+                          [colors]="areaChartOptions4.colors" [stroke]="areaChartOptions4.stroke"
+                          [legend]="areaChartOptions4.legend" [tooltip]="areaChartOptions4.tooltip"
+                          [dataLabels]="areaChartOptions4.dataLabels"></apx-chart>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <!-- tab-5 -->
+              <mat-tab label="Temperature">
+                <div class="card-body">
+                  <div class="spaceCss">
+                    <div class="float-start">
+                      <h6 class="text-muted">Performance Temperature</h6>
+                      <!-- <h5>102 F <span class="text-muted font-12">(Average)</span></h5> -->
+                    </div>
+                    <ul class="btnsBtn">
+                      <li><button mat-button type="button" (click)="weeklyData_Temperature()">Week</button></li>
+                      <li>
+                        <!-- <button mat-button type="button" (click)="monthlyData_Temperature()">Monthly</button> -->
+                        <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline">
+                          <mat-label>Month</mat-label>
+                          <mat-select (selectionChange)="monthlyData_TemperatureData($event)">
+                            <mat-option [value]="'select-a-month'">
+                              select
+                            </mat-option>
+                            <mat-option [value]="'January'">
+                              January
+                            </mat-option>
+                            <mat-option [value]="'February'">
+                              February
+                            </mat-option>
+                            <mat-option [value]="'March'">
+                              March
+                            </mat-option>
+                            <mat-option [value]="'April'">
+                              April
+                            </mat-option>
+                            <mat-option [value]="'May'">
+                              May
+                            </mat-option>
+                            <mat-option [value]="'June '">
+                              June
+                            </mat-option>
+                            <mat-option [value]="'July '">
+                              July
+                            </mat-option>
+                            <mat-option [value]="'August'">
+                              August
+                            </mat-option>
+                            <mat-option [value]="'September '">
+                              September
+                            </mat-option>
+                            <mat-option [value]="'October'">
+                              October
+                            </mat-option>
+                            <mat-option [value]="'November'">
+                              November
+                            </mat-option>
+                            <mat-option [value]="'December'">
+                              December
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </li>
+                      <li><button mat-button type="button" (click)="yearlyData_Temperature()">Year</button></li>
+                    </ul>
+                    <!-- <ul class="btnsBtn_max_min ">
+                      <li><button mat-button type="button" (click)="maxFilterType('max_temperature')">Max</button></li>
+                      <li><button mat-button type="button" (click)="minFilterType('min_temperature')">Min</button></li>
+                    </ul> -->
+                  </div>
+                  <div class="mb-5">
+                    <div *ngIf="!temperatureCondition"> 
+                      <p class="text-danger text-center h4" >No Data Found</p>
+                    </div>
+                    <div class="body" *ngIf="temperatureCondition">
+                      <div class="recent-report__chart">
+                        <apx-chart [series]="areaChartOptions5.series" [chart]="areaChartOptions5.chart"
+                          [xaxis]="areaChartOptions5.xaxis" [yaxis]="areaChartOptions5.yaxis"
+                          [colors]="areaChartOptions5.colors" [stroke]="areaChartOptions5.stroke"
+                          [legend]="areaChartOptions5.legend" [tooltip]="areaChartOptions5.tooltip"
+                          [dataLabels]="areaChartOptions5.dataLabels"></apx-chart>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <!-- tab-6 -->
+              <mat-tab label="BMI">
+                <div class="card-body">
+                  <div class="spaceCss">
+                    <div class="float-start">
+                      <h6 class="text-muted">Performance BMI</h6>
+                      <!-- <h5>129 bmp <span class="text-muted font-12">(Average)</span></h5> -->
+                    </div>
+                    <ul class="btnsBtn">
+                      <li><button mat-button type="button" (click)="weeklyData_BMI()">Week</button></li>
+                      <li>
+                        <!-- <button mat-button type="button" (click)="monthlyData_BMI()">Monthly</button> -->
+                        <mat-form-field class="example-full-width-dropGraph mb-3" appearance="outline">
+                          <mat-label>Month</mat-label>
+                          <mat-select (selectionChange)="monthlyData_BMIData($event)">
+                            <mat-option [value]="'select-a-month'">
+                              select
+                            </mat-option>
+                            <mat-option [value]="'January'">
+                              January
+                            </mat-option>
+                            <mat-option [value]="'February'">
+                              February
+                            </mat-option>
+                            <mat-option [value]="'March'">
+                              March
+                            </mat-option>
+                            <mat-option [value]="'April'">
+                              April
+                            </mat-option>
+                            <mat-option [value]="'May'">
+                              May
+                            </mat-option>
+                            <mat-option [value]="'June '">
+                              June
+                            </mat-option>
+                            <mat-option [value]="'July '">
+                              July
+                            </mat-option>
+                            <mat-option [value]="'August'">
+                              August
+                            </mat-option>
+                            <mat-option [value]="'September '">
+                              September
+                            </mat-option>
+                            <mat-option [value]="'October'">
+                              October
+                            </mat-option>
+                            <mat-option [value]="'November'">
+                              November
+                            </mat-option>
+                            <mat-option [value]="'December'">
+                              December
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </li>
+                      <li><button mat-button type="button" (click)="yearlyData_BMI()">Year</button></li>
+                    </ul>
+                    <!-- <ul class="btnsBtn_max_min ">
+                      <li><button mat-button type="button" (click)="maxFilterType('max_bmi')">Max</button></li>
+                      <li><button mat-button type="button" (click)="minFilterType('min_bmi')">Min</button></li>
+                    </ul> -->
+                  </div>
+                  <div class="mb-5">
+                    <div *ngIf="!bmiCondition"> 
+                      <p class="text-danger text-center h4" >No Data Found</p>
+                    </div>
+                    <div class="body" *ngIf="bmiCondition">
+                      <div class="recent-report__chart">
+                        <apx-chart [series]="areaChartOptions6.series" [chart]="areaChartOptions6.chart"
+                          [xaxis]="areaChartOptions6.xaxis" [yaxis]="areaChartOptions6.yaxis"
+                          [colors]="areaChartOptions6.colors" [stroke]="areaChartOptions6.stroke"
+                          [legend]="areaChartOptions6.legend" [tooltip]="areaChartOptions6.tooltip"
+                          [dataLabels]="areaChartOptions6.dataLabels"></apx-chart>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row clearfix">
+      <!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="card">
+          <div class="body">
+            <mat-tab-group dynamicHeight>
+              <mat-tab label="Latest Test Reports">
+                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table" >
+                  
+                 
+                  <li class="app-list"  *ngFor="let listData of dataSourceTestreport">
+                    <img alt="image" class="rounded-circle" width="40" src="{{listData.profile_image?imageURL+listData.profile_image:imageURL+'demouserGFG.png'}}">
+                    <div class="set-flex">
+                      <div class="media-title font-16">{{listData.first_name ?? '-'}} </div>
+                    
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title font-16">{{listData.created_at | date:'dd/MM/yyyy'}}</div>
+                      <div class="text-job text-muted mb-0">{{listData.created_at |date:'mediumTime' }}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Treatement</div>
+                      <div class="text-job font-16">{{listData.sub_category}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Contact Number</div>
+                      <div class="text-job font-16">{{listData.mobile}}</div>
+                    </div>
+                    <div class="media-cta px-4">
+                      <td>
+                        <a class="view" target="_blank" href="{{listData.report_document?imageDoc+listData.report_document:'#'}}">View</a>
+                      </td>
+                    </div>
+                  </li>
+                 
+         
+                  
+                </ul>
+              </mat-tab>
+              
+            </mat-tab-group>
+          </div>
+        </div>
+      </div> -->
+
+
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="card">
+          <div class="body">
+            <mat-tab-group dynamicHeight>
+              <mat-tab label="My Test Report">
+                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table"
+                  *ngFor="let labrDoc of latestlabRadioReport ; let i=index">
+                  <li class="app-list" *ngIf="i<5">
+                    <img alt="image" class="" width="40"
+                      src="{{labrDoc.profile_image?imageURL+labrDoc.profile_image:imageURL+'demouser.png'}}">
+                    <div class="set-flex">
+                      <div class="media-title font-16">{{labrDoc.first_name}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Date</div>
+                      <div class="media-title font-16">{{labrDoc.created_at | date : 'dd/MM/yyyy'}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Name</div>
+                      <div class="text-job font-16">{{labrDoc.sub_category}}</div>
+                    </div>
+                    <!-- <div class="set-flex">
+                        <div class="media-title text-muted mb-0">Contact Number</div>
+                        <div class="text-job font-16">+123 676545655</div>
+                      </div> -->
+                    <div class="media-cta px-4">
+                      <td>
+
+                        <div>
+                          <span>
+                            <a class="imgSizeIcon"
+                              *ngIf="((labrDoc.dcm_document_url != null && labrDoc.dcm_document_url != '') ? true : false)"
+                              target="__blank" href="{{labrDoc.dcm_document_url}}">
+                              {{labrDoc.dcm_document_url ? viewDicomFile(labrDoc.dcm_document_url??"-") : "-"}} <div
+                                [innerHtml]="htmlReturn"></div> </a>
+                          </span>
+                          <span>
+                            <a class="imgSizeIcon"
+                              *ngIf="((labrDoc.document != null && labrDoc.document != '') ? true : false)"
+                              href="{{labrDoc.document}}" target="_blank">
+                              {{labrDoc.document ? returnPdf(labrDoc.document??'-') : "-"}} <div [innerHtml]="htmlReturn">
+                              </div> </a>
+                          </span>
+  
+                        </div>
+                      </td>
+                     
+                    </div>
+                    <div class="media-cta px-4">
+                      
+                      <td>
+                        <button mat-icon-button *ngIf="labrDoc.document.length > 0" [matMenuTriggerFor]="menu2"
+                          aria-label="Example icon-button with a menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu2="matMenu">
+                          <share-buttons [theme]="'material-dark'" [include]="['whatsapp']"
+                            [url]="labrDoc.document"
+                            [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                            [autoSetMeta]="true">
+                          </share-buttons>
+                          <share-buttons [theme]="'material-dark'" [include]="['email']"
+                            [url]="labrDoc.document"
+                            [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                            [autoSetMeta]="true">
+                          </share-buttons>
+                          <share-buttons [theme]="'material-dark'" [include]="['telegram']"
+                            [url]="labrDoc.document"
+                            [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                            [autoSetMeta]="true">
+                          </share-buttons>
+                        </mat-menu>
+                      </td>
+                    </div>
+                  </li>
+                </ul>
+              </mat-tab>
+
+              <mat-tab label="Lab Reports">
+                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table"
+                  *ngFor="let labrDoc of labReportList">
+                  <li class="app-list">
+                    <img alt="image" class="" width="40"
+                      src="{{labrDoc.profile_image?imageURL+labrDoc.profile_image:imageURL+'demouser.png'}}">
+                    <div class="set-flex">
+                      <div class="media-title font-16">{{labrDoc.first_name}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Date</div>
+                      <div class="media-title font-16">{{labrDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Name</div>
+                      <div class="text-job font-16">{{labrDoc.document_title}}</div>
+                    </div>
+                    <!-- <div class="set-flex">
+                        <div class="media-title text-muted mb-0">Contact Number</div>
+                        <div class="text-job font-16">+123 676545655</div>
+                      </div> -->
+                    <div class="media-cta px-4">
+                      <td>
+
+                        <div>
+                          <span>
+                            <a class="imgSizeIcon"
+                              *ngIf="((labrDoc.dcm_document_url != null && labrDoc.dcm_document_url != '') ? true : false)"
+                              target="__blank" href="{{labrDoc.dcm_document_url}}">
+                              {{labrDoc.dcm_document_url ? viewDicomFile(labrDoc.dcm_document_url??"-") : "-"}} <div
+                                [innerHtml]="htmlReturn"></div> </a>
+                          </span>
+                          <span>
+                            <a class="imgSizeIcon"
+                              *ngIf="((labrDoc.document_file_url != null || labrDoc.document_file_url != '') ? true : false)"
+                              href="{{labrDoc.document_file_url}}" target="_blank">
+                              {{labrDoc.document_file_url ? returnPdf(labrDoc.document_file_url??'-') : "-"}} <div [innerHtml]="htmlReturn">
+                              </div> </a>
+                          </span>
+  
+                        </div>
+                      </td>
+                     
+                    </div>
+                    <div class="media-cta px-4">
+                      
+                      <td>
+                        <button mat-icon-button [matMenuTriggerFor]="menu2"
+                          aria-label="Example icon-button with a menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu2="matMenu">
+                          <share-buttons [theme]="'material-dark'" [include]="['whatsapp']"
+                            [url]="imageURL+labrDoc.document_file"
+                            [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                            [autoSetMeta]="true">
+                          </share-buttons>
+                          <share-buttons [theme]="'material-dark'" [include]="['email']"
+                            [url]="imageURL+labrDoc.document_file"
+                            [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                            [autoSetMeta]="true">
+                          </share-buttons>
+                          <share-buttons [theme]="'material-dark'" [include]="['telegram']"
+                            [url]="imageURL+labrDoc.document_file"
+                            [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                            [autoSetMeta]="true">
+                          </share-buttons>
+                        </mat-menu>
+                      </td>
+                    </div>
+                  </li>
+                </ul>
+              </mat-tab>
+              <mat-tab label="Prescription">
+                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table"
+                  *ngFor="let labDoc of labReport">
+                  <li class="app-list">
+                    <img alt="image" class="" width="40"
+                      src="{{labDoc.profile_image?imageURL+labDoc.profile_image:imageURL+'demouser.png' }}">
+                    <div class="set-flex">
+                      <div class="media-title font-16">{{labDoc.first_name}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Date</div>
+                      <div class="media-title font-16">{{labDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Name</div>
+                      <div class="text-job font-16">{{labDoc.document_title}}</div>
+                    </div>
+                    <div class="media-cta px-4">
+                      <td>
+                        <a class="view" [href]="imageURL+labDoc.document_file" target="_blank">View</a>
+                      </td>
+                      <td>
+                        <button mat-icon-button [matMenuTriggerFor]="menu2"
+                          aria-label="Example icon-button with a menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu2="matMenu">
+                          <share-buttons [theme]="'material-dark'" [include]="['whatsapp']"
+                            [url]="imageURL+labDoc.document_file"
+                            [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                            [autoSetMeta]="true">
+                          </share-buttons>
+                          <share-buttons [theme]="'material-dark'" [include]="['email']"
+                            [url]="imageURL+labDoc.document_file"
+                            [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                            [autoSetMeta]="true">
+                          </share-buttons>
+                          <share-buttons [theme]="'material-dark'" [include]="['telegram']"
+                            [url]="imageURL+labDoc.document_file"
+                            [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                            [autoSetMeta]="true">
+                          </share-buttons>
+                        </mat-menu>
+                      </td>
+
+                    </div>
+                  </li>
+
+
+                </ul>
+              </mat-tab>
+              <mat-tab label="Vaccination">
+                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table"
+                  *ngFor="let vacDoc of vacReport">
+                  <li class="app-list">
+                    <img alt="image" class="" width="40"
+                      src="{{vacDoc.profile_image?imageURL+vacDoc.profile_image:imageURL+'demouser.png'}}">
+                    <div class="set-flex">
+                      <div class="media-title font-16">{{vacDoc.first_name}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Date</div>
+                      <div class="media-title font-16">{{vacDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Name</div>
+                      <div class="text-job font-16">{{vacDoc.document_title}}</div>
+                    </div>
+                    <div class="media-cta px-4">
+                      <td>
+                        <a class="view" [href]="imageURL+vacDoc.document_file" target="_blank">View</a>
+                      </td>
+                      <td>
+                        <button mat-icon-button [matMenuTriggerFor]="menu1"
+                          aria-label="Example icon-button with a menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu1="matMenu">
+                          <button mat-menu-item (click)="shareToMail(imageURL+vacDoc.document_file)">
+                            <mat-icon>mail</mat-icon>
+                            <span>mail</span>
+                          </button>
+                        </mat-menu>
+                      </td>
+                    </div>
+                  </li>
+                </ul>
+              </mat-tab>
+              <mat-tab label="Procedure Reports">
+                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table"
+                  *ngFor="let proDoc of procedureReport">
+                  <li class="app-list">
+                    <img alt="image" class="" width="40"
+                      src="{{proDoc.profile_image?imageURL+proDoc.profile_image:imageURL+'demouser.png'}}">
+                    <div class="set-flex">
+                      <div class="media-title font-16">{{proDoc.first_name}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Date</div>
+                      <div class="media-title font-16">{{proDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Name</div>
+                      <div class="text-job font-16">{{proDoc.document_title}}</div>
+                    </div>
+                    <div class="media-cta px-4">
+                      <td>
+                        <a class="view" [href]="imageURL+proDoc.document_file" target="_blank">View</a>
+                      </td>
+                      <td>
+                        <button mat-icon-button [matMenuTriggerFor]="menu1"
+                          aria-label="Example icon-button with a menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu1="matMenu">
+                          <button mat-menu-item (click)="shareToMail(imageURL+proDoc.document_file)">
+                            <mat-icon>mail</mat-icon>
+                            <span>mail</span>
+                          </button>
+                        </mat-menu>
+                      </td>
+                    </div>
+                  </li>
+                </ul>
+              </mat-tab>
+              <mat-tab label="Discharge Summery">
+                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table"
+                  *ngFor="let dischargeDoc of dischargeReport">
+                  <li class="app-list">
+                    <img alt="image" class="" width="40"
+                      src="{{dischargeDoc.profile_image?imageURL+dischargeDoc.profile_image:imageURL+'demouser.png'}}">
+                    <div class="set-flex">
+                      <div class="media-title font-16">{{dischargeDoc.first_name}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Date</div>
+                      <div class="media-title font-16">{{dischargeDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Name</div>
+                      <div class="text-job font-16">{{dischargeDoc.document_title}}</div>
+                    </div>
+                    <div class="media-cta px-4">
+                      <td>
+                        <a class="view" [href]="imageURL+dischargeDoc.document_file" target="_blank">View</a>
+                      </td>
+                      <td>
+                        <button mat-icon-button [matMenuTriggerFor]="menu1"
+                          aria-label="Example icon-button with a menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu1="matMenu">
+                          <button mat-menu-item (click)="shareToMail(imageURL+dischargeDoc.document_file)">
+                            <mat-icon>mail</mat-icon>
+                            <span>mail</span>
+                          </button>
+                        </mat-menu>
+                      </td>
+                    </div>
+                  </li>
+                </ul>
+              </mat-tab>
+              <mat-tab label="Medical Bills">
+                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table"
+                  *ngFor="let billsDoc of billsReport">
+                  <li class="app-list">
+                    <img alt="image" class="" width="40"
+                      src="{{billsDoc.profile_image?imageURL+billsDoc.profile_image:imageURL+'demouser.png'}}">
+                    <div class="set-flex">
+                      <div class="media-title font-16">{{billsDoc.first_name}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Date</div>
+                      <div class="media-title font-16">{{billsDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Name</div>
+                      <div class="text-job font-16">{{billsDoc.document_title}}</div>
+                    </div>
+                    <div class="media-cta px-4">
+                      <td>
+                        <a class="view" [href]="imageURL+billsDoc.document_file" target="_blank">View</a>
+                      </td>
+                      <td>
+                        <button mat-icon-button [matMenuTriggerFor]="menu1"
+                          aria-label="Example icon-button with a menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu1="matMenu">
+                          <button mat-menu-item (click)="shareToMail(imageURL+billsDoc.document_file)">
+                            <mat-icon>mail</mat-icon>
+                            <span>mail</span>
+                          </button>
+                        </mat-menu>
+                      </td>
+                    </div>
+                  </li>
+                </ul>
+              </mat-tab>
+              <mat-tab label="Insurance Documents">
+                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder respo_table"
+                  *ngFor="let inssuranceDoc of insuranceReport">
+                  <li class="app-list">
+                    <img alt="image" class="" width="40"
+                      src="{{inssuranceDoc.profile_image?imageURL+inssuranceDoc.profile_image:imageURL+'demouser.png'}}">
+                    <div class="set-flex">
+                      <div class="media-title font-16">{{inssuranceDoc.first_name}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Date</div>
+                      <div class="media-title font-16">{{inssuranceDoc.document_date | date : 'dd/MM/yyyy'}}</div>
+                    </div>
+                    <div class="set-flex">
+                      <div class="media-title text-muted mb-0">Document Name</div>
+                      <div class="text-job font-16">{{inssuranceDoc.document_title}}</div>
+                    </div>
+                    <div class="media-cta px-4">
+                      <td>
+                        <a class="view" [href]="imageURL+inssuranceDoc.document_file" target="_blank">View</a>
+                      </td>
+                      <td>
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item (click)="shareToMail(imageURL+inssuranceDoc.document_file)">
+                            <mat-icon>mail</mat-icon>
+                            <span>mail</span>
+                          </button>
+                        </mat-menu>
+                      </td>
+                    </div>
+                  </li>
+                </ul>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="card">
+          <div class="header">
+            <h2>Upload Reports/Documents</h2>
+          </div>
+          <div class="body">
+            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
+              <li class="report-list" *ngFor="let listData of dataSource">
+                <div class="">
+                  <i class="far fa-file file-style col-red font-20"></i>
+                  <div class="media-title font-16">{{listData.document_title}}</div>
+                </div>
+                <div class="ms-auto">
+                  <td>
+                    <button class="btn tblActnBtn h-auto" (click)="open(mymodal); getId(listData.id)">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                    <a [href]="listData.document" [download]="listData.document_title" target="_blank">
+                      <i class="far fa-arrow-alt-circle-down"></i>
+                    </a>
+
+                  </td>
+                </div>
+              </li>
+              <!-- <li class="report-list">
+                <div class="d-flex">
+                  <i class="far fa-file-word col-blue font-20 file-style"></i>
+                  <div class="media-title font-16">Mediclaim Documents</div>
+                </div>
+                <div class="ms-auto">
+                  <td>
+                    <i class="far fa-trash-alt"></i>
+                    <i class="far fa-arrow-alt-circle-down"></i>
+                  </td>
+                </div>
+              </li> -->
+
+
+              <!-- <li class="report-list">
+                <div class="d-flex">
+                  <i class="far fa-file-pdf col-red font-20 file-style"></i>
+                  <div class="media-title font-16">Urine Report</div>
+                </div>
+                <div class="ms-auto">
+                  <td>
+                    <i class="far fa-trash-alt"></i>
+                    <i class="far fa-arrow-alt-circle-down"></i>
+                  </td>
+                </div>
+              </li> -->
+              <!-- <li class="report-list">
+                <div class="d-flex">
+                  <i class="far fa-file-image col-teal font-20 file-style"></i>
+                  <div class="media-title font-16">Scanned Documents</div>
+                </div>
+                <div class="ms-auto">
+                  <td>
+                    <i class="far fa-trash-alt"></i>
+                    <i class="far fa-arrow-alt-circle-down"></i>
+                  </td>
+                </div>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Delete Pop -->
+
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+      <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button> -->
+    </div>
+    <div class="modal-body">
+      Are You sure you want to delete?
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); deleteRecord()">Ok</button>
+
+      <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </ng-template>
+
+</section>

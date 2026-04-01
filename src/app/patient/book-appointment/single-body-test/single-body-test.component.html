@@ -1,0 +1,78 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Single Body Check'" [items]="[]"
+                [active_item]="'Single Body Check'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="body" *ngFor="let labList of testDetail">
+                        <div class="headingBody">
+                            <span>&#8377; {{labList.amount}} Onwards</span>
+                            <h4>{{labList.test_name}}</h4>
+                        </div>
+                        <div class="bodyContent">
+                            <h5>Tests Include</h5>
+                            <span>Click on below <strong>Add to Cart</strong> button to see included tests</span>
+                            <ul class="testList singleTest">
+                                <li class="testName">
+                                    <img src="{{imageURL+labList.images}}" alt="Liver">
+                                    <p>{{labList.test_name}}</p>
+                                </li>
+                            </ul>
+                            <ul class="coverLines">
+                                <h6>This Package Covers</h6>
+                                <div [innerHtml]='labList.description'>
+
+                                </div>
+                                <!-- <li>{{labList.description}}</li> -->
+                                <!-- <li>Risk Assessment: Hypothyroidism and Hyperthyroidism.</li> -->
+                            </ul>
+                        </div>
+                        <div [innerHTML]="">
+
+                        </div>
+
+                        <div class="col-12" *ngIf="(testDetail[0].user_role_id==3)">
+                            <div class="body bg-light">
+                                <div class="dark_border">
+                                    <ul class="row" *ngFor="let labList of testDetail">
+                                        <li class="col-lg-4 col-md-4 col-md-6 mt-4">
+                                            <p> Report Time: <strong class="mt-2"> {{labList.test_report}} </strong>
+                                            </p>
+                                        </li>
+                                        <li class="col-lg-4 col-md-4 col-md-6 mt-4 ps-3">
+                                            <p> Fasting Time: <strong class="mt-2">{{labList.fast_time}} </strong>
+                                            </p>
+                                        </li>
+                                        <li class="col-lg-4 col-md-4 col-md-6 mt-4 ps-3">
+                                            <p>Test Recommended for: <strong class="mt-2"> {{labList.test_recommended}}
+                                                </strong> </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="two min-height bg-white">
+                                _
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-12" *ngIf="hideDiv==false">
+                            <div class="body bg-light">
+                                <h1>hello</h1>
+                            </div>
+                        </div> -->
+
+                        <div class="mtBtn" *ngFor="let labList of testDetail">
+                            <button mat-raised-button color="warn" type="submit"
+                                (click)="addToCart(labList.lab_id, labList.test_id , labList.test_name , labList.amount, 'test')">Add
+                                to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

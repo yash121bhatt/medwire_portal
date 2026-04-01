@@ -1,0 +1,73 @@
+<section class="content">
+    <div class="content-block">
+       <div class="block-header">
+          <!-- breadcrumb -->
+          <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Edit Doctor Fees'"></app-breadcrumb>
+       </div>
+       <div class="row clearfix">
+          <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+             <div class="card">
+                <div class="header mx-4">
+                   <h2><strong>Edit Doctor Fees</strong></h2>
+                </div>
+                <div class="body">
+                   <form class="m-4" [formGroup]="editfeeForm" (ngSubmit)="onSubmit()">
+                   <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                         <mat-form-field class="example-full-width " appearance="outline">
+                            <mat-label>Select Doctor</mat-label>
+                            <mat-select formControlName="doctor"  [(ngModel)]="feesdoctorDetail.doctor_id"  >
+                               <mat-option [value]="feesdoctorDetail.doctor_id"  >
+                                  {{feesdoctorDetail.first_name}}
+                               </mat-option>
+                              
+                            </mat-select>
+                           
+                         </mat-form-field>
+                      </div>
+                   </div>
+               
+                   <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                         <label class="example-margin font-15 fw_mid">Select Visit Type</label> <br>
+                         
+                         <mat-checkbox (change)="toggleoffline($event)" class="mat-primary" [checked]="offlineValueChecked">
+                            Offline Fees
+                          </mat-checkbox> 
+                         <mat-checkbox (change)="toggleonline($event)" class="mat-primary p-4"  [checked]="onlineValueChecked">
+                           Online Fees 
+                         </mat-checkbox>
+                      </div>
+                      </div>
+                      <div class="row">
+                      <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3"> -->
+                         <div  class="mb-3 col-xl-6 col-lg-6 col-md-6 " [hidden]='isHidden'>
+                               <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-label>Doctor's Offline Fees</mat-label>
+                                  <input matInput formControlName="offline_doctor_fee" type="number" [(ngModel)]="feesdoctorDetail.clinic_visit_consulting_fee" >
+                                  <mat-icon matSuffix>currency_rupee</mat-icon>
+                               </mat-form-field>
+                         </div>
+                         <div  class="mb-3 col-xl-6 col-lg-6 col-md-6 " [hidden]='isHiddenonline'>
+                               <mat-form-field class="example-full-width mb-3" appearance="outline" >
+                                  <mat-label>Doctor's Online Fees</mat-label>
+                                  <input matInput formControlName="online_doctor_fee" type="number"  [(ngModel)]="feesdoctorDetail.online_consulting_fee" >
+                                  <mat-icon matSuffix>currency_rupee</mat-icon>
+                               </mat-form-field>
+                         </div>
+                      <!-- </div> -->
+                   </div>
+                   <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                         <button class="btn-space"  mat-raised-button
+                            color="primary" [disabled]="!editfeeForm.valid ">Submit</button>
+                         <button type="button" mat-button [routerLink]="['/staff/fees/doctor-fees-list']">Cancel</button>
+                      </div>
+                   </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>

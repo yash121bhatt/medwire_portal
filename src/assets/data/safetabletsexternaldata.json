@@ -1,0 +1,49 @@
+[
+    
+    {
+        "problem": "Allergy",
+        "medicinename": "Antihistamines including:<br>Cetirizine (Zyrtec)<br>Chlorpheniramine (Chlor-Trimeton, Efidac, Teldrin)<br>Diphenhydramine (Benadryl)<br>Doxylamine <br>Fexofenadine(Allegra) <br> Loratadine (Alavert, Claritin)<br> Nasal spray oxymetazoline (Afrin, Neo-Synephrine) (Check with your doctor first and limit use to a few days.)<br>Steroid nasal spray (Flonase, Nasacort, Rhinocort) (Check with your doctor first, but over-the-counter sprays are generally safe.)"
+    },
+    {
+        "problem": "Cough, Cold and Flu",
+        "medicinename": "Robitussin Cough (check which ones, some should not be used in 1st trimester), Trind-DM,<br>Vicks Cough Syrup<br>Saline nasal drops or spray <br> Actifed, Dristan, Flonase, Nasacort, Sudafed (Check with your doctor first. Do not use in first trimester.)<br>Tylenol (acetaminophen) or Tylenol Cold (limit dose and duration of usage)<br>Warm salt/water gargle<br>*Do not take 'SA' (sustained action) forms or 'Multi-Symptom' forms of these drugs."
+    },
+    {
+        "problem": "Constipation",
+        "medicinename": "Citrucel<br>Colace<br>Fiberall/Fibercon<br>Metamucil<br>Milk of Magnesia<br>Senokot, Senokot S, Miralax"
+    },
+    {
+        "problem": "Diarrhoea",
+        "medicinename": "For 24 hours: <br>Imodium <br>Parepectolin"
+    },
+    {
+        "problem": "First Aid Ointment",
+        "medicinename": "Bacitracin, Neosporin"
+    },
+    {
+        "problem": "Headache",
+        "medicinename": "Tylenol (acetaminophen) - limit dose and duratio"
+    },
+    {
+        "problem": "Heartburn",
+        "medicinename": "Gaviscon <br> Maalox <br> Mylanta<br> Riopan <br> Tagamet <br>TUMs"
+    },
+    {
+        "problem": "Haemorrhoids",
+        "medicinename": "Anusol <br>Preparation H <br>Tucks <br>Witch hazel<br>"
+    },
+    {
+        "problem": "Nausea & Vomiting",
+        "medicinename": "Doxylamine (in combination with pyridoxine) <br>Emetrol (if not diabetic)"
+    },
+    {
+        "problem": "Rashes",
+        "medicinename":"Benadryl cream <br> Caladryl lotion or cream<br>Hydrocortisone cream or ointment<br>Oatmeal bath (Aveeno)"
+    },
+    {
+        "problem":"Yeast",
+        "medicinename":"Monistat"
+    }
+   
+   
+]

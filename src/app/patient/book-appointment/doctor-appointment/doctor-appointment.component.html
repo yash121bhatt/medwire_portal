@@ -1,0 +1,101 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Dashboard'" [items]="['Doctor Appointment','Appointments','Book Appointment']" [active_item]="'Appointment Detail'">
+            </app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Appointment Detail</strong></h2>
+                    </div>
+                    <div class="body">
+
+                        <div>
+                            <div class="drInfo">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div class="media doctorsList">
+                                            <img class="mr-3" src="{{profileImageurl+profileImage}}" alt="Generic placeholder image">
+                                            <div class="media-body mediaText">
+                                              <h5 >{{doctorName}}</h5>
+                                              <p>{{speciality}}</p>
+                                              <span>{{experience}} years experience</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="specialityText">
+                                                <span>Clinic : <strong>{{clinicName}}, {{clinicaddress}}</strong></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <h5 class="mt-4">Appointment Type: {{appointment_type}}</h5>
+                                        <h5 class="mt-4">Fees: &#8377; {{fees}}</h5>  
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <form action="" [formGroup]="bookAppointmentForm">
+                                <div class="col-12 mb-3">
+                                   <mat-form-field class="example-chip-list w-100 mt-3" appearance="outline">
+                                       <mat-label>Reason of Appointment</mat-label>
+                                       <mat-chip-list #chipList aria-label="History selection" formControlName="description" autocomplete="off" >
+                                           <mat-chip *ngFor="let history of historys" (removed)="remove(history)"> {{history}} 
+                                               <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                                           </mat-chip>
+                                           <input placeholder="Add Reason of Appointment" #historyInput [formControl]="historyCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event);">
+                                       </mat-chip-list>
+                                       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                           <mat-option *ngFor="let history of filteredHistorys | async" [value]="history">
+                                               {{history}}
+                                           </mat-option>
+                                       </mat-autocomplete>
+                                      
+                                   </mat-form-field>
+                                 
+                               </div>
+                            </form>
+                             </div>
+                            <form [formGroup]="appoitnementForm" (ngSubmit)="onFormSubmit()">
+                                <h3 class="">Select Date & Time</h3>
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Select Appointment Date</mat-label>
+                                    <input matInput [matDatepickerFilter]="myDateFilter" [matDatepicker]="picker"
+                                     [min]="todayDate" [max]="maxDate" required autocomplete="off"  formControlName="dateOfAppointment"  (dateChange)="getTimeslot($event)">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field> <br>
+                                <div  *ngIf="showslotMessage" class="text-danger">
+                                    Timeslot not available for selected date.
+                                </div>
+                                <div  *ngIf="showslotMessage1" class="text-danger">
+                                    Sorry , Currently Doctor is not available.
+                                </div>
+
+                                <mat-button-toggle-group class="manual">
+                                    <mat-button-toggle class="timeBtn" value="bold" *ngFor=" let slotData of morningavailableSlot " (click)="slotTimeselected(slotData.Stime)">{{slotData.Stime}}</mat-button-toggle>  
+                                    <mat-button-toggle class="timeBtn" value="bold" *ngFor=" let slotData of afternoonavailableSlot " (click)="slotTimeselected(slotData.Stime)">{{slotData.Stime}}</mat-button-toggle>  
+                                    <mat-button-toggle class="timeBtn" value="bold" *ngFor=" let slotData of eveningavailableSlot " (click)="slotTimeselected(slotData.Stime)">{{slotData.Stime}}</mat-button-toggle>  
+                                </mat-button-toggle-group>
+
+                                <div class="proceedBtn"  (click)="processAppointment()">
+                                    <button mat-raised-button color="primary" type="button"  [class.auth-spinner]="loading " [disabled]="payNowbtn" >Proceed to Pay</button>
+                                </div>  
+                                <!-- <div class="proceedBtn"  (click)="paymentNow()">
+                                    <a mat-raised-button color="primary" type="button"  [class.auth-spinner]="loading "  >Pay Test</a>
+                                </div> -->
+                              
+                            </form>  
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

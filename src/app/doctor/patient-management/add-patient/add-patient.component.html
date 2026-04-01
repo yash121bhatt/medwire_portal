@@ -1,0 +1,211 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Dashboard'" [items]="['Patient Management']" [active_item]="'Add Patient'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="header mx-4">
+                        <h2><strong>Add Patient</strong></h2>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+
+                    </div>
+                    <div class="body">
+                        <form class="m-4 mt-0" [formGroup]="addpatientForm" (ngSubmit)="onSubmit()">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Mobile Number</mat-label>
+                                <input matInput formControlName="mobile" (keyup)="searchPatientMobile($event)"
+                                    type="number" required autocomplete="off">
+                                <mat-error
+                                    *ngIf="addpatientForm.get('mobile').hasError('required') || addpatientForm.get('mobile').touched">
+                                    Please enter a Valid Mobile no.
+                                </mat-error>
+                            </mat-form-field>
+
+                            <div class="row mb-4">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3 ps-0">
+                                    <!-- <label class="example-margin font-15 fw_mid">Suggested By</label> -->
+                                    <section class="example-section">
+
+                                        <mat-radio-group formControlName="memberselected" #radioGroup="matRadioGroup">
+                                            <mat-radio-button class="radioBtns"
+                                                *ngFor="let i = index ;let data of memberData;"
+                                                (click)="fetchmemberDetail(data.id)" value="{{data.id}}"
+                                                [checked]="checkedTrue(i)">
+                                                <div class="media boxImg">
+                                                    <img class="mr-3" src="{{data.profile_image_name?imageURLprofile+data.profile_image_name:imageURLprofile+'demouser.png' }}"
+                                                        alt="Generic placeholder image">
+                                                    <div class="media-body mediaCntnt">
+                                                        <h5 class="mt-0">{{data.full_name}}</h5>
+                                                        <ul class="d-flex">
+                                                            <li class="ageText"> <strong>Age:</strong>
+                                                                {{showAge(data.date_of_birth)}}</li>
+                                                            <li class="ageText"> <strong>Gender:</strong>
+                                                                {{data.gender}}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3 mb-3 ps-0">
+                                    <label class="example-margin font-15 fw_mid">Referred by</label>
+                                    <section class="example-section mb-3">
+                                        <mat-radio-group formControlName="suggested_by" [(ngModel)]="selection"
+                                            #radioGroup="matRadioGroup">
+                                            <mat-radio-button class="example-margin" (click)="changediv('self_div')"
+                                                value="doctor">
+                                                Doctor
+                                            </mat-radio-button>
+                                            <mat-radio-button class="example-margin" (click)="changediv('doctor_div')"
+                                                value="self">
+                                                Self
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </section>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-5 mb-0 ps-0">
+                                    <div class="row">
+                                        <div class="col-12 " id="doctor_div" [hidden]="!flat">
+                                            <mat-form-field class="example-full-width mb-0" appearance="outline">
+                                                <mat-label>Select Doctor</mat-label>
+                                                <mat-select formControlName="doctor">
+                                                    <mat-option *ngFor="let data of doctorData" [value]="data.user_id">
+                                                        {{data.doctor_name}}
+                                                    </mat-option>
+
+                                                </mat-select>
+                                                <mat-error *ngIf="addpatientForm.get('doctor').hasError('required')">
+                                                    Atleast select one Doctor.
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12 " id="self_div" [hidden]="!persentage"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Full Name</mat-label>
+                                        <input matInput formControlName="fullname" type="text" maxlength="32" pattern="[A-Za-z ]{1,32}" required [(ngModel)]="fullName"
+                                            autocomplete="off">
+                                        <mat-error *ngIf="addpatientForm.get('fullname').hasError('required')">
+                                            Full Name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Gender</mat-label>
+                                        <mat-select formControlName="gender" required [(ngModel)]="gender">
+                                            <mat-option [value]="'Male'">
+                                                Male
+                                            </mat-option>
+                                            <mat-option [value]="'Female'">
+                                                Female
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="addpatientForm.get('gender').hasError('required')">
+                                            Gender is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                         <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Mobile Number</mat-label>
+                            <input matInput formControlName="mobile" type="number" required [(ngModel)]="mobile_no">
+                            <mat-error *ngIf="addpatientForm.get('mobile').hasError('required')">
+                               Mobile Number is required
+                            </mat-error>
+                         </mat-form-field>
+                      </div> -->
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Email Address</mat-label>
+                                        <input matInput formControlName="email" type="email" required
+                                            [(ngModel)]="email" autocomplete="off">
+                                        <mat-error *ngIf="addpatientForm.get('email').hasError('required')">
+                                            Email Address is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Enquiry Date</mat-label>
+                                        <input matInput [matDatepicker]="pickerenquiry" [max]="minDate" date="true"
+                                            name="start_time" [(ngModel)]="planModel.start_time"
+                                            formControlName="enquiryDate" >
+                                        <mat-datepicker-toggle matSuffix [for]="pickerenquiry"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickerenquiry></mat-datepicker>
+                                        <mat-error *ngIf="addpatientForm.get('enquiryDate').hasError('required')">
+                                            Please select Enquiry Date
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Date Of Birth</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="dob" required
+                                            [(ngModel)]="dob" placeholder="dd/mm/yyyy" [max]="dateReflect">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-error *ngIf="addpatientForm.get('dob').hasError('required')">
+                                            Please select date of birth
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Upload Image</mat-label>
+                                        <ngx-mat-file-input formControlName="uploadImg" [accept]="'.png,.jpg,.jpeg'"
+                                            (change)="fileChange($event.target.files)">
+                                        </ngx-mat-file-input>
+                                    </mat-form-field>
+                                    <div *ngIf="imageCondition">
+                                        <a href="{{profileImg?imageURLprofile+profileImg:imageURLprofile+'demouser.png'}}"
+                                            class="" target="_blank">View Image</a>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Area Pincode</mat-label>
+                                        <input matInput formControlName="pincode" type="number" [(ngModel)]="pincode"
+                                            autocomplete="off">
+                                        <mat-error *ngIf="addpatientForm.get('pincode').hasError('required')">
+                                            Area Pincode is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Address</mat-label>
+                                        <textarea matInput formControlName="address" [(ngModel)]="address"></textarea>
+                                        <mat-error *ngIf="addpatientForm.get('address').hasError('required')">
+                                            Address is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="btn-space" mat-raised-button color="primary"
+                                        [disabled]="!addpatientForm.valid ">Submit</button>
+                                    <button type="button" mat-button [routerLink]="['../patient-list']">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

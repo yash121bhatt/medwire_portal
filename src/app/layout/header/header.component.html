@@ -1,0 +1,191 @@
+<nav #navbar class="navbar active">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="#" onClick="return false;" class="navbar-toggle collapsed"
+        (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
+      <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
+      <a class="navbar-brand" routerLink={{dashboardRedirectLink}}>
+        <img src="assets/images/medwire-logo.png"  alt="Medwire" />
+        
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
+      <ul class="float-start collapse-menu-icon">
+        <li>
+          <button mat-icon-button (click)="callSidemenuCollapse()" class="sidemenu-collapse">
+            <i class="material-icons-outlined icon-color">
+              menu
+            </i>
+          </button>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- Full Screen Button -->
+        <li class="fullscreen">
+          <button mat-icon-button (click)="callFullscreen()" class=" nav-notification-icons">
+            <i *ngIf="icon" class="material-icons-outlined icon-color">
+              fullscreen
+            </i>
+            <i *ngIf="!icon" class="material-icons-outlined icon-color">
+              fullscreen_exit
+            </i>
+          </button>
+          {{offlineOnlineStatus}}
+          <mat-slide-toggle *ngIf="isShow===true"
+          [(ngModel)]="checked"
+          class="example-margin"
+          [color]="color"
+          (change)="labOnlineOffline($event)"
+          >
+        </mat-slide-toggle>
+        </li>
+        <!-- #END# Full Screen Button -->
+        <!-- #START# Notifications-->
+       <!-- #START# Notifications-->
+       <li class="nav-item" ngbDropdown>
+        <button mat-icon-button ngbDropdownToggle class="nav-notification-icons" id="notificationContain">
+          <i matBadge="{{unreadNotificationCount}}" class="material-icons-outlined icon-color">
+          notifications_active
+          </i>
+          <!-- <mat-icon matBadge="15">notifications_active</mat-icon> -->
+          </button>
+        <div ngbDropdownMenu class="notification-dropdown pullDown">
+          <div class="noti-list" style="position: relative; max-width: 600px; max-height: 350px;" [perfectScrollbar]>
+            <ul class="menu">
+              <li class="nfc-header">
+                <h5 class="mb-0">Notifications</h5>
+                <span></span>
+              </li>
+              <li>
+                <a  *ngFor="let notification of notifications" (click)="notificationRedirect(userRoleu)"
+                 >
+                  <!-- <span class="table-img msg-user ">
+                    <i class="material-icons-two-tone nfc-type-icon"
+                      [ngClass]="[notification.color]">{{notification.icon}}</i>
+                  </span> -->
+                  <span class="menu-info">
+                    <h6 class="titleClr">{{notification.title}}</h6>
+                    <span class="menu-title ntfctnMsg" [innerHTML]="notification.message"></span>
+                    <!-- <span class="menu-desc timeText mt-2">
+                      <i class="material-icons">access_time</i> {{ notification.created_at | date:'dd/MM/yyy'}}, {{notification.created_at | date:'shortTime'}}
+                    </span> -->
+                    <span class="menu-desc timeText mt-2">  <i class="material-icons">access_time</i> {{ notification.created_at}}
+                    
+                    </span>
+                  </span>
+                  <!-- <span class="nfc-close dropCross">
+                    <app-feather-icons [icon]="'X'" [class]="'user-menu-icons'"></app-feather-icons>
+                  </span> -->
+                </a>
+              </li>
+            </ul>
+          </div>
+          <a (click)="notificationRedirect(userRoleu)" class="nfc-read-more cursorCss">Read
+            All Notifications</a>
+        </div>
+      </li>
+        <!-- #END# Notifications-->
+        <!-- <li class="nav-item" ngbDropdown>
+          <a ngbDropdownToggle class="lang-dropdown">
+            <img *ngIf="flagvalue !== undefined" src="{{flagvalue}}" height="16">
+            <img *ngIf="flagvalue === undefined" src="{{defaultFlag}}" height="16">
+          </a>
+          <div ngbDropdownMenu class="dropdown-menu lang-item dropdown-menu-right pullDown">
+            <a href="javascript:void(0);" class="dropdown-item lang-item-list" *ngFor="let item of listLang"
+              (click)="setLanguage(item.text, item.lang, item.flag)"
+              [ngClass]="{'active': langStoreValue === item.lang}">
+              <img src="{{item.flag}}" class="flag-img" height="12"> <span class="align-middle">{{item.text}}</span>
+            </a>
+          </div>
+        </li> -->
+        <li class="nav-item user_profile" ngbDropdown>
+          <div class="chip dropdown-toggle" ngbDropdownToggle class="nav-notification-icons pt-0"  id="profileContent">
+            <img src="{{userImg}}" class="user_img" width="32" height="32" alt="User">
+            <span>{{userName}}</span>
+          </div>
+          <div ngbDropdownMenu class="notification-dropdown pullDown">
+            <div class="noti-list" style="position: relative; max-width: 600px; max-height: 300px;" [perfectScrollbar]>
+              <ul class="menu">
+                <li class="body">
+                  <ul class="user_dw_menu"  (click)="profilePopup()">
+                    <li>
+                      <a routerLink="{{profilepage}}" onClick="return false;">
+                        <app-feather-icons [icon]="'user'" [class]="'user-menu-icons'"></app-feather-icons>My Profile
+                      </a>
+                    </li>
+                    <ul class="" *ngIf="userRoleu == 'patient'">
+                    <li *ngFor="let data of Users">
+                      <a [routerLink]="['/patient/dashboard/'+encryptionData(data.id)]" onClick="return false;" (click)="callMe()" class="imgCircle align-items-center">
+                        <img src="{{data.imgName?imageURL+data.imgName:imageURL+'demouser.png' }}" class="switch_user m-r-10" width="25" height="25" alt="User">{{data.first_name}}
+                      </a>
+                    </li>
+                    <!-- <li>
+                      <a routerLink="/patient/dashboard-person-two" onClick="return false;" class="align-items-center">
+                        <img src="assets/images/pages/welcome_user2.png" class="switch_user rounded-circle m-r-10" width="25" height="25" alt="User">Naruto Ujumaki
+                      </a>
+                    </li> -->
+                    <!-- <li>
+                      <a routerLink="/patient/dashboard-person-three" onClick="return false;" class="align-items-center">
+                        <img src="assets/images/pages/welcome_user3.png" class="switch_user rounded-circle m-r-10" width="25" height="25" alt="User">Ruby Casstlewood
+                      </a>
+                    </li> -->
+                    <!-- <li>
+                      <a routerLink="/patient/dashboard-person-four" onClick="return false;" class="align-items-center">
+                        <img src="assets/images/pages/welcome_user4.png" class="switch_user rounded-circle m-r-10" width="25" height="25" alt="User">Billy Rhymi
+                      </a>
+                    </li> -->
+                    <!-- <li>
+                      <a routerLink="/patient/dashboard-person-five" onClick="return false;" class="align-items-center">
+                        <img src="assets/images/pages/welcome_user5.png" class="switch_user rounded-circle m-r-10" width="25" height="25" alt="User">Peter Casstlewood
+                      </a>
+                    </li> -->
+                  </ul>
+                  <ul class="" *ngIf="userRoleu == 'doctor'">
+                    <li *ngFor="let data of doctorData">
+                      
+                      <a [routerLink]="['/doctors/dashboard']" onClick="return false;" class="align-items-center">
+                        <img src="{{data.profile_image_name?imageURL+data.profile_image_name:imageURL+'demouser.png' }}" class="switch_user rounded-circle m-r-10" width="25" height="25" alt="User">{{data.full_name}}
+                      </a>
+                    </li>
+                    </ul>
+                    <!-- <li>
+                      <a href="#" onClick="return false;">
+                        <app-feather-icons [icon]="'mail'" [class]="'user-menu-icons'"></app-feather-icons>Inbox
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" onClick="return false;">
+                        <app-feather-icons [icon]="'settings'" [class]="'user-menu-icons'"></app-feather-icons>Settings
+                      </a>
+                    </li> -->
+                    <li>
+                      <a href="javascript:void(0);" (click)="open(mymodal)">
+                        <app-feather-icons [icon]="'log-out'" [class]="'user-menu-icons'"></app-feather-icons>Logout
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <!-- #END# Tasks -->
+      </ul>
+    </div>
+  </div>
+</nav>
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Logout Confirmation</h4>
+  </div>
+  <div class="modal-body">Are you sure you want to Logout?</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); logout()">
+      Ok
+    </button>
+
+    <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">
+      Cancel
+    </button>
+  </div>
+</ng-template>

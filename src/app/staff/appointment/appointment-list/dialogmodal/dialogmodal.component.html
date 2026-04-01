@@ -1,0 +1,65 @@
+<div>
+    <h5 mat-dialog-title>Reschedule Appointment</h5>
+    <div mat-dialog-content class="">
+       <form [formGroup]="resheduleForm" (ngSubmit)="onSubmitClick()">
+       <div class="text-inside mt-4 ">
+          <div class="row scroll">
+             <div class="col-md-8 col-sm-12 m-auto mb-3">
+                <ngx-calendar [options]="calendarOptions" formControlName="time_set" (onChooseDate)="onChooseDate($event)" [events]="calendarEvents"></ngx-calendar>
+             </div>
+             <div class="col-md-8 col-sm-12 m-auto">
+                <div class="row">
+                   <div class="col-lg-4 col-md-6 col-sm-12 pe-0">
+                      <label class="badge bg-blue">Morning</label>
+                      <mat-button-toggle-group class="manual mt-2">
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="10AM">10:00-10:30 AM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="10:30AM">10:30-11:00 AM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="11AM">11:00-11:30 AM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="11:30AM">11:30-12:00 PM</mat-button-toggle>
+                      </mat-button-toggle-group>
+                   </div>
+                   <div class="col-lg-4 col-md-6 col-sm-12 pe-0">
+                      <label class="badge bg-blue">Afternoon</label>
+                      <mat-button-toggle-group class="manual mt-2">
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="01:00PM">01:00-01:30 PM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="01:30PM">01:30-02:00 PM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="02:00PM">02:00-02:30 PM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="02:30PM">02:30-03:00 PM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="03:00PM">03:00-03:30 PM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="03:30PM">03:30-04:00 PM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="04:00PM">04:00-04:30 AM</mat-button-toggle>
+                      </mat-button-toggle-group>
+                   </div>
+                   <div class="col-lg-4 col-md-6 col-sm-12 pe-0">
+                      <label class="badge bg-blue">Evening</label>
+                      <mat-button-toggle-group class="manual mt-2">
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="05:30PM">05:30-06:00 PM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="06:00PM">06:00-06:30 PM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="06:30PM">06:30-07:00 PM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="07:00PM">07:00-07:30 PM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="07:30PM">07:30-08:00 PM</mat-button-toggle>
+                         <mat-button-toggle class="timeBtn col-6 my-2" value="08:00PM">08:00-08:30 PM</mat-button-toggle>
+                      </mat-button-toggle-group>
+                   </div>
+                </div>
+             </div>
+             <div class="col-md-8 col-sm-12 m-auto">
+                <h6 class="mb-0">Reason Of Reschedule</h6>
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                   <mat-label>Reason of Reschedule</mat-label>
+                   <input matInput formControlName="reschedule" required >
+                   <mat-error *ngIf="resheduleForm.get('reschedule').hasError('required')">
+                      Reason Of Reschedule is required
+                   </mat-error>
+                </mat-form-field>
+             </div>
+             <div class="btn-sec pb-5 text-center">
+                <button class="btn-space" mat-raised-button color="primary" [disabled]="!resheduleForm.valid " (click)="showResheduleDialog()">Submit</button>
+                <button type="button" mat-button (click)="closeDialog()">Cancel</button>
+             </div>
+          </div>
+          
+       </div>
+       </form>
+    </div>
+ </div>

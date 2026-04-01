@@ -1,0 +1,80 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Cart List'" [items]="[]" [active_item]="'Cart List'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix lab_appointment">
+            <div class="col-lg-7 col-md-7 col-sm-12">
+                <div class="usplevel_two dark_border row p-3 m-0">
+                    <div *ngFor="let d of cartListone">
+                        <h5 class="mb-3"> {{d.totalCartItems}} Cart Item</h5>
+                    </div>
+                    <!-- <div class="col-6">
+                   <p class="mb-0 font-15">Ultrasound Test</p>
+                </div>
+                <div class="col-6 text-end">
+                   <p class="mb-0 font-15">Fees : ₹ 499 &nbsp; <strong>|</strong> &nbsp; <button mat-button color="warn" class="p-0 min-width-0" type="button" (click)="customWithFunction()"><i class="fas fa-trash col-gray"></i></button></p>
+                </div> -->
+                    <div class="d-flex align-items-center" *ngFor="let d of cartList; let i = index ;">
+                        <div class="col-6">
+                            <p class="mb-0 font-15">{{ d.test_name}}</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="mb-0 font-15">Fees : ₹ {{ d.amount }} &nbsp; <strong>|</strong>
+                                &nbsp; <button mat-button color="warn" class="p-0 min-width-0" type="button"
+                                    (click)="customWithFunction(i)"><i class="fas fa-trash col-gray"></i></button></p>
+                        </div>
+                    </div>
+                    <div class="col-12 d-grid mt-3">
+                        <button type="button" (click)="onclick()" class="btn btn-outline-info">Add More Test</button>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <ng-container *ngIf="visible">
+                        <form [formGroup]="testgroup" (ngSubmit)="submit()">
+                            <mat-checkbox-group [(ngModel)]="selectedStatus" formControlName="lab_test">
+                                <div class="row mt-2">
+                                    <div *ngFor="let d of labList" class="col-md-6 col-sm-12 my-2">
+                                        <div class="divederLine couponBox dark_border mt-0">
+                                            <mat-checkbox [checked]="d.checked" (change)="d.checked = !d.checked"
+                                                color="primary">
+                                                <div class="media doctorsList mt-0 mb-0 ms-3">
+                                                    <img class="me-3"
+                                                        src="{{ d.image?imageURL+d.image:imageURL+'mri_img.png' }}"
+                                                        alt="Generic placeholder image">
+                                                    <div class="media-body mediaText">
+                                                        <p class="font-14 mb-0"><b>{{ d.lab_name }}</b></p>
+                                                        <p class="font-14 mb-0">{{ d.test_name }}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <div class="specialityText consultText">
+                                                        <span>Fees : <strong>&#8377; {{ d.amount }}</strong></span>
+                                                    </div>
+                                                    <button type="button" class="btn btn-outline-primary out_btn"
+                                                        [routerLink]="['/patient/book-appointment/single-body-test/'+d.test_id+'/'+memberId]">Know More</button>
+                                                </div>
+                                            </mat-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-checkbox-group>
+                            <button mat-raised-button class="small-btn ms-0 my-3" color="primary" type="button"
+                                (click)="add()">Add to Cart</button>
+                        </form>
+                    </ng-container>
+                    <ul class="booking-date totalAmount pt-0">
+                        <li class="proceedBtn">
+                            <button mat-raised-button class="py-0" color="warn" type="button"
+                                [routerLink]="['/patient/book-appointment/radio-payment-method/'+cartListone[0].lab_id+'/'+memberId]">Continue</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-12">
+            </div>
+        </div>
+    </div>
+</section>

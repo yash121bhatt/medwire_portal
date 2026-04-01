@@ -1,0 +1,227 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Payment Method'" [items]="[]" [active_item]="'Payment Method'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <!-- <div class="header">
+                        <h2><strong>Blank</strong> Page</h2>
+                    </div> -->
+                    <div class="body">
+                        <form action="" [formGroup]="paymentForm" class="book">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <h5 class="dateSelect">Select Date & Time</h5>
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Select Appointment Date</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="appointmentDate"
+                                            [min]="todayDate" (dateChange)="appointmentSlot($event.target.value)"
+                                            (ngModelChange)="setDate('start', $event)" required autocomplete="off">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                    <mat-button-toggle-group class="manual toggleBtn">
+                                        <h4 *ngIf="slotsStatus==true" class="textClr">Time slots not available</h4>
+                                        <mat-button-toggle class="timeBtn" *ngFor="let timeSlot of timeslots"
+                                            value="bold" (click)="buttonValue(timeSlot.Stime)">{{timeSlot.Stime}}
+                                        </mat-button-toggle>
+
+                                    </mat-button-toggle-group>
+                                </div>
+                                <div class="col-md-7">
+
+                                    <!-- <h5 class="mt-4">Select Doctor</h5>
+                                    <div class="radioSelect">
+
+                                        <ng-container>
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <mat-label>Select Doctor</mat-label>
+                                                <mat-select formControlName="doctors" required="">
+                                                    <mat-option *ngFor="let data of DocList" (click)="doctorId(data.id)"
+                                                        [value]="data.id">
+                                                        {{data.doctor}}
+                                                    </mat-option>
+
+                                                </mat-select>
+                                                <mat-error *ngIf="paymentForm.get('doctors').hasError('required')">
+                                                    Doctor is required
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </ng-container>
+                                    </div> -->
+                                    <h5 class="mt-4">Patient Info</h5>
+                                    <div class="couponBox">
+                                        <div class="media doctorsList" *ngFor="let userdata of Users">
+                                            <img class="mr-3"
+                                                src="{{userdata.imgName?imageURL+userdata.imgName:imageURL+'demouser.png'}}"
+                                                alt="Generic placeholder image">
+                                            <div class="media-body mediaText">
+                                                <h5 class="mt-1">{{userdata.first_name}}</h5>
+                                                <p> <b>Gender:</b> {{userdata.gender}}</p>
+                                                <p> <b>Age:</b> {{showAge}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="coupon">
+                                        <h5 class="mt-4">Coupon Codes</h5>
+                                        <ul
+                                            *ngFor="let coupon of couponList | paginate: { id: 'pagination2', itemsPerPage : 4, currentPage : pagination2, totalItems: total }">
+                                            <li class="couponBox">
+                                                <div class="media doctorsList couponImg">
+                                                    <img class="mr-3"
+                                                        src="{{coupon.banner_image?imageURL+coupon.banner_image:imageURL}}"
+                                                        alt="Generic placeholder image">
+                                                    <div class="media-body couponText">
+                                                        <!-- <h3 class="mt-0">Get 15% Flat Rs. 150 instant discount on first
+                                                            appointment</h3> -->
+                                                        <h5>{{coupon.description}}</h5>
+                                                        <p>Discount: <b>{{(coupon.discount_type ==
+                                                                "percent")?coupon.discount_rate+"%" :
+                                                                coupon.discount_price+" rs Off"}}</b></p>
+                                                        <span>Statrt Date: <strong>{{coupon.validity_start_date | date:
+                                                                'dd/MM/yyyy'}} &nbsp; -</strong></span>
+                                                        <span>&nbsp; End Date: <strong>{{coupon.validity_end_date |
+                                                                date: 'dd/MM/yyyy'}}</strong></span>
+                                                    </div>
+                                                </div>
+                                                <ul class="booking-date couponCode">
+                                                    <li>Code: <strong>{{coupon.promo_code}}</strong></li>
+                                                    <li class="copyCode cursor-pointer"
+                                                        (click)="copyText(coupon.promo_code)"><a>COPY CODE </a>
+
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <div class="paginator">
+                                            <pagination-controls id="pagination2" (pageChange)="pagination2 = $event">
+                                            </pagination-controls>
+                                        </div>
+                                    </div>
+                                    <!-- <h5 class="mt-4">Select Family Member</h5>
+                                    <div class="radioSelect mt-4">
+                                        <mat-radio-group aria-label="Select an option" formControlName="referBtn">
+                                            <mat-radio-button value="3" (click)="memberClick()" [checked]="true">Self</mat-radio-button>
+                                            <mat-radio-button value="4" (click)="memberClick()">Family Member</mat-radio-button>
+                                        </mat-radio-group>
+
+                                        <ng-container *ngIf="show1">
+                                            <mat-form-field class="example-full-width mt-2" appearance="outline">
+                                                <mat-label>Select Family Members</mat-label>
+                                                <mat-select formControlName="familyMember" multiple>
+                                                <mat-option *ngFor="let data of UsersList" (click)="getArray(data.id)" [value]="data.id">
+                                                {{data.first_name}}
+                                                </mat-option>
+                        
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </ng-container>
+                                    </div> -->
+                                </div>
+                                <div class="col-md-5">
+                                    <h5 class="mt-4">My Cart</h5>
+                                    <div class="couponBox">
+                                        <div class="d-flex align-items-center"
+                                            *ngFor="let d of cartList; let i = index ;">
+                                            <div class="col-6">
+                                                <p class="mb-0 font-15">{{ d.test_name}}</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p class="mb-0 font-15">Fees : ₹ {{ d.amount }} &nbsp;
+                                                    <strong>|</strong>
+                                                    &nbsp; <button mat-button color="warn" class="p-0 min-width-0"
+                                                        type="button" (click)="customWithFunction(i)"><i
+                                                            class="fas fa-trash col-gray"></i></button>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <h5 class="mt-4">Booking Summary</h5>
+                                        <div class="couponBox bookingSummery" *ngFor="let booked of bookList">
+                                            <div class="media doctorsList">
+                                                <img class="mr-3"
+                                                    src="{{booked.lab_image?imageURL+booked.lab_image:imageURL+'demouser.png'}}"
+                                                    alt="Generic placeholder image">
+                                                <div class="media-body mediaText">
+                                                    <h5 class="mt-4">{{booked.lab_name}}</h5>
+                                                    <!-- <p>Advanced Full Body Check-up</p> -->
+                                                </div>
+                                            </div>
+                                            <ul class="booking-date">
+                                                <li>Date</li>
+                                                <li>{{startDate??'-' | date:'dd/MM/yyyy'}}</li>
+                                            </ul>
+                                            <ul class="booking-date">
+                                                <li>Time</li>
+                                                <li>{{mytimeSlot??'-'}}</li>
+                                            </ul>
+                                            <ul class="booking-date">
+                                                <li>Consulting Fee</li>
+                                                <li>&#8377; {{booked.total_amount}}</li>
+                                            </ul>
+                                            <!-- <ul class="booking-date">
+                                                <li>Discount</li>
+                                                <li>&#8377; 15%</li>
+                                            </ul> -->
+                                            <form action="" [formGroup]="couponCodeForm">
+                                                <mat-form-field class="example-full-width mb-0 pb-0 no-margin"
+                                                    appearance="outline">
+                                                    <mat-label>Enter Coupon Code</mat-label>
+                                                    <input matInput type="text" formControlName="coupon_data"
+                                                        autocomplete="off">
+                                                    <!-- <mat-error *ngIf="couponCodeForm.get('coupon_data').hasError('required')">
+                                                       Coupon is required
+                                                     </mat-error> -->
+                                                </mat-form-field>
+                                                <div class="container-auth-form-btn">
+                                                    <button mat-flat-button color="primary" class="btn-space"
+                                                        (click)="appyleCouponCode()" type="submit">
+                                                        Apply Coupon Code
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <ul class="booking-date totalAmount">
+                                                <li class="textClr">
+                                                    <h4>Total</h4>
+                                                </li>
+                                                <li>
+                                                    <h4>&#8377; {{booked.grand_total_amount}}</h4>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="proceedBtn">
+                                            <button mat-raised-button color="primary" type="submit"
+                                                (click)="open(mymodal)">Confirm and Pay</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #mymodal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Radiology Appointment Confirmation</h4>
+            <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button> -->
+        </div>
+        <div class="modal-body">
+            Are you sure you want to book appointment?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark"
+                (click)="modal.close('Save click'); addAppointment()">Yes</button>
+
+            <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+        </div>
+    </ng-template>
+</section>

@@ -1,0 +1,46 @@
+<div class="body upload_document ps-sm-0 pt-0">
+    <div class="row">
+         <div class="col-lg-3 col-12 min_scroll" >
+             <mat-button-toggle-group class="pt-5" appearance="" vertical>
+                 <mat-button-toggle checked (change)="getHealthResult('current_medication')">Current Medication</mat-button-toggle>
+                 <mat-button-toggle  (change)="getHealthResult('medical_history')">Medical History</mat-button-toggle>
+                 <mat-button-toggle  (change)="getHealthResult('surgical_history')">Surgical History</mat-button-toggle>
+                 <mat-button-toggle  (change)="getHealthResult('personal_health_dairy')">Personal Health Diary</mat-button-toggle>  
+             </mat-button-toggle-group>
+         </div>
+         <div class="col-lg-9 col-12">
+             <div class="row">
+                 <div class="col-sm-12">
+                    <div class="body table-responsive">
+                     <div class="table-responsive">
+                       <table mat-table [dataSource]="dataSource3" class="w-100 padding">
+                         <!-- s_no Column -->
+                         <ng-container matColumnDef="s_no">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header class="ps-0"> 
+                                S.No.</th>
+                             <td mat-cell class="px-1" *matCellDef="let element ; let i = index"> {{i+1}} </td>
+                         </ng-container>
+                         <!-- first Name Column -->
+                         <ng-container matColumnDef="created_at">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                             <td mat-cell class="px-1" *matCellDef="let element"> {{ element.created_date|date:'MM/yyyy' }}</td>
+                         </ng-container>
+                         <!-- upload_date_time Column -->
+                         <ng-container matColumnDef="description">
+                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                             <td mat-cell class="px-1" *matCellDef="let element" [innerHTML]="element.description"> </td>
+                         </ng-container>
+                        
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                       </table>
+                      </div>
+                       <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons>
+                      </mat-paginator>
+                    </div>
+                 </div>
+              </div>
+         </div>
+     </div>
+ </div>
+

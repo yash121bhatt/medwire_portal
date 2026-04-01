@@ -1,0 +1,45 @@
+<section class="content" >
+    <div class="content-block">
+       <div class="block-header">
+          <!-- breadcrumb -->
+          <app-breadcrumb [title]="'Dashboard'" [items]="['Doctor List']" [active_item]="'Add Doctor'"></app-breadcrumb>
+       </div>
+       <div class="row clearfix">
+          <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+             <div class="card">
+                <div class="header mx-4">
+                   <h2><strong>Add Doctor</strong></h2>
+                </div>
+                <div class="body">
+                   <form class="m-4 mt-0" [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Doctor Name</mat-label>
+                                <mat-select #select2 placeholder="Auto Focus" formControlName="doctor">
+                                    <mat-select-filter *ngIf="select2.focused" [array]="variables3" (keyup)="onKey($event.target.value)"></mat-select-filter>
+                                    <mat-option *ngFor="let item of filteredList3" [value]="item">
+                                        {{item.doctor}} ({{item.clinic}})
+                                    </mat-option>
+                                </mat-select>
+                              <mat-error *ngIf="doctorForm.get('doctor').hasError('required')">
+                                    Doctors Name is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+                   <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                         <button class="btn-space"  mat-raised-button
+                            color="primary" [disabled]="!doctorForm.valid">Submit</button>
+                         <button type="button" mat-button [routerLink]="['../doctor-list']">Cancel</button>
+                      </div>
+                   </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </section>

@@ -1,0 +1,101 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Promocode Management'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="body">
+              <div class="body table-responsive long_text_td">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width formField" appearance="outline">
+                      <mat-label>Filter</mat-label>
+                      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. John" autocomplete="off" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 text-end">
+                    <button mat-raised-button color="primary" type="button" [routerLink]="['../add-promocode']">Add Promo Code</button>
+                  </div>
+                </div>
+  
+                <table mat-table [dataSource]="dataSource3" class="w-100" matSort #empTbSort="matSort">
+                  <!-- No Column -->
+                  <ng-container matColumnDef="no">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No. </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> {{ i + 1 }} </td>
+                  </ng-container>
+                   <!-- Image Column -->
+                   <ng-container matColumnDef="img">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header > Banner Image </th>
+                    <td mat-cell *matCellDef="let element"><img width="50" class="rounded" src="{{ element.img }}" /></td>
+                 </ng-container>
+                  <!-- promoCode Column -->
+                  <ng-container matColumnDef="promoCode">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Promo Code</th>
+                    <td mat-cell *matCellDef="let element">{{element.promoCode}}</td>
+                  </ng-container>
+                  <!-- Offer_type Column -->
+                  <ng-container matColumnDef="offer_type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Offer Type</th>
+                    <td mat-cell *matCellDef="let element">{{element.offer_type}}</td>
+                  </ng-container>
+                  <!-- Offer Column -->
+                  <ng-container matColumnDef="offer">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Offer </th>
+                    <td mat-cell *matCellDef="let element">{{element.offer}}</td>
+                  </ng-container>
+                  <!-- startDate Column -->
+                  <ng-container matColumnDef="startDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Validity Start Date</th>
+                    <td mat-cell *matCellDef="let element">{{element.startDate}}</td>
+                  </ng-container>
+                  <!-- endDate Column -->
+                  <ng-container matColumnDef="endDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Validity End Date</th>
+                    <td mat-cell *matCellDef="let element">{{element.endDate}}</td>
+                  </ng-container>
+                  <!-- uses_times Column -->
+                  <ng-container matColumnDef="uses_times">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>No. of Uses</th>
+                    <td mat-cell *matCellDef="let element">{{element.uses_times}}</td>
+                  </ng-container>
+                  <!-- pricerange Column -->
+                  <ng-container matColumnDef="pricerange">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Price Start</th>
+                    <td mat-cell *matCellDef="let element">{{element.pricerange}}</td>
+                  </ng-container>
+                  <!-- Description Column -->
+                  <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+                    <td mat-cell *matCellDef="let element">{{element.description}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef>Action</th>
+                    <td mat-cell *matCellDef="let element">
+                      <span class="d-flex">
+                        <button class="btn tblActnBtn h-auto eyeIcon checkIcon" matTooltip="Edit" [routerLink]="['../edit-promocode/:id']">
+                          <i class="material-icons">edit</i>
+                        </button>
+                        <!-- <button class="btn tblActnBtn h-auto eyeIcon cancelIcon" matTooltip="Delete">
+                          <i class="material-icons">delete</i>
+                        </button> -->
+                      </span>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                </mat-paginator>
+              </div>
+              <!-- Add content here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+  

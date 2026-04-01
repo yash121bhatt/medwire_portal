@@ -1,0 +1,27 @@
+[
+    {
+        "img": "assets/images/user/patient.jpg",
+        "name": "Jerry",
+        "surname": "Kino",
+        "gender": "Male",
+        "dob": "28-02-94",
+        "adharcardno": "2225 5454 5858"
+    },
+    {
+        "img": "assets/images/user/patient.jpg",
+        "name": "Luffy",
+        "surname": "Dragon",
+        "gender": "Male",
+        "dob": "12-02-01",
+        "adharcardno": "5858 2225 5454"
+    },
+    {
+        "img": "assets/images/user/patient.jpg",
+        "name": "Naruto",
+        "surname": "Ujumaki",
+        "gender": "Male",
+        "dob": "17-02-98",
+        "adharcardno": "2185 5469 1214"
+    }
+   
+]

@@ -1,0 +1,134 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Dashboard'" [items]="['Vaccination List']" [active_item]="'Edit Baby'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <!-- <div class="header">
+              <h2><strong>Blank</strong> Page</h2>
+            </div> -->
+            <div class="body">
+  
+                <div class="mb-5">
+                    <div class="row">
+                        <form action="" [formGroup]="addBabyForm" (ngSubmit)="onSubmit(addBabyForm.value)">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div class="childHeading">
+                                <h5>Select Gender</h5>
+                            </div>
+                            <!-- <form action="" [formGroup]="eventEditForm" novalidate> -->
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                 
+                                        <mat-radio-group  [(ngModel)]="selectedStatus" formControlName="baby_gender" required="true">
+                                            <mat-radio-button class="genderRadio" [value]="gender_f">
+                                                <!-- <p>I have a girl</p> -->
+                                                <div class="media genderimg">
+                                                    <img class="mr-3" src="assets/images/woman.png" alt="Generic placeholder image">
+                                                    <div class="media-body genderText">
+                                                      <h5 class="mt-0">I have a Girl</h5>
+                                                    </div>
+                                                </div>
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    <!-- </form> -->
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <!-- <div class="childHeading">
+                                        <h5></h5>
+                                    </div> -->
+                                    <!-- <form action="" [formGroup]="addBabyForm" novalidate> -->
+                                        <mat-radio-group  [(ngModel)]="selectedStatus" formControlName="baby_gender" required="true">
+                                            <mat-radio-button class="genderRadio" [value]="gender_m">
+                                                <!-- <p>I have a girl</p> -->
+                                                <div class="media genderimg">
+                                                    <img class="mr-3" src="assets/images/boy.png" alt="Generic placeholder image">
+                                                    <div class="media-body genderText">
+                                                      <h5 class="mt-0">I have a Boy</h5>
+                                                    </div>
+                                                </div>
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                   
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                            <div class="childHeading">
+                                <h5>Enter Child's Name</h5>
+                            </div>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Name</mat-label>
+                                <input matInput type="text" formControlName="baby_name" [(ngModel)]="baby_name" autocomplete="off">
+                                <mat-error *ngIf="addBabyForm.get('baby_name').hasError('required')">
+                                  Baby Name Required
+                                  </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-0">
+                            <div class="childHeading">
+                                <h5> Date of Birth</h5>
+                            </div>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Date Of Birth</mat-label>
+                                <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" [max]="maxDate" [(ngModel)]="baby_ofbirthdate" formControlName="dateofbirth" autocomplete="off">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-error *ngIf="addBabyForm.get('dateofbirth').hasError('required')">
+                                    Date of Birth required
+                                  </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                            <div class="childHeading">
+                                <h5>Father Height (in Cms)</h5>
+                            </div>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Father Height</mat-label>
+                                <input matInput type="text" formControlName="father_height" [(ngModel)]="father_height" autocomplete="off">
+                                <mat-error *ngIf="addBabyForm.get('father_height').hasError('required')">
+                                  Father height is Required (in Cms)
+                                  </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                            <div class="childHeading">
+                                <h5>Mother Height (in Cms)</h5>
+                            </div>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Mother Height</mat-label>
+                                <input matInput type="text" formControlName="mother_height" [(ngModel)]="mother_height" autocomplete="off">
+                                <mat-error *ngIf="addBabyForm.get('mother_height').hasError('required')">
+                                  Mother height is Required (in Cms)
+                                  </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        
+                        <div *ngIf="success_message" class="alert alert-success alert-dismissible">
+                            <strong> Success Now ! </strong>
+                          </div>
+                          <p *ngIf="error_message" class="alert alert-danger alert-dismissible">
+                            <strong>{{error_message_text}} </strong>
+                          </p>
+                    
+                    <div class="saveBtn">
+                        <button class="text-center" mat-raised-button color="primary">Submit</button>
+                        <button type="button" mat-button class="cancel_btn_back" [routerLink]="['/patient/paediatric-group/add-child']">Cancel</button>
+                    </div>
+                </form>
+            </div>
+                </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+  

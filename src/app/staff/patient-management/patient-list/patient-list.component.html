@@ -1,0 +1,156 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Patient List'"></app-breadcrumb>
+      </div>
+      <!-- Basic Examples -->
+      <div class="row clearfix">
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+               <div class="body">
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <div class="body long_text_td">
+                           <div class="row align-items-center">
+                              <div class="col-md-6">
+                                 <mat-form-field class="example-full-width my-0" appearance="outline">
+                                    <mat-label>Search</mat-label>
+                                    <input matInput (keyup)="applyFilter($event)" autocomplete="off">
+                                 </mat-form-field>
+                              </div>
+                              <div class="col-md-6 text-end">
+                                 <ul class="header-buttons text-end">
+                                    <li>
+                                       <button mat-raised-button color="primary" type="button"
+                                          [routerLink]="['../add-patient']">Add Patient</button>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                           <div class="table-responsive">
+                              <table mat-table [dataSource]="dataSource3" class="w-100" matSort #empTbSort="matSort">
+                                 <!-- No Column -->
+                                 <ng-container matColumnDef="no">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No. </th>
+                                    <td mat-cell *matCellDef="let element; let i = index;"> {{ i + 1 }} </td>
+                                 </ng-container>
+                                 <!-- Image Column -->
+                                 <ng-container matColumnDef="profile_image_name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+                                    <td mat-cell *matCellDef="let element" class="table-img"><img width="40"
+                                          src="{{element.profile_image_name?imageURL+element.profile_image_name:imageURL+'demouser.png'}}" /></td>
+                                 </ng-container>
+                                 <!-- Medwire ID Column -->
+                                 <ng-container matColumnDef="medwire_id">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> MedWire ID</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.medwire_id}} </td>
+                                 </ng-container>
+                                 <!-- Full Name Column -->
+                                 <ng-container matColumnDef="full_name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.full_name}} </td>
+                                 </ng-container>
+                                 <!-- referred Column -->
+                                 <ng-container matColumnDef="suggested_by_name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Referred By </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.suggested_by_name}} </td>
+                                 </ng-container>
+                                 <!-- referred Column -->
+                                 <ng-container matColumnDef="enquiry_date">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Enquiry Date </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.enquiry_date | date :
+                                       'dd/MM/yyyy'}} </td>
+                                 </ng-container>
+                                 <!-- Gender Column -->
+                                 <ng-container matColumnDef="gender">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                                 </ng-container>
+                                 <!-- Mobile No. Column -->
+                                 <ng-container matColumnDef="mobile_number">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile No. </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.mobile_number}} </td>
+                                 </ng-container>
+                                 <!-- Email Column -->
+                                 <ng-container matColumnDef="email">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                                 </ng-container>
+                                 <!-- Notification Title For Column -->
+                                 <ng-container matColumnDef="staff_name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Added By</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.staff_name!== "" && element.staff_name!== null ? element.staff_name: 'Clinic'}} </td>
+                                 </ng-container>
+                                 <!-- AdharCardno Column -->
+                                 <!-- <ng-container matColumnDef="adharcardno">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Aadhar Card No. </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.adharcardno}} </td>
+                               </ng-container> -->
+                                 <!-- DOB Column -->
+                                 <ng-container matColumnDef="date_of_birth">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> DOB </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.date_of_birth | date :
+                                       'dd/MM/yyyy'}} </td>
+                                 </ng-container>
+                                 <!-- Address Column -->
+                                 <ng-container matColumnDef="address">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.address!='' && element.address!=null ? element.address :'-'}} </td>
+                                 </ng-container>
+                                 <!-- pincode Column -->
+                                 <ng-container matColumnDef="pin_code">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Pin Code </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.pin_code??'-'}} </td>
+                                 </ng-container>
+                                 <!-- Action Column -->
+                                 <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef> Action</th>
+                                    <td mat-cell *matCellDef="let element">
+                                       <span>
+                                          <!-- <button class="btn tblActnBtn h-auto" [routerLink]="['../edit-patient/:id']">
+                                          <i class="material-icons">mode_edit</i>
+                                        </button> -->
+                                          <button class="btn tblActnBtn h-auto"
+                                             (click)="open(mymodal); getId(element.id);">
+                                             <i class="material-icons">delete</i>
+                                          </button>
+                                          <button class="btn tblActnBtn h-auto p-1" matTooltip="Book Appointment" [routerLink]="['../book-appointment/'+element.id]">
+                                             <i class="material-icons">insert_invitation</i>
+                                          </button>
+                                       </span>
+                                    </td>
+                                 </ng-container>
+                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                              </table>
+                           </div>
+                           <mat-paginator [pageSizeOptions]="[10, 20, 25]" showFirstLastButtons>
+                           </mat-paginator>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Delete Patient Modal -->
+   <ng-template #mymodal let-modal>
+      <div class="modal-header">
+         <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+         <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+         Are You sure you want to delete this doctor?
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-outline-dark"
+            (click)="modal.close('Save click'); deleteRecord()">Ok</button>
+
+         <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+      </div>
+   </ng-template>
+</section>

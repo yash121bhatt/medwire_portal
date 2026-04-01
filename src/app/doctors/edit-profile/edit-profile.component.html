@@ -1,0 +1,200 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Edit Profile'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+               <!-- <div class="header">
+                  <h2><strong>Blank</strong> Page</h2>
+                  </div> -->
+               <div class="body editBlock">
+                  <div class="example-container">
+                     <div class="row justify-content-between">
+                       <div class="col-lg-12 col-md-12">
+                           <form [formGroup]="editprofiletForm"  (ngSubmit)="onSubmit()" class="text-center">
+                           <div class="group-gap">
+                              <!-- Upload image -->
+                              <div class="avatar-upload">
+                                 <div class="uploadFile">
+                                    <mat-icon class="uploadIcon">upload</mat-icon>
+                                 </div>
+                                 <div class="avatar-edit">
+                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event);fileChange($event.target.files)" />
+                                 </div>
+                                 <div class="avatar-preview">
+                                    <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Submit Button -->
+                           <a  class="btn btn-outline-secondary btn-lg btn-block" (click)="fileInput.click()">Upload Profile Image</a>
+                           <a  href="{{imageURLprofile+imageprofile}}" class="btn btn-outline-secondary btn-lg btn-block ml-4 profilee-btn" target="_blank">View Image</a>
+                           <div class="col-lg-12 col-md-12">
+                             <div class="body" >
+                                <!-- <form class="mt-4" [formGroup]="editprofiletForm" > -->
+                                <div class="row" >
+                                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2" *ngFor="let userdata  of Users">
+                                      <mat-form-field class="example-full-width" appearance="outline">
+                                         <mat-label>Full name</mat-label>
+                                         
+                                         <input matInput formControlName="username" type="text" maxlength="32" pattern="[A-Za-z ]{1,32}" [(ngModel)]="username"  autocomplete="off">
+                                         <mat-icon matSuffix>text</mat-icon>
+                                         <mat-error *ngIf="editprofiletForm.get('username').hasError('required')">
+                                            Name is required
+                                         </mat-error>
+                                      </mat-form-field>
+                                   </div>
+
+                                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width readonly" appearance="outline">
+                                       <mat-label>Mobile No.</mat-label>
+                                       <input type="text" matInput formControlName="mobile" [(ngModel)]="mobileno" required autocomplete="off" readonly>
+                                       <mat-icon matSuffix>perm_phone_msg</mat-icon>
+                                       <mat-error *ngIf="editprofiletForm.get('mobile').hasError('required') || editprofiletForm.get('mobile').touched">
+                                          Please enter a valid mobile number
+                                       </mat-error>
+                                    </mat-form-field>
+                                 </div>
+
+                                
+                                  
+                                </div>
+                                <div class="row">
+                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width " appearance="outline">
+                                       <mat-label>Alternate Mobile No.</mat-label>
+                                       <input type="text" matInput formControlName="alternate_mobile" [(ngModel)]="alternate_mobile_no"  autocomplete="off">
+                                       <mat-icon matSuffix>perm_phone_msg</mat-icon>
+                                       <mat-error *ngIf="editprofiletForm.get('alternate_mobile').touched">
+                                          Please enter a valid alternate  mobile number
+                                       </mat-error>
+                                    </mat-form-field>
+                                 </div>
+
+                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                      <mat-label>Gender </mat-label>
+                                      <mat-select formControlName="gender" [(ngModel)]="gender" required >
+                                        <mat-option [value]="'Male'">
+                                          Male
+                                        </mat-option>
+                                        <mat-option [value]="'Female'">
+                                          Female
+                                        </mat-option>
+                                      </mat-select>
+                                      <mat-error *ngIf="editprofiletForm.get('gender').hasError('required')">
+                                       Gender is required
+                                      </mat-error>
+                                    </mat-form-field>
+                                  </div>
+
+                               
+                                </div>
+                                
+                                
+                                 <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                       <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                         <mat-label>Date Of Birth</mat-label>
+                                         <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="dob" [(ngModel)]="dateOfBirth" [max]="maxDate" required autocomplete="off" >
+                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                         <mat-datepicker #picker></mat-datepicker>
+                                         <mat-error *ngIf="editprofiletForm.get('dob').hasError('required')">
+                                           Please select date
+                                         </mat-error>
+                                       </mat-form-field>
+                                     </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3"> 
+                                       
+                                       <mat-form-field class="example-full-width" appearance="outline">
+                                          <mat-label>Doctor's Degree</mat-label>
+                                         
+                                          <mat-select [disableOptionCentering]="true" #select2 placeholder="Auto Focus" formControlName="doctor_degree" [(ngModel)]="finalDegree" [multiple]="true" >
+                                          <mat-select-filter *ngIf="select2.focused" [array]="variables" (filteredReturn)="filteredList3 =$event" ></mat-select-filter>
+                                          <mat-option *ngFor="let item of filteredList3" [value]="item">
+                                          {{item}}
+                                          </mat-option>
+                                          </mat-select>
+                                          <mat-error *ngIf="editprofiletForm.get('doctor_degree').hasError('required')">
+                                             Degree is required
+                                          </mat-error>
+                                       </mat-form-field>
+                                    </div>
+                                 
+                               
+                              </div>
+                              <div class="row">
+                                 <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 mb-3">
+                                    <mat-form-field class="example-chip-list w-100 padding" appearance="outline">
+                                       <mat-label>Speciality</mat-label>
+                                       <mat-chip-list #chipList aria-label="speciality selection" >
+                                           <mat-chip *ngFor="let speciality of specialitys" (removed)="remove(speciality)"> {{speciality}} 
+                                               <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                                           </mat-chip>
+                                           <input placeholder="Add Speciality..." #specialityInput [formControl]="specialityCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                                       </mat-chip-list>
+                                       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                           <mat-option *ngFor="let speciality of filteredSpecialitys | async" [value]="speciality">
+                                               {{speciality}}
+                                           </mat-option>
+                                       </mat-autocomplete>
+                                   </mat-form-field>
+                                 </div>
+                                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                      <mat-label>Experience</mat-label>
+                                      <input matInput formControlName="experience" [(ngModel)]="experience"  required autocomplete="off" >
+                                      <mat-error *ngIf="editprofiletForm.get('experience').hasError('required')">
+                                       Pin Code is required
+                                      </mat-error>
+                                    </mat-form-field>
+                                  </div>
+
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                       <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                         <mat-label>Address</mat-label>
+                                         <input matInput formControlName="address" [(ngModel)]="address"  required autocomplete="off" > 
+                                         <mat-error *ngIf="editprofiletForm.get('address').hasError('required')">
+                                         Address is required 
+                                         </mat-error>
+                                       </mat-form-field>
+                                     </div>
+                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                       <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                         <mat-label>Pin Code</mat-label>
+                                         <input matInput formControlName="pin_code" [(ngModel)]="pin_code"  required autocomplete="off" >
+                                         <mat-error *ngIf="editprofiletForm.get('pin_code').hasError('required')">
+                                          Pin Code is required
+                                         </mat-error>
+                                       </mat-form-field>
+                                     </div>
+                                </div>
+                                <div class="row">
+                                   <div *ngIf="success_message" class="alert alert-success alert-dismissible">
+                                      <strong> Success Now ! </strong>
+                                    </div>
+                                    <p *ngIf="error_message" class="alert alert-danger alert-dismissible">
+                                      <strong>{{error_message_text}} </strong>
+                                    </p>
+                                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                      <button type="submit" class="btn-space" mat-raised-button
+                                         color="primary">Update Profile</button>
+                                         <button type="button" mat-button [routerLink]="['/patient/myprofile']">Cancel</button>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </form>
+                       </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

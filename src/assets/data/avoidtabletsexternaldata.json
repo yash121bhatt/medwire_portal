@@ -1,0 +1,42 @@
+[
+    {
+        
+        "tablet": "Antibiotics",
+        "sideeffect": "Certain antibiotics may be fine to take for bacterial infections if your doctor prescribes them, though others won't be allowed."
+        
+    },
+    {
+        "tablet": "Antidepressants",
+        "sideeffect": "Treating depression is very important in pregnancy. Most antidepressants can be used when you're expecting, though there others that should be discussed with your psychiatrist and OB/GYN and considered on a case-by-case basis — the research is ongoing and ever-changing. Your doctor will weigh their use against the risk of untreated depression, which can have many adverse effects on a developing fetus."
+    },
+    {
+        "tablet": "Aspirin",
+        "sideeffect": "Some studies, however, suggest that very low dosages (baby aspirin) may help to prevent preeclampsia in certain circumstances. Other research indicates that low-dose aspirin in combination with the blood-thinning medication heparin may reduce the incidence of recurrent miscarriage in some women."
+    },
+    {
+        "tablet": "Ibuprofen (Advil or Motrin)",
+        "sideeffect": " It generally shouldn't be used during pregnancy (though there are some exceptions) — especially during the first and third trimesters, when it can have the same blood-thinning effects as aspirin. "
+    },
+    {
+        "tablet": "Angiotensin-converting enzyme (ACE) inhibitors",
+        "sideeffect": "These are prescribed for hypertension or congestive heart failure, and can cause miscarriage or birth defects."
+    },
+    {
+        "tablet": "Decongestants",
+        "sideeffect": "Pseudoephedrine and phenylephrine (Sudafed, DayQuil, Claritin-D), especially if taken during the first trimester, may cause stomach defects or affect blood flow to the placenta — though some doctors will recommend in limited amounts in the second and third trimesters. Also avoid cough and cold meds that contain alcohol or NSAIDs."
+    },
+    {
+        "tablet": "Isotretinoin (Accutane)",
+        "sideeffect": "This medication for cystic acne raises the risk of miscarriage and physical and mental defects in babies."
+    },
+    {
+        "tablet": "Methotrexate",
+        "sideeffect": " Used to treat psoriasis and rheumatoid arthritis, methotrexate increases the risk of miscarriage and birth defects."
+    },
+    {
+        "tablet": "Valproic acid",
+        "sideeffect": "Used for epilepsy, bipolar disorder and sometimes migraines, valproic acid can cause major birth defects, such as a heart defect, and behavior and learning problems. Check with your practitioner if valproic acid can be changed to another medication prior to pregnancy."
+    }
+   
+   
+]

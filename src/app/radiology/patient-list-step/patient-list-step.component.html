@@ -1,0 +1,148 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="['Radiology Visits']" [active_item]="'New Visits'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <!-- <div class="header">
+              <h2>
+                <strong>Stepper Horizontal</strong>
+              </h2>
+            </div> -->
+          <div class="body">
+            <mat-horizontal-stepper [linear]="isLinear" #stepper>
+              <!-- <mat-step [stepControl]="HFormGroup1">
+                  <form [formGroup]="HFormGroup1">
+                    <ng-template matStepLabel>Enter Your Mobile Number</ng-template>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Mobile Number</mat-label>
+                      <input matInput type="number" formControlName="phone" required>
+                      <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+                    <div class="saveBtn">
+                      <button mat-raised-button matStepperNext color="primary"
+                        [disabled]="!HFormGroup1.valid" [routerLink]="['/radiology/patient-list-step']">Next</button>
+                    </div>
+                  </form>
+                </mat-step> -->
+              <mat-step [stepControl]="HFormGroup2">
+                <form [formGroup]="HFormGroup2">
+                  <ng-template matStepLabel>Select Patient</ng-template>
+                  <form [formGroup]="eventEditForm" novalidate>
+                    <div class="form-group" *ngIf="checkData">
+                      <mat-radio-group [(ngModel)]="selectedStatus" formControlName="completed" required="true">
+                        <div class="card mb-0">
+                          <mat-radio-button class="radioBtns" [value]="mainUser.id" checked required="true"
+                            (change)="radioChange($event)">
+                            <div class="media boxImg">
+                              <img class="mr-3"
+                                src="{{mainUser.imgName?imageURL+mainUser.imgName:imageURL+'demouser.png'}}"
+                                alt="Generic placeholder image">
+                              <div class="media-body mediaCntnt">
+                                <h5 class="mt-0">{{mainUser.first_name}}</h5>
+                                <ul class="d-flex">
+                                  <li class="ageText"> <strong>Age:</strong> {{showAge(mainUser.date_of_birth)}}</li>
+                                  <li class="ageText"> <strong>Gender:</strong> {{mainUser.gender}}</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </mat-radio-button>
+                        </div>
+                        <div *ngIf="checkData">
+                          <div class="card mb-0" *ngFor="let listData of patientList">
+                            <mat-radio-button class="radioBtns" [value]="listData.id" unchecked required="true"
+                              (change)="radioChange($event)">
+                              <div class="media boxImg">
+                                <img class="mr-3"
+                                  src="{{listData.imgName?imageURL+listData.imgName:imageURL+'demouser.png'}}"
+                                  alt="Generic placeholder image">
+                                <div class="media-body mediaCntnt">
+                                  <h5 class="mt-0">{{listData.first_name}}</h5>
+                                  <ul class="d-flex">
+                                    <li class="ageText"> <strong>Age:</strong> {{showAge(listData.date_of_birth)}}</li>
+                                    <li class="ageText"> <strong>Gender: </strong> {{listData.gender}}</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </mat-radio-button>
+                          </div>
+                        </div>
+                        <br>
+                      </mat-radio-group>
+                    </div>
+                  </form>
+                  <div class="saveBtn">
+                    <button mat-raised-button matStepperPrevious color="warn" class="msr-2"
+                      [routerLink]="['/radiology/new-visit']">Back</button>
+                    <button mat-raised-button matStepperNext color="primary"  [disabled]="nextBtnCondition">Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="HFormGroup3">
+                <form action="" [formGroup]="HFormGroup3" (ngSubmit)="onSubmit('HFormGroup3.value')">
+                  <div class="matSelect">
+                    <ng-template matStepLabel>Select Test</ng-template>
+
+                    <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+
+                        <!-- <mat-form-field  class="example-full-width" appearance="outline">
+                          <mat-label>Category</mat-label>
+                          <mat-select formControlName="category" required="true" (selectionChange)="onSelect($event)">
+                            <mat-option *ngFor="let category of categories" [value]= "category.name">
+                              {{category.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field> -->
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Test Category</mat-label>
+                          <mat-select [disableOptionCentering]="true" #select1 placeholder=""
+                            (selectionChange)="onSelect($event)" formControlName="cat_id">
+                            <mat-select-filter *ngIf="select1.focused" [array]="variables"
+                              (filteredReturn)="filteredList2 =$event"></mat-select-filter>
+                            <mat-option *ngFor="let item of filteredList2" [value]="item.category_name">
+                              {{item.category_name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                        <!-- <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Sub Category</mat-label>
+                          <mat-select formControlName="sub_category" required="true">
+                            <mat-option *ngFor="let subcategory of subCategories " [value]="subcategory.name">
+                              {{subcategory.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field> -->
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Test Name</mat-label>
+                          <mat-select [disableOptionCentering]="true" #select2 placeholder="Auto Focus"
+                            formControlName="test_id" [multiple]="true">
+                            <mat-select-filter *ngIf="select2.focused" [array]="variables"
+                              (filteredReturn)="filteredList3 =$event"></mat-select-filter>
+                            <mat-option *ngFor="let item of filteredList3" [value]="item.test_name">
+                              {{item.test_name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="saveBtn">
+                    <button mat-raised-button matStepperPrevious color="secondary" class="msr-2">Back</button>
+                    <button mat-raised-button color="primary" [disabled]="!HFormGroup3.valid"
+                      type="submit"  [class.auth-spinner]="loading" [disabled]="loading">Submit</button>
+                  </div>
+                </form>
+              </mat-step>
+            </mat-horizontal-stepper>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

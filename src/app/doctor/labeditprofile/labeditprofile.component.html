@@ -1,0 +1,227 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Edit Profile'" [items]="[]" [active_item]="'Edit Profile'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+               <!-- <div class="header">
+                  <h2><strong>Blank</strong> Page</h2>
+                  </div> -->
+               <div class="body editBlock">
+                  <div class="example-container">
+                     <div class="row justify-content-between">
+                        <div class="col-lg-10 col-md-12">
+                           <form [formGroup]="editprofiletForm" (ngSubmit)="onSubmit(editprofiletForm.value)"
+                              class="text-center">
+                              <div class="group-gap">
+                                 <!-- Upload image -->
+                                 <div class="avatar-upload">
+                                    <div class="uploadFile" (click)="fileInput.click()">
+                                       <mat-icon class="uploadIcon">upload</mat-icon>
+                                    </div>
+                                    <div class="avatar-edit">
+                                       <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                                          (change)="uploadFile($event);fileChange($event.target.files)" />
+                                    </div>
+                                    <div class="avatar-preview">
+                                       <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- Submit Button -->
+                              <a class="btn btn-outline-secondary submitBtn btn-lg btn-block me-3"
+                                 (click)="fileInput.click()">Upload Profile Image</a>
+                              <a href="{{imageURLprofile+imageprofile}}"
+                                 class="btn btn-outline-secondary btn-lg btn-block ml-4 profilee-btn"
+                                 target="_blank">View Image</a>
+                              <!-- </form> -->
+
+
+                              <!-- <form class="mt-4" [formGroup]="editprofiletForm" (ngSubmit)="onSubmit()"> -->
+                              <div class="row">
+                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                       <mat-label>Full name</mat-label>
+                                       <input matInput formControlName="username" type="text" maxlength="32" pattern="[A-Za-z ]{1,32}" [(ngModel)]="username" required>
+                                       <mat-icon matSuffix>face</mat-icon>
+                                       <!-- <mat-error *ngIf="editprofiletForm.get('username').hasError('required')">
+                                          Name is required
+                                       </mat-error> -->
+                                       <mat-error>
+                                          <div *ngIf="editprofiletForm.get('username').hasError('required')">Name is required</div>
+                                          <div *ngIf="editprofiletForm.get('username').hasError('pattern')">Invalid Name</div>
+                                       </mat-error>
+
+                                    </mat-form-field>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width readonly" appearance="outline">
+                                       <mat-label>Mobile No.</mat-label>
+                                       <input matInput formControlName="mobile" [(ngModel)]="mobileNo" readonly>
+                                       <mat-icon matSuffix>perm_phone_msg</mat-icon>
+                                       <!-- <mat-error *ngIf="editprofiletForm.get('mobile').hasError('required') || editprofiletForm.get('mobile').touched">
+                                          Please enter a valid mobile number
+                                       </mat-error> -->
+                                    </mat-form-field>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                       <mat-label>Email</mat-label>
+                                       <input matInput formControlName="email" [(ngModel)]="email" readonly>
+                                       <mat-icon matSuffix>mail</mat-icon>
+                                       <mat-error
+                                          *ngIf="editprofiletForm.get('email').hasError('required') || editprofiletForm.get('email').touched">
+                                          Please enter a valid email address
+                                       </mat-error>
+                                    </mat-form-field>
+                                 </div>
+                              </div>
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                 <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                       <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <mat-label>Address</mat-label>
+                                          <input matInput formControlName="address" type="text" [(ngModel)]="address"
+                                             required autocomplete="off">
+                                          <mat-error *ngIf="editprofiletForm.get('address').hasError('required')">
+                                             Address is required
+                                          </mat-error>
+                                       </mat-form-field>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                       <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <mat-label>Pin Code</mat-label>
+                                          <input matInput formControlName="pin_code" type="number"
+                                             [(ngModel)]="pin_code" required autocomplete="off">
+                                          <mat-error *ngIf="editprofiletForm.get('pin_code').hasError('required')">
+                                             Pin Code is required
+                                          </mat-error>
+                                       </mat-form-field>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                 <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                       <div class="default-time-example timeInput text-start
+                                 text-start">
+
+                                          <label>Opening Time*</label>
+                                          <input class="mt-2" aria-label="default time" formControlName="opening_time"
+                                             [ngxTimepicker]="defaultValue" [value]="opening_time"
+                                             [(ngModel)]="opening_time" placeholder="Opening Time" readonly required="">
+                                          
+                                          <ngx-material-timepicker #defaultValue></ngx-material-timepicker>
+                                       </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                       <div class="default-time-example timeInput text-start
+                                 text-start">
+                                          <label>Closing Time*</label>
+                                          <input class="mt-2" aria-label="default time" formControlName="closing_time"
+                                             [ngxTimepicker]="defaultValuesecond" [value]="closing_time"
+                                             [(ngModel)]="closing_time" placeholder="Closing Time" readonly required="">
+                                        
+                                          <ngx-material-timepicker #defaultValuesecond></ngx-material-timepicker>
+
+                                       </div>
+                                    </div>
+                                 </div>
+
+
+                              </div>
+                              <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                 <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                       <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <mat-label>Opening Time</mat-label>
+                                          <input matInput [owlDateTimeTrigger]="time1"  formControlName="opening_time" autocomplete="off" [owlDateTime]="time1">
+                                          <mat-icon matSuffix [owlDateTimeTrigger]="time1" class="date-icon">schedule</mat-icon>
+                                          <owl-date-time [pickerType]="'timer'" #time1></owl-date-time>
+                                          <mat-error *ngIf="editprofiletForm.get('opening_time').hasError('required')" >
+                                             Opening time is required
+                                          </mat-error>
+                                       </mat-form-field>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                       <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <mat-label>Closing Time</mat-label>
+                                          <input matInput [owlDateTimeTrigger]="time2"  formControlName="closing_time" autocomplete="off" [owlDateTime]="time2">
+                                          <mat-icon matSuffix [owlDateTimeTrigger]="time2" class="date-icon">schedule</mat-icon>
+                                          <owl-date-time [pickerType]="'timer'" #time2></owl-date-time>
+                                          <mat-error *ngIf="editprofiletForm.get('closing_time').hasError('required')" autocomplete="off">
+                                             Closing time is required
+                                          </mat-error>
+                                       </mat-form-field>
+                                    </div>
+                                 </div>
+                              </div> -->
+                              <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-label>Adhar Card Number</mat-label>
+                                  <input matInput formControlName="adharcardno" type="number" [(ngModel)]="adharcardno" required >
+                                  <mat-error *ngIf="editprofiletForm.get('adharcardno').hasError('required')">
+                                    Adhar Card Number is required
+                                  </mat-error>
+                                </mat-form-field>
+                              </div> -->
+                              <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-label>Sex</mat-label>
+                                  <mat-select formControlName="gender" [(ngModel)]="gender" required >
+                                    <mat-option [value]="'Male'">
+                                      Male
+                                    </mat-option>
+                                    <mat-option [value]="'Female'">
+                                      Female
+                                    </mat-option>
+                                  </mat-select>
+                                  <mat-error *ngIf="editprofiletForm.get('gender').hasError('required')">
+                                    Sex is required
+                                  </mat-error>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-label>Date Of Birth</mat-label>
+                                  <input matInput [matDatepicker]="picker" formControlName="dob" [(ngModel)]="dob"  required  [max]="maxDate">
+                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker></mat-datepicker>
+                                  <mat-error *ngIf="editprofiletForm.get('dob').hasError('required')">
+                                    Please select date
+                                  </mat-error>
+                                </mat-form-field>
+                              </div> -->
+
+                              <div *ngIf="success_message" class="alert alert-success alert-dismissible">
+                                 <strong> Profile Update ! </strong>
+
+                              </div>
+                              <p *ngIf="error_message" class="alert alert-danger alert-dismissible">
+                                 <strong>{{error_message_text}} </strong>
+                              </p>
+                              <div class="row">
+                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="btn-space" mat-raised-button color="primary">Update Profile</button>
+                                    <button type="button" mat-button
+                                       [routerLink]="['/doctor/labmyprofile']">Cancel</button>
+                                 </div>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

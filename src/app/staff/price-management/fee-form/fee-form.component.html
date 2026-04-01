@@ -1,0 +1,111 @@
+<section class="content">
+    <div class="content-block">
+       <div class="block-header">
+          <!-- breadcrumb -->
+          <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Add Doctor Fees'"></app-breadcrumb>
+       </div>
+       <div class="row clearfix">
+          <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+             <div class="card">
+                <div class="header mx-4">
+                   <h2><strong>Add Doctor Fees</strong></h2>
+                </div>
+                <div class="body">
+                   <form class="m-4" [formGroup]="addfeeForm" (ngSubmit)="onSubmit()">
+                   <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                         <mat-form-field class="example-full-width " appearance="outline">
+                            <mat-label>Select Doctor</mat-label>
+                            <mat-select formControlName="doctor" required >
+                               <mat-option [value]="'Mark Donne'">
+                                  Dr. Mark Donne
+                               </mat-option>
+                               <mat-option [value]="'Will Sten'">
+                                  Dr. Will Sten
+                               </mat-option>
+                               <mat-option [value]="'Patric Wott'">
+                                  Dr. Patric Wott
+                               </mat-option>
+                               <mat-option [value]="'Rose Barn'">
+                                  Dr. Rose Barn
+                               </mat-option>
+                               <mat-option [value]="'Lina Tylor'">
+                                  Dr. Lina Tylor
+                               </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="addfeeForm.get('doctor').hasError('required')">
+                               Atleast select one Doctor.
+                            </mat-error>
+                         </mat-form-field>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-0 ps-0">
+                         <label class="example-margin font-15 fw_mid">Select Visit Type</label>
+                         <section class="example-section" >
+                            <mat-radio-group formControlName="visit" [(ngModel)]="selection" #radioGroup="matRadioGroup">
+                               <mat-radio-button class="example-margin" (click)="changediv('online_visit')" value="offline" >
+                                  For Online Consulting
+                               </mat-radio-button>
+                               <mat-radio-button class="example-margin" (click)="changediv('offline_visit')" value="online">
+                                  For Clinic Visit
+                               </mat-radio-button>
+                            </mat-radio-group>
+                         </section>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3" id="offline_visit" [hidden]="!online">
+                         <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Online Consulting Doctor's Fees</mat-label>
+                            <input matInput formControlName="online_doctor_fee" type="number"  >
+                            <mat-error *ngIf="addfeeForm.get('online_doctor_fee').hasError('required')">
+                               Doctor fees is required
+                            </mat-error>
+                            <mat-icon matSuffix>currency_rupee</mat-icon>
+                         </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3" id="online_visit" [hidden]="!offline">
+                         <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Clinic Visit Doctor's Fees</mat-label>
+                            <input matInput formControlName="offline_doctor_fee" type="number"  >
+                            <mat-error *ngIf="addfeeForm.get('offline_doctor_fee').hasError('required')">
+                               Doctor fees is required
+                            </mat-error>
+                            <mat-icon matSuffix>currency_rupee</mat-icon>
+                         </mat-form-field>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                         <mat-checkbox (click)='toggle()' class="mat-primary"><label class="example-margin font-15 fw_mid ms-0">Is Doctor available for {{ radioGroup.value }} Visit</label>
+                         </mat-checkbox>
+                         <div  class="col-12 mb-3" [hidden]='isHidden'>
+                            <div class="col-12 mb-3">
+                               <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-label>Clinic Visit Doctor's Fees</mat-label>
+                                  <input matInput formControlName="clinic_doctor_fee" type="number"  >
+                                  <mat-error *ngIf="addfeeForm.get('clinic_doctor_fee').hasError('required')">
+                                     Doctor fees is required
+                                  </mat-error>
+                                  <mat-icon matSuffix>currency_rupee</mat-icon>
+                               </mat-form-field>
+                            </div>
+                         </div>
+                         
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                         <button class="btn-space"  mat-raised-button
+                            color="primary" [disabled]="!addfeeForm.valid ">Submit</button>
+                         <button type="button" mat-button [routerLink]="['/staff/price-management/fee-management']">Cancel</button>
+                      </div>
+                   </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>

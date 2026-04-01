@@ -1,0 +1,144 @@
+<section class="content">
+   <div class="content-block">
+      <div class="block-header">
+         <!-- breadcrumb -->
+         <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'My Profile'"></app-breadcrumb>
+      </div>
+      <!-- Your content goes here  -->
+      <div class="row clearfix remov_scroll">
+         <div class="col-lg-12 col-md-12">
+            <div class="card">
+               <mat-tab-group>
+                  <mat-tab>
+                     <ng-template mat-tab-label>
+                        <div class="tabColor">My Profile</div>
+                     </ng-template>
+                     <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="project_widget">
+                           <div class="body profileEdit">
+                             <div class="media mediapatient d-flex mt-0 ml-10 align-items-center" *ngFor="let userdata of Users">
+                                <img class="mr-3" src="{{userdata.imgName?imageURLprofile+userdata.imgName:imageURLprofile+'demouser.png'}}"  alt="Generic placeholder image">
+                                 <div class="media-body patientContent">
+                                    <h3 class="mt-0 mb-2"><b>{{userdata.first_name}}</b>&nbsp; <small class="col-gray"></small></h3>
+                                    <p class="mb-1">{{userdata.mobile}}</p>
+                                    <p>{{userdata.email}}</p>
+                                    <!-- <p><b>LifeCare Hospital</b></p> -->
+                                 </div>
+                              </div>
+                              <div >
+                                 <a class="editIcon" [routerLink]="['/staff/staff-editmyprofile']">
+                                    <mat-icon class="example-tab-icon msr-2 editico">edit_copy</mat-icon>
+                                 </a>
+                              </div>
+                           </div>
+                           <div class="body">
+                               <div class="row" *ngFor="let userdata of Users" >
+                                   <div class="col-lg-2">
+                                     <b class="">Gender </b>
+                                     <p>{{userdata.gender?userdata.gender:'-'}}</p>
+                                   </div>
+                                   <div class="col-lg-2">
+                                      <b class="">Date of Birth </b>
+                                      <p>{{userdata.date_of_birth??'-' | date:'dd/MM/yyyy'}}</p>
+                                    </div>
+                                   <div class="col-lg-1">
+                                      <b class="">Age </b>
+                                      <p>{{userdata.age?userdata.age:'-'}}</p>
+                                    </div>
+                                   <!-- <div class="col-lg-3">
+                                     <b class="">Aadhar Number </b>
+                                     <p>4145 6989 3256</p>
+                                   </div> -->
+                                   <div class="col-lg-5 col-md-5">
+                                      <b class="">Address </b>
+                                      <p>{{userdata.address?userdata.address:'-'}}</p>
+                                   </div>
+                                   <div class="col-lg-1 col-md-5">
+                                      <b class="">Pin Code </b>
+                                      <p>{{userdata.pin_code?userdata.pin_code:'-'}}</p>
+                                   </div>
+                                </div>
+                           </div>
+                       </div>
+                     </div>
+                  </mat-tab>
+                  <mat-tab>
+                     <ng-template mat-tab-label>
+                        <div class="tabColor">Change Password</div>
+                     </ng-template>
+                     <div class="body changePswrd">
+                        <div class="example-container">
+                           <form class="row validate-form" [formGroup]="profilepassform" (ngSubmit)="onSubmit(profilepassform.value)">
+                           <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                              <mat-form-field class="example-full-width" appearance="outline">
+                                 <mat-label>Old Password</mat-label>
+                                 <input matInput formControlName="opassword" [type]="hide ? 'password' : 'text'" required>
+                                 <mat-icon matSuffix (click)="hide = !hide">
+                                    {{hide ? 'visibility_off' : 'visibility'}}
+                                 </mat-icon>
+                                 <mat-error *ngIf="profilepassform.get('opassword').hasError('required')">
+                                    Old Password is required
+                                 </mat-error>
+                              </mat-form-field>
+                           </div>
+                           <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                              <mat-form-field class="example-full-width" appearance="outline">
+                                 <mat-label>New Password</mat-label>
+                                 <input matInput formControlName="npassword" [type]="hide ? 'password' : 'text'" required>
+                                 <mat-icon matSuffix (click)="hide = !hide">
+                                    {{hide ? 'visibility_off' : 'visibility'}}
+                                 </mat-icon>
+                                 <mat-error *ngIf="profilepassform.get('npassword').hasError('required')  || profilepassform.get('npassword').touched ">
+                                    New Password contains at least one special character
+                                    Must contain at least one uppercase and lowercase character
+                                    Last, must contains at least one number and 8 characters long
+                                 </mat-error>
+                              </mat-form-field>
+                           </div>
+                           <!-- <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                              <mat-form-field class="example-full-width" appearance="outline">
+                                 <mat-label>Confirm Password</mat-label>
+                                 <input matInput formControlName="cpassword" [type]="chide ? 'password' : 'text'" required>
+                                 <mat-icon matSuffix (click)="chide = !chide">
+                                    {{chide ? 'visibility_off' : 'visibility'}}
+                                 </mat-icon>
+                                 <mat-error *ngIf="profilepassform.get('cpassword').hasError('required')">
+                                    Confirm Password is required
+                                 </mat-error>
+                              </mat-form-field>
+                           </div> -->
+                           <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                              <mat-form-field class="example-full-width" appearance="outline">
+                                 <mat-label>Confirm Password</mat-label>
+                                 <input matInput formControlName="cpassword" [type]="chide ? 'password' : 'text'"
+                                    required>
+                                 <mat-icon matSuffix (click)="chide = !chide">
+                                    {{chide ? 'visibility_off' : 'visibility'}}
+                                 </mat-icon>
+                                 <mat-error *ngIf="fun.cpassword.touched && fun.cpassword.invalid">
+                                    <div *ngIf="success_message" class="alert alert-success alert-dismissible">
+                                       <strong> Password Update Successfully! </strong>
+                                    </div>
+                                    <!-- <div *ngIf="error_message"  class="alertalert-danger alert-dismissible">
+                                  <strong>{{error_message_text}}</strong>
+                               </div> -->
+                                    <div *ngIf="fun.cpassword.errors.confirmedValidator">New Password and Confirm
+                                       Password must be match.</div>
+                                 </mat-error>
+                              </mat-form-field>
+                           </div>
+                           <div class="container-auth-form-btn mt-5">
+                              <button mat-flat-button color="primary" class="btn-space" type="submit">
+                              Save
+                              </button>
+                           </div>
+                           </form>
+                        </div>
+                     </div>
+                  </mat-tab>
+               </mat-tab-group>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

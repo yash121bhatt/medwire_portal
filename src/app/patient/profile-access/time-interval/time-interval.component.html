@@ -1,0 +1,25 @@
+<div>
+	<h2 mat-dialog-title>Profile Access</h2>
+	<div mat-dialog-content>
+		<form [formGroup]="addCusForm" (ngSubmit)="onSubmitClick()">
+			<div class="text-inside">
+        <p>For how long to allow profile access</p>
+				<mat-form-field class="example-full-width mb-3" appearance="outline">
+					<mat-label>Set Time Interval</mat-label>
+					<mat-select formControlName="time_set" required>
+						<mat-option [value]="'30 Minutes'">30 Minutes</mat-option>
+						<mat-option [value]="'60 Minutes'">60 Minutes</mat-option>
+						<mat-option [value]="'1 Month'">1 Month</mat-option>
+						<mat-option [value]="'6 Month'">6 Month</mat-option>
+						<mat-option [value]="'1 Year'">1 Year</mat-option>
+					</mat-select>
+					<mat-error *ngIf="addCusForm.get('time_set').hasError('required')"> Time Set is required</mat-error>
+				</mat-form-field>
+			</div>
+			<div class="btn-sec">
+				<button class="btn-space" mat-raised-button color="primary">Save</button>
+				<button type="button" mat-button (click)="closeDialog()">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>

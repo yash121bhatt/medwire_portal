@@ -1,0 +1,53 @@
+<section class="content">
+    <div class="content-block">
+       <div class="block-header">
+          <!-- breadcrumb -->
+          <app-breadcrumb [title]="'Dashboard'" [items]="[]" [active_item]="'Upload E-signature'"></app-breadcrumb>
+       </div>
+       <div class="row clearfix">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+             <div class="card">
+                <!-- <div class="header">
+                   <h2><strong>Blank</strong> Page</h2>
+                   </div> -->
+                <div class="body editBlock">
+                   <div class="example-container">
+                      <div class="row justify-content-between">
+                         <div class="col-lg-10 col-md-12 m-auto">
+                            <form  [formGroup]="uploadfileForm"  class="text-center">
+                            <div class="group-gap">
+                               <!-- Upload image -->
+                               <div class="avatar-upload">
+                                  <div class="uploadFile">
+                                     <mat-icon class="uploadIcon">upload</mat-icon>
+                                  </div>
+                                  <div class="avatar-edit">
+                                     <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event);fileChange($event.target.files)" />
+                                  </div>
+                                  <div class="avatar-preview">
+                                     <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                     </div>
+                                  </div>
+                               </div>
+                            </div>
+                            <!-- Submit Button -->
+                            <div class="row">
+                                <div class="col-12 col-md-6 m-auto">
+                                    <button type="submit" class="btn btn-outline-secondary submitBtn btn-lg btn-block" (click)="fileInput.click()">Upload Signature</button>
+                            <!-- <button type="submit" class="btn btn-outline-secondary submitBtn btn-lg btn-block">Add Signature</button> -->
+                            <button type="submit" mat-raised-button color="primary" (click)="submit()" style="margin-left: 8px;">Add Signature</button>
+                            <!-- <a  href="{{imageURLprofile+imageprofile}}" class="btn btn-outline-secondary btn-lg btn-block ml-4 profilee-btn" target="_blank">View Image</a> -->
+                                </div>
+                            </div>
+                            
+                            </form>
+                         </div>
+    
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
