@@ -29,7 +29,7 @@ export const environment = {
   // ----------------- Cloudinary
   production: false,
   // apiUrl: "https://api-dev-medwire.onrender.com/api/",
-  apiUrl: "https://medwire-portal.vercel.app/api/",
+  apiUrl: "https://medwire-api.onrender.com/api/",
   documentUrl: "https://res.cloudinary.com/dqpruenbu/image/upload/yash_medwire_dev/member/",
   labDocumentUrl: "https://res.cloudinary.com/dqpruenbu/image/upload/yash_medwire_dev/laboratory/",
   dicomUrl: "https://res.cloudinary.com/dqpruenbu/image/upload/yash_medwire_dev/dicom/",
